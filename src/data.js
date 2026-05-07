@@ -55,14 +55,14 @@ export const landBanners = [
     sub: 'Khopoli and Pen — strategic highway-access parcels',
   },
   {
-    img: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1600&q=80',
-    title: 'Mumbai 3.0 - The Next Growth Frontier',
-    sub: 'Premium land parcels along Navi Mumbai International Airport corridor',
-  },
-  {
     img: 'https://images.unsplash.com/photo-1591389703635-e15a07b842d7?q=80&w=1333&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     title: 'Alibagh Industrial Zone',
     sub: 'High-growth corridor with airport-led commercial potential',
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1600&q=80',
+    title: 'Mumbai 3.0 - The Next Growth Frontier',
+    sub: 'Premium land parcels along Navi Mumbai International Airport corridor',
   },
   {
     img: 'https://images.unsplash.com/photo-1609984263066-3535ad427873?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
