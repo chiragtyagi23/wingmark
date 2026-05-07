@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   BrowserRouter,
   Routes,
@@ -12,11 +12,32 @@ import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import LandPage from './pages/LandPage';
 import LandDetailPage from './pages/LandDetailPage';
+import PlotPage from './pages/PlotPage';
+import PlotDetailPage from './pages/PlotDetailPage';
+
+if (typeof window !== 'undefined' && 'scrollRestoration' in window.history) {
+  window.history.scrollRestoration = 'manual';
+}
 
 function ScrollManager() {
   const location = useLocation();
+  const isInitialLoadRef = useRef(true);
 
   useEffect(() => {
+    if (isInitialLoadRef.current) {
+      isInitialLoadRef.current = false;
+
+      if (location.hash) {
+        window.history.replaceState(
+          null,
+          '',
+          location.pathname + location.search
+        );
+      }
+      window.scrollTo({ top: 0, behavior: 'auto' });
+      return;
+    }
+
     if (location.hash) {
       const id = location.hash.replace('#', '');
       const tryScroll = () => {
@@ -117,6 +138,8 @@ function Layout() {
         <Route path="/" element={<HomePage />} />
         <Route path="/land" element={<LandPage />} />
         <Route path="/land/:slug" element={<LandDetailPage />} />
+        <Route path="/plot" element={<PlotPage />} />
+        <Route path="/plot/:slug" element={<PlotDetailPage />} />
       </Routes>
       <Footer />
     </>

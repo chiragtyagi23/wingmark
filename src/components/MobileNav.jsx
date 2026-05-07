@@ -29,6 +29,9 @@ function MobileNav({ open, onClose }) {
       <Link to="/land" onClick={onClose}>
         Land
       </Link>
+      <Link to="/plot" onClick={onClose}>
+        Plots
+      </Link>
       <a href="/#investor" onClick={(e) => goToHash(e, 'investor')}>
         Investors / NRI
       </a>

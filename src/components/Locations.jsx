@@ -44,7 +44,7 @@ function Locations() {
           </div>
           <div className="loc-card reveal reveal-delay-2">
             <img
-              src="https://images.unsplash.com/photo-1623018035782-b269248df916?w=600&q=80"
+              src="https://images.unsplash.com/photo-1598270553906-e4537ca1ff88?w=900&q=80&auto=format&fit=crop"
               alt="Khopoli"
               loading="lazy"
             />
@@ -58,7 +58,7 @@ function Locations() {
           </div>
           <div className="loc-card reveal">
             <img
-              src="https://images.unsplash.com/photo-1504006833117-8886a355efbf?w=600&q=80"
+              src="https://images.unsplash.com/photo-1451440063999-77a8b2960d2b?w=900&q=80&auto=format&fit=crop"
               alt="Pen"
               loading="lazy"
             />

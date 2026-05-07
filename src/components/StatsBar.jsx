@@ -1,19 +1,82 @@
-function StatsBar({ count }) {
+import { useEffect, useRef, useState } from 'react';
+
+const STATS = [
+  { target: 30, suffix: '+', label: 'Years Combined Experience' },
+  { target: 6, suffix: '+', label: 'Prime Locations Covered' },
+  { target: 4, suffix: '', label: 'Office Locations' },
+];
+
+const DURATION_MS = 2600;
+const LOADER_BUFFER_MS = 2400;
+
+function StatsBar() {
+  const containerRef = useRef(null);
+  const [counts, setCounts] = useState(STATS.map(() => 0));
+  const [started, setStarted] = useState(false);
+
+  useEffect(() => {
+    const node = containerRef.current;
+    if (!node) return;
+
+    let observer;
+    let timer;
+
+    const start = () => {
+      observer = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting) {
+            setStarted(true);
+            observer.disconnect();
+          }
+        },
+        { threshold: 0.3 }
+      );
+      observer.observe(node);
+    };
+
+    timer = window.setTimeout(start, LOADER_BUFFER_MS);
+
+    return () => {
+      window.clearTimeout(timer);
+      if (observer) observer.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!started) return;
+
+    let startTimestamp = null;
+    let frameId = 0;
+
+    const step = (timestamp) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / DURATION_MS, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCounts(STATS.map(({ target }) => Math.floor(eased * target)));
+
+      if (progress < 1) {
+        frameId = requestAnimationFrame(step);
+      } else {
+        setCounts(STATS.map(({ target }) => target));
+      }
+    };
+
+    frameId = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(frameId);
+  }, [started]);
+
   return (
-    <div className="stats-bar">
-      <div className="stat-item reveal">
-        <div className="stat-num">{count > 0 ? `${count}+` : '0+'}</div>
-        <div className="stat-label">Years Combined Experience</div>
-      </div>
-      <div className="stat-item reveal reveal-delay-1">
-        <div className="stat-num">6+</div>
-        <div className="stat-label">Prime Locations Covered</div>
-      </div>
-      <div className="stat-item reveal reveal-delay-2">
-        <div className="stat-num">4</div>
-        <div className="stat-label">Office Locations</div>
-      </div>
-      <div className="stat-item reveal reveal-delay-3">
+    <div className="stats-bar" ref={containerRef}>
+      {STATS.map((stat, i) => (
+        <div key={stat.label} className="stat-item">
+          <div className="stat-num">
+            {counts[i]}
+            {stat.suffix}
+          </div>
+          <div className="stat-label">{stat.label}</div>
+        </div>
+      ))}
+      <div className="stat-item">
         <div className="stat-num">LLP</div>
         <div className="stat-label">Incorporated May 2026</div>
       </div>

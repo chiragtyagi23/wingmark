@@ -1,6 +1,3 @@
-import ShareButton from './ShareButton';
-import { WHATSAPP_NUMBER } from '../data';
-
 function Team() {
   return (
     <section id="team">
@@ -25,7 +22,7 @@ function Team() {
               </div>
             </div>
             <div className="team-card-body">
-              <div className="team-name">Mehhul Badani</div>
+              <div className="team-name">Mehul Badani</div>
               <div className="team-roles">
                 <span className="team-role">COO</span>
                 <span className="team-role">Strategic Advisor</span>
@@ -45,10 +42,10 @@ function Team() {
               </div>
             </div>
             <div className="team-card-body">
-              <div className="team-name">Vijay Gaaikwad</div>
+              <div className="team-name">Vijay C Gaaikwad</div>
               <div className="team-roles">
                 <span className="team-role">Founder</span>
-                <span className="team-role" style={{ background: 'var(--steel)', color: 'var(--white)' }}>
+                <span className="team-role">
                   Govt. Liaising
                 </span>
                 <span className="team-role">Designated Partner</span>
@@ -59,19 +56,6 @@ function Team() {
               </div>
             </div>
           </div>
-        </div>
-        <div style={{ display: 'flex', justifyContent: 'center', marginTop: 48 }}>
-          <ShareButton
-            title="The Wingsmark Infraa — Leadership"
-            message={
-              '*Wingsmark Infraa — Founders*\n\n' +
-              '• Mehhul Badani — COO, Strategic Advisor, Designated Partner.\n' +
-              '• Vijay Gaaikwad — Founder, Govt. Liaising, Designated Partner.\n\n' +
-              'Cumulative experience of 30+ years across hospitality, legal, real estate, marketing & construction.'
-            }
-            label="Share Team on WhatsApp"
-            phone={WHATSAPP_NUMBER}
-          />
         </div>
       </div>
     </section>

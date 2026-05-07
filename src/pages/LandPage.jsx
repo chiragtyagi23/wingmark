@@ -1,51 +1,15 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import LandBanner from '../components/LandBanner';
-import ShareButton from '../components/ShareButton';
-import { landListings, landCategories, WHATSAPP_NUMBER } from '../data';
+import { landListings, landCategories } from '../data';
 
 function LandPage() {
   const [activeCategory, setActiveCategory] = useState('all');
   const [activeType, setActiveType] = useState('all');
-  const [showcaseIndex, setShowcaseIndex] = useState(0);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'auto' });
   }, []);
-
-  const showcaseImages = useMemo(
-    () => [
-      'https://source.unsplash.com/zSflp4Mq_l0/1600x900',
-      'https://source.unsplash.com/otyhxFfvF_U/1600x900',
-      'https://source.unsplash.com/T2W_XxVgcdI/1600x900',
-      'https://source.unsplash.com/oFweDg39ldw/1600x900',
-      'https://cdn.pixabay.com/photo/2016/10/14/00/38/real-estate-1739189_1280.jpg',
-      'https://source.unsplash.com/mYXDtOxxuJo/1600x900',
-      'https://source.unsplash.com/9dJifyLKAUE/1600x900',
-      'https://source.unsplash.com/SRoA10H6hmc/1600x900',
-      'https://source.unsplash.com/GBc_0a6MUEM/1600x900',
-      'https://source.unsplash.com/8O_LpUb46_g/1600x900',
-    ],
-    []
-  );
-
-  const showcaseVideos = useMemo(
-    () => [
-      { title: 'Land Media 01', url: 'https://www.youtube.com/embed/_yhE9Wo-OtQ' },
-      { title: 'Land Media 02', url: 'https://www.youtube.com/embed/MMotsPLv8zU' },
-      { title: 'Land Media 03', url: 'https://www.youtube.com/embed/4jnzf1yj48M' },
-      { title: 'Land Media 04', url: 'https://www.youtube.com/embed/cvXvxseapcU' },
-      { title: 'Land Media 05', url: 'https://www.youtube.com/embed/VKAKbueezMk' },
-    ],
-    []
-  );
-
-  useEffect(() => {
-    const id = window.setInterval(() => {
-      setShowcaseIndex((i) => (i + 1) % showcaseImages.length);
-    }, 4500);
-    return () => window.clearInterval(id);
-  }, [showcaseImages.length]);
 
   const filtered = landListings.filter((listing) => {
     const categoryOk = activeCategory === 'all' || listing.category === activeCategory;
@@ -57,157 +21,18 @@ function LandPage() {
     <>
       <LandBanner />
 
-      <section className="land-showcase">
-        <div className="land-showcase-inner">
-          <div className="land-showcase-top">
-            <div>
-              <div className="section-badge">
-                <span>Land Snapshot</span>
-              </div>
-              <h2 className="section-h2">
-                Discover land that matches your <em>vision</em>
-              </h2>
-              <p className="section-p">
-                Quick highlights, curated visuals, and media to help you evaluate opportunities faster.
-              </p>
-            </div>
-          </div>
-
-          <div className="land-promo-cards">
-            <div className="land-promo-card">
-              <div className="land-promo-img" style={{ backgroundImage: 'url(/land-promo-1.png)' }} />
-              <div className="land-promo-body">
-                <div className="land-promo-line">Prime land with strong future potential.</div>
-                <div className="land-promo-sub">Perfect blend of location and opportunity.</div>
-              </div>
-            </div>
-            <div className="land-promo-card">
-              <div className="land-promo-img" style={{ backgroundImage: 'url(/land-promo-2.png)' }} />
-              <div className="land-promo-body">
-                <div className="land-promo-line">Scenic land crafted for premium development.</div>
-                <div className="land-promo-sub">A valuable asset in a fast-growing region.</div>
-              </div>
-            </div>
-          </div>
-
-          <div className="land-showcase-grid">
-            <div className="land-showcase-gallery">
-              <div className="land-showcase-gallery-main">
-                <img src={showcaseImages[showcaseIndex]} alt={`Gallery ${showcaseIndex + 1}`} />
-                <button
-                  className="land-showcase-arrow prev"
-                  onClick={() => setShowcaseIndex((i) => (i - 1 + showcaseImages.length) % showcaseImages.length)}
-                  aria-label="Previous image"
-                >
-                  ‹
-                </button>
-                <button
-                  className="land-showcase-arrow next"
-                  onClick={() => setShowcaseIndex((i) => (i + 1) % showcaseImages.length)}
-                  aria-label="Next image"
-                >
-                  ›
-                </button>
-              </div>
-              <div className="land-showcase-thumbs">
-                {showcaseImages.map((src, i) => (
-                  <button
-                    key={`${src}-${i}`}
-                    className={`land-showcase-thumb ${i === showcaseIndex ? 'active' : ''}`}
-                    onClick={() => setShowcaseIndex(i)}
-                    aria-label={`Show image ${i + 1}`}
-                  >
-                    <img src={src} alt="" loading="lazy" />
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className="land-showcase-side">
-              <div className="land-showcase-box">
-                <h3 className="land-showcase-h3">Description</h3>
-                <textarea
-                  className="land-showcase-textarea"
-                  placeholder="Type full content here… (This is a draft box; we can connect it to saving later)"
-                  rows={8}
-                />
-              </div>
-              <div className="land-showcase-box">
-                <h3 className="land-showcase-h3">Google Location</h3>
-                <div className="land-showcase-map">
-                  <iframe
-                    src="https://www.google.com/maps?q=19.0227,73.2045&z=13&output=embed"
-                    title="Land page location"
-                    loading="lazy"
-                    allowFullScreen
-                    referrerPolicy="no-referrer-when-downgrade"
-                  />
-                </div>
-                <a
-                  href="https://maps.app.goo.gl/ueeHTgaq7vpVfhjx6"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn-outline"
-                  style={{ marginTop: 14, width: '100%', justifyContent: 'center' }}
-                >
-                  Open exact location in Google Maps
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div className="land-showcase-media">
-            <div className="section-badge">
-              <span>Media</span>
-            </div>
-            <h2 className="section-h2">
-              On-ground <em>videos</em>
-            </h2>
-            <div className="media-grid">
-              {showcaseVideos.map((item) => (
-                <div key={item.url} className="media-item">
-                  <div className="media-frame">
-                    <iframe
-                      src={item.url}
-                      title={item.title}
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    />
-                  </div>
-                  <div className="media-title">{item.title}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
       <section id="land" className="land-page-section">
         <div className="land-inner">
           <div className="land-header">
             <div className="section-badge" style={{ justifyContent: 'center' }}>
-              <span>Featured Listings</span>
+              <span>Section 1</span>
             </div>
             <h2 className="section-h2" style={{ textAlign: 'center' }}>
-              Premium Land <em>Opportunities</em>
+              LAND <em>DEALS</em>
             </h2>
             <p className="section-p" style={{ margin: '0 auto', textAlign: 'center' }}>
-              Carefully curated land parcels across Navi Mumbai's highest-growth corridors. Each listing is legally cleared, government liaisoned, and investment-ready.
+              Curated land parcels across Navi Mumbai's highest-growth corridors. Each listing carries title clarity, government liaison, and structured fields covering location, area, suitability, opportunity, price and status.
             </p>
-            <div style={{ display: 'flex', justifyContent: 'center', marginTop: 24 }}>
-              <ShareButton
-                title="The Wingsmark Infraa — Land Opportunities"
-                message={
-                  '*The Wingsmark Infraa — Land Opportunities*\n\n' +
-                  'Browse curated land parcels across Navi Mumbai, Panvel & Mumbai 3.0:\n' +
-                  '• Land for Sale\n• Joint Ventures\n• Villa Plotting'
-                }
-                label="Share these listings on WhatsApp"
-                className="share-btn-lg"
-                phone={WHATSAPP_NUMBER}
-                image="/wingsmark-logo.png"
-              />
-            </div>
           </div>
 
           <div className="land-filters">
@@ -275,16 +100,23 @@ function LandPage() {
                     </div>
                   </div>
                   <div className="land-card-body">
-                    <div className="land-loc">{listing.loc}</div>
-                    <div className="land-name">{listing.name}</div>
-                    <div className="land-area">{listing.area}</div>
-                    {listing.snapshot?.length > 0 && (
-                      <ul className="land-snapshot">
-                        {listing.snapshot.slice(0, 2).map((line) => (
-                          <li key={line}>{line}</li>
-                        ))}
-                      </ul>
+                    {listing.listingNumber && (
+                      <div className="land-card-num">{listing.listingNumber}</div>
                     )}
+                    <div className="land-name">{listing.name}</div>
+                    <div className="land-loc">{listing.loc}</div>
+                    <div className="land-card-quick">
+                      <div>
+                        <span>Total Area</span>
+                        <strong>{listing.area}</strong>
+                      </div>
+                      {listing.suitableFor && (
+                        <div>
+                          <span>Suitable for</span>
+                          <strong>{listing.suitableFor}</strong>
+                        </div>
+                      )}
+                    </div>
                   </div>
                   <div className="land-card-footer">
                     <div>

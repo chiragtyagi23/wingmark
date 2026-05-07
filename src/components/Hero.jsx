@@ -1,10 +1,7 @@
 import { Link } from 'react-router-dom';
+import StatsBar from './StatsBar';
 
 function Hero() {
-  const handleScrollToAbout = () => {
-    document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
     <section id="hero">
       <div className="hero-bg" />
@@ -39,9 +36,8 @@ function Hero() {
           </a>
         </div>
       </div>
-      <div className="hero-scroll" onClick={handleScrollToAbout}>
-        <div className="scroll-line" />
-        <span>Scroll</span>
+      <div className="hero-stats">
+        <StatsBar />
       </div>
     </section>
   );

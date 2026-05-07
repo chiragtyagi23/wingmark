@@ -30,6 +30,21 @@
       content="Curated land parcels — Sale, Joint Venture, Villa Plotting — across Navi Mumbai, Panvel, Karjat and Mumbai 3.0."
     />
     <meta name="twitter:image" content="https://wingmark.vercel.app/wingsmark-logo.png" />
+    <script>
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+      }
+      if (window.location.hash) {
+        history.replaceState(
+          null,
+          '',
+          window.location.pathname + window.location.search
+        );
+      }
+      window.addEventListener('beforeunload', function () {
+        window.scrollTo(0, 0);
+      });
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -1,6 +1,3 @@
-import ShareButton from './ShareButton';
-import { WHATSAPP_NUMBER } from '../data';
-
 function Investor() {
   return (
     <section id="investor">
@@ -41,21 +38,10 @@ function Investor() {
               </div>
             </div>
 
-            <div style={{ marginTop: 40, display: 'flex', flexWrap: 'wrap', gap: 14 }}>
+            <div style={{ marginTop: 40 }}>
               <a href="#contact" className="btn-gold">
                 Schedule an Investor Consultation
               </a>
-              <ShareButton
-                title="Wingsmark Infraa — Investor & NRI"
-                message={
-                  '*Wingsmark Infraa — Investor & NRI Opportunities*\n\n' +
-                  '• Mumbai 3.0 / Navi Mumbai International Airport corridor — high-growth land.\n' +
-                  '• Fully liaisoned, government-cleared, dispute-free transactions.\n' +
-                  '• NRI-friendly process — paperwork, FEMA compliance, remote support.'
-                }
-                label="Share Investor Page on WhatsApp"
-                phone={WHATSAPP_NUMBER}
-              />
             </div>
           </div>
 

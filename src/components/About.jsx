@@ -1,6 +1,3 @@
-import ShareButton from './ShareButton';
-import { WHATSAPP_NUMBER } from '../data';
-
 function About() {
   return (
     <section id="about">
@@ -54,18 +51,6 @@ function About() {
               <div className="pillar-title">Sales &amp; Marketing</div>
               <div className="pillar-p">Expert distribution and marketing strategies for new real estate developments.</div>
             </div>
-          </div>
-          <div style={{ marginTop: 32 }}>
-            <ShareButton
-              title="About The Wingsmark Infraa"
-              message={
-                '*About The Wingsmark Infraa*\n\n' +
-                'Navi Mumbai based real estate enterprise specializing in land acquisition, development, legal clearance and sales & marketing strategy for new developments.\n\n' +
-                'Trust & Value · 30+ years of combined expertise.'
-              }
-              label="Share About on WhatsApp"
-              phone={WHATSAPP_NUMBER}
-            />
           </div>
         </div>
       </div>

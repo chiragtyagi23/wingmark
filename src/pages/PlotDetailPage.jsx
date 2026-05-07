@@ -1,87 +1,108 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { landListings } from '../data';
+import { plotListings } from '../data';
 
-function LandDetailPage() {
+function PlotDetailPage() {
   const { slug } = useParams();
-  const listing = landListings.find((item) => item.slug === slug);
+  const plot = plotListings.find((item) => item.slug === slug);
   const [galleryIndex, setGalleryIndex] = useState(0);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'auto' });
   }, [slug]);
 
-  if (!listing) {
+  if (!plot) {
     return (
       <div className="land-detail-missing">
-        <h2>Listing not found.</h2>
-        <Link to="/land" className="btn-gold">
-          Back to All Listings
+        <h2>Plot listing not found.</h2>
+        <Link to="/plot" className="btn-gold">
+          Back to All Plots
         </Link>
       </div>
     );
   }
 
-  const mapLink = listing.googleLocationUrl ?? `https://www.google.com/maps/search/?api=1&query=${listing.location.lat},${listing.location.lng}`;
-  const gallery = listing.gallery?.length ? listing.gallery : [listing.img];
+  const isJv = plot.plotType === 'jv';
+  const mapLink =
+    plot.googleLocationUrl ||
+    `https://www.google.com/maps/search/?api=1&query=${plot.location_geo.lat},${plot.location_geo.lng}`;
+  const gallery = plot.gallery?.length ? plot.gallery : [plot.img];
 
   const detailBlocks = [
-    { label: 'Title', value: listing.name, wide: true },
-    { label: 'Location', value: listing.loc, wide: true },
-    { label: 'Nearest train station', value: listing.nearestStation },
-    { label: 'Total Area', value: listing.area },
-    { label: 'Price', value: listing.price },
-    { label: 'Status', value: listing.status },
-    { label: 'Suitable for', value: listing.suitableFor, wide: true },
-    { label: 'Opportunity', value: listing.opportunity, wide: true },
-    { label: 'Special Comments', value: listing.specialComments, wide: true, accent: true },
-  ].filter((block) => block.value);
+    { label: 'Title', value: plot.title, wide: true },
+    { label: 'Location', value: plot.location, wide: true },
+    { label: 'Sector', value: plot.sector },
+    { label: 'Area', value: plot.area },
+    { label: 'Plot Number', value: plot.plotNumber },
+    { label: 'Access Road', value: plot.accessRoad },
+    { label: 'Stage', value: plot.stage, wide: true },
+    isJv
+      ? { label: 'JV Ratio', value: plot.jvRatio }
+      : { label: 'Sale Price', value: plot.salePrice },
+    isJv ? { label: 'JV on Price', value: plot.jvOnPrice } : null,
+    plot.validityDays
+      ? {
+          label: 'Validity',
+          value: `${plot.validityDays} days`,
+          accent: true,
+          wide: true,
+        }
+      : null,
+  ].filter((b) => b && b.value);
 
   return (
     <>
       <div className="land-detail-hero">
         <div
           className="land-detail-hero-bg"
-          style={{ backgroundImage: `url(${listing.img})` }}
+          style={{ backgroundImage: `url(${plot.img})` }}
         />
         <div className="land-detail-hero-overlay" />
         <div className="land-detail-hero-content">
           <div className="land-detail-hero-top">
-            <Link to="/land" className="land-detail-back">
-              ← Land Deals
+            <Link to="/plot" className="land-detail-back">
+              ← All Plots
             </Link>
           </div>
           <div className="land-detail-hero-tags">
-            {listing.listingNumber && (
-              <div className="land-detail-listing-num">{listing.listingNumber}</div>
+            {plot.listingNumber && (
+              <div className="land-detail-listing-num">{plot.listingNumber}</div>
             )}
             <div
               className="land-card-type"
               style={{
-                background: listing.type === 'jv' ? 'var(--steel)' : listing.type === 'plot' ? 'var(--red)' : 'var(--gold)',
-                color: listing.type === 'jv' ? 'var(--white)' : listing.type === 'plot' ? 'var(--white)' : 'var(--charcoal)',
+                background: isJv ? 'var(--steel)' : 'var(--gold)',
+                color: isJv ? 'var(--white)' : 'var(--charcoal)',
                 alignSelf: 'flex-start',
               }}
             >
-              {listing.badge}
+              {plot.badge}
             </div>
+            {plot.validityDays ? (
+              <div className="plot-validity-pill">
+                Validity · {plot.validityDays} days
+              </div>
+            ) : null}
           </div>
-          <h1 className="land-detail-title">{listing.name}</h1>
-          <div className="land-detail-loc">{listing.loc}</div>
+          <h1 className="land-detail-title">{plot.title}</h1>
+          <div className="land-detail-loc">{plot.location}</div>
           <div className="land-detail-meta">
             <div>
-              <div className="land-price-label">{listing.label}</div>
-              <div className="land-price">{listing.price}</div>
+              <div className="land-price-label">
+                {isJv ? 'JV on Price' : 'Sale Price'}
+              </div>
+              <div className="land-price">
+                {isJv ? plot.jvOnPrice : plot.salePrice}
+              </div>
             </div>
-            <div className="land-detail-area">{listing.area}</div>
+            <div className="land-detail-area">{plot.area}</div>
           </div>
         </div>
       </div>
 
       <div className="land-detail-body">
         <section className="land-detail-section" id="details">
-          <h2 className="land-detail-h">Listing Details</h2>
-
+          <h2 className="land-detail-h">Plot Snapshot</h2>
           <div className="listing-details-grid">
             {detailBlocks.map((block) => {
               const cls = [
@@ -102,11 +123,14 @@ function LandDetailPage() {
         </section>
 
         <section className="land-detail-section" id="gallery">
-          <h2 className="land-detail-h">Images</h2>
-          {gallery.length > 0 ? (
+          <h2 className="land-detail-h">Images <span className="land-detail-h-sub">(up to 5)</span></h2>
+          {gallery.length > 0 && plot.gallery?.length ? (
             <div className="gallery-wrap">
               <div className="gallery-main">
-                <img src={gallery[galleryIndex]} alt={`${listing.name} ${galleryIndex + 1}`} />
+                <img
+                  src={gallery[galleryIndex]}
+                  alt={`${plot.title} ${galleryIndex + 1}`}
+                />
               </div>
               <div className="gallery-thumbs">
                 {gallery.map((src, i) => (
@@ -127,10 +151,10 @@ function LandDetailPage() {
         </section>
 
         <section className="land-detail-section" id="videos">
-          <h2 className="land-detail-h">Videos</h2>
-          {listing.media?.length > 0 ? (
+          <h2 className="land-detail-h">Videos <span className="land-detail-h-sub">(up to 5)</span></h2>
+          {plot.media?.length > 0 ? (
             <div className="media-grid">
-              {listing.media.map((item) => {
+              {plot.media.map((item) => {
                 const isMp4 = item.url?.toLowerCase().endsWith('.mp4');
                 const videoSrc = isMp4
                   ? `${item.url}${item.url.includes('#') ? '' : '#t=0.5'}`
@@ -139,12 +163,7 @@ function LandDetailPage() {
                   <div key={item.url} className="media-item">
                     <div className="media-frame">
                       {isMp4 ? (
-                        <video
-                          src={videoSrc}
-                          controls
-                          preload="auto"
-                          playsInline
-                        />
+                        <video src={videoSrc} controls preload="auto" playsInline />
                       ) : (
                         <iframe
                           src={item.url}
@@ -165,14 +184,19 @@ function LandDetailPage() {
         </section>
 
         <section className="land-detail-section" id="files">
-          <h2 className="land-detail-h">Files (PDF / JPG)</h2>
-          {listing.files?.length > 0 ? (
+          <h2 className="land-detail-h">Files <span className="land-detail-h-sub">(PDF / JPG · up to 5)</span></h2>
+          {plot.files?.length > 0 ? (
             <ul className="files-list">
-              {listing.files.map((file) => {
+              {plot.files.map((file) => {
                 const ext = (file.url?.split('.').pop() || 'pdf').toUpperCase();
                 return (
                   <li key={file.name}>
-                    <a href={file.url} target="_blank" rel="noreferrer" className="file-row">
+                    <a
+                      href={file.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="file-row"
+                    >
                       <div className="file-icon">{ext.length <= 4 ? ext : 'FILE'}</div>
                       <div className="file-name">{file.name}</div>
                       <div className="file-action">Download</div>
@@ -189,28 +213,25 @@ function LandDetailPage() {
         <section className="land-detail-section" id="location">
           <h2 className="land-detail-h">Google Location</h2>
           <div className="map-embed">
-            {listing.locationImage ? (
-              <img
-                src={listing.locationImage}
-                alt={`${listing.name} location preview`}
-                loading="lazy"
-              />
-            ) : (
-              <iframe
-                src={`https://www.google.com/maps?q=${listing.location.lat},${listing.location.lng}&z=14&output=embed`}
-                title={`${listing.name} location`}
-                loading="lazy"
-                allowFullScreen
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-            )}
+            <iframe
+              src={`https://www.google.com/maps?q=${plot.location_geo.lat},${plot.location_geo.lng}&z=14&output=embed`}
+              title={`${plot.title} location`}
+              loading="lazy"
+              allowFullScreen
+              referrerPolicy="no-referrer-when-downgrade"
+            />
           </div>
           <div className="map-meta">
             <div>
               <div className="map-address-label">Address</div>
-              <div className="map-address">{listing.location.address}</div>
+              <div className="map-address">{plot.location_geo.address}</div>
             </div>
-            <a href={mapLink} target="_blank" rel="noreferrer" className="btn-outline">
+            <a
+              href={mapLink}
+              target="_blank"
+              rel="noreferrer"
+              className="btn-outline"
+            >
               Open in Google Maps
             </a>
           </div>
@@ -218,10 +239,10 @@ function LandDetailPage() {
 
         <div className="land-detail-cta">
           <Link to="/#contact" className="btn-gold">
-            Enquire About This Listing
+            Enquire About This Plot
           </Link>
-          <Link to="/land" className="btn-outline">
-            Back to Land Deals
+          <Link to="/plot" className="btn-outline">
+            Back to All Plots
           </Link>
         </div>
       </div>
@@ -229,4 +250,4 @@ function LandDetailPage() {
   );
 }
 
-export default LandDetailPage;
+export default PlotDetailPage;
