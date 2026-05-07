@@ -22,7 +22,7 @@ function Team() {
               </div>
             </div>
             <div className="team-card-body">
-              <div className="team-name">Mehul Badani</div>
+              <div className="team-name">Mehhul Badani</div>
               <div className="team-roles">
                 <span className="team-role">COO</span>
                 <span className="team-role">Strategic Advisor</span>

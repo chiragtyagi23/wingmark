@@ -64,13 +64,13 @@ function Investor() {
                 </div>
                 <div className="invest-card-tag">Open for Partnerships</div>
               </div>
-              <div className="invest-card" style={{ borderColor: 'rgba(154,7,4,0.3)' }}>
-                <div className="invest-card-label" style={{ color: 'var(--red)' }}>Limited Opportunity</div>
+              <div className="invest-card ">
+                <div className="invest-card-label invest-card-tag" >Limited Opportunity</div>
                 <div className="invest-card-title">Early Mover Advantage</div>
                 <div className="invest-card-p">
                   Prime land parcels in pre-development stages offer the highest appreciation. Connect now to get first access to our exclusive listings.
                 </div>
-                <div className="invest-card-tag" style={{ color: 'var(--red)', background: 'rgba(154,7,4,0.1)', borderColor: 'rgba(154,7,4,0.3)' }}>
+                <div className="invest-card-tag">
                   Exclusive Access
                 </div>
               </div>

@@ -30,8 +30,8 @@ function Contact({ formSubmitted, onFormSubmit }) {
                 <div className="office-type">Delhi Branch</div>
                 <div className="office-detail">North India operations and NRI investor liaison office.</div>
               </div>
-              <div className="office-card" style={{ borderColor: 'rgba(154,7,4,0.4)' }}>
-                <div className="office-city" style={{ color: 'var(--red)' }}>Gujarat</div>
+              <div className="office-card">
+                <div className="office-city">Gujarat</div>
                 <div className="office-type">Coming Soon</div>
                 <div className="office-detail">Upcoming branch to serve Gujarat-based investors and NRI community.</div>
               </div>
