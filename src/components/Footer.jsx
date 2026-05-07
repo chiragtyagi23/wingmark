@@ -19,7 +19,7 @@ function Footer() {
       <div className="footer-grid">
         <div className="footer-brand">
           <Link to="/" className="nav-logo" style={{ marginBottom: 16, display: 'inline-flex' }}>
-            <div className="logo-mark">W</div>
+            <img className="logo-img" src="/wingsmark-logo.png" alt="The Wingsmark Infraa" />
             <div className="logo-text">
               <div className="brand">The Wingsmark Infraa</div>
               <div className="sub">Land · Infrastructure · Growth</div>

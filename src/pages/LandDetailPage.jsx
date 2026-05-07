@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { landListings } from '../data';
+import { landListings, WHATSAPP_NUMBER } from '../data';
+import ShareButton from '../components/ShareButton';
 
 function LandDetailPage() {
   const { slug } = useParams();
@@ -25,6 +26,18 @@ function LandDetailPage() {
   const mapLink = listing.googleLocationUrl ?? `https://www.google.com/maps/search/?api=1&query=${listing.location.lat},${listing.location.lng}`;
   const gallery = listing.gallery?.length ? listing.gallery : [listing.img];
 
+  const shareMessage = [
+    `*${listing.name}*`,
+    `Location: ${listing.loc}`,
+    `${listing.area}`,
+    `${listing.label}: ${listing.price}`,
+    listing.status ? `Status: ${listing.status}` : null,
+    '',
+    listing.snapshot?.length ? listing.snapshot.map((line) => `• ${line}`).join('\n') : null,
+  ]
+    .filter(Boolean)
+    .join('\n');
+
   return (
     <>
       <div className="land-detail-hero">
@@ -34,9 +47,18 @@ function LandDetailPage() {
         />
         <div className="land-detail-hero-overlay" />
         <div className="land-detail-hero-content">
-          <Link to="/land" className="land-detail-back">
-            ← All Listings
-          </Link>
+          <div className="land-detail-hero-top">
+            <Link to="/land" className="land-detail-back">
+              ← All Listings
+            </Link>
+            <ShareButton
+              title={listing.name}
+              message={shareMessage}
+              label="Share"
+              phone={WHATSAPP_NUMBER}
+              image={listing.img}
+            />
+          </div>
           <div
             className="land-card-type"
             style={{
@@ -201,6 +223,14 @@ function LandDetailPage() {
           <Link to="/#contact" className="btn-gold">
             Enquire About This Listing
           </Link>
+          <ShareButton
+            title={listing.name}
+            message={shareMessage}
+            label="Share on WhatsApp"
+            className="share-btn-lg"
+            phone={WHATSAPP_NUMBER}
+            image={listing.img}
+          />
           <Link to="/land" className="btn-outline">
             Back to All Listings
           </Link>

@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import LandBanner from '../components/LandBanner';
-import { landListings, landCategories } from '../data';
+import ShareButton from '../components/ShareButton';
+import { landListings, landCategories, WHATSAPP_NUMBER } from '../data';
 
 function LandPage() {
   const [activeCategory, setActiveCategory] = useState('all');
@@ -193,6 +194,20 @@ function LandPage() {
             <p className="section-p" style={{ margin: '0 auto', textAlign: 'center' }}>
               Carefully curated land parcels across Navi Mumbai's highest-growth corridors. Each listing is legally cleared, government liaisoned, and investment-ready.
             </p>
+            <div style={{ display: 'flex', justifyContent: 'center', marginTop: 24 }}>
+              <ShareButton
+                title="The Wingsmark Infraa — Land Opportunities"
+                message={
+                  '*The Wingsmark Infraa — Land Opportunities*\n\n' +
+                  'Browse curated land parcels across Navi Mumbai, Panvel & Mumbai 3.0:\n' +
+                  '• Land for Sale\n• Joint Ventures\n• Villa Plotting'
+                }
+                label="Share these listings on WhatsApp"
+                className="share-btn-lg"
+                phone={WHATSAPP_NUMBER}
+                image="/wingsmark-logo.png"
+              />
+            </div>
           </div>
 
           <div className="land-filters">

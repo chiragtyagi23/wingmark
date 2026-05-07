@@ -1,3 +1,6 @@
+import ShareButton from './ShareButton';
+import { WHATSAPP_NUMBER } from '../data';
+
 function Services() {
   return (
     <section id="services">
@@ -60,6 +63,19 @@ function Services() {
               <li>Wide Distribution &amp; investor networks</li>
             </ul>
           </div>
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: 48 }}>
+          <ShareButton
+            title="The Wingsmark Infraa — Services"
+            message={
+              '*Wingsmark Infraa — Core Services*\n\n' +
+              '01. Land Services — acquisition, dispute resolution, legal clearance.\n' +
+              '02. Development — bungalow & villa plotting, redevelopment, infrastructure.\n' +
+              '03. New Projects — sales strategy, targeted marketing, distribution.'
+            }
+            label="Share Services on WhatsApp"
+            phone={WHATSAPP_NUMBER}
+          />
         </div>
       </div>
     </section>

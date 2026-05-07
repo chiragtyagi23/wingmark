@@ -1,3 +1,6 @@
+import ShareButton from './ShareButton';
+import { WHATSAPP_NUMBER } from '../data';
+
 function Team() {
   return (
     <section id="team">
@@ -17,8 +20,8 @@ function Team() {
           <div className="team-card reveal">
             <div className="team-card-accent" />
             <div className="team-card-img">
-              <div className="team-avatar">
-                <span>MB</span>
+              <div className="team-avatar team-avatar-photo">
+                <img src="/mehhul-badani.png" alt="Mehhul Badani" />
               </div>
             </div>
             <div className="team-card-body">
@@ -56,6 +59,19 @@ function Team() {
               </div>
             </div>
           </div>
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: 48 }}>
+          <ShareButton
+            title="The Wingsmark Infraa — Leadership"
+            message={
+              '*Wingsmark Infraa — Founders*\n\n' +
+              '• Mehhul Badani — COO, Strategic Advisor, Designated Partner.\n' +
+              '• Vijay Gaaikwad — Founder, Govt. Liaising, Designated Partner.\n\n' +
+              'Cumulative experience of 30+ years across hospitality, legal, real estate, marketing & construction.'
+            }
+            label="Share Team on WhatsApp"
+            phone={WHATSAPP_NUMBER}
+          />
         </div>
       </div>
     </section>

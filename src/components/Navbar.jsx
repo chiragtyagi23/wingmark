@@ -29,7 +29,7 @@ function Navbar({ scrolled, activeSection, onMobileOpen }) {
   return (
     <nav id="mainNav" className={scrolled ? 'scrolled' : ''}>
       <Link to="/" className="nav-logo">
-        <div className="logo-mark">W</div>
+        <img className="logo-img" src="/wingsmark-logo.png" alt="The Wingsmark Infraa" />
         <div className="logo-text">
           <div className="brand">The Wingsmark Infraa</div>
           <div className="sub">Land · Infrastructure · Growth</div>

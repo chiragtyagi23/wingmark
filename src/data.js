@@ -1,3 +1,6 @@
+export const WHATSAPP_NUMBER = '7210789372';
+export const SITE_URL = 'https://wingmark.vercel.app';
+
 export const landBanners = [
   {
     img: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1600&q=80',
