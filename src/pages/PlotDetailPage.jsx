@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Navigation, ExternalLink } from 'lucide-react';
 import { plotListings } from '../data';
+import ShareBrochureButton from '../components/ShareBrochureButton';
+import { recordVisit } from '../hooks/useVisitedListings';
 
 function PlotDetailPage() {
   const { slug } = useParams();
@@ -11,6 +13,21 @@ function PlotDetailPage() {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'auto' });
   }, [slug]);
+
+  useEffect(() => {
+    if (!plot) return;
+    const isJv = plot.plotType === 'jv';
+    recordVisit({
+      id: `plot/${plot.slug}`,
+      type: 'plot',
+      slug: plot.slug,
+      listingNumber: plot.listingNumber,
+      title: plot.title,
+      location: plot.location,
+      price: isJv ? plot.jvOnPrice : plot.salePrice,
+      img: plot.img,
+    });
+  }, [plot]);
 
   if (!plot) {
     return (
@@ -242,6 +259,7 @@ function PlotDetailPage() {
         </section>
 
         <div className="land-detail-cta">
+          <ShareBrochureButton listing={plot} type="plot" />
           <Link to="/#contact" className="btn-gold">
             Enquire About This Plot
           </Link>

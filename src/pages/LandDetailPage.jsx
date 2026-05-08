@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Navigation, ExternalLink } from 'lucide-react';
 import { landListings } from '../data';
+import ShareBrochureButton from '../components/ShareBrochureButton';
+import { recordVisit } from '../hooks/useVisitedListings';
 
 function LandDetailPage() {
   const { slug } = useParams();
@@ -11,6 +13,20 @@ function LandDetailPage() {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'auto' });
   }, [slug]);
+
+  useEffect(() => {
+    if (!listing) return;
+    recordVisit({
+      id: `land/${listing.slug}`,
+      type: 'land',
+      slug: listing.slug,
+      listingNumber: listing.listingNumber,
+      title: listing.name,
+      location: listing.loc,
+      price: listing.price,
+      img: listing.img,
+    });
+  }, [listing]);
 
   if (!listing) {
     return (
@@ -226,6 +242,7 @@ function LandDetailPage() {
         </section>
 
         <div className="land-detail-cta">
+          <ShareBrochureButton listing={listing} type="land" />
           <Link to="/#contact" className="btn-gold">
             Enquire About This Listing
           </Link>
