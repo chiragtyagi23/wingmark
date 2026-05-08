@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { Navigation, ExternalLink } from 'lucide-react';
 import { landListings } from '../data';
 
 function LandDetailPage() {
@@ -23,6 +24,7 @@ function LandDetailPage() {
   }
 
   const mapLink = listing.googleLocationUrl ?? `https://www.google.com/maps/search/?api=1&query=${listing.location.lat},${listing.location.lng}`;
+  const directionLink = `https://www.google.com/maps/dir/?api=1&destination=${listing.location.lat},${listing.location.lng}`;
   const gallery = listing.gallery?.length ? listing.gallery : [listing.img];
 
   const detailBlocks = [
@@ -58,8 +60,8 @@ function LandDetailPage() {
             <div
               className="land-card-type"
               style={{
-                background: listing.type === 'jv' ? 'var(--steel)' : listing.type === 'plot' ? 'var(--red)' : 'var(--gold)',
-                color: listing.type === 'jv' ? 'var(--white)' : listing.type === 'plot' ? 'var(--white)' : 'var(--charcoal)',
+                background: listing.type === 'jv' ? 'var(--steel)' : listing.type === 'plot' ? 'var(--royal)' : 'var(--gold)',
+                color: listing.type === 'jv' ? 'var(--gold)' : listing.type === 'plot' ? 'var(--gold)' : 'var(--charcoal)',
                 alignSelf: 'flex-start',
               }}
             >
@@ -210,9 +212,16 @@ function LandDetailPage() {
               <div className="map-address-label">Address</div>
               <div className="map-address">{listing.location.address}</div>
             </div>
-            <a href={mapLink} target="_blank" rel="noreferrer" className="btn-outline">
-              Open in Google Maps
-            </a>
+            <div className="map-actions">
+              <a href={directionLink} target="_blank" rel="noreferrer" className="btn-gold">
+                <Navigation size={14} />
+                Get Direction
+              </a>
+              <a href={mapLink} target="_blank" rel="noreferrer" className="btn-outline">
+                <ExternalLink size={14} />
+                Open in Google Maps
+              </a>
+            </div>
           </div>
         </section>
 

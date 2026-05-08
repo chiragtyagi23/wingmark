@@ -1,4 +1,44 @@
+import { useEffect, useState } from 'react';
+import { MapPin, Send, RefreshCw, Navigation } from 'lucide-react';
+
+const HQ_ADDRESS = 'Sector 19, Kharghar, Navi Mumbai, Maharashtra, India';
+const HQ_GEO = { lat: 19.0470, lng: 73.0697 };
+const DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${HQ_GEO.lat},${HQ_GEO.lng}`;
+
+function makeChallenge() {
+  const a = Math.floor(Math.random() * 9) + 1;
+  const b = Math.floor(Math.random() * 9) + 1;
+  return { a, b, answer: a + b };
+}
+
 function Contact({ formSubmitted, onFormSubmit }) {
+  const [challenge, setChallenge] = useState(makeChallenge);
+  const [captcha, setCaptcha] = useState('');
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    if (formSubmitted) {
+      setCaptcha('');
+      setError('');
+    }
+  }, [formSubmitted]);
+
+  const refreshCaptcha = () => {
+    setChallenge(makeChallenge());
+    setCaptcha('');
+    setError('');
+  };
+
+  const handleSubmit = () => {
+    if (parseInt(captcha, 10) !== challenge.answer) {
+      setError('Captcha answer is incorrect. Please try again.');
+      refreshCaptcha();
+      return;
+    }
+    setError('');
+    onFormSubmit?.();
+  };
+
   return (
     <section id="contact">
       <div className="contact-inner">
@@ -37,9 +77,21 @@ function Contact({ formSubmitted, onFormSubmit }) {
               </div>
             </div>
 
-            <div className="map-placeholder">
-              <div className="map-pin">📍</div>
-              <div className="map-label">Navi Mumbai Headquarters</div>
+            <div className="map-with-direction">
+              <div className="map-placeholder">
+                <MapPin className="map-pin-icon" size={36} />
+                <div className="map-label">Navi Mumbai Headquarters</div>
+                <div className="map-address-sub">{HQ_ADDRESS}</div>
+              </div>
+              <a
+                href={DIRECTIONS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-direction"
+              >
+                <Navigation size={16} />
+                Get Direction
+              </a>
             </div>
           </div>
 
@@ -95,17 +147,44 @@ function Contact({ formSubmitted, onFormSubmit }) {
                   <label>Message</label>
                   <textarea placeholder="Tell us about your requirement, budget, or timeline..." />
                 </div>
+
+                <div className="form-group captcha-group">
+                  <label>
+                    Verify you're human
+                    <button
+                      type="button"
+                      className="captcha-refresh"
+                      onClick={refreshCaptcha}
+                      aria-label="Refresh captcha"
+                    >
+                      <RefreshCw size={12} />
+                      New question
+                    </button>
+                  </label>
+                  <div className="captcha-row">
+                    <div className="captcha-question">
+                      {challenge.a} <span>+</span> {challenge.b} <span>=</span>
+                    </div>
+                    <input
+                      type="number"
+                      placeholder="?"
+                      className="captcha-input"
+                      value={captcha}
+                      onChange={(e) => setCaptcha(e.target.value)}
+                      aria-label="Captcha answer"
+                    />
+                  </div>
+                  {error && <div className="captcha-error">{error}</div>}
+                </div>
+
                 <button
                   className="btn-gold"
                   style={{ width: '100%', justifyContent: 'center' }}
                   type="button"
-                  onClick={onFormSubmit}
+                  onClick={handleSubmit}
                   disabled={formSubmitted}
                 >
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                    <line x1="22" y1="2" x2="11" y2="13" />
-                    <polygon points="22,2 15,22 11,13 2,9" />
-                  </svg>
+                  <Send size={14} />
                   {formSubmitted ? '✓ Enquiry Sent — We will be in touch shortly!' : 'Submit Enquiry'}
                 </button>
               </div>

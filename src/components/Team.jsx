@@ -36,9 +36,9 @@ function Team() {
           </div>
           <div className="team-card reveal reveal-delay-2">
             <div className="team-card-accent" style={{ background: 'linear-gradient(90deg, var(--royal), var(--steel))' }} />
-            <div className="team-card-img" style={{ background: 'linear-gradient(135deg, #0a2840, var(--charcoal))' }}>
-              <div className="team-avatar">
-                <span>VG</span>
+            <div className="team-card-img">
+              <div className="team-avatar team-avatar-photo">
+                <img src="/vijay-founder.png" alt="Vijay C Gaaikwad" />
               </div>
             </div>
             <div className="team-card-body">

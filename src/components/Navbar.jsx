@@ -31,8 +31,11 @@ function Navbar({ scrolled, activeSection, onMobileOpen }) {
       <Link to="/" className="nav-logo">
         <img className="logo-img" src="/wingsmark-logo.png" alt="The Wingsmark Infraa" />
         <div className="logo-text">
-          <div className="brand">The Wingsmark Infraa</div>
-          <div className="sub">Land · Infrastructure · Growth</div>
+          <div className="brand">
+            <span className="brand-the">The</span>
+            <span className="brand-name">Wingsmark Infraa</span>
+          </div>
+          <div className="sub">Land Infrastructure Growth</div>
         </div>
       </Link>
 

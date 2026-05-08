@@ -92,8 +92,8 @@ function LandPage() {
                     <div
                       className="land-card-type"
                       style={{
-                        background: listing.type === 'jv' ? 'var(--steel)' : listing.type === 'plot' ? 'var(--red)' : 'var(--gold)',
-                        color: listing.type === 'jv' ? 'var(--white)' : listing.type === 'plot' ? 'var(--white)' : 'var(--charcoal)',
+                        background: listing.type === 'jv' ? 'var(--steel)' : listing.type === 'plot' ? 'var(--royal)' : 'var(--gold)',
+                        color: listing.type === 'jv' ? 'var(--gold)' : listing.type === 'plot' ? 'var(--gold)' : 'var(--charcoal)',
                       }}
                     >
                       {listing.badge}

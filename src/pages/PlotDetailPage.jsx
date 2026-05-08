@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { Navigation, ExternalLink } from 'lucide-react';
 import { plotListings } from '../data';
 
 function PlotDetailPage() {
@@ -26,6 +27,7 @@ function PlotDetailPage() {
   const mapLink =
     plot.googleLocationUrl ||
     `https://www.google.com/maps/search/?api=1&query=${plot.location_geo.lat},${plot.location_geo.lng}`;
+  const directionLink = `https://www.google.com/maps/dir/?api=1&destination=${plot.location_geo.lat},${plot.location_geo.lng}`;
   const gallery = plot.gallery?.length ? plot.gallery : [plot.img];
 
   const detailBlocks = [
@@ -226,14 +228,16 @@ function PlotDetailPage() {
               <div className="map-address-label">Address</div>
               <div className="map-address">{plot.location_geo.address}</div>
             </div>
-            <a
-              href={mapLink}
-              target="_blank"
-              rel="noreferrer"
-              className="btn-outline"
-            >
-              Open in Google Maps
-            </a>
+            <div className="map-actions">
+              <a href={directionLink} target="_blank" rel="noreferrer" className="btn-gold">
+                <Navigation size={14} />
+                Get Direction
+              </a>
+              <a href={mapLink} target="_blank" rel="noreferrer" className="btn-outline">
+                <ExternalLink size={14} />
+                Open in Google Maps
+              </a>
+            </div>
           </div>
         </section>
 

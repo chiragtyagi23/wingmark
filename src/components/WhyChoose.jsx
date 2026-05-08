@@ -1,3 +1,5 @@
+import { ShieldCheck, IndianRupee, Globe2, Users } from 'lucide-react';
+
 function WhyChoose() {
   return (
     <section id="why">
@@ -11,43 +13,30 @@ function WhyChoose() {
         <div className="why-grid">
           <div className="why-card reveal">
             <div className="why-icon">
-              <svg viewBox="0 0 24 24">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-              </svg>
+              <ShieldCheck size={30} strokeWidth={1.6} />
             </div>
             <div className="why-title">Trusted &amp; Transparent</div>
             <div className="why-p">Every transaction backed by complete legal clarity and stakeholder-first values. Your investment is protected.</div>
           </div>
           <div className="why-card reveal reveal-delay-1">
             <div className="why-icon">
-              <svg viewBox="0 0 24 24">
-                <path d="M6 5h12" />
-                <path d="M6 10h12" />
-                <path d="M9 5a5 5 0 0 1 0 10H6l9 8" />
-              </svg>
+              <IndianRupee size={30} strokeWidth={1.6} />
             </div>
             <div className="why-title">High-Return Focus</div>
             <div className="why-p">Land in Navi Mumbai and Mumbai 3.0 corridors offering some of India's strongest appreciation trajectories.</div>
           </div>
           <div className="why-card reveal reveal-delay-2">
             <div className="why-icon">
-              <svg viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="10" />
-                <path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
-              </svg>
+              <Globe2 size={30} strokeWidth={1.6} />
             </div>
-            <div className="why-title">InDepth Market Knowledge</div>
+            <div className="why-title">In-Depth Market Knowledge</div>
             <div className="why-p">Decades of on-ground knowledge across Navi Mumbai, Raigad, and the Mumbai Metropolitan Region.</div>
           </div>
           <div className="why-card reveal reveal-delay-3">
             <div className="why-icon">
-              <svg viewBox="0 0 24 24">
-                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-                <circle cx="9" cy="7" r="4" />
-                <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
-              </svg>
+              <Users size={30} strokeWidth={1.6} />
             </div>
-            <div className="why-title">Diverse Options</div>
+            <div className="why-title">Diverse Expertise</div>
             <div className="why-p">Our team spans hospitality, legal, construction, finance, and real estate — 30+ years of combined excellence.</div>
           </div>
         </div>

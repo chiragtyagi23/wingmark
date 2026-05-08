@@ -56,31 +56,34 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 5vw;
-  height: 128px;
+  padding: 0 4vw;
+  height: 120px;
   background: rgba(248, 244, 236, 0.94);
   backdrop-filter: blur(18px);
   border-bottom: 1px solid rgba(10, 26, 47, 0.08);
   border-bottom: 1px solid rgba(247, 198, 27, 0.12);
   transition: all 0.4s ease;
+  gap: 32px;
 }
 
 nav.scrolled {
-  height: 104px;
+  height: 96px;
   background: rgba(250, 247, 240, 0.98);
   border-bottom-color: rgba(247, 198, 27, 0.45);
   box-shadow: 0 2px 10px rgba(10, 26, 47, 0.08);
 }
 
 nav.scrolled .logo-img {
-  height: 116px;
+  height: 96px;
 }
 
+/* Group 1: logo + brand text — sits on the LEFT */
 .nav-logo {
   display: flex;
   align-items: center;
   gap: 12px;
   text-decoration: none;
+  flex-shrink: 0;
 }
 
 .logo-mark {
@@ -99,7 +102,7 @@ nav.scrolled .logo-img {
 }
 
 .logo-img {
-  height: 140px;
+  height: 120px;
   width: auto;
   display: block;
   flex-shrink: 0;
@@ -122,37 +125,58 @@ nav.scrolled .logo-img {
 
 .logo-text .brand {
   font-family: 'Cormorant Garamond', serif;
+  color: var(--charcoal);
+  display: flex;
+  flex-direction: column;
+  line-height: 0.95;
+}
+
+.logo-text .brand-the {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  font-style: italic;
+  color: #6a543a;
+}
+
+.logo-text .brand-name {
   font-size: 22px;
   font-weight: 600;
-  color: var(--charcoal);
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
 }
 
 .logo-text .sub {
-  font-size: 11px;
+  margin-top: 4px;
+  font-size: 9.5px;
   font-weight: 500;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.22em;
   color: #b88a04;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
+/* Group 2: nav links + CTA — sits on the RIGHT (pushed by space-between on parent) */
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 36px;
+  gap: 24px;
   list-style: none;
+  flex-shrink: 0;
+  margin-left: auto;
 }
 
 .nav-links a {
   text-decoration: none;
   font-size: 13px;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--charcoal);
   position: relative;
-  padding-bottom: 2px;
+  padding: 8px 0;
   transition: color 0.3s;
+  white-space: nowrap;
 }
 
 .nav-links a::after {
@@ -177,10 +201,11 @@ nav.scrolled .logo-img {
 .nav-cta {
   background: var(--gold);
   color: var(--charcoal) !important;
-  padding: 11px 26px !important;
+  padding: 10px 22px !important;
   border-radius: 2px;
   font-weight: 700 !important;
   letter-spacing: 0.1em !important;
+  font-size: 12px !important;
   transition: background 0.3s, transform 0.2s !important;
 }
 
@@ -225,7 +250,7 @@ nav.scrolled .logo-img {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(160deg, rgba(14,56,94,0.85) 0%, rgba(10, 26, 47,0.7) 50%, rgba(154,7,4,0.15) 100%),
+    linear-gradient(160deg, rgba(14,56,94,0.85) 0%, rgba(10, 26, 47,0.78) 55%, rgba(247,198,27,0.15) 100%),
     url('https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1800&q=80') center/cover no-repeat;
   transform-origin: center;
   animation: heroZoom 20s ease-in-out infinite alternate;
@@ -746,12 +771,16 @@ section {
   border: 1px solid rgba(247,198,27,0.2);
 }
 
+.service-icon {
+  color: var(--gold);
+}
+
 .service-icon svg {
   width: 26px;
   height: 26px;
-  stroke: var(--gold);
+  stroke: currentColor;
   fill: none;
-  stroke-width: 1.5;
+  stroke-width: 1.6;
 }
 
 .service-num {
@@ -954,12 +983,16 @@ section {
   border-radius: 50%;
 }
 
+.why-icon {
+  color: var(--gold);
+}
+
 .why-icon svg {
   width: 28px;
   height: 28px;
-  stroke: var(--gold);
+  stroke: currentColor;
   fill: none;
-  stroke-width: 1.5;
+  stroke-width: 1.6;
 }
 
 .why-title {
@@ -1904,7 +1937,7 @@ footer {
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--red);
+  color: var(--charcoal);
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -2057,7 +2090,7 @@ footer {
   width: 100%;
   height: 78vh;
   min-height: 520px;
-  margin-top: 128px;
+  margin-top: 120px;
   overflow: hidden;
   background: var(--charcoal);
 }
@@ -2510,7 +2543,7 @@ footer {
   width: 100%;
   height: 60vh;
   min-height: 420px;
-  margin-top: 128px;
+  margin-top: 120px;
   overflow: hidden;
 }
 
@@ -2942,13 +2975,14 @@ footer {
   position: absolute;
   bottom: 12px;
   left: 12px;
-  background: rgba(154, 7, 4, 0.92);
-  color: var(--white);
+  background: rgba(14, 56, 94, 0.95);
+  color: var(--gold);
   padding: 5px 12px;
   font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   font-weight: 700;
+  border: 1px solid rgba(247, 198, 27, 0.5);
   border-radius: 2px;
   z-index: 2;
 }
@@ -2957,12 +2991,13 @@ footer {
   display: inline-flex;
   align-items: center;
   padding: 6px 14px;
-  background: rgba(154, 7, 4, 0.85);
-  color: var(--white);
+  background: rgba(14, 56, 94, 0.9);
+  color: var(--gold);
   font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   font-weight: 700;
+  border: 1px solid rgba(247, 198, 27, 0.45);
   border-radius: 2px;
 }
 
@@ -3165,8 +3200,9 @@ footer {
 .file-icon {
   width: 44px;
   height: 44px;
-  background: var(--red);
-  color: var(--white);
+  background: var(--royal);
+  color: var(--gold);
+  border: 1px solid rgba(247, 198, 27, 0.45);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3238,7 +3274,7 @@ footer {
 
 .land-detail-missing {
   min-height: 60vh;
-  margin-top: 128px;
+  margin-top: 120px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -3268,3 +3304,1301 @@ footer {
     height: 320px;
   }
 }
+
+/* =====================================================================
+   COMPREHENSIVE RESPONSIVE LAYER
+   Breakpoints:
+     <= 480px     small phones
+     481-640px    large phones
+     641-900px    small tablets / large phones (landscape)
+     901-1100px   tablets / small laptops
+     1101-1280px  laptops
+     1281-1599px  standard desktops (default design target)
+     1600-1919px  large desktops
+     >= 1920px    ultra-wide / extra-large screens
+   This layer is purely additive — original styles remain the source of truth.
+   ===================================================================== */
+
+/* ---------- Large desktops (1600px+) : bump container widths so content doesn't feel small ---------- */
+@media (min-width: 1600px) {
+  .land-inner,
+  .footer-grid,
+  .services-inner,
+  .why-inner,
+  .news-inner,
+  .team-inner,
+  .investor-inner,
+  .about-inner,
+  .contact-inner,
+  .loc-grid,
+  .stats-bar,
+  .news-grid {
+    max-width: 1480px;
+  }
+
+  .hero-content {
+    max-width: 1040px;
+  }
+
+  .land-detail-body {
+    max-width: 1280px;
+  }
+
+  .section-h2 {
+    font-size: clamp(40px, 4.2vw, 72px);
+  }
+}
+
+/* ---------- Ultra-wide / extra-large screens (1920px+) ---------- */
+@media (min-width: 1920px) {
+  .land-inner,
+  .footer-grid,
+  .services-inner,
+  .why-inner,
+  .news-inner,
+  .team-inner,
+  .investor-inner,
+  .about-inner,
+  .contact-inner,
+  .loc-grid,
+  .stats-bar,
+  .news-grid {
+    max-width: 1680px;
+  }
+
+  .hero-content {
+    max-width: 1180px;
+  }
+
+  .land-detail-body {
+    max-width: 1440px;
+  }
+
+  nav {
+    padding: 0 7vw;
+  }
+
+  section,
+  .land-page-section,
+  .news-section,
+  #investor,
+  #services,
+  #about,
+  #contact,
+  #why,
+  #footprint,
+  #team {
+    padding-left: 7vw;
+    padding-right: 7vw;
+  }
+
+  .hero-bg {
+    background-size: cover;
+  }
+
+  .land-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ---------- 4K and beyond (2560px+) ---------- */
+@media (min-width: 2560px) {
+  .land-inner,
+  .footer-grid,
+  .services-inner,
+  .why-inner,
+  .news-inner,
+  .team-inner,
+  .investor-inner,
+  .about-inner,
+  .contact-inner,
+  .loc-grid,
+  .stats-bar,
+  .news-grid {
+    max-width: 2000px;
+  }
+
+  .hero-content {
+    max-width: 1400px;
+  }
+
+  .section-h2 {
+    font-size: clamp(56px, 4vw, 96px);
+  }
+
+  .hero-h1 {
+    font-size: clamp(72px, 6vw, 128px);
+  }
+}
+
+/* ---------- Tablets / small laptops (1024px-1280px) ---------- */
+@media (max-width: 1280px) and (min-width: 1025px) {
+  nav {
+    padding: 0 3vw;
+    height: 100px;
+    gap: 20px;
+  }
+  .logo-img {
+    height: 96px;
+  }
+  nav.scrolled {
+    height: 86px;
+  }
+  nav.scrolled .logo-img {
+    height: 80px;
+  }
+  .logo-text .brand {
+    font-size: 18px;
+  }
+  .logo-text .sub {
+    font-size: 9px;
+    letter-spacing: 0.14em;
+  }
+  .nav-links {
+    gap: 18px;
+  }
+  .nav-links a {
+    font-size: 11.5px;
+    letter-spacing: 0.08em;
+  }
+  .nav-cta {
+    padding: 9px 18px !important;
+    font-size: 11px !important;
+  }
+  .land-grid,
+  .services-grid,
+  .news-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .why-grid,
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .loc-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ---------- Small tablets / large phones landscape (768-1024px) ---------- */
+@media (max-width: 1024px) and (min-width: 769px) {
+  nav {
+    padding: 0 4vw;
+    height: 100px;
+  }
+  nav.scrolled {
+    height: 86px;
+  }
+  .logo-img {
+    height: 100px;
+  }
+  nav.scrolled .logo-img {
+    height: 84px;
+  }
+  .land-grid,
+  .news-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .stats-bar {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .land-detail-body {
+    padding: 56px 5vw 100px;
+  }
+  .land-detail-hero {
+    height: 56vh;
+    min-height: 380px;
+  }
+  .listing-details-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .gallery-main {
+    height: 50vh;
+  }
+}
+
+/* ---------- Mobile common (<=768px) reinforcements ---------- */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+  .land-inner,
+  .footer-grid,
+  .services-inner,
+  .news-inner,
+  .team-inner,
+  .investor-inner,
+  .about-inner,
+  .contact-inner {
+    padding-left: 5vw;
+    padding-right: 5vw;
+  }
+  .section-h2 {
+    font-size: clamp(28px, 7vw, 44px);
+    line-height: 1.15;
+  }
+  .section-p {
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .hero-content {
+    padding: 0 18px;
+  }
+  .hero-h1,
+  .hero-title {
+    font-size: clamp(36px, 9vw, 64px);
+    line-height: 1.05;
+  }
+  .land-page-section {
+    padding: 56px 0 80px;
+  }
+  .land-detail-body {
+    padding: 48px 5vw 80px;
+    gap: 48px;
+  }
+  .land-detail-hero-content {
+    padding: 32px 5vw;
+  }
+  .land-detail-title {
+    font-size: clamp(26px, 7vw, 42px);
+  }
+  .land-detail-h {
+    font-size: 24px;
+  }
+  .listing-details-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .listing-block-value {
+    font-size: 15px;
+  }
+  .land-filters,
+  .land-categories {
+    gap: 8px;
+  }
+  .filter-btn,
+  .category-pill {
+    font-size: 10px;
+    padding: 8px 16px;
+    letter-spacing: 0.08em;
+  }
+  .land-banner {
+    height: 56vh;
+    min-height: 360px;
+  }
+  .stats-bar {
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    padding: 28px 5vw;
+  }
+  .stat-num {
+    font-size: 32px;
+  }
+  .stat-label {
+    font-size: 9px;
+    letter-spacing: 0.16em;
+  }
+  .gallery-thumbs {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .media-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .file-grid {
+    grid-template-columns: 1fr;
+  }
+  .land-card-thumb {
+    aspect-ratio: 16 / 11;
+  }
+  .land-name {
+    font-size: 18px;
+    line-height: 1.3;
+  }
+  .invest-cards-stack {
+    gap: 18px;
+  }
+  .invest-card {
+    padding: 22px;
+  }
+  .ticker-item {
+    font-size: 9px;
+    letter-spacing: 0.14em;
+  }
+  .nav-cta {
+    padding: 9px 16px !important;
+    font-size: 11px !important;
+  }
+}
+
+/* ---------- Small phones (<=480px) ---------- */
+@media (max-width: 480px) {
+  body {
+    font-size: 13px;
+  }
+  nav {
+    height: 80px;
+    padding: 0 4vw;
+  }
+  nav.scrolled {
+    height: 70px;
+  }
+  .logo-img {
+    height: 80px;
+  }
+  nav.scrolled .logo-img {
+    height: 64px;
+  }
+  .logo-text .brand {
+    font-size: 16px;
+  }
+  .logo-text .sub {
+    font-size: 9px;
+    letter-spacing: 0.14em;
+  }
+  .hero-h1,
+  .hero-title {
+    font-size: clamp(30px, 10vw, 48px);
+  }
+  .hero-content {
+    padding: 0 14px;
+  }
+  .section-h2 {
+    font-size: clamp(24px, 8vw, 36px);
+  }
+  .section-p {
+    font-size: 12.5px;
+  }
+  #hero {
+    min-height: 560px;
+  }
+  .land-banner {
+    height: 50vh;
+    min-height: 300px;
+    margin-top: 80px;
+  }
+  .land-detail-hero {
+    height: 48vh;
+    min-height: 320px;
+    margin-top: 80px;
+  }
+  .land-detail-missing {
+    margin-top: 80px;
+  }
+  .stats-bar {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 22px 5vw;
+  }
+  .stat-num {
+    font-size: 26px;
+  }
+  .stat-item:nth-child(4) {
+    grid-column: span 2;
+  }
+  .land-page-section {
+    padding: 40px 0 64px;
+  }
+  .land-detail-body {
+    padding: 36px 5vw 64px;
+    gap: 36px;
+  }
+  .land-detail-h {
+    font-size: 20px;
+  }
+  .land-detail-title {
+    font-size: clamp(22px, 8vw, 32px);
+  }
+  .gallery-main {
+    height: 36vh;
+    min-height: 220px;
+  }
+  .gallery-thumbs {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .gallery-thumb {
+    height: 56px;
+  }
+  .land-card-thumb {
+    aspect-ratio: 16 / 10;
+  }
+  .land-name {
+    font-size: 16px;
+  }
+  .land-card-body {
+    padding: 18px;
+  }
+  .land-card-footer {
+    padding: 12px 18px;
+  }
+  .filter-btn,
+  .category-pill {
+    font-size: 9.5px;
+    padding: 7px 12px;
+    letter-spacing: 0.06em;
+  }
+  .land-filters,
+  .land-categories {
+    gap: 6px;
+  }
+  .nav-cta {
+    display: none !important;
+  }
+  .ticker-item {
+    font-size: 8.5px;
+    gap: 10px;
+  }
+  .footer-grid {
+    gap: 28px;
+  }
+  .invest-card-title {
+    font-size: 18px;
+  }
+  .news-thumb {
+    height: 180px;
+  }
+  .news-title {
+    font-size: 17px;
+  }
+  .map-embed,
+  .land-detail-body .map-embed {
+    height: 260px;
+  }
+}
+
+/* ---------- Very small phones (<=360px) — minimum supported ---------- */
+@media (max-width: 360px) {
+  .stats-bar {
+    grid-template-columns: 1fr;
+  }
+  .stat-item:nth-child(4) {
+    grid-column: auto;
+  }
+  .gallery-thumbs {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .land-detail-back {
+    font-size: 11px;
+  }
+}
+
+/* ---------- Landscape orientation on short screens (<=520px tall) ---------- */
+@media (max-height: 520px) and (orientation: landscape) {
+  #hero {
+    min-height: 460px;
+    height: auto;
+    padding: 100px 0 40px;
+  }
+  .land-banner,
+  .land-detail-hero {
+    height: 88vh;
+    min-height: 320px;
+  }
+}
+
+/* ---------- Honour user reduced-motion preference ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* =====================================================================
+   NAVBAR RESPONSIVE OVERHAUL
+   The site has 9 nav links + a logo with brand text. On tablets and
+   smaller laptops (anything below ~1180px) there isn't enough room for
+   all of that to fit on one row, so the navbar wraps / overflows.
+   Switch to the hamburger menu earlier and shrink the logo
+   progressively as the viewport shrinks.
+   ===================================================================== */
+
+/* Switch to hamburger menu for tablets and smaller (<= 1180px) */
+@media (max-width: 1180px) {
+  .nav-links {
+    display: none !important;
+  }
+  .hamburger {
+    display: flex !important;
+  }
+  nav {
+    height: 104px;
+    padding: 0 4vw;
+  }
+  nav.scrolled {
+    height: 88px;
+  }
+  .logo-img {
+    height: 96px;
+  }
+  nav.scrolled .logo-img {
+    height: 80px;
+  }
+  .logo-text .brand {
+    font-size: 18px;
+  }
+  .logo-text .sub {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+  }
+}
+
+/* Hide brand text on smaller tablets — keep just the logo image (<= 900px) */
+@media (max-width: 900px) {
+  .logo-text {
+    display: none;
+  }
+  nav {
+    height: 92px;
+  }
+  nav.scrolled {
+    height: 78px;
+  }
+  .logo-img {
+    height: 80px;
+  }
+  nav.scrolled .logo-img {
+    height: 68px;
+  }
+}
+
+/* Phones — slim nav (<= 600px) */
+@media (max-width: 600px) {
+  nav {
+    height: 78px;
+    padding: 0 4vw;
+  }
+  nav.scrolled {
+    height: 68px;
+  }
+  .logo-img {
+    height: 64px;
+  }
+  nav.scrolled .logo-img {
+    height: 56px;
+  }
+  .hamburger span {
+    width: 22px;
+  }
+}
+
+/* Tiny phones (<= 380px) */
+@media (max-width: 380px) {
+  nav {
+    height: 70px;
+  }
+  .logo-img {
+    height: 54px;
+  }
+  nav.scrolled .logo-img {
+    height: 48px;
+  }
+}
+
+/* Sync banner / hero margin-top with the responsive navbar heights so
+   there's no visible gap below the navbar on tablets / phones */
+@media (max-width: 1180px) {
+  .land-banner,
+  .land-detail-hero,
+  .land-detail-missing {
+    margin-top: 104px;
+  }
+}
+
+@media (max-width: 900px) {
+  .land-banner,
+  .land-detail-hero,
+  .land-detail-missing {
+    margin-top: 92px;
+  }
+}
+
+@media (max-width: 600px) {
+  .land-banner,
+  .land-detail-hero,
+  .land-detail-missing {
+    margin-top: 78px;
+  }
+}
+
+@media (max-width: 380px) {
+  .land-banner,
+  .land-detail-hero,
+  .land-detail-missing {
+    margin-top: 70px;
+  }
+}
+
+/* =====================================================
+   Math Captcha (Contact form)
+   ===================================================== */
+.captcha-group label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.captcha-refresh {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px solid rgba(247, 198, 27, 0.35);
+  color: var(--gold);
+  padding: 4px 10px;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.captcha-refresh:hover {
+  background: rgba(247, 198, 27, 0.12);
+  border-color: var(--gold);
+}
+
+.captcha-row {
+  display: grid;
+  grid-template-columns: 1fr 110px;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.captcha-question {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--gold);
+  background: rgba(247, 198, 27, 0.08);
+  border: 1px dashed rgba(247, 198, 27, 0.4);
+  padding: 12px 18px;
+  user-select: none;
+  letter-spacing: 0.04em;
+}
+
+.captcha-question span {
+  color: var(--silver);
+  font-size: 22px;
+}
+
+.captcha-input {
+  text-align: center;
+  font-size: 18px !important;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.captcha-input::-webkit-inner-spin-button,
+.captcha-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.captcha-error {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: rgba(154, 7, 4, 0.12);
+  border: 1px solid rgba(154, 7, 4, 0.4);
+  color: #ff8a85;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 480px) {
+  .captcha-row {
+    grid-template-columns: 1fr;
+  }
+  .captcha-question {
+    font-size: 24px;
+  }
+}
+
+/* =====================================================
+   Direction button & address sub-line on map
+   ===================================================== */
+.map-with-direction {
+  position: relative;
+  margin-top: 40px;
+}
+
+.map-with-direction .map-placeholder {
+  margin-top: 0;
+}
+
+.map-pin-icon {
+  color: var(--gold);
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 4px 8px rgba(247, 198, 27, 0.3));
+}
+
+.map-address-sub {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--med-gray);
+  text-align: center;
+  max-width: 80%;
+  margin-top: 4px;
+  position: relative;
+  z-index: 1;
+}
+
+.btn-direction {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--gold);
+  color: var(--charcoal);
+  padding: 10px 18px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: all 0.2s;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  z-index: 2;
+}
+
+.btn-direction:hover {
+  background: #e0b015;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+}
+
+@media (max-width: 480px) {
+  .btn-direction {
+    bottom: 12px;
+    right: 12px;
+    padding: 8px 14px;
+    font-size: 10px;
+  }
+}
+
+/* Map actions row on detail pages */
+.map-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.map-actions .btn-gold,
+.map-actions .btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+@media (max-width: 600px) {
+  .map-actions {
+    width: 100%;
+  }
+  .map-actions .btn-gold,
+  .map-actions .btn-outline {
+    flex: 1;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+/* =====================================================
+   Sticky bottom CTA bar (I'm Interested + Brochure)
+   ===================================================== */
+.sticky-cta {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 950;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 26, 47, 0.92) 0%,
+    rgba(6, 18, 31, 0.98) 100%
+  );
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-top: 1px solid rgba(247, 198, 27, 0.35);
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.45);
+  animation: stickyCtaSlideUp 0.45s ease 0.4s both;
+}
+
+@keyframes stickyCtaSlideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.sticky-cta-inner {
+  max-width: 1480px;
+  margin: 0 auto;
+  padding: 14px 5vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.sticky-cta-left,
+.sticky-cta-right {
+  flex-shrink: 0;
+  display: flex;
+}
+
+.sticky-cta-title {
+  flex: 1;
+  text-align: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  color: var(--silver);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+  padding: 0 16px;
+}
+
+.sticky-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 20px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+/* I Am Interested — solid lime green with charcoal text */
+.sticky-cta-btn--primary {
+  background: #94c13f;
+  color: var(--charcoal);
+  border: 1px solid #94c13f;
+  font-weight: 800;
+}
+
+.sticky-cta-btn--primary:hover {
+  background: #a8d44a;
+  border-color: #a8d44a;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(148, 193, 63, 0.45);
+}
+
+/* Waving hand animation on hover */
+.sticky-cta-wave {
+  color: #f4b870;
+  display: inline-block;
+  transform-origin: 70% 70%;
+  transition: transform 0.2s;
+}
+
+.sticky-cta-btn--primary:hover .sticky-cta-wave {
+  animation: stickyWave 0.9s ease-in-out;
+}
+
+@keyframes stickyWave {
+  0% { transform: rotate(0deg); }
+  15% { transform: rotate(-14deg); }
+  30% { transform: rotate(12deg); }
+  45% { transform: rotate(-10deg); }
+  60% { transform: rotate(8deg); }
+  75% { transform: rotate(-4deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* Download Brochure — solid red with white text */
+.sticky-cta-btn--outline {
+  background: #d63131;
+  color: #ffffff;
+  border: 1px solid #d63131;
+  font-weight: 800;
+}
+
+.sticky-cta-btn--outline:hover {
+  background: #e54141;
+  border-color: #e54141;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(214, 49, 49, 0.45);
+}
+
+/* Reserve space at bottom of every page so sticky bar doesn't overlap content */
+body {
+  padding-bottom: 78px;
+}
+
+@media (max-width: 900px) {
+  .sticky-cta-title {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-bottom: 90px;
+  }
+  .sticky-cta-inner {
+    padding: 12px 4vw;
+    gap: 10px;
+  }
+  .sticky-cta-btn {
+    padding: 11px 14px;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding-bottom: 80px;
+  }
+  .sticky-cta-btn {
+    padding: 10px 10px;
+    font-size: 10.5px;
+    gap: 6px;
+  }
+  .sticky-cta-btn span {
+    display: inline;
+  }
+}
+
+/* Very small phones — stack vertically full-width to avoid cramped buttons */
+@media (max-width: 360px) {
+  body {
+    padding-bottom: 110px;
+  }
+  .sticky-cta-inner {
+    flex-direction: column;
+  }
+  .sticky-cta-left,
+  .sticky-cta-right {
+    width: 100%;
+  }
+  .sticky-cta-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* =====================================================
+   Lead Modal (Download Brochure / Get a Quote)
+   White card on dark backdrop, gold-bordered fields
+   ===================================================== */
+.lead-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(6, 12, 25, 0.78);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  overflow-y: auto;
+  animation: leadOverlayFade 0.22s ease;
+}
+
+@keyframes leadOverlayFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.lead-modal-card {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 36px 32px 32px;
+  color: var(--charcoal);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+  animation: leadCardPop 0.32s cubic-bezier(.2,.9,.3,1.05);
+  margin: auto;
+}
+
+@keyframes leadCardPop {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.lead-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--charcoal);
+  color: var(--gold);
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.lead-modal-close:hover {
+  background: var(--royal);
+  transform: rotate(90deg);
+}
+
+.lead-modal-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-weight: 600;
+  text-align: center;
+  color: var(--charcoal);
+  margin: 0 0 6px;
+  letter-spacing: 0.01em;
+}
+
+.lead-modal-sub {
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: #6a6a6a;
+  margin-bottom: 24px;
+  padding: 0 8px;
+}
+
+.lead-modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.lead-modal-field label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--charcoal);
+  margin-bottom: 6px;
+  letter-spacing: 0.02em;
+}
+
+.lead-modal-field input {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 14px;
+  color: var(--charcoal);
+  background: #ffffff;
+  border: 1.5px solid rgba(247, 198, 27, 0.55);
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  font-family: inherit;
+}
+
+.lead-modal-field input::placeholder {
+  color: #b6b6b6;
+}
+
+.lead-modal-field input:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(247, 198, 27, 0.18);
+}
+
+.lead-modal-captcha {
+  background: rgba(14, 56, 94, 0.04);
+  border: 1px solid rgba(14, 56, 94, 0.15);
+  border-radius: 6px;
+  padding: 14px 14px 12px;
+}
+
+.lead-modal-captcha-row {
+  display: grid;
+  grid-template-columns: 1fr 90px 36px;
+  gap: 10px;
+  align-items: stretch;
+}
+
+.lead-modal-captcha-q {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--royal);
+  background: #ffffff;
+  border: 1px dashed rgba(14, 56, 94, 0.45);
+  border-radius: 4px;
+  user-select: none;
+  letter-spacing: 0.04em;
+  padding: 8px 12px;
+}
+
+.lead-modal-captcha-q span {
+  color: var(--gold);
+  font-size: 18px;
+}
+
+.lead-modal-captcha-input {
+  text-align: center;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  padding: 8px !important;
+  border: 1.5px solid rgba(14, 56, 94, 0.35) !important;
+  border-radius: 4px !important;
+}
+
+.lead-modal-captcha-input::-webkit-inner-spin-button,
+.lead-modal-captcha-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.lead-modal-captcha-refresh {
+  background: var(--charcoal);
+  color: var(--gold);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.lead-modal-captcha-refresh:hover {
+  background: var(--royal);
+}
+
+.lead-modal-captcha-hint {
+  margin-top: 8px;
+  font-size: 11px;
+  color: #6a6a6a;
+  letter-spacing: 0.04em;
+}
+
+.lead-modal-error {
+  padding: 10px 12px;
+  background: rgba(154, 7, 4, 0.08);
+  border: 1px solid rgba(154, 7, 4, 0.45);
+  color: #b71c19;
+  font-size: 13px;
+  border-radius: 4px;
+}
+
+.lead-modal-submit {
+  margin-top: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 14px 18px;
+  background: var(--gold);
+  color: var(--charcoal);
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+
+.lead-modal-submit:hover {
+  background: #e0b015;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(247, 198, 27, 0.4);
+}
+
+/* Success state */
+.lead-modal-success {
+  text-align: center;
+  padding: 8px 8px 4px;
+}
+
+.lead-modal-success-tick {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--charcoal);
+  font-size: 36px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  animation: leadTickPop 0.4s cubic-bezier(.2,.9,.3,1.4) 0.05s both;
+}
+
+@keyframes leadTickPop {
+  from { transform: scale(0); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.lead-modal-success-h {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--charcoal);
+  margin-bottom: 6px;
+}
+
+.lead-modal-success-p {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 22px;
+  padding: 0 8px;
+}
+
+@media (max-width: 480px) {
+  .lead-modal-overlay {
+    padding: 16px;
+  }
+  .lead-modal-card {
+    padding: 32px 22px 24px;
+  }
+  .lead-modal-title {
+    font-size: 22px;
+  }
+  .lead-modal-captcha-row {
+    grid-template-columns: 1fr 70px 32px;
+    gap: 8px;
+  }
+  .lead-modal-captcha-q {
+    font-size: 18px;
+    padding: 6px 10px;
+  }
+}
+

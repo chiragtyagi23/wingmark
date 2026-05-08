@@ -1,3 +1,5 @@
+import { LandPlot, Building2, TrendingUp } from 'lucide-react';
+
 function Services() {
   return (
     <section id="services">
@@ -15,10 +17,7 @@ function Services() {
           <div className="service-card reveal">
             <div className="service-num">01</div>
             <div className="service-icon">
-              <svg viewBox="0 0 24 24">
-                <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
-                <polyline points="9,22 9,12 15,12 15,22" />
-              </svg>
+              <LandPlot size={28} strokeWidth={1.6} />
             </div>
             <div className="service-cat">Core Service</div>
             <div className="service-title">Land Services</div>
@@ -31,11 +30,7 @@ function Services() {
           <div className="service-card reveal reveal-delay-1">
             <div className="service-num">02</div>
             <div className="service-icon">
-              <svg viewBox="0 0 24 24">
-                <rect x="2" y="3" width="20" height="14" rx="2" />
-                <line x1="8" y1="21" x2="16" y2="21" />
-                <line x1="12" y1="17" x2="12" y2="21" />
-              </svg>
+              <Building2 size={28} strokeWidth={1.6} />
             </div>
             <div className="service-cat">Core Service</div>
             <div className="service-title">Development</div>
@@ -48,9 +43,7 @@ function Services() {
           <div className="service-card reveal reveal-delay-2">
             <div className="service-num">03</div>
             <div className="service-icon">
-              <svg viewBox="0 0 24 24">
-                <polyline points="22,12 18,12 15,21 9,3 6,12 2,12" />
-              </svg>
+              <TrendingUp size={28} strokeWidth={1.6} />
             </div>
             <div className="service-cat">Core Service</div>
             <div className="service-title">New Projects</div>

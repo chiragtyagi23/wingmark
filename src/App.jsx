@@ -9,6 +9,7 @@ import PageLoader from './components/PageLoader';
 import MobileNav from './components/MobileNav';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import StickyCTA from './components/StickyCTA';
 import HomePage from './pages/HomePage';
 import LandPage from './pages/LandPage';
 import LandDetailPage from './pages/LandDetailPage';
@@ -142,6 +143,7 @@ function Layout() {
         <Route path="/plot/:slug" element={<PlotDetailPage />} />
       </Routes>
       <Footer />
+      <StickyCTA />
     </>
   );
 }

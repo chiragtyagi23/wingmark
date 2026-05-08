@@ -93,7 +93,7 @@ function Locations() {
             />
             <div
               className="loc-card-overlay"
-              style={{ background: 'linear-gradient(to top, rgba(14,56,94,0.97) 0%, rgba(154,7,4,0.2) 100%)' }}
+              style={{ background: 'linear-gradient(to top, rgba(14,56,94,0.97) 0%, rgba(247,198,27,0.22) 100%)' }}
             >
               <div className="loc-name">Mumbai 3.0</div>
               <div className="loc-tag">⭐ Priority Focus Area</div>
