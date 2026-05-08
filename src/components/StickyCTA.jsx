@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Hand, Download, FileText, History } from 'lucide-react';
+import { Hand, Download, FileText } from 'lucide-react';
 import { landListings, plotListings } from '../data';
 import LeadModal from './LeadModal';
 import VisitedPanel from './VisitedPanel';
@@ -11,7 +11,7 @@ import {
   SITE_URL,
 } from '../utils/generateBrochure';
 
-/** After page loader (~2s), open “Get a Quote” on first paint of the app */
+/** After page loader (~2s), open “Post Your Enquiry” on first paint of the app */
 const AUTO_INTEREST_DELAY_MS = 2300;
 
 function StickyCTA() {
@@ -93,6 +93,7 @@ function StickyCTA() {
 
   const landMatch = path.match(/^\/land\/([^/]+)/);
   const plotMatch = path.match(/^\/plot\/([^/]+)/);
+  const isDetailPage = Boolean(landMatch || plotMatch);
 
   let brochureUrl = '';
   let listingTitle = '';
@@ -121,7 +122,17 @@ function StickyCTA() {
     setActiveModal(null);
   };
 
+  // Reserve bottom space (and tag <body>) only while the bar is visible
+  // so other pages don't leave an unused gap below the footer.
   useEffect(() => {
+    if (!isDetailPage) return undefined;
+    document.body.classList.add('has-sticky-cta');
+    return () => document.body.classList.remove('has-sticky-cta');
+  }, [isDetailPage]);
+
+  // Auto-open "Post Your Enquiry" — only on listing detail pages.
+  useEffect(() => {
+    if (!isDetailPage) return undefined;
     let cancelled = false;
     const timer = window.setTimeout(() => {
       if (cancelled) return;
@@ -132,7 +143,7 @@ function StickyCTA() {
       cancelled = true;
       window.clearTimeout(timer);
     };
-  }, []);
+  }, [isDetailPage]);
 
   const handleBrochureSubmit = (data) => {
     // eslint-disable-next-line no-console
@@ -154,6 +165,10 @@ function StickyCTA() {
     console.log('[Interest request]', data);
   };
 
+  if (!isDetailPage) {
+    return null;
+  }
+
   return (
     <>
       <div className="sticky-cta">
@@ -165,7 +180,7 @@ function StickyCTA() {
               onClick={openBrochure}
             >
               {brochureUrl ? <Download size={16} /> : <FileText size={16} />}
-              <span>{brochureUrl ? 'Download Brochure' : 'Request Brochure'}</span>
+              <span>{brochureUrl ? 'Download File' : 'Request File'}</span>
             </button>
           </div>
 
@@ -187,15 +202,16 @@ function StickyCTA() {
 
             <button
               type="button"
-              className={`sticky-cta-history ${visitedOpen ? 'is-active' : ''}`}
+              className={`sticky-cta-btn sticky-cta-btn--cart ${visitedOpen ? 'is-active' : ''}`}
               onClick={() => setVisitedOpen((v) => !v)}
-              aria-label={`Recently viewed (${visitedEntries.length})`}
+              aria-label={`Add to Cart (${visitedEntries.length} item${
+                visitedEntries.length === 1 ? '' : 's'
+              })`}
               aria-expanded={visitedOpen}
-              title="Recently viewed listings"
             >
-              <History size={18} />
+              <span>Add to Cart</span>
               {visitedEntries.length > 0 && (
-                <span className="sticky-cta-history-badge">
+                <span className="sticky-cta-cart-badge">
                   {visitedEntries.length > 9 ? '9+' : visitedEntries.length}
                 </span>
               )}
@@ -217,7 +233,7 @@ function StickyCTA() {
       <LeadModal
         open={activeModal === 'brochure'}
         onClose={closeModal}
-        title="Download Brochure"
+        title="Download File"
         submitLabel="Submit"
         onSubmit={handleBrochureSubmit}
         context={listingTitle}
@@ -226,7 +242,7 @@ function StickyCTA() {
       <LeadModal
         open={activeModal === 'interest'}
         onClose={closeModal}
-        title="Get a Quote"
+        title="Post Your Enquiry"
         submitLabel="Submit"
         onSubmit={handleInterestSubmit}
         context={listingTitle || "Tell us a bit about you and we'll get in touch"}

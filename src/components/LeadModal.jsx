@@ -12,7 +12,7 @@ const initialForm = { name: '', email: '', mobile: '' };
 function LeadModal({
   open,
   onClose,
-  title = 'Get a Quote',
+  title = 'Post Your Enquiry',
   submitLabel = 'Submit',
   onSubmit,
   context,

@@ -4271,7 +4271,7 @@ footer {
   100% { transform: rotate(0deg); }
 }
 
-/* Download Brochure — solid red with white text */
+/* Download File — solid red with white text */
 .sticky-cta-btn--outline {
   background: #d63131;
   color: #ffffff;
@@ -4291,8 +4291,8 @@ footer {
   padding-bottom: env(safe-area-inset-bottom, 0);
 }
 
-/* Reserve space at bottom of every page so sticky bar doesn't overlap content */
-body {
+/* Reserve space at bottom only on pages that actually render the sticky bar */
+body.has-sticky-cta {
   padding-bottom: calc(78px + env(safe-area-inset-bottom, 0px));
 }
 
@@ -4303,7 +4303,7 @@ body {
 }
 
 @media (max-width: 768px) {
-  body {
+  body.has-sticky-cta {
     padding-bottom: calc(90px + env(safe-area-inset-bottom, 0px));
   }
   .sticky-cta-inner {
@@ -4317,34 +4317,47 @@ body {
   }
 }
 
-/* ≤520px: every iPhone (SE, 12 Pro, XR, 14, 14 Plus) and Pixel —
-   shrink so the round Recently-Viewed icon stays in view. */
-@media (max-width: 520px) {
-  body {
-    padding-bottom: calc(86px + env(safe-area-inset-bottom, 0px));
+/* ≤600px — every phone gets a clean 2-row layout:
+     Row 1: Request / Download File   (full width)
+     Row 2: I Am Interested  |  Add to Cart   (50% / 50%)
+   This guarantees readable labels and tap targets on every iPhone / Pixel. */
+@media (max-width: 600px) {
+  body.has-sticky-cta {
+    padding-bottom: calc(120px + env(safe-area-inset-bottom, 0px));
   }
   .sticky-cta-inner {
+    flex-direction: column;
+    align-items: stretch;
     padding: 10px 12px;
     gap: 8px;
   }
   .sticky-cta-left,
   .sticky-cta-right {
-    gap: 8px;
+    width: 100%;
     min-width: 0;
+    flex: 1 1 auto;
+    gap: 8px;
   }
   .sticky-cta-left {
-    flex: 1 1 auto;
-    min-width: 0;
+    display: flex;
+  }
+  .sticky-cta-left .sticky-cta-btn {
+    flex: 1 1 100%;
+    justify-content: center;
   }
   .sticky-cta-right {
-    flex: 0 0 auto;
+    display: flex;
+  }
+  .sticky-cta-right .sticky-cta-btn {
+    flex: 1 1 0;
+    min-width: 0;
+    justify-content: center;
+    padding: 11px 10px;
   }
   .sticky-cta-btn {
-    padding: 10px 12px;
-    font-size: 10.5px;
-    letter-spacing: 0.05em;
+    font-size: 11px;
+    letter-spacing: 0.06em;
     gap: 6px;
-    min-width: 0;
   }
   .sticky-cta-btn svg {
     flex-shrink: 0;
@@ -4355,30 +4368,34 @@ body {
     white-space: nowrap;
     min-width: 0;
   }
-  .sticky-cta-history {
-    width: 38px;
-    height: 38px;
-    flex-shrink: 0;
+  /* Pull the cart badge inside the button rect on small screens to avoid
+     it overlapping the bar's top border. */
+  .sticky-cta-btn--cart {
+    padding-right: 22px;
+  }
+  .sticky-cta-cart-badge {
+    top: -6px;
+    right: -6px;
   }
 }
 
-/* ≤400px: iPhone SE (375), iPhone 12/13 mini (375), iPhone 12 Pro (390) —
-   labels start to push out, so make right group flush-right and tighter. */
+/* ≤400px — iPhone SE / 12 mini / 12 Pro: tighten typography only */
 @media (max-width: 400px) {
-  .sticky-cta-inner {
-    padding: 10px 10px;
+  body.has-sticky-cta {
+    padding-bottom: calc(116px + env(safe-area-inset-bottom, 0px));
   }
-  .sticky-cta-btn {
-    padding: 9px 10px;
-    font-size: 10px;
+  .sticky-cta-inner {
+    padding: 8px 10px;
+    gap: 6px;
+  }
+  .sticky-cta-left .sticky-cta-btn,
+  .sticky-cta-right .sticky-cta-btn {
+    padding: 10px 8px;
+    font-size: 10.5px;
     letter-spacing: 0.04em;
     gap: 5px;
   }
-  .sticky-cta-history {
-    width: 36px;
-    height: 36px;
-  }
-  .sticky-cta-history-badge {
+  .sticky-cta-cart-badge {
     min-width: 16px;
     height: 16px;
     line-height: 16px;
@@ -4387,30 +4404,24 @@ body {
   }
 }
 
-/* ≤340px: original first-gen SE / Galaxy Fold front — stack to keep
-   everything tappable. */
+/* ≤340px — folded Fold / very old SE: keep 2 rows, just smaller */
 @media (max-width: 340px) {
-  body {
-    padding-bottom: calc(150px + env(safe-area-inset-bottom, 0px));
-  }
-  .sticky-cta-inner {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .sticky-cta-left,
-  .sticky-cta-right {
-    width: 100%;
-    justify-content: space-between;
+  body.has-sticky-cta {
+    padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px));
   }
   .sticky-cta-left .sticky-cta-btn,
   .sticky-cta-right .sticky-cta-btn {
-    flex: 1 1 auto;
-    justify-content: center;
+    padding: 9px 6px;
+    font-size: 10px;
+    letter-spacing: 0.02em;
+  }
+  .sticky-cta-btn--cart {
+    padding-right: 20px;
   }
 }
 
 /* =====================================================
-   Lead Modal (Download Brochure / Get a Quote)
+   Lead Modal (Download File / Post Your Enquiry)
    White card on dark backdrop, gold-bordered fields
    ===================================================== */
 .lead-modal-overlay {
@@ -4773,26 +4784,18 @@ body {
 }
 
 /* =====================================================
-   Recently Viewed — round button on sticky bar + popup panel
+   Add to Cart pill on sticky bar + popup panel
    ===================================================== */
-.sticky-cta-history {
+.sticky-cta-btn--cart {
   position: relative;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  border: 1px solid rgba(247, 198, 27, 0.55);
-  background: rgba(247, 198, 27, 0.10);
+  background: rgba(247, 198, 27, 0.12);
   color: var(--gold);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: background 0.2s ease, border-color 0.2s ease,
-    transform 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
-  flex-shrink: 0;
+  border: 1px solid rgba(247, 198, 27, 0.55);
+  font-weight: 800;
+  padding-right: 18px;
 }
 
-.sticky-cta-history:hover {
+.sticky-cta-btn--cart:hover {
   background: var(--gold);
   border-color: var(--gold);
   color: var(--charcoal);
@@ -4800,16 +4803,16 @@ body {
   box-shadow: 0 6px 16px rgba(247, 198, 27, 0.35);
 }
 
-.sticky-cta-history.is-active {
+.sticky-cta-btn--cart.is-active {
   background: var(--gold);
   border-color: var(--gold);
   color: var(--charcoal);
 }
 
-.sticky-cta-history-badge {
+.sticky-cta-cart-badge {
   position: absolute;
-  top: -4px;
-  right: -4px;
+  top: -8px;
+  right: -8px;
   min-width: 18px;
   height: 18px;
   padding: 0 5px;

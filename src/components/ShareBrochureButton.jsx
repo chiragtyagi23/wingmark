@@ -20,7 +20,7 @@ function buildShareText({ title, location, price, listingUrl }) {
 function ShareBrochureButton({
   listing,
   type = 'land',
-  label = 'Send Brochure on WhatsApp',
+  label = 'Send This Listing on WhatsApp',
 }) {
   const [busy, setBusy] = useState(false);
 
@@ -54,7 +54,7 @@ function ShareBrochureButton({
       aria-busy={busy}
     >
       {busy ? <Loader2 size={16} className="btn-share-spin" /> : <Send size={16} />}
-      <span>{busy ? 'Preparing brochure…' : label}</span>
+      <span>{busy ? 'Preparing…' : label}</span>
     </button>
   );
 }
