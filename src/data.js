@@ -318,6 +318,57 @@ export const landListings = [
     googleLocationUrl: 'https://maps.app.goo.gl/ueeHTgaq7vpVfhjx6',
     location: { lat: 19.0227, lng: 73.2045, address: 'Village Wardoli, Panvel' },
   },
+  {
+    slug: 'rameshwar-vaibhav-hill-station-1000-acres',
+    listingNumber: 'LISTING 05',
+    type: 'sale',
+    category: 'luxury',
+    img: '/rameshwar-plot-area-1.png',
+    loc: 'Rameshwar Vaibhav Hill Station · Village Tadgaon · Taluka Sudhagad · District Raigad',
+    name: 'NA Hill Station Land — 1,000 Acres at Rameshwar Vaibhav',
+    area: '1,000 Acres (NA · Master Layout Approved)',
+    label: 'Price',
+    price: 'Price on Request',
+    badge: 'For Sale',
+    nearestStation:
+      'Nagothane / Khopoli (~27 km) · 38 km from Khalapur Toll, Mumbai-Pune Expressway · 12 km from NH548A (Khopoli–Pali Road)',
+    suitableFor:
+      'Hill-station development on the lines of Lake City — townships, resort communities, premium villas / second homes (similar to Lavasa, Amby Valley)',
+    opportunity:
+      'Government-declared Hill Station with high-priority tourist destination status under Maharashtra GR (akin to Lavasa & Amby Valley). Sits inside a state-declared High Growth Area at 1,430 ft above sea level, surrounded by ~10,000 acres of reserve forest. All key approvals already in place — Town Planning, Tahsildar (NA), MTDC, Gram Panchayat, PWD, MSEB, Health and Police — plus FIPB / CCFI clearance for direct foreign investment in this mixed-use infrastructure project. Trans-Harbour Link (Sewri–Nhava) and Colaba–Uran links will compress the Mumbai distance from ~104 km to ~70 km — strong long-horizon capital appreciation.',
+    status:
+      'Clear title · Loans & mortgages free · Bankable title with valuation and title report from Yardi Prabhu',
+    specialComments:
+      'Excellent connectivity & live infrastructure — 38 km from Khalapur Toll (Mumbai-Pune Expressway), 12 km from NH548A, ~55 km from sanctioned Navi Mumbai International Airport (Panvel) and ~40 km from proposed Mandva-Alibaug airport, ~13 minutes by helicopter from Mumbai. On-site helipad, year-round natural-spring water, tar road access, optical-fibre connectivity and operational telephone exchange. Closer than Lonavala from Mumbai, with daily MSRTC bus service from Pen and Khopoli stations. Close proximity to MMRDA NAINA. Land is easily procurable for further widening of the access road to 120 ft.',
+    snapshot: [
+      'Government-approved Hill Station spanning 1,000 acres, ringed by ~10,000 acres of reserve forest.',
+      '1,430 ft above sea level with master layout approval — closer than Lonavala from Mumbai, helipad on site.',
+    ],
+    gallery: [
+      '/rameshwar-plot-area-1.png',
+      '/rameshwar-plot-area-2.png',
+      '/rameshwar-plot-area-3.png',
+      '/rameshwar-plot-area-4.png',
+    ],
+    media: [],
+    files: [
+      {
+        name: 'Salient Features (Project Brief).pdf',
+        url: '/rameshwar-salient-features.pdf',
+      },
+      {
+        name: '7-12 (VC) Land Record.pdf',
+        url: '/rameshwar-7-12-vc.pdf',
+      },
+    ],
+    googleLocationUrl: 'https://goo.gl/maps/9kmCiELvPxQtziLC7',
+    location: {
+      lat: 18.63825,
+      lng: 73.19953,
+      address:
+        'Rameshwar Vaibhav Hill Station, Village Tadgaon, Taluka Sudhagad, District Raigad, Maharashtra',
+    },
+  },
   // {
   //   slug: 'khopoli-industrial-jv',
   //   type: 'jv',
