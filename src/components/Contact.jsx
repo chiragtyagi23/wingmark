@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { MapPin, Send, RefreshCw, Navigation } from 'lucide-react';
 
-const HQ_ADDRESS = 'Sector 19, Kharghar, Navi Mumbai, Maharashtra, India';
-const HQ_GEO = { lat: 19.0470, lng: 73.0697 };
+const HQ_ADDRESS =
+  'Shop 2, Sai Leela CHS, New Sector 50, Seawoods, Navi Mumbai – 400 706';
+const HQ_GEO = { lat: 19.0188, lng: 73.019 };
 const DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${HQ_GEO.lat},${HQ_GEO.lng}`;
 
 function makeChallenge() {
@@ -58,7 +59,7 @@ function Contact({ formSubmitted, onFormSubmit }) {
               <div className="office-card">
                 <div className="office-city">Navi Mumbai</div>
                 <div className="office-type">Headquarters</div>
-                <div className="office-detail">Our main operations hub covering Kharghar, Panvel, and surrounding nodes.</div>
+                <div className="office-detail">Our main operations hub at Seawoods, serving Nerul, Kharghar, Panvel and surrounding nodes.</div>
               </div>
               <div className="office-card">
                 <div className="office-city">Mumbai</div>

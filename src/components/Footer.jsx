@@ -1,4 +1,5 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Phone, Mail, Globe, MapPin } from 'lucide-react';
 
 function Footer() {
   const location = useLocation();
@@ -51,13 +52,53 @@ function Footer() {
           </ul>
         </div>
 
-        <div className="footer-col">
-          <h5>Connect</h5>
-          <ul>
-            <li><a href="/#contact" onClick={(e) => goToHash(e, 'contact')}>Contact Us</a></li>
-            <li><a href="/#contact" onClick={(e) => goToHash(e, 'contact')}>Navi Mumbai HQ</a></li>
-            <li><a href="/#contact" onClick={(e) => goToHash(e, 'contact')}>Mumbai Branch</a></li>
-            <li><a href="/#contact" onClick={(e) => goToHash(e, 'contact')}>Delhi Branch</a></li>
+        <div className="footer-col footer-contact">
+          <h5>Get in Touch</h5>
+          <ul className="footer-contact-list">
+            <li>
+              <a href="tel:+918070888111" className="footer-contact-row">
+                <span className="footer-contact-ico"><Phone size={14} /></span>
+                <span>
+                  +91 80708 88111
+                  <br />
+                  +91 99309 49066
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="mailto:mehul@thewingsmarkinfraa.com" className="footer-contact-row">
+                <span className="footer-contact-ico"><Mail size={14} /></span>
+                <span>mehul@thewingsmarkinfraa.com</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.thewingsmarkinfraa.com"
+                target="_blank"
+                rel="noreferrer"
+                className="footer-contact-row"
+              >
+                <span className="footer-contact-ico"><Globe size={14} /></span>
+                <span>www.thewingsmarkinfraa.com</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.google.com/maps/dir/?api=1&destination=19.0188,73.019"
+                target="_blank"
+                rel="noreferrer"
+                className="footer-contact-row footer-contact-row--addr"
+              >
+                <span className="footer-contact-ico"><MapPin size={14} /></span>
+                <span>
+                  Shop 2, Sai Leela CHS,
+                  <br />
+                  New Sector 50, Seawoods,
+                  <br />
+                  Navi Mumbai – 400 706
+                </span>
+              </a>
+            </li>
           </ul>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Hand, Download, FileText } from 'lucide-react';
+import { Hand, Download } from 'lucide-react';
 import { landListings, plotListings } from '../data';
 import LeadModal from './LeadModal';
 import VisitedPanel from './VisitedPanel';
@@ -10,9 +10,6 @@ import {
   shareBrochureFiles,
   SITE_URL,
 } from '../utils/generateBrochure';
-
-/** After page loader (~2s), open “Post Your Enquiry” on first paint of the app */
-const AUTO_INTEREST_DELAY_MS = 2300;
 
 function StickyCTA() {
   const location = useLocation();
@@ -95,26 +92,21 @@ function StickyCTA() {
   const plotMatch = path.match(/^\/plot\/([^/]+)/);
   const isDetailPage = Boolean(landMatch || plotMatch);
 
-  let brochureUrl = '';
+  let listingFiles = [];
   let listingTitle = '';
 
   if (landMatch) {
     const slug = landMatch[1];
     const listing = landListings.find((l) => l.slug === slug);
     listingTitle = listing?.name || '';
-    const firstPdf = listing?.files?.find((f) =>
-      (f.url || '').toLowerCase().endsWith('.pdf')
-    );
-    brochureUrl = firstPdf?.url || '';
+    listingFiles = (listing?.files || []).filter((f) => f?.url && f.url !== '#');
   } else if (plotMatch) {
     const slug = plotMatch[1];
     const plot = plotListings.find((p) => p.slug === slug);
     listingTitle = plot?.title || '';
-    const firstPdf = plot?.files?.find((f) =>
-      (f.url || '').toLowerCase().endsWith('.pdf')
-    );
-    brochureUrl = firstPdf?.url || '';
+    listingFiles = (plot?.files || []).filter((f) => f?.url && f.url !== '#');
   }
+  const hasFiles = listingFiles.length > 0;
 
   const openBrochure = () => setActiveModal('brochure');
   const openInterest = () => setActiveModal('interest');
@@ -130,34 +122,22 @@ function StickyCTA() {
     return () => document.body.classList.remove('has-sticky-cta');
   }, [isDetailPage]);
 
-  // Auto-open "Post Your Enquiry" — only on listing detail pages.
-  useEffect(() => {
-    if (!isDetailPage) return undefined;
-    let cancelled = false;
-    const timer = window.setTimeout(() => {
-      if (cancelled) return;
-      setActiveModal((prev) => (prev == null ? 'interest' : prev));
-    }, AUTO_INTEREST_DELAY_MS);
-
-    return () => {
-      cancelled = true;
-      window.clearTimeout(timer);
-    };
-  }, [isDetailPage]);
-
   const handleBrochureSubmit = (data) => {
     // eslint-disable-next-line no-console
     console.log('[Brochure request]', data);
-    if (brochureUrl) {
-      const a = document.createElement('a');
-      a.href = brochureUrl;
-      a.target = '_blank';
-      a.rel = 'noopener noreferrer';
-      a.download = '';
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-    }
+    if (!listingFiles.length) return;
+    listingFiles.forEach((file, i) => {
+      window.setTimeout(() => {
+        const a = document.createElement('a');
+        a.href = file.url;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        a.download = file.name || '';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      }, i * 350);
+    });
   };
 
   const handleInterestSubmit = (data) => {
@@ -179,8 +159,8 @@ function StickyCTA() {
               className="sticky-cta-btn sticky-cta-btn--outline"
               onClick={openBrochure}
             >
-              {brochureUrl ? <Download size={16} /> : <FileText size={16} />}
-              <span>{brochureUrl ? 'Download File' : 'Request File'}</span>
+              <Download size={16} />
+              <span>Download All Documents</span>
             </button>
           </div>
 
@@ -233,7 +213,7 @@ function StickyCTA() {
       <LeadModal
         open={activeModal === 'brochure'}
         onClose={closeModal}
-        title="Download File"
+        title="Download All Documents"
         submitLabel="Submit"
         onSubmit={handleBrochureSubmit}
         context={listingTitle}

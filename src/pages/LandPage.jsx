@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import LandBanner from '../components/LandBanner';
+import AddToCartButton from '../components/AddToCartButton';
 import { landListings, landCategories } from '../data';
 
 function LandPage() {
@@ -123,11 +124,25 @@ function LandPage() {
                       <div className="land-price-label">{listing.label}</div>
                       <div className="land-price">{listing.price}</div>
                     </div>
-                    <div className="land-arrow">
-                      <svg viewBox="0 0 24 24">
-                        <line x1="5" y1="12" x2="19" y2="12" />
-                        <polyline points="12,5 19,12 12,19" />
-                      </svg>
+                    <div className="land-card-actions">
+                      <AddToCartButton
+                        entry={{
+                          id: `land/${listing.slug}`,
+                          type: 'land',
+                          slug: listing.slug,
+                          listingNumber: listing.listingNumber,
+                          title: listing.name,
+                          location: listing.loc,
+                          price: listing.price,
+                          img: listing.img,
+                        }}
+                      />
+                      <div className="land-arrow">
+                        <svg viewBox="0 0 24 24">
+                          <line x1="5" y1="12" x2="19" y2="12" />
+                          <polyline points="12,5 19,12 12,19" />
+                        </svg>
+                      </div>
                     </div>
                   </div>
                 </Link>

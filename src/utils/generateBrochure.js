@@ -74,14 +74,21 @@ async function fetchAsArrayBuffer(url) {
 }
 
 function sanitizeBrochureData(data) {
+  const keyPointsRaw = Array.isArray(data.keyPoints)
+    ? data.keyPoints.join('\n')
+    : data.keyPoints;
   return {
     ...data,
     listingNumber: sanitizePdfText(data.listingNumber),
     title: sanitizePdfText(data.title),
     location: sanitizePdfText(data.location),
+    nearestTrain: sanitizePdfText(data.nearestTrain),
     area: sanitizePdfText(data.area),
     suitableFor: sanitizePdfText(data.suitableFor),
     opportunity: sanitizePdfText(data.opportunity),
+    keyPoints: sanitizePdfText(keyPointsRaw),
+    specialFeatures: sanitizePdfText(data.specialFeatures),
+    comments: sanitizePdfText(data.comments ?? data.specialComments),
     price: sanitizePdfText(data.price),
     status: sanitizePdfText(data.status),
     specialComments: sanitizePdfText(data.specialComments),
@@ -181,6 +188,10 @@ function wrapText(text, font, fontSize, maxWidth) {
  *   area?: string,
  *   suitableFor?: string,
  *   opportunity?: string,
+ *   nearestTrain?: string,
+ *   keyPoints?: string,
+ *   specialFeatures?: string,
+ *   comments?: string,
  *   price?: string,
  *   status?: string,
  *   specialComments?: string,
@@ -283,12 +294,15 @@ export async function generateListingBrochure(data) {
 
   // ---------- Detail rows ----------
   const rows = [
+    ['Nearest Train Station', safe.nearestTrain],
     ['Total Area', safe.area],
     ['Suitable For', safe.suitableFor],
     ['Opportunity', safe.opportunity],
+    ['Key Points', safe.keyPoints],
+    ['Special Features', safe.specialFeatures],
+    ['Comments', safe.comments],
     ['Price', safe.price],
     ['Status', safe.status],
-    ['Special Comments', safe.specialComments],
   ].filter(([, v]) => v);
 
   const labelSize = 8;
@@ -422,9 +436,15 @@ export function buildBrochureData(item, type) {
     title: item.name,
     listingNumber: item.listingNumber,
     location: item.loc,
+    nearestTrain: item.nearestStation,
     area: item.area,
     suitableFor: item.suitableFor,
     opportunity: item.opportunity,
+    keyPoints: Array.isArray(item.keyPoints)
+      ? item.keyPoints.join('\n')
+      : item.keyPoints || '',
+    specialFeatures: item.specialFeatures || '',
+    comments: item.comments ?? item.specialComments ?? '',
     price: item.price,
     status: item.status,
     specialComments: item.specialComments,

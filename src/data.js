@@ -2,6 +2,17 @@ export const SITE_URL = 'https://wingmark.vercel.app';
 
 export const marketNews = [
   {
+    source: 'Indian Express',
+    date: 'May 8, 2026',
+    title:
+      'Mumbai’s 14-lane mega Virar–Alibaug corridor gets Cabinet green light — Phase 1 approved at Rs 31,793 crore',
+    summary:
+      'Maharashtra cleared administrative approval for the first phase of the Virar–Alibaug Multi-Modal Transport Corridor (126 km), linking JNPA, Navi Mumbai International Airport and the Mumbai Trans Harbour Link; MSRDC will execute a 96.41 km Vasai-to-Pen stretch on DBFOT with nine interchanges and digital tolling.',
+    url: 'https://indianexpress.com/article/cities/mumbai/mumbais-14-lane-mega-virar-alibaug-corridor-gets-cabinet-green-light-10678969/',
+    img: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=1200&q=80',
+    tag: 'MMR · Connectivity',
+  },
+  {
     source: 'Mid-Day',
     date: 'Apr 7, 2026',
     title: 'CIDCO unveils ₹16,250 crore Budget for FY27 — focus on airport, metro and housing',
@@ -89,35 +100,48 @@ export const plotBanners = [
   },
 ];
 
-export const plotListings = [
+// Plot listings — kept in display order; codes are assigned automatically
+// at the bottom of this file (PS# for plotType: 'sale', PJ# for 'jv').
+const _plotListingsRaw = [
   {
-    slug: 'sample-plot-for-sale',
-    listingNumber: 'PLOT 01',
+    slug: 'pushpak-nagar-plot-11-sector-2-panvel',
     plotType: 'sale',
-    img: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1200&q=80',
-    title: 'Sample Plot for Sale',
-    location: 'Navi Mumbai, Maharashtra',
-    sector: 'Sector 22',
-    area: '2,500 sq.ft.',
-    plotNumber: 'PL-22-019',
-    accessRoad: '12 mtr internal road',
-    stage: 'NA-titled, ready for development',
-    salePrice: '₹ 1.25 Cr',
-    validityDays: 30,
+    img: '/pushpak-aerial.png',
+    title: '990 sq mtr plot for sale at Pushpak Nagar, Panvel',
+    location: 'Village Kundevahal, Dapoli · Pushpak Nagar, Taluka Panvel, District Raigad',
+    sector: 'Sector 2',
+    area: '989.66 sq mtr',
+    plotNumber: 'Plot No. 11',
+    accessRoad: '20 mtr wide road facing',
+    stage: 'Agreement stage',
+    salePrice: '₹ 1.30 Cr per guntha',
     badge: 'Plot for Sale',
     snapshot: [
-      'Clear title plot positioned for fast development.',
-      'Validity-backed sale offer with documentation support.',
+      'Pushpak Nagar (CIDCO node) parcel on a 20 mtr wide road in Sector 2.',
+      'Plot No. 11 — 989.66 sq mtr — currently at agreement stage.',
     ],
-    gallery: [],
+    gallery: [
+      '/pushpak-aerial.png',
+      '/pushpak-plot-map.png',
+      '/pushpak-site.png',
+      '/pushpak-handover.png',
+    ],
     media: [],
-    files: [],
-    googleLocationUrl: '',
-    location_geo: { lat: 19.0227, lng: 73.0297, address: 'Sector 22, Navi Mumbai' },
+    files: [
+      { name: 'CIDCO Plot Demarcation (Simankan Naksha).png', url: '/pushpak-plot-map.png' },
+      { name: 'CIDCO Handover Receipt (Tabaa Paveti).png', url: '/pushpak-handover.png' },
+    ],
+    googleLocationUrl:
+      'https://www.google.com/maps/search/?api=1&query=18.9655454,73.06807261',
+    location_geo: {
+      lat: 18.9655454,
+      lng: 73.06807261,
+      address:
+        'Plot No. 11, Sector 2, Pushpak Nagar (Village Kundevahal, Dapoli), Taluka Panvel, District Raigad, Maharashtra',
+    },
   },
   {
     slug: 'sample-plot-for-jv',
-    listingNumber: 'PLOT 02',
     plotType: 'jv',
     img: 'https://images.unsplash.com/photo-1669003154058-e1876138ac3c?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     title: 'Sample Plot for Joint Venture',
@@ -153,10 +177,11 @@ export const landCategories = [
   { id: 'bungalow', label: 'Bungalow Plots' },
 ];
 
-export const landListings = [
+// Land listings — kept in display order; codes (L#) are assigned
+// automatically at the bottom of this file.
+const _landListingsRaw = [
   {
     slug: 'rohinjan-premium-land-sale',
-    listingNumber: 'LISTING 01',
     type: 'sale',
     category: 'premium',
     img: '/rohinjan-grid-map.png',
@@ -203,7 +228,6 @@ export const landListings = [
   },
   {
     slug: 'upper-kharghar-jv-dhansar',
-    listingNumber: 'LISTING 02',
     type: 'jv',
     category: 'affordable',
     img: '/dhansar-listing.jpg',
@@ -239,7 +263,6 @@ export const landListings = [
   },
   {
     slug: 'rohinjan-kharghar-premium-sale',
-    listingNumber: 'LISTING 03',
     type: 'sale',
     category: 'luxury',
     img: '/rohinjan-location.png',
@@ -280,7 +303,6 @@ export const landListings = [
   },
   {
     slug: 'panvel-wardoli-mountain-facing',
-    listingNumber: 'LISTING 04',
     type: 'sale',
     category: 'premium',
     img: '/wardoli-location-1.png',
@@ -320,29 +342,72 @@ export const landListings = [
   },
   {
     slug: 'rameshwar-vaibhav-hill-station-1000-acres',
-    listingNumber: 'LISTING 05',
     type: 'sale',
     category: 'luxury',
     img: '/rameshwar-plot-area-1.png',
     loc: 'Rameshwar Vaibhav Hill Station · Village Tadgaon · Taluka Sudhagad · District Raigad',
-    name: 'NA Hill Station Land — 1,000 Acres at Rameshwar Vaibhav',
-    area: '1,000 Acres (NA · Master Layout Approved)',
+    name: '1000+ acres N.A. land for Hill Station available near Khopoli',
+    area: '1,000+ acres (NA · Master layout approved · Hill station as per Government GR)',
     label: 'Price',
     price: 'Price on Request',
     badge: 'For Sale',
     nearestStation:
-      'Nagothane / Khopoli (~27 km) · 38 km from Khalapur Toll, Mumbai-Pune Expressway · 12 km from NH548A (Khopoli–Pali Road)',
+      'Nagothane and Khopoli (~27 km from site) · Daily MSRTC bus service from Pen and Khopoli stations',
     suitableFor:
-      'Hill-station development on the lines of Lake City — townships, resort communities, premium villas / second homes (similar to Lavasa, Amby Valley)',
+      'Hill-station and mixed-use development on the lines of Lake City — townships, resort communities, premium villas and second homes (similar to Lavasa and Amby Valley)',
     opportunity:
-      'Government-declared Hill Station with high-priority tourist destination status under Maharashtra GR (akin to Lavasa & Amby Valley). Sits inside a state-declared High Growth Area at 1,430 ft above sea level, surrounded by ~10,000 acres of reserve forest. All key approvals already in place — Town Planning, Tahsildar (NA), MTDC, Gram Panchayat, PWD, MSEB, Health and Police — plus FIPB / CCFI clearance for direct foreign investment in this mixed-use infrastructure project. Trans-Harbour Link (Sewri–Nhava) and Colaba–Uran links will compress the Mumbai distance from ~104 km to ~70 km — strong long-horizon capital appreciation.',
+      'Large-format NA hill-station parcel near Khopoli with master layout, reserve-forest setting and multi-modal connectivity to Mumbai, Pune and upcoming MMR mega-projects — positioned for long-horizon development and capital appreciation as regional infrastructure scales.',
+    keyPoints: [
+      'Clear title',
+      'Non-agriculture (NA) land',
+      'Master layout approved',
+      'Hill station approval as per Government GR (similar to Lavasa and Amby Valley)',
+      '1,430 ft above sea level — closer than Lonavala from Mumbai',
+      'Helipad on site',
+      'Surrounded by ~10,000 acres of reserve forest',
+      'Daily State Transport bus service from Pen and Khopoli stations',
+      'Close proximity to MMRDA NAINA',
+      'Close to Navi Mumbai International Airport corridor',
+      'Loans and mortgages free — bankable title',
+      'Bank valuation and title report from Yardi Prabhu',
+    ],
+    specialFeatures: [
+      'Project scale is 1,000 acres, surrounded by dense forest of about 10,000 acres. Land pattern is hilly as well as table land — suited for best-in-class development on the lines of Lake City.',
+      'The site is at Village Tadgaon, Raigad District — approximately 104 km from Mumbai. Accessible by NH 9 (Mumbai–Pune Highway), Mumbai–Pune Expressway, and NH 17 (Mumbai–Goa Highway). Nearest railway stations: Nagothane and Khopoli (~27 km from the site).',
+      'State and Central Government have sanctioned two bridges to Uran (Sewri and Colaba routes), reducing the effective distance from Mumbai to about 70 km. The site can be reached in about 13 minutes from Mumbai by helicopter.',
+      'Approximately 55 km from the sanctioned international airport at Panvel and ~40 km from the proposed international airport at Mandva, Alibaug. The location is easily accessible by road from Mumbai yet far enough to retain pristine natural beauty and offer respite from high-pressure city life.',
+      'Optical fibre cables are laid on site and a telephone exchange is situated and operational — enabling global connectivity.',
+      'Water is available throughout the year through natural springs. Tar road is constructed to the site. Soil pattern is red soil.',
+      'Located in the eastern ranges of the Sahyadri at about 1,675 ft above sea level, declared by the State Government as a hill station and a high-priority tourist destination — enabling expeditious approvals for infrastructure development.',
+      'The Trans Harbour Link, Nhava–Sewri and Colaba–Uran projects (where sanctioned) will further improve access from Mumbai. The area is declared a "High Growth Area" by the Government of Maharashtra. Land can be procured for widening the access road to 120 ft.',
+      'UDDHAR RAMESHWAR — two Lord Shiva temples (Gramvashi Rameshwar and Parvatvashi Rameshwar); folklore links the idols to Lord Rama; Jatayu’s final salvation by Lord Rama is associated with this place (~26 km from Rameshwar Vaibhav).',
+      'Ballal Vinayak (Ballaleshwar) legend at Palipur / Ballal — consecrated as Ballaleshwar.',
+      'UNHERE HOT WATER SPRINGS — three natural sulphur-rich medicated springs in village Unhere (~21 km from Rameshwar Vaibhav).',
+      'SARAS GADH — Chhatrapati Shivaji’s watch point; trekking and rock climbing; fort about 1,000 ft above sea level (~24 km from Rameshwar Vaibhav).',
+      'Archaeologically significant Lord Rameshwar temple with holy water lake, greenery and scenery.',
+      'Ballaleshwar Temple (Ashta Vinayak) ~19 km from Rameshwar Vaibhav.',
+      'Fort Sudhagad of Bhor Sansthan and Bhorai Devi Temple (~32 km from Rameshwar Vaibhav).',
+      'Thanale — Buddhist-era caves (~32 km from Rameshwar Vaibhav).',
+      'Nanvali Buddhist-era caves (~38 km from Rameshwar Vaibhav).',
+      'Gomashi cave house of Saint Mrig Rishi (~32 km from Rameshwar Vaibhav).',
+    ].join('\n\n'),
+    comments: [
+      'Asst. Director Town Planning, Raigad — Resolution No. NA/SNO/-13 to 114 SS-A/3930 dated 15 December 1986 (Town Planning Department, Government of Maharashtra).',
+      'Tahsildar, Sudhagad, District Raigad, Revenue Department, GoM — Resolution No. NA/SR/360 dated 19 December 1986.',
+      'Sarpanch, Group Gram Panchayat, Tadgaon, District Raigad — Resolution No. 123 dated 30 November 1985.',
+      'Maharashtra Tourism Development Corporation Ltd. — Resolution No. MTDC/DEV/RAIGAD-776 dated 13 September 1986.',
+      'No Objection Certificate (NOC) — District Health Office, Raigad, Zilla Parishad.',
+      'Executive Engineer, Mahad (Public Works Department, Mahad).',
+      'Executive Engineer, Raigad Zilla Parishad, Government of Maharashtra.',
+      'Maharashtra Electricity Board.',
+      'Superintendent of Police, District Raigad.',
+      'Foreign Investment Promotion Board (FIPB) and Cabinet Committee on Foreign Investment (CCFI) — allowing foreign direct investment in this mixed-use infrastructure project.',
+    ].join('\n\n'),
     status:
       'Clear title · Loans & mortgages free · Bankable title with valuation and title report from Yardi Prabhu',
-    specialComments:
-      'Excellent connectivity & live infrastructure — 38 km from Khalapur Toll (Mumbai-Pune Expressway), 12 km from NH548A, ~55 km from sanctioned Navi Mumbai International Airport (Panvel) and ~40 km from proposed Mandva-Alibaug airport, ~13 minutes by helicopter from Mumbai. On-site helipad, year-round natural-spring water, tar road access, optical-fibre connectivity and operational telephone exchange. Closer than Lonavala from Mumbai, with daily MSRTC bus service from Pen and Khopoli stations. Close proximity to MMRDA NAINA. Land is easily procurable for further widening of the access road to 120 ft.',
     snapshot: [
-      'Government-approved Hill Station spanning 1,000 acres, ringed by ~10,000 acres of reserve forest.',
-      '1,430 ft above sea level with master layout approval — closer than Lonavala from Mumbai, helipad on site.',
+      'Government-approved hill station spanning 1,000+ acres, ringed by ~10,000 acres of reserve forest.',
+      '1,430 ft above sea level with master layout — strong connectivity to Mumbai, Khopoli and upcoming MMR projects.',
     ],
     gallery: [
       '/rameshwar-plot-area-1.png',
@@ -424,6 +489,33 @@ export const landListings = [
   //   location: { lat: 19.034, lng: 73.029, address: 'Sector 22, Navi Mumbai' },
   // },
 ];
+
+/* =====================================================
+   Auto-numbering for listings
+   ----------------------------------------------------
+   - Land listings:        L1, L2, L3, ...   (in array order)
+   - Plot for Sale (sale): PS1, PS2, PS3, ...
+   - Plot for JV (jv):     PJ1, PJ2, PJ3, ...
+
+   Just add a new entry to the raw arrays above; the code below
+   recomputes the `listingNumber` for every item — no manual edits.
+   ===================================================== */
+
+export const landListings = _landListingsRaw.map((item, idx) => ({
+  ...item,
+  listingNumber: `L${idx + 1}`,
+}));
+
+let _psSeq = 0;
+let _pjSeq = 0;
+export const plotListings = _plotListingsRaw.map((item) => {
+  if (item.plotType === 'jv') {
+    _pjSeq += 1;
+    return { ...item, listingNumber: `PJ${_pjSeq}` };
+  }
+  _psSeq += 1;
+  return { ...item, listingNumber: `PS${_psSeq}` };
+});
 
 export const navLinks = [
   { href: '/#about', label: 'About' },

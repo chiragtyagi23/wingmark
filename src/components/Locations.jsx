@@ -16,8 +16,8 @@ function Locations() {
         <div className="loc-grid">
           <div className="loc-card reveal">
             <img
-              src="https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=600&q=80"
-              alt="Kharghar"
+              src="/footprint-kharghar.png"
+              alt="Kharghar — Utsav Chowk, Navi Mumbai"
               loading="lazy"
             />
             <div className="loc-card-overlay">
@@ -30,8 +30,8 @@ function Locations() {
           </div>
           <div className="loc-card reveal reveal-delay-1">
             <img
-              src="https://images.unsplash.com/photo-1579033461380-adb47c3eb938?w=600&q=80"
-              alt="Panvel"
+              src="/footprint-panvel.png"
+              alt="Panvel — regional connectivity and gateway growth"
               loading="lazy"
             />
             <div className="loc-card-overlay">
@@ -44,22 +44,22 @@ function Locations() {
           </div>
           <div className="loc-card reveal reveal-delay-2">
             <img
-              src="https://images.unsplash.com/photo-1598270553906-e4537ca1ff88?w=900&q=80&auto=format&fit=crop"
-              alt="Khopoli"
+              src="/footprint-khopoli.png"
+              alt="Khopoli — industrial corridor and logistics belt"
               loading="lazy"
             />
             <div className="loc-card-overlay">
               <div className="loc-name">Khopoli</div>
-              <div className="loc-tag">Industrial Corridor</div>
+              <div className="loc-tag">Industrial corridor</div>
               <div className="loc-card-body">
-                <p>Growing industrial and leisure destination with high land appreciation potential.</p>
+                <p>Industrial corridor from Khopoli with strong logistics, manufacturing adjacency, and land upside.</p>
               </div>
             </div>
           </div>
           <div className="loc-card reveal">
             <img
-              src="https://images.unsplash.com/photo-1451440063999-77a8b2960d2b?w=900&q=80&auto=format&fit=crop"
-              alt="Pen"
+              src="/footprint-pen.png"
+              alt="Pen — Western Ghats and Raigad district"
               loading="lazy"
             />
             <div className="loc-card-overlay">
@@ -72,8 +72,8 @@ function Locations() {
           </div>
           <div className="loc-card reveal reveal-delay-1">
             <img
-              src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=80"
-              alt="Karjat"
+              src="/footprint-karjat.png"
+              alt="Karjat — resort and villa destination"
               loading="lazy"
             />
             <div className="loc-card-overlay">
@@ -84,12 +84,11 @@ function Locations() {
               </div>
             </div>
           </div>
-          <div className="loc-card reveal reveal-delay-2" style={{ background: 'linear-gradient(135deg, var(--royal), var(--charcoal))' }}>
+          <div className="loc-card reveal reveal-delay-2">
             <img
-              src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&q=80"
-              alt="Mumbai 3.0"
+              src="/footprint-mumbai30.png"
+              alt="Mumbai 3.0 — next-generation metropolitan growth"
               loading="lazy"
-              style={{ opacity: 0.5 }}
             />
             <div
               className="loc-card-overlay"

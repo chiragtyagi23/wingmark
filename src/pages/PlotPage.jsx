@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PlotBanner from '../components/PlotBanner';
+import AddToCartButton from '../components/AddToCartButton';
 import { plotListings } from '../data';
 
 function PlotPage() {
@@ -111,11 +112,28 @@ function PlotPage() {
                         {plot.plotType === 'jv' ? plot.jvOnPrice : plot.salePrice}
                       </div>
                     </div>
-                    <div className="land-arrow">
-                      <svg viewBox="0 0 24 24">
-                        <line x1="5" y1="12" x2="19" y2="12" />
-                        <polyline points="12,5 19,12 12,19" />
-                      </svg>
+                    <div className="land-card-actions">
+                      <AddToCartButton
+                        entry={{
+                          id: `plot/${plot.slug}`,
+                          type: 'plot',
+                          slug: plot.slug,
+                          listingNumber: plot.listingNumber,
+                          title: plot.title,
+                          location: plot.location,
+                          price:
+                            plot.plotType === 'jv'
+                              ? plot.jvOnPrice
+                              : plot.salePrice,
+                          img: plot.img,
+                        }}
+                      />
+                      <div className="land-arrow">
+                        <svg viewBox="0 0 24 24">
+                          <line x1="5" y1="12" x2="19" y2="12" />
+                          <polyline points="12,5 19,12 12,19" />
+                        </svg>
+                      </div>
                     </div>
                   </div>
                 </Link>

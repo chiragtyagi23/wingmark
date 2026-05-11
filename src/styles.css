@@ -1435,6 +1435,78 @@ section {
   stroke: var(--charcoal);
 }
 
+.land-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-card-cart {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(247, 198, 27, 0.1);
+  border: 1px solid rgba(247, 198, 27, 0.4);
+  color: var(--gold);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease,
+    transform 0.15s ease;
+  white-space: nowrap;
+  position: relative;
+  z-index: 2;
+}
+
+.btn-card-cart:hover {
+  background: var(--gold);
+  color: var(--charcoal);
+  border-color: var(--gold);
+}
+
+.btn-card-cart:active {
+  transform: translateY(1px);
+}
+
+.btn-card-cart.is-added {
+  background: rgba(34, 197, 94, 0.15);
+  border-color: rgba(34, 197, 94, 0.7);
+  color: #4ade80;
+}
+
+.btn-card-cart.is-added:hover {
+  background: rgba(220, 38, 38, 0.18);
+  border-color: rgba(220, 38, 38, 0.65);
+  color: #fca5a5;
+}
+
+@media (max-width: 520px) {
+  .btn-card-cart {
+    padding: 7px 10px;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+  }
+  .land-card-actions {
+    gap: 8px;
+  }
+}
+
+@media (max-width: 380px) {
+  .btn-card-cart span {
+    display: none;
+  }
+  .btn-card-cart {
+    padding: 8px;
+    width: 32px;
+    height: 32px;
+    justify-content: center;
+  }
+}
+
 #contact-cta {
   padding: 100px 5vw;
   background: var(--royal);
@@ -1638,6 +1710,49 @@ footer {
 
 .footer-col ul li a:hover {
   color: var(--silver);
+}
+
+/* Get in Touch — phone / mail / web / address rows */
+.footer-contact-list {
+  gap: 14px !important;
+}
+
+.footer-contact-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  line-height: 1.5;
+  color: var(--silver) !important;
+  font-size: 12.5px !important;
+}
+
+.footer-contact-row:hover {
+  color: var(--gold) !important;
+}
+
+.footer-contact-row:hover .footer-contact-ico {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--charcoal);
+}
+
+.footer-contact-ico {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(247, 198, 27, 0.08);
+  border: 1px solid rgba(247, 198, 27, 0.35);
+  color: var(--gold);
+  margin-top: 1px;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.footer-contact-row--addr span:last-child {
+  font-size: 12px !important;
 }
 
 .footer-bottom {
@@ -2946,6 +3061,10 @@ footer {
 .listing-block--accent .listing-block-value {
   color: #f3eddd;
   font-style: italic;
+}
+
+.listing-block-value--preline {
+  white-space: pre-line;
 }
 
 @media (max-width: 720px) {
