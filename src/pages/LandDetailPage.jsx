@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { Navigation, ExternalLink } from 'lucide-react';
 import { landListings } from '../data';
 import ShareBrochureButton from '../components/ShareBrochureButton';
-import { recordVisit } from '../hooks/useVisitedListings';
+import AddToCartButton from '../components/AddToCartButton';
 
 function LandDetailPage() {
   const { slug } = useParams();
@@ -14,19 +14,6 @@ function LandDetailPage() {
     window.scrollTo({ top: 0, behavior: 'auto' });
   }, [slug]);
 
-  useEffect(() => {
-    if (!listing) return;
-    recordVisit({
-      id: `land/${listing.slug}`,
-      type: 'land',
-      slug: listing.slug,
-      listingNumber: listing.listingNumber,
-      title: listing.name,
-      location: listing.loc,
-      price: listing.price,
-      img: listing.img,
-    });
-  }, [listing]);
 
   if (!listing) {
     return (
@@ -92,7 +79,7 @@ function LandDetailPage() {
     { label: 'Opportunity', value: splitToBullets(listing.opportunity), wide: true, preline: true },
     { label: 'Key points', value: formatMultiline(listing.keyPoints), wide: true, preline: true },
     { label: 'Special Features', value: formatMultiline(listing.specialFeatures), wide: true, preline: true },
-    { label: 'Comments', value: formatMultiline(commentsText), wide: true, accent: true, preline: true },
+    { label: 'Comments', value: formatMultiline(commentsText), wide: true, preline: true },
     { label: 'Price', value: listing.price },
     { label: 'Status', value: listing.status, wide: true, preline: true },
   ].filter((block) => block.value);
@@ -140,7 +127,22 @@ function LandDetailPage() {
 
       <div className="land-detail-body">
         <section className="land-detail-section" id="details">
-          <h2 className="land-detail-h">Listing Details</h2>
+          <div className="land-detail-section-header">
+            <h2 className="land-detail-h">Listing Details</h2>
+            <AddToCartButton
+              entry={{
+                id: `land/${listing.slug}`,
+                type: 'land',
+                slug: listing.slug,
+                listingNumber: listing.listingNumber,
+                title: listing.name,
+                location: listing.loc,
+                price: listing.price,
+                img: listing.img,
+              }}
+              size="lg"
+            />
+          </div>
 
           <div className="listing-details-grid">
             {detailBlocks.map((block) => {

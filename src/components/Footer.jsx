@@ -19,17 +19,18 @@ function Footer() {
     <footer>
       <div className="footer-grid">
         <div className="footer-brand">
-          <Link to="/" className="nav-logo" style={{ marginBottom: 16, display: 'inline-flex' }}>
-            <img className="logo-img" src="/wingsmark-logo.png" alt="The Wingsmark Infraa" />
-            <div className="logo-text">
-              <div className="brand">The Wingsmark Infraa</div>
-              <div className="sub">Land · Infrastructure · Growth</div>
+          <Link to="/" className="footer-logo-link">
+            <img src="/wingsmark-logo.png" alt="The Wingsmark Infraa" className="footer-logo-img" />
+            <div className="footer-logo-text">
+              <span className="footer-brand-name"><span className="footer-brand-the">The</span> Wingsmark Infraa</span>
+              <span className="footer-brand-tagline">Land · Infrastructure · Growth</span>
             </div>
           </Link>
+          <div className="footer-brand-divider" />
           <p>
-            A Navi Mumbai based real estate LLP specializing in land acquisition, development, and investment. Building trust, one acre at a time.
+            A Navi Mumbai based Real Estate LLP specializing in Land Acquisition, Development, and Investment. Building Trust, one Acre at a time.
           </p>
-          <div style={{ fontSize: 11, color: 'var(--dark-gray)', letterSpacing: '0.1em' }}>LLP · Incorporated May 2026</div>
+          <div className="footer-llp">LLP · Incorporated May 2026</div>
         </div>
 
         <div className="footer-col">
@@ -103,10 +104,9 @@ function Footer() {
         </div>
       </div>
       <div className="footer-bottom">
-        <p>
-          © 2026 The Wingsmark Infraa LLP. All rights reserved. · <a href="#">Privacy Policy</a>
-        </p>
+        <p>© 2026 The Wingsmark Infraa LLP. All rights reserved.</p>
         <div className="footer-legal">
+          <a href="#">Privacy Policy</a>
           <a href="#">Terms of Use</a>
           <a href="#">Disclaimer</a>
           <a href="#">RERA</a>

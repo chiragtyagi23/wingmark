@@ -10,7 +10,7 @@ function Services() {
           </div>
           <h2 className="section-h2">Core <em>Services</em></h2>
           <p className="section-p" style={{ margin: '0 auto', textAlign: 'center' }}>
-            Comprehensive real estate solutions from acquisition through development, designed for maximum stakeholder value.
+            Comprehensive Real Estate Solutions from Acquisition through Development, Designed for Maximum Stakeholder Value.
           </p>
         </div>
         <div className="services-grid">
@@ -19,7 +19,6 @@ function Services() {
             <div className="service-icon">
               <LandPlot size={28} strokeWidth={1.6} />
             </div>
-            <div className="service-cat">Core Service</div>
             <div className="service-title">Land Services</div>
             <ul className="service-list">
               <li>Strategic Land Acquisition across prime corridors</li>
@@ -32,7 +31,6 @@ function Services() {
             <div className="service-icon">
               <Building2 size={28} strokeWidth={1.6} />
             </div>
-            <div className="service-cat">Core Service</div>
             <div className="service-title">Development</div>
             <ul className="service-list">
               <li>Bungalow &amp; Villa Plotting in Mumbai 3.0</li>
@@ -45,7 +43,6 @@ function Services() {
             <div className="service-icon">
               <TrendingUp size={28} strokeWidth={1.6} />
             </div>
-            <div className="service-cat">Core Service</div>
             <div className="service-title">New Projects</div>
             <ul className="service-list">
               <li>Tailored Sales Strategy for new developments</li>

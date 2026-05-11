@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { X, RefreshCw, Send } from 'lucide-react';
 
 function makeChallenge() {
@@ -16,6 +17,7 @@ function LeadModal({
   submitLabel = 'Submit',
   onSubmit,
   context,
+  variant,
 }) {
   const [form, setForm] = useState(initialForm);
   const [challenge, setChallenge] = useState(makeChallenge);
@@ -76,7 +78,7 @@ function LeadModal({
     onSubmit?.({ ...form, context });
   };
 
-  return (
+  return createPortal(
     <div
       className="lead-modal-overlay"
       role="dialog"
@@ -86,7 +88,7 @@ function LeadModal({
         if (e.target === e.currentTarget) onClose?.();
       }}
     >
-      <div className="lead-modal-card">
+      <div className={`lead-modal-card${variant === 'blue' ? ' lead-modal-card--blue' : ''}`}>
         <button
           type="button"
           className="lead-modal-close"
@@ -184,7 +186,8 @@ function LeadModal({
           </form>
         )}
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 

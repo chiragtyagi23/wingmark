@@ -16,12 +16,12 @@ function Navbar({ scrolled, activeSection, onMobileOpen }) {
 
   const handleHashClick = (event, href) => {
     const id = href.replace('/#', '');
+    event.preventDefault();
     if (location.pathname === '/') {
-      event.preventDefault();
       const el = document.getElementById(id);
       if (el) el.scrollIntoView({ behavior: 'smooth' });
+      window.history.replaceState(null, '', `/#${id}`);
     } else {
-      event.preventDefault();
       navigate(`/#${id}`);
     }
   };

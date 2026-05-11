@@ -10,6 +10,7 @@ function MobileNav({ open, onClose }) {
     if (location.pathname === '/') {
       const el = document.getElementById(hash);
       if (el) el.scrollIntoView({ behavior: 'smooth' });
+      window.history.replaceState(null, '', `/#${hash}`);
     } else {
       navigate(`/#${hash}`);
     }

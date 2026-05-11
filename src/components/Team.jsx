@@ -11,8 +11,8 @@ function Team() {
           <h2 className="section-h2">The <em>Founders</em></h2>
           <div className="gold-divider center" />
           <p className="team-intro">
-            The Wingsmark Infraa comprises individuals from diverse backgrounds — hospitality, facility &amp; payroll management, land liaisoning,
-            legal clearance, real estate sales, marketing, distribution &amp; construction — with a cumulative experience of over 30 years.
+            The Wingsmark Infraa comprises individuals from diverse backgrounds - Hospitality, Facility &amp; Payroll Management, Land Liaisoning,
+            Legal Clearance, Real Estate Sales, Marketing, Distribution &amp; Construction - with a cumulative experience of over 30 years.
           </p>
         </div>
         <div className="team-grid team-grid--3">
@@ -36,8 +36,8 @@ function Team() {
                 <a href="tel:+919930949066">99309 49066</a>
               </div>
               <div className="team-bio">
-                A strategic leader with deep expertise in real estate operations, stakeholder management, and growth strategy. Mehhul drives
-                The Wingsmark Infraa's operational excellence and long-term value creation across all business verticals.
+                A Strategic Leader with Deep Expertise in Real Estate Operations, Stakeholder Management, and Growth Strategy. Mehhul drives
+                The Wingsmark Infraa's Operational Excellence and Long-Term Value Creation across all Business Verticals.
               </div>
             </div>
           </div>
@@ -60,8 +60,8 @@ function Team() {
                 <a href="tel:+919552510383">95525 10383</a>
               </div>
               <div className="team-bio">
-                The founding force behind The Wingsmark Infraa, Vijay brings unparalleled government liaison expertise and deep knowledge of
-                Navi Mumbai's land ecosystem, enabling smooth, dispute-free transactions for every stakeholder.
+                The Founding Force behind The Wingsmark Infraa, Vijay brings Unparalleled Government Liaison Expertise and Deep Knowledge of
+                Navi Mumbai's Land Ecosystem, Enabling Smooth, Dispute-Free Transactions for every Stakeholder.
               </div>
             </div>
           </div>
@@ -83,8 +83,8 @@ function Team() {
                 <a href="tel:+919819520866">98195 20866</a>
               </div>
               <div className="team-bio">
-                Our in-house legal counsel, Advocate Sathyam Acharya ensures every transaction undergoes rigorous title verification,
-                documentation scrutiny and regulatory compliance — safeguarding our clients at every stage.
+                Our In-House Legal Counsel, Advocate Sathyam Acharya ensures every Transaction undergoes Rigorous Title Verification,
+                Documentation Scrutiny and Regulatory Compliance - Safeguarding our Clients at every Stage.
               </div>
             </div>
           </div>

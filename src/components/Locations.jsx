@@ -58,20 +58,6 @@ function Locations() {
           </div>
           <div className="loc-card reveal">
             <img
-              src="/footprint-pen.png"
-              alt="Pen — Western Ghats and Raigad district"
-              loading="lazy"
-            />
-            <div className="loc-card-overlay">
-              <div className="loc-name">Pen</div>
-              <div className="loc-tag">Raigad District</div>
-              <div className="loc-card-body">
-                <p>Emerging investment zone with significant agricultural and residential land potential.</p>
-              </div>
-            </div>
-          </div>
-          <div className="loc-card reveal reveal-delay-1">
-            <img
               src="/footprint-karjat.png"
               alt="Karjat — resort and villa destination"
               loading="lazy"

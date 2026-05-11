@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import LeadModal from './LeadModal';
 
 function ContactCTA() {
+  const [modalOpen, setModalOpen] = useState(false);
   return (
     <section id="contact-cta">
       <div className="cta-inner">
@@ -9,11 +12,20 @@ function ContactCTA() {
         </div>
         <h2 className="section-h2">Ready to <em>Invest</em> in Tomorrow?</h2>
         <p className="cta-p">
-          Whether you're an individual investor, an NRI looking to invest in India's fastest-growing region, or a landowner seeking the right
-          partner — we're here to deliver Trust &amp; Value.
+          Whether you're an Individual Investor, an NRI Looking to Invest in India's Fastest-Growing Region, or a Landowner Seeking the Right
+          Partner - We're here to deliver Trust &amp; Value.
         </p>
         <div className="hero-btns">
-          <a href="#contact" className="btn-gold">Start a Conversation</a>
+          <button type="button" className="btn-gold" onClick={() => setModalOpen(true)}>Start a Conversation</button>
+          <LeadModal
+              open={modalOpen}
+              onClose={() => setModalOpen(false)}
+              title="Post Your Enquiry"
+              submitLabel="Submit"
+              onSubmit={(data) => { console.log('[ContactCTA enquiry]', data); setModalOpen(false); }}
+              context="Start a Conversation"
+              variant="blue"
+            />
           <Link to="/land" className="btn-outline">View All Listings</Link>
         </div>
       </div>

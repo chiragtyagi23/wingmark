@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { Navigation, ExternalLink } from 'lucide-react';
 import { plotListings } from '../data';
 import ShareBrochureButton from '../components/ShareBrochureButton';
-import { recordVisit } from '../hooks/useVisitedListings';
+import AddToCartButton from '../components/AddToCartButton';
 
 function PlotDetailPage() {
   const { slug } = useParams();
@@ -14,20 +14,6 @@ function PlotDetailPage() {
     window.scrollTo({ top: 0, behavior: 'auto' });
   }, [slug]);
 
-  useEffect(() => {
-    if (!plot) return;
-    const isJv = plot.plotType === 'jv';
-    recordVisit({
-      id: `plot/${plot.slug}`,
-      type: 'plot',
-      slug: plot.slug,
-      listingNumber: plot.listingNumber,
-      title: plot.title,
-      location: plot.location,
-      price: isJv ? plot.jvOnPrice : plot.salePrice,
-      img: plot.img,
-    });
-  }, [plot]);
 
   if (!plot) {
     return (
@@ -63,7 +49,6 @@ function PlotDetailPage() {
       ? {
           label: 'Validity',
           value: `${plot.validityDays} days`,
-          accent: true,
           wide: true,
         }
       : null,
@@ -121,7 +106,22 @@ function PlotDetailPage() {
 
       <div className="land-detail-body">
         <section className="land-detail-section" id="details">
-          <h2 className="land-detail-h">Plot Snapshot</h2>
+          <div className="land-detail-section-header">
+            <h2 className="land-detail-h">Plot Snapshot</h2>
+            <AddToCartButton
+              entry={{
+                id: `plot/${plot.slug}`,
+                type: 'plot',
+                slug: plot.slug,
+                listingNumber: plot.listingNumber,
+                title: plot.title,
+                location: plot.location,
+                price: isJv ? plot.jvOnPrice : plot.salePrice,
+                img: plot.img,
+              }}
+              size="lg"
+            />
+          </div>
           <div className="listing-details-grid">
             {detailBlocks.map((block) => {
               const cls = [

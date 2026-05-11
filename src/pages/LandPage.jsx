@@ -106,15 +106,27 @@ function LandPage() {
                     )}
                     <div className="land-name">{listing.name}</div>
                     <div className="land-loc">{listing.loc}</div>
-                    <div className="land-card-quick">
-                      <div>
+                    <div className="land-card-details">
+                      <div className="land-card-detail-row">
                         <span>Total Area</span>
                         <strong>{listing.area}</strong>
                       </div>
                       {listing.suitableFor && (
-                        <div>
-                          <span>Suitable for</span>
+                        <div className="land-card-detail-row">
+                          <span>Suitable For</span>
                           <strong>{listing.suitableFor}</strong>
+                        </div>
+                      )}
+                      {listing.opportunity && (
+                        <div className="land-card-detail-row">
+                          <span>Opportunity</span>
+                          <strong>{listing.opportunity}</strong>
+                        </div>
+                      )}
+                      {listing.status && (
+                        <div className="land-card-detail-row">
+                          <span>Status</span>
+                          <strong>{listing.status}</strong>
                         </div>
                       )}
                     </div>
@@ -137,12 +149,7 @@ function LandPage() {
                           img: listing.img,
                         }}
                       />
-                      <div className="land-arrow">
-                        <svg viewBox="0 0 24 24">
-                          <line x1="5" y1="12" x2="19" y2="12" />
-                          <polyline points="12,5 19,12 12,19" />
-                        </svg>
-                      </div>
+                      <div className="land-enter">Enter ↵</div>
                     </div>
                   </div>
                 </Link>

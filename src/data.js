@@ -114,7 +114,7 @@ const _plotListingsRaw = [
     plotNumber: 'Plot No. 11',
     accessRoad: '20 mtr wide road facing',
     stage: 'Agreement stage',
-    salePrice: '₹ 1.30 Cr per guntha',
+    salePrice: '₹ 1.30 Lacs per sq mtr',
     badge: 'Plot for Sale',
     snapshot: [
       'Pushpak Nagar (CIDCO node) parcel on a 20 mtr wide road in Sector 2.',
@@ -169,10 +169,6 @@ const _plotListingsRaw = [
 
 export const landCategories = [
   { id: 'all', label: 'All Listings' },
-  { id: 'budget', label: 'Budget' },
-  { id: 'affordable', label: 'Affordable' },
-  { id: 'luxury', label: 'Luxury' },
-  { id: 'premium', label: 'Premium' },
   { id: 'commercial', label: 'Commercial' },
   { id: 'bungalow', label: 'Bungalow Plots' },
 ];
@@ -189,7 +185,7 @@ const _landListingsRaw = [
     name: 'Premium Land for Sale at Rohinjan near Amandoot metro station',
     area: '6 Acres',
     label: 'Price',
-    price: '₹ 1 Lakh per sq mtr',
+    price: '₹ 40 Lacs per acre',
     badge: 'For Sale',
     nearestStation: 'Amandoot metro station',
     suitableFor: 'Residential complex / Mixed use development with commercial shops and offices',
@@ -270,7 +266,7 @@ const _landListingsRaw = [
     name: 'Premium Land for Sale at Rohinjan (Kharghar)',
     area: '8.25 Acres',
     label: 'Price',
-    price: '₹ 1 L per sq mtr (Negotiable on prompt payment)',
+    price: '₹ 40 Lacs per acre (Negotiable on prompt payment)',
     badge: 'For Sale',
     nearestStation: '1.5 km from Amandoot metro station',
     suitableFor:

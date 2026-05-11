@@ -13,8 +13,10 @@ function Hero() {
         <h1 className="hero-h1">
           <em>Trust &amp; Value</em>
           <br />
-          <strong>in Every Acre.</strong>
         </h1>
+        <h3 className="hero-h3">
+          <strong>in Every Acre.</strong>
+        </h3>
         <p className="hero-tagline">Premium Land Acquisition · Infrastructure Growth · High-Return Investments</p>
         <div className="hero-btns">
           <Link to="/land" className="btn-gold">

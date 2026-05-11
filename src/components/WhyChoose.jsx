@@ -37,7 +37,7 @@ function WhyChoose() {
               <Users size={30} strokeWidth={1.6} />
             </div>
             <div className="why-title">Diverse Expertise</div>
-            <div className="why-p">Our team spans hospitality, legal, construction, finance, and real estate — 30+ years of combined excellence.</div>
+            <div className="why-p">Our team spans real estate, facility management, hospitality, construction, and legal - 30+ years of combined excellence.</div>
           </div>
         </div>
       </div>

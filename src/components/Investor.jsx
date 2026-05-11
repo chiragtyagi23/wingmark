@@ -1,4 +1,9 @@
+import { useState } from 'react';
+import LeadModal from './LeadModal';
+
 function Investor() {
+  const [modalOpen, setModalOpen] = useState(false);
+
   return (
     <section id="investor">
       <div className="investor-inner">
@@ -33,16 +38,25 @@ function Investor() {
                 <div className="invest-point-num">03</div>
                 <div className="invest-point-content">
                   <h4>NRI-Friendly Process</h4>
-                  <p>End-to-end support for NRI investors — paperwork, FEMA compliance, remote transactions made simple.</p>
+                  <p>End-to-end support for NRI investors - paperwork, FEMA compliance, remote transactions made simple.</p>
                 </div>
               </div>
             </div>
 
             <div style={{ marginTop: 40 }}>
-              <a href="#contact" className="btn-gold">
+              <button type="button" className="btn-gold" onClick={() => setModalOpen(true)}>
                 Schedule an Investor Consultation
-              </a>
+              </button>
             </div>
+
+            <LeadModal
+              open={modalOpen}
+              onClose={() => setModalOpen(false)}
+              title="Post Your Enquiry"
+              submitLabel="Submit"
+              onSubmit={(data) => { console.log('[Investor enquiry]', data); setModalOpen(false); }}
+              context="Investor Consultation"
+            />
           </div>
 
           <div className="investor-visual reveal reveal-delay-2">
@@ -65,7 +79,7 @@ function Investor() {
                 <div className="invest-card-tag">Open for Partnerships</div>
               </div>
               <div className="invest-card ">
-                <div className="invest-card-label invest-card-tag" >Limited Opportunity</div>
+                <div className="invest-card-label" >Limited Opportunity</div>
                 <div className="invest-card-title">Early Mover Advantage</div>
                 <div className="invest-card-p">
                   Prime land parcels in pre-development stages offer the highest appreciation. Connect now to get first access to our exclusive listings.

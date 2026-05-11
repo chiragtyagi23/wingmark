@@ -12,7 +12,7 @@ function News() {
             What's <em>moving</em> Navi Mumbai
           </h2>
           <p className="section-p" style={{ margin: '0 auto', textAlign: 'center' }}>
-            Real-time signals from CIDCO, the airport corridor and the commercial real-estate market — context for every investor.
+            Real-Time Signals from CIDCO, The Airport Corridor and The Commercial Real-Estate Market - Context for every Investor.
           </p>
         </div>
 

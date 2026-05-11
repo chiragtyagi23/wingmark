@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 
 const STATS = [
   { target: 30, suffix: '+', label: 'Years Combined Experience' },
-  { target: 6, suffix: '+', label: 'Prime Locations Covered' },
-  { target: 4, suffix: '', label: 'Office Locations' },
+  { target: 6, suffix: '+', label: 'Prime Regions Covered' },
+  { target: 3, suffix: '', label: 'Office Locations' },
 ];
 
 const DURATION_MS = 2600;

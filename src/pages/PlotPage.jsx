@@ -90,15 +90,27 @@ function PlotPage() {
                     )}
                     <div className="land-name">{plot.title}</div>
                     <div className="land-loc">{plot.location}</div>
-                    <div className="land-card-quick">
-                      <div>
+                    <div className="land-card-details">
+                      <div className="land-card-detail-row">
                         <span>Area</span>
                         <strong>{plot.area}</strong>
                       </div>
                       {plot.plotNumber && (
-                        <div>
+                        <div className="land-card-detail-row">
                           <span>Plot Number</span>
                           <strong>{plot.plotNumber}</strong>
+                        </div>
+                      )}
+                      {plot.accessRoad && (
+                        <div className="land-card-detail-row">
+                          <span>Road Facing</span>
+                          <strong>{plot.accessRoad}</strong>
+                        </div>
+                      )}
+                      {plot.stage && (
+                        <div className="land-card-detail-row">
+                          <span>Status</span>
+                          <strong>{plot.stage}</strong>
                         </div>
                       )}
                     </div>
@@ -128,12 +140,7 @@ function PlotPage() {
                           img: plot.img,
                         }}
                       />
-                      <div className="land-arrow">
-                        <svg viewBox="0 0 24 24">
-                          <line x1="5" y1="12" x2="19" y2="12" />
-                          <polyline points="12,5 19,12 12,19" />
-                        </svg>
-                      </div>
+                      <div className="land-enter">Enter ↵</div>
                     </div>
                   </div>
                 </Link>

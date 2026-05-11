@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Hand, Download } from 'lucide-react';
+import { Hand, Download, ShoppingCart } from 'lucide-react';
 import { landListings, plotListings } from '../data';
 import LeadModal from './LeadModal';
 import VisitedPanel from './VisitedPanel';
@@ -189,6 +189,7 @@ function StickyCTA() {
               })`}
               aria-expanded={visitedOpen}
             >
+              <ShoppingCart size={16} />
               <span>Add to Cart</span>
               {visitedEntries.length > 0 && (
                 <span className="sticky-cta-cart-badge">

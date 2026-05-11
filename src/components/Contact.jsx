@@ -97,13 +97,9 @@ function Contact({ formSubmitted, onFormSubmit }) {
           </div>
 
           <div className="reveal reveal-delay-2">
-            <div style={{ padding: 40, background: 'rgba(14,56,94,0.15)', border: '1px solid rgba(97,98,99,0.2)' }}>
-              <h3 style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 28, color: 'var(--white)', marginBottom: 8 }}>
-                Send an Enquiry
-              </h3>
-              <p style={{ fontSize: 12, color: 'var(--dark-gray)', marginBottom: 32 }}>
-                Our team will respond within 24 hours.
-              </p>
+            <div className="contact-form-panel">
+              <h3 className="contact-form-title">Send an Enquiry</h3>
+              <p className="contact-form-sub">Our team will respond within 24 hours.</p>
 
               <div className="contact-form">
                 <div className="form-row">

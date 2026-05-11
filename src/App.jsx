@@ -118,6 +118,11 @@ function Layout() {
       });
 
       setActiveSection(current);
+
+      const hash = current && current !== 'hero' ? `/#${current}` : '/';
+      if (window.location.pathname + window.location.hash !== hash) {
+        window.history.replaceState(null, '', hash);
+      }
     };
 
     handleActiveSection();
