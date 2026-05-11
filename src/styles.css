@@ -19,6 +19,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -57,7 +58,7 @@ nav {
   align-items: center;
   justify-content: space-between;
   padding: 0 4vw;
-  height: 120px;
+  height: 140px;
   background: rgba(248, 244, 236, 0.94);
   backdrop-filter: blur(18px);
   border-bottom: 1px solid rgba(10, 26, 47, 0.08);
@@ -67,14 +68,14 @@ nav {
 }
 
 nav.scrolled {
-  height: 96px;
+  height: 110px;
   background: rgba(250, 247, 240, 0.98);
   border-bottom-color: rgba(247, 198, 27, 0.45);
   box-shadow: 0 2px 10px rgba(10, 26, 47, 0.08);
 }
 
 nav.scrolled .logo-img {
-  height: 96px;
+  height: 110px;
 }
 
 /* Group 1: logo + brand text — sits on the LEFT */
@@ -102,7 +103,7 @@ nav.scrolled .logo-img {
 }
 
 .logo-img {
-  height: 120px;
+  height: 140px;
   width: auto;
   display: block;
   flex-shrink: 0;
@@ -244,6 +245,7 @@ nav.scrolled .logo-img {
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  padding-top: 140px;
 }
 
 .hero-bg {
@@ -298,12 +300,30 @@ nav.scrolled .logo-img {
   padding: 22px 5vw;
 }
 
+@media (max-width: 900px) {
+  #hero {
+    padding-top: 88px;
+  }
+}
+
 @media (max-width: 768px) {
   #hero {
     min-height: 640px;
   }
   .hero-stats .stats-bar {
     padding: 16px 4vw;
+  }
+}
+
+@media (max-width: 600px) {
+  #hero {
+    padding-top: 82px;
+  }
+}
+
+@media (max-width: 380px) {
+  #hero {
+    padding-top: 76px;
   }
 }
 
@@ -601,6 +621,60 @@ section {
   line-height: 1.9;
   color: var(--med-gray);
   max-width: 560px;
+}
+
+#about,
+#services,
+#locations,
+#investor,
+#team,
+#contact,
+#news,
+#why,
+#contact-cta {
+  scroll-margin-top: 140px;
+}
+
+@media (max-width: 900px) {
+  #about,
+  #services,
+  #locations,
+  #investor,
+  #team,
+  #contact,
+  #news,
+  #why,
+  #contact-cta {
+    scroll-margin-top: 92px;
+  }
+}
+
+@media (max-width: 600px) {
+  #about,
+  #services,
+  #locations,
+  #investor,
+  #team,
+  #contact,
+  #news,
+  #why,
+  #contact-cta {
+    scroll-margin-top: 86px;
+  }
+}
+
+@media (max-width: 380px) {
+  #about,
+  #services,
+  #locations,
+  #investor,
+  #team,
+  #contact,
+  #news,
+  #why,
+  #contact-cta {
+    scroll-margin-top: 80px;
+  }
 }
 
 #about {
@@ -1163,6 +1237,31 @@ section {
   gap: 40px;
   max-width: 900px;
   margin: 0 auto;
+}
+
+.team-grid--3 {
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 1100px;
+}
+
+.team-contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.team-contact a {
+  font-size: 12px;
+  color: var(--gold);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: color 0.2s;
+}
+
+.team-contact a:hover {
+  color: var(--white);
 }
 
 .team-card {
@@ -1972,30 +2071,6 @@ footer {
 }
 
 @media (max-width: 768px) {
-  .nav-links {
-    display: none;
-  }
-
-  .hamburger {
-    display: flex;
-  }
-
-  nav {
-    height: 96px;
-  }
-
-  nav.scrolled {
-    height: 80px;
-  }
-
-  .logo-img {
-    height: 96px;
-  }
-
-  nav.scrolled .logo-img {
-    height: 76px;
-  }
-
   .stats-bar {
     grid-template-columns: 1fr 1fr;
   }
@@ -2004,8 +2079,21 @@ footer {
   .loc-grid,
   .land-grid,
   .why-grid,
-  .team-grid {
+  .team-grid,
+  .team-grid--3 {
     grid-template-columns: 1fr;
+  }
+
+  #about,
+  #services,
+  #locations,
+  #investor,
+  #team,
+  #contact,
+  #why,
+  #contact-cta {
+    padding-top: 72px;
+    padding-bottom: 72px;
   }
 
   .contact-offices {
@@ -2205,7 +2293,7 @@ footer {
   width: 100%;
   height: 78vh;
   min-height: 520px;
-  margin-top: 120px;
+  margin-top: 140px;
   overflow: hidden;
   background: var(--charcoal);
 }
@@ -2330,7 +2418,6 @@ footer {
   .land-banner {
     height: 64vh;
     min-height: 420px;
-    margin-top: 96px;
   }
   .land-banner-arrow {
     width: 38px;
@@ -2658,7 +2745,7 @@ footer {
   width: 100%;
   height: 60vh;
   min-height: 420px;
-  margin-top: 120px;
+  margin-top: 140px;
   overflow: hidden;
 }
 
@@ -3393,7 +3480,7 @@ footer {
 
 .land-detail-missing {
   min-height: 60vh;
-  margin-top: 120px;
+  margin-top: 140px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -3408,10 +3495,6 @@ footer {
   .land-detail-hero {
     height: 52vh;
     min-height: 360px;
-    margin-top: 96px;
-  }
-  .land-detail-missing {
-    margin-top: 96px;
   }
   .gallery-main {
     height: 42vh;
@@ -3590,7 +3673,8 @@ footer {
     grid-template-columns: repeat(2, 1fr);
   }
   .why-grid,
-  .team-grid {
+  .team-grid,
+  .team-grid--3 {
     grid-template-columns: repeat(2, 1fr);
   }
   .loc-grid {
@@ -3755,26 +3839,6 @@ footer {
   body {
     font-size: 13px;
   }
-  nav {
-    height: 80px;
-    padding: 0 4vw;
-  }
-  nav.scrolled {
-    height: 70px;
-  }
-  .logo-img {
-    height: 80px;
-  }
-  nav.scrolled .logo-img {
-    height: 64px;
-  }
-  .logo-text .brand {
-    font-size: 16px;
-  }
-  .logo-text .sub {
-    font-size: 9px;
-    letter-spacing: 0.14em;
-  }
   .hero-h1,
   .hero-title {
     font-size: clamp(30px, 10vw, 48px);
@@ -3794,15 +3858,10 @@ footer {
   .land-banner {
     height: 50vh;
     min-height: 300px;
-    margin-top: 80px;
   }
   .land-detail-hero {
     height: 48vh;
     min-height: 320px;
-    margin-top: 80px;
-  }
-  .land-detail-missing {
-    margin-top: 80px;
   }
   .stats-bar {
     grid-template-columns: 1fr 1fr;
@@ -3903,6 +3962,35 @@ footer {
   .land-detail-body .map-embed {
     height: 260px;
   }
+  #about,
+  #services,
+  #locations,
+  #investor,
+  #team,
+  #contact,
+  #why,
+  #contact-cta {
+    padding-top: 56px;
+    padding-bottom: 56px;
+  }
+  .about-grid {
+    gap: 36px;
+  }
+  .contact-grid {
+    gap: 36px;
+  }
+  .team-card-body {
+    padding: 18px 20px;
+  }
+  .team-name {
+    font-size: 16px;
+  }
+  .team-role {
+    font-size: 11px;
+  }
+  .loc-card {
+    aspect-ratio: 4/3;
+  }
 }
 
 /* ---------- Very small phones (<=360px) — minimum supported ---------- */
@@ -4001,63 +4089,98 @@ footer {
   }
 }
 
-/* Hide brand text on smaller tablets — keep just the logo image (<= 900px) */
+/* Tablets (<= 900px) — shrink text, keep visible */
 @media (max-width: 900px) {
-  .logo-text {
-    display: none;
-  }
   nav {
-    height: 92px;
-  }
-  nav.scrolled {
-    height: 78px;
-  }
-  .logo-img {
-    height: 80px;
-  }
-  nav.scrolled .logo-img {
-    height: 68px;
-  }
-}
-
-/* Phones — keep logo prominent (<= 600px) */
-@media (max-width: 600px) {
-  nav {
-    height: 96px;
+    height: 88px;
     padding: 0 4vw;
   }
   nav.scrolled {
-    height: 84px;
+    height: 74px;
   }
   .logo-img {
-    height: 88px;
+    height: 72px;
   }
   nav.scrolled .logo-img {
-    height: 76px;
+    height: 60px;
+  }
+  .nav-logo {
+    gap: 8px;
+  }
+  .logo-text .brand-the {
+    font-size: 9px;
+  }
+  .logo-text .brand-name {
+    font-size: 15px;
+  }
+  .logo-text .sub {
+    font-size: 7px;
+    letter-spacing: 0.12em;
+  }
+}
+
+/* Phones (<= 600px) — consistent sizing across all phones */
+@media (max-width: 600px) {
+  nav {
+    height: 82px;
+  }
+  nav.scrolled {
+    height: 68px;
+  }
+  .logo-img {
+    height: 66px;
+  }
+  nav.scrolled .logo-img {
+    height: 54px;
+  }
+  .nav-logo {
+    gap: 6px;
+  }
+  .logo-text .brand-the {
+    font-size: 8px;
+  }
+  .logo-text .brand-name {
+    font-size: 13px;
+  }
+  .logo-text .sub {
+    font-size: 6.5px;
+    letter-spacing: 0.1em;
   }
   .hamburger span {
     width: 24px;
   }
 }
 
-/* Tiny phones (<= 380px) — still big enough to read at a glance */
+/* Small phones (<= 380px) */
 @media (max-width: 380px) {
   nav {
-    height: 86px;
-  }
-  nav.scrolled {
-    height: 74px;
-  }
-  .logo-img {
     height: 76px;
   }
-  nav.scrolled .logo-img {
+  nav.scrolled {
     height: 64px;
+  }
+  .logo-img {
+    height: 58px;
+  }
+  nav.scrolled .logo-img {
+    height: 48px;
+  }
+  .nav-logo {
+    gap: 5px;
+  }
+  .logo-text .brand-the {
+    font-size: 7px;
+  }
+  .logo-text .brand-name {
+    font-size: 11px;
+  }
+  .logo-text .sub {
+    font-size: 6px;
+    letter-spacing: 0.08em;
   }
 }
 
-/* Sync banner / hero margin-top with the responsive navbar heights so
-   there's no visible gap below the navbar on tablets / phones */
+/* Sync banner margin-top with the responsive navbar heights */
 @media (max-width: 1180px) {
   .land-banner,
   .land-detail-hero,
@@ -4070,7 +4193,7 @@ footer {
   .land-banner,
   .land-detail-hero,
   .land-detail-missing {
-    margin-top: 92px;
+    margin-top: 88px;
   }
 }
 
@@ -4078,7 +4201,7 @@ footer {
   .land-banner,
   .land-detail-hero,
   .land-detail-missing {
-    margin-top: 96px;
+    margin-top: 82px;
   }
 }
 
@@ -4086,7 +4209,7 @@ footer {
   .land-banner,
   .land-detail-hero,
   .land-detail-missing {
-    margin-top: 86px;
+    margin-top: 76px;
   }
 }
 

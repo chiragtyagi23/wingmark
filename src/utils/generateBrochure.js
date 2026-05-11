@@ -5,6 +5,8 @@ import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
  * (Users sometimes save with different spelling/casing.)
  */
 const LETTERHEAD_CANDIDATES = [
+  '/black beige Modern Business Letterhead.pdf',
+  '/Black Beige Modern Business Letterhead.pdf',
   '/White Green and Gold Modern Minimal Business Letterhead.pdf',
   '/white green and gold modern minimal bussiness lerrerhead.pdf',
   '/letterhead.pdf',
@@ -277,18 +279,41 @@ export async function generateListingBrochure(data) {
   });
   y -= 18;
 
-  // ---------- Optional main image ----------
-  if (data.imageUrl) {
-    const img = await tryEmbedImage(pdfDoc, data.imageUrl);
-    if (img) {
-      const targetWidth = contentWidth;
+  // ---------- Two gallery images side by side ----------
+  const imgUrls = data.galleryUrls?.length ? data.galleryUrls.slice(0, 2) : (data.imageUrl ? [data.imageUrl] : []);
+  if (imgUrls.length > 0) {
+    const embedPromises = imgUrls.map((u) => tryEmbedImage(pdfDoc, u));
+    const embedded = (await Promise.all(embedPromises)).filter(Boolean);
+
+    if (embedded.length === 2) {
+      const gap = 12;
+      const halfW = (contentWidth - gap) / 2;
+      const maxImgH = 140;
+      const heights = embedded.map((img) => {
+        const ratio = img.height / img.width;
+        return Math.min(maxImgH, halfW * ratio);
+      });
+      const drawH = Math.max(...heights);
+      y -= drawH;
+      for (let i = 0; i < 2; i++) {
+        const img = embedded[i];
+        const ratio = img.height / img.width;
+        const h = Math.min(maxImgH, halfW * ratio);
+        const w = h / ratio;
+        const x = contentX + i * (halfW + gap) + (halfW - w) / 2;
+        const imgY = y + (drawH - h);
+        page.drawImage(img, { x, y: imgY, width: w, height: h });
+      }
+      y -= 14;
+    } else if (embedded.length === 1) {
+      const img = embedded[0];
       const ratio = img.height / img.width;
-      const drawH = Math.min(170, targetWidth * ratio);
+      const drawH = Math.min(150, contentWidth * ratio);
       const drawW = drawH / ratio;
       const drawX = contentX + (contentWidth - drawW) / 2;
       y -= drawH;
       page.drawImage(img, { x: drawX, y, width: drawW, height: drawH });
-      y -= 16;
+      y -= 14;
     }
   }
 
@@ -415,6 +440,7 @@ export function buildBrochureData(item, type) {
   if (!item) return null;
   if (type === 'plot') {
     const isJv = item.plotType === 'jv';
+    const plotGallery = item.gallery?.length ? item.gallery : [item.img].filter(Boolean);
     return {
       title: item.title,
       listingNumber: item.listingNumber,
@@ -429,9 +455,11 @@ export function buildBrochureData(item, type) {
         : '',
       description: item.snapshot?.join(' ') || item.description || '',
       imageUrl: item.img,
+      galleryUrls: plotGallery.slice(0, 2),
       listingUrl: `${SITE_URL}/plot/${item.slug}`,
     };
   }
+  const gallery = item.gallery?.length ? item.gallery : [item.img].filter(Boolean);
   return {
     title: item.name,
     listingNumber: item.listingNumber,
@@ -450,6 +478,7 @@ export function buildBrochureData(item, type) {
     specialComments: item.specialComments,
     description: item.snapshot?.join(' ') || item.description || '',
     imageUrl: item.img,
+    galleryUrls: gallery.slice(0, 2),
     listingUrl: `${SITE_URL}/land/${item.slug}`,
   };
 }
