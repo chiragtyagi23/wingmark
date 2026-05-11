@@ -2243,10 +2243,19 @@ footer {
 
 .loader-logo {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 48px;
+  font-size: clamp(42px, 12vw, 64px);
   font-weight: 300;
   color: var(--white);
   letter-spacing: 0.1em;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.loader-logo-the {
+  font-size: 0.55em;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  font-style: italic;
 }
 
 .loader-logo em {

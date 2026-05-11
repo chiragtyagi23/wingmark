@@ -2,7 +2,7 @@ function PageLoader({ loaderHidden }) {
   return (
     <div className={`page-loader ${loaderHidden ? 'hidden' : ''}`} id="pageLoader">
       <div className="loader-logo">
-        Wingsmark <em>Infraa</em>
+        <div className="loader-logo-the">The</div> Wingsmark <em>Infraa</em>
       </div>
       <div className="loader-bar">
         <div className="loader-bar-fill" />
