@@ -89,7 +89,7 @@ function PlotPage() {
                       <div className="land-card-num">{plot.listingNumber}</div>
                     )}
                     <div className="land-name">{plot.title}</div>
-                    <div className="land-loc">{plot.location}</div>
+                    <div className="land-loc"><span className="land-loc-label">Location: </span>{plot.location}</div>
                     <div className="land-card-details">
                       <div className="land-card-detail-row">
                         <span>Area</span>

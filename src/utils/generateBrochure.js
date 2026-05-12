@@ -5,11 +5,7 @@ import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
  * (Users sometimes save with different spelling/casing.)
  */
 const LETTERHEAD_CANDIDATES = [
-  '/black beige Modern Business Letterhead.pdf',
-  '/Black Beige Modern Business Letterhead.pdf',
-  '/White Green and Gold Modern Minimal Business Letterhead.pdf',
-  '/white green and gold modern minimal bussiness lerrerhead.pdf',
-  '/letterhead.pdf',
+  '/black beige Modern Business Letterhead (2).pdf',
 ].map((p) => encodeURI(p));
 
 /**
@@ -63,8 +59,8 @@ async function fetchLetterheadBytes() {
 }
 
 const PALETTE = {
-  navy: rgb(0.04, 0.10, 0.18),
-  gold: rgb(0.97, 0.78, 0.10),
+  navy: rgb(0.078, 0.247, 0.404),
+  gold: rgb(0.80, 0.60, 0.0),
   red: rgb(0.84, 0.18, 0.18),
   text: rgb(0.06, 0.14, 0.26),
   muted: rgb(0.40, 0.43, 0.48),
@@ -76,64 +72,90 @@ async function fetchAsArrayBuffer(url) {
   return await res.arrayBuffer();
 }
 
+const SKIP_SANITIZE = new Set(['imageUrl', 'locationImageUrl', 'listingUrl']);
+
 function sanitizeBrochureData(data) {
   const result = { ...data };
   for (const key of Object.keys(result)) {
-    if (typeof result[key] === 'string') {
+    if (typeof result[key] === 'string' && !SKIP_SANITIZE.has(key)) {
       result[key] = sanitizePdfText(result[key]);
     }
   }
   return result;
 }
 
-function loadHtmlImage(url) {
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-    img.crossOrigin = 'anonymous';
-    img.onload = () => resolve(img);
-    img.onerror = () => reject(new Error(`Image failed to load: ${url}`));
-    img.src = url;
-  });
-}
-
 /**
- * Decode any browser-supported image (PNG variants, WebP, JPG, …) and
- * re-encode it as JPEG so pdf-lib can embed it reliably.
- * pdf-lib's embedPng silently fails on indexed/interlaced PNGs — going
- * through a canvas avoids that whole class of issues.
+ * Embed an image into the PDF. Tries multiple strategies:
+ *   1. Fetch raw bytes → embedJpg or embedPng directly
+ *   2. If direct embed fails, re-encode through canvas → dataURL → embedJpg
  */
 async function tryEmbedImage(pdfDoc, url) {
   if (!url) return null;
   try {
-    const img = await loadHtmlImage(url);
-    let w = img.naturalWidth || img.width;
-    let h = img.naturalHeight || img.height;
-    if (!w || !h) return null;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`fetch ${res.status}`);
+    const arrBuf = await res.arrayBuffer();
+    const bytes = new Uint8Array(arrBuf);
 
-    const MAX = 1600;
-    if (w > MAX || h > MAX) {
-      const scale = MAX / Math.max(w, h);
-      w = Math.round(w * scale);
-      h = Math.round(h * scale);
+    const isJpg = bytes[0] === 0xff && bytes[1] === 0xd8;
+    const isPng =
+      bytes[0] === 0x89 &&
+      bytes[1] === 0x50 &&
+      bytes[2] === 0x4e &&
+      bytes[3] === 0x47;
+
+    // Strategy 1: direct embed
+    if (isJpg) {
+      try {
+        return await pdfDoc.embedJpg(bytes);
+      } catch { /* fall through to canvas */ }
+    }
+    if (isPng) {
+      try {
+        return await pdfDoc.embedPng(bytes);
+      } catch { /* fall through to canvas */ }
     }
 
-    const canvas = document.createElement('canvas');
-    canvas.width = w;
-    canvas.height = h;
-    const ctx = canvas.getContext('2d');
-    ctx.fillStyle = '#ffffff';
-    ctx.fillRect(0, 0, w, h);
-    ctx.drawImage(img, 0, 0, w, h);
+    // Strategy 2: canvas re-encode (handles all browser-decodable formats)
+    const blob = new Blob([bytes]);
+    const blobUrl = URL.createObjectURL(blob);
+    try {
+      const img = await new Promise((resolve, reject) => {
+        const el = new Image();
+        el.onload = () => resolve(el);
+        el.onerror = () => reject(new Error('img decode failed'));
+        el.src = blobUrl;
+      });
 
-    const dataUrl = canvas.toDataURL('image/jpeg', 0.85);
-    const base64 = dataUrl.split(',')[1];
-    if (!base64) return null;
+      let w = img.naturalWidth || img.width;
+      let h = img.naturalHeight || img.height;
+      if (!w || !h) return null;
 
-    const binary = atob(base64);
-    const bytes = new Uint8Array(binary.length);
-    for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+      const MAX = 800;
+      if (w > MAX || h > MAX) {
+        const s = MAX / Math.max(w, h);
+        w = Math.round(w * s);
+        h = Math.round(h * s);
+      }
 
-    return await pdfDoc.embedJpg(bytes);
+      const canvas = document.createElement('canvas');
+      canvas.width = w;
+      canvas.height = h;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, w, h);
+      ctx.drawImage(img, 0, 0, w, h);
+
+      const dataUrl = canvas.toDataURL('image/jpeg', 0.80);
+      const b64 = dataUrl.split(',')[1];
+      if (!b64) return null;
+      const raw = atob(b64);
+      const jpgBytes = new Uint8Array(raw.length);
+      for (let i = 0; i < raw.length; i++) jpgBytes[i] = raw.charCodeAt(i);
+      return await pdfDoc.embedJpg(jpgBytes);
+    } finally {
+      URL.revokeObjectURL(blobUrl);
+    }
   } catch (e) {
     console.warn('[brochure] image embed failed for', url, e);
     return null;
@@ -218,41 +240,68 @@ export async function generateListingBrochure(data) {
   const minY = footerSpace;
   let y = height - headerSpace;
 
-  // ---------- Title block ----------
+  // ---------- Listing number badge (centered, #143F67 bg, red text) ----------
   if (safe.listingNumber) {
-    page.drawText(String(safe.listingNumber), {
-      x: contentX,
-      y,
-      size: 11,
+    const badgeText = String(safe.listingNumber).toUpperCase();
+    const badgeFontSize = 13;
+    const badgePadH = 18;
+    const badgePadV = 8;
+    const badgeTextWidth = helvBold.widthOfTextAtSize(badgeText, badgeFontSize);
+    const badgeW = badgeTextWidth + badgePadH * 2;
+    const badgeH = badgeFontSize + badgePadV * 2;
+    const badgeX = contentX + (contentWidth - badgeW) / 2;
+    const badgeY = y - badgeH + badgePadV;
+
+    page.drawRectangle({
+      x: badgeX,
+      y: badgeY,
+      width: badgeW,
+      height: badgeH,
+      color: PALETTE.navy,
+      borderColor: PALETTE.gold,
+      borderWidth: 1.5,
+    });
+
+    page.drawText(badgeText, {
+      x: badgeX + badgePadH,
+      y: badgeY + badgePadV,
+      size: badgeFontSize,
       font: helvBold,
       color: PALETTE.red,
     });
-    y -= 22;
+    y -= badgeH + 24;
   }
 
+  // ---------- Title in a gold-bordered box ----------
   const titleSize = 20;
-  const titleLines = wrapText(safe.title, helvBold, titleSize, contentWidth);
+  const titleBoxPad = 16;
+  const titleLines = wrapText(safe.title, helvBold, titleSize, contentWidth - titleBoxPad * 2);
+  const titleTextH = titleLines.length * (titleSize + 5);
+  const titleBlockH = titleTextH + titleBoxPad * 2;
+
+  page.drawRectangle({
+    x: contentX,
+    y: y - titleBlockH,
+    width: contentWidth,
+    height: titleBlockH,
+    borderColor: PALETTE.gold,
+    borderWidth: 1.5,
+  });
+
+  let titleY = y - titleBoxPad - (titleBlockH - titleTextH) / 2;
   for (const line of titleLines) {
+    const lineW = helvBold.widthOfTextAtSize(line, titleSize);
+    const lineX = contentX + (contentWidth - lineW) / 2;
     page.drawText(line, {
-      x: contentX,
-      y,
+      x: lineX,
+      y: titleY,
       size: titleSize,
       font: helvBold,
       color: PALETTE.navy,
     });
-    y -= titleSize + 5;
+    titleY -= titleSize + 5;
   }
-
-  // gold divider
-  y -= 4;
-  page.drawRectangle({
-    x: contentX,
-    y,
-    width: 56,
-    height: 2,
-    color: PALETTE.gold,
-  });
-  y -= 18;
+  y -= titleBlockH + 28;
 
   // ---------- Detail rows (vary by listing type) ----------
   let rows;
@@ -324,6 +373,95 @@ export async function generateListingBrochure(data) {
     y -= lineGap;
   }
 
+  // ---------- Two image boxes in gold frames (COMMENTED OUT FOR NOW) ----------
+  /*
+  const rawImgUrls = [data.imageUrl, data.locationImageUrl].filter(Boolean);
+  const imgUrls = [...new Set(rawImgUrls)];
+
+  if (imgUrls.length > 0) {
+    const embedResults = await Promise.all(imgUrls.map((u) => tryEmbedImage(pdfDoc, u)));
+    const embeds = embedResults.filter(Boolean);
+
+    if (embeds.length > 0) {
+      const boxBorder = 2;
+      const boxPad = 5;
+      const gap = 14;
+      const spaceLeft = y - minY - 10;
+      const needNewPage = spaceLeft < 120;
+
+      let targetPage = page;
+      let imgY0;
+      const imgAreaH = 220;
+
+      if (needNewPage) {
+        const [lhPage] = await PDFDocument.load(letterheadBytes, {
+          ignoreEncryption: true,
+        }).then((d) => {
+          const ps = d.getPages();
+          return pdfDoc.copyPages(d, ps.map((_, i) => i));
+        });
+        pdfDoc.addPage(lhPage);
+        targetPage = pdfDoc.getPages().at(-1);
+        imgY0 = height - headerSpace;
+      } else {
+        imgY0 = y;
+      }
+
+      const totalAvail = contentWidth;
+      const boxW =
+        embeds.length === 2
+          ? (totalAvail - gap) / 2
+          : totalAvail * 0.6;
+      const imgW = boxW - (boxBorder + boxPad) * 2;
+      const maxImgH = needNewPage
+        ? imgAreaH
+        : Math.min(imgAreaH, spaceLeft - (boxBorder + boxPad) * 2);
+
+      const imgDraws = embeds.map((emb) => {
+        const aspect = emb.width / emb.height;
+        let drawW = imgW;
+        let drawH = drawW / aspect;
+        if (drawH > maxImgH) {
+          drawH = maxImgH;
+          drawW = drawH * aspect;
+        }
+        return { emb, drawW, drawH };
+      });
+
+      const tallest = Math.max(...imgDraws.map((d) => d.drawH));
+      const boxH = tallest + (boxBorder + boxPad) * 2;
+      const boxY = imgY0 - boxH - 4;
+      const startX =
+        embeds.length === 2
+          ? contentX
+          : contentX + (totalAvail - boxW) / 2;
+      let curX = startX;
+
+      for (const { emb, drawW, drawH } of imgDraws) {
+        targetPage.drawRectangle({
+          x: curX,
+          y: boxY,
+          width: boxW,
+          height: boxH,
+          borderColor: PALETTE.gold,
+          borderWidth: boxBorder,
+        });
+
+        const imgX = curX + (boxW - drawW) / 2;
+        const imgYPos = boxY + (boxH - drawH) / 2;
+        targetPage.drawImage(emb, {
+          x: imgX,
+          y: imgYPos,
+          width: drawW,
+          height: drawH,
+        });
+
+        curX += boxW + gap;
+      }
+    }
+  }
+  */
+
   const bytes = await pdfDoc.save();
   return new Blob([bytes], { type: 'application/pdf' });
 }
@@ -360,6 +498,7 @@ export function buildBrochureData(item, type) {
   if (!item) return null;
   if (type === 'plot') {
     const isJv = item.plotType === 'jv';
+    const secondImg = item.gallery?.find((g) => g !== item.img) || '';
     return {
       pdfType: isJv ? 'plot-jv' : 'plot-sale',
       title: item.title,
@@ -374,6 +513,8 @@ export function buildBrochureData(item, type) {
       jvRatio: isJv ? item.jvRatio : '',
       jvDepositPrice: isJv ? item.jvOnPrice : '',
       comments: item.comments || '',
+      imageUrl: item.img || '',
+      locationImageUrl: secondImg,
     };
   }
   return {
@@ -392,6 +533,13 @@ export function buildBrochureData(item, type) {
     comments: item.comments ?? item.specialComments ?? '',
     price: item.price,
     status: item.status,
+    imageUrl: item.img || '',
+    locationImageUrl:
+      (item.locationImage && item.locationImage !== item.img
+        ? item.locationImage
+        : null) ||
+      item.gallery?.find((g) => g !== item.img) ||
+      '',
   };
 }
 
@@ -405,7 +553,7 @@ export async function generateBrochureFile(item, type) {
   const blob = await generateListingBrochure(data);
   const numMatch = (item.listingNumber || '').match(/(\d+)/);
   const num = numMatch ? numMatch[1].padStart(4, '0') : '0001';
-  const fileName = `thewingsmarkinfraalisting#${num}.pdf`;
+  const fileName = `TheWingsMarkInfraa-listing#${num}.pdf`;
   return new File([blob], fileName, { type: 'application/pdf' });
 }
 

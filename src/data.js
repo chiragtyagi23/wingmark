@@ -229,7 +229,7 @@ const _landListingsRaw = [
     name: 'Premium Land for Sale at Rohinjan near Amandoot metro station',
     area: '6 Acres',
     label: 'Price',
-    price: '₹ 40 Lacs per acre',
+    price: '₹ 40 Cr per acre',
     badge: 'For Sale',
     nearestStation: 'Amandoot metro station',
     suitableFor: 'Residential complex / Mixed use development with commercial shops and offices',
@@ -275,7 +275,7 @@ const _landListingsRaw = [
     name: 'JV Proposal with building plans and feasibility report at Upper Kharghar',
     area: '131 Guntha · Ratio 60 : 40',
     label: 'On amount',
-    price: '₹ 10 Cr (non refundable)',
+    price: '₹ 10 Cr\n(non refundable)',
     badge: 'Joint Venture',
     suitableFor: 'Entry level developers',
     opportunity:
@@ -310,7 +310,7 @@ const _landListingsRaw = [
     name: 'Premium Land for Sale at Rohinjan (Kharghar)',
     area: '8.25 Acres',
     label: 'Price',
-    price: '₹ 40 Lacs per acre (Negotiable on prompt payment)',
+    price: '₹ 40 Cr per acre (Negotiable on prompt payment)',
     badge: 'For Sale',
     nearestStation: '1.5 km from Amandoot metro station',
     suitableFor:
@@ -371,7 +371,9 @@ const _landListingsRaw = [
       '/wardoli-location-2.png',
       '/wardoli-location-3.png',
     ],
-    media: [],
+    media: [
+      { url: '/wardoli-road-construction.mp4', title: 'Road for site – under construction' },
+    ],
     files: [
       { name: 'Gat Book map.pdf', url: '/wardoli-gat-book-map.pdf' },
       { name: '7-12. Ferfar.pdf', url: '/wardoli-7-12-ferfar.pdf' },
@@ -390,7 +392,7 @@ const _landListingsRaw = [
     name: '1000+ acres N.A. land for Hill Station available near Khopoli',
     area: '1,000+ acres (NA · Master layout approved · Hill station as per Government GR)',
     label: 'Price',
-    price: '700 cr',
+    price: '700 Cr',
     badge: 'For Sale',
     nearestStation:
       'Nagothane and Khopoli (~27 km from site) · Daily MSRTC bus service from Pen and Khopoli stations',

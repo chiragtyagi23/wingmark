@@ -31,8 +31,7 @@ function Team() {
                 <span className="team-role">Designated Partner</span>
               </div>
               <div className="team-bio">
-                A Strategic Leader with Deep Expertise in Real Estate Operations, Stakeholder Management, and Growth Strategy. Mehhul drives
-                The Wingsmark Infraa's Operational Excellence and Long-Term Value Creation across all Business Verticals.
+              A Strategic Leader with Deep Expertise in Real Estate Operations, Stakeholder Management, and Growth Strategy. Mehhul drives The Wingsmark Infraa's Operational Excellence and Long-Term Value Creation across all Business Verticals.
               </div>
             </div>
           </div>

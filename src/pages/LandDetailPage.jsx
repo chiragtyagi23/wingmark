@@ -74,7 +74,7 @@ function LandDetailPage() {
     { label: 'Title', value: listing.name, wide: true, preline: true },
     { label: 'Location', value: listing.loc, wide: true, preline: true },
     { label: 'Nearest train station', value: listing.nearestStation, preline: true },
-    { label: 'Total Area', value: listing.area, preline: true },
+    { label: 'Total Area', value: listing.area, wide: true, preline: true },
     { label: 'Suitable for', value: listing.suitableFor, wide: true, preline: true },
     { label: 'Opportunity', value: listing.skipOpportunitySplit ? listing.opportunity : splitToBullets(listing.opportunity), wide: true, preline: true },
     { label: 'Key points', value: formatMultiline(listing.keyPoints), wide: true, preline: true },
