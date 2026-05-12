@@ -320,14 +320,7 @@ export async function generateListingBrochure(data) {
     });
     y -= titleSize + 1;
   }
-  page.drawRectangle({
-    x: contentX,
-    y: y + 2,
-    width: contentWidth,
-    height: 2,
-    color: PALETTE.red,
-  });
-  y -= 30;
+  y -= 20;
 
   // ---------- Detail rows (vary by listing type) ----------
   let rows;
@@ -392,7 +385,7 @@ export async function generateListingBrochure(data) {
       y: y - 3,
       width: labelW,
       height: 1.2,
-      color: PALETTE.red,
+      color: PALETTE.gold,
     });
     y -= labelSize + 10;
     for (const line of valueLines) {
