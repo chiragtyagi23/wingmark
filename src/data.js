@@ -390,7 +390,7 @@ const _landListingsRaw = [
     name: '1000+ acres N.A. land for Hill Station available near Khopoli',
     area: '1,000+ acres (NA · Master layout approved · Hill station as per Government GR)',
     label: 'Price',
-    price: 'Price on Request',
+    price: '700 cr',
     badge: 'For Sale',
     nearestStation:
       'Nagothane and Khopoli (~27 km from site) · Daily MSRTC bus service from Pen and Khopoli stations',
