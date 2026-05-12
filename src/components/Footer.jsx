@@ -57,19 +57,19 @@ function Footer() {
           <h5>Get in Touch</h5>
           <ul className="footer-contact-list">
             <li>
-              <a href="tel:+918070888111" className="footer-contact-row">
+              <a href="tel:+919833791533" className="footer-contact-row">
                 <span className="footer-contact-ico"><Phone size={14} /></span>
                 <span>
-                  +91 80708 88111
+                  +91 98337 91533
                   <br />
-                  +91 99309 49066
+                  +91 95525 10383
                 </span>
               </a>
             </li>
             <li>
-              <a href="mailto:mehul@thewingsmarkinfraa.com" className="footer-contact-row">
+              <a href="mailto:info@thewingsmarkinfraa.com" className="footer-contact-row">
                 <span className="footer-contact-ico"><Mail size={14} /></span>
-                <span>mehul@thewingsmarkinfraa.com</span>
+                <span>info@thewingsmarkinfraa.com</span>
               </a>
             </li>
             <li>

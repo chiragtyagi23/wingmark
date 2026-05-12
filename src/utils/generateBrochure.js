@@ -65,7 +65,8 @@ async function fetchLetterheadBytes() {
 const PALETTE = {
   navy: rgb(0.04, 0.10, 0.18),
   gold: rgb(0.97, 0.78, 0.10),
-  text: rgb(0.16, 0.20, 0.25),
+  red: rgb(0.84, 0.18, 0.18),
+  text: rgb(0.06, 0.14, 0.26),
   muted: rgb(0.40, 0.43, 0.48),
 };
 
@@ -76,27 +77,13 @@ async function fetchAsArrayBuffer(url) {
 }
 
 function sanitizeBrochureData(data) {
-  const keyPointsRaw = Array.isArray(data.keyPoints)
-    ? data.keyPoints.join('\n')
-    : data.keyPoints;
-  return {
-    ...data,
-    listingNumber: sanitizePdfText(data.listingNumber),
-    title: sanitizePdfText(data.title),
-    location: sanitizePdfText(data.location),
-    nearestTrain: sanitizePdfText(data.nearestTrain),
-    area: sanitizePdfText(data.area),
-    suitableFor: sanitizePdfText(data.suitableFor),
-    opportunity: sanitizePdfText(data.opportunity),
-    keyPoints: sanitizePdfText(keyPointsRaw),
-    specialFeatures: sanitizePdfText(data.specialFeatures),
-    comments: sanitizePdfText(data.comments ?? data.specialComments),
-    price: sanitizePdfText(data.price),
-    status: sanitizePdfText(data.status),
-    specialComments: sanitizePdfText(data.specialComments),
-    description: sanitizePdfText(data.description),
-    listingUrl: sanitizePdfText(data.listingUrl),
-  };
+  const result = { ...data };
+  for (const key of Object.keys(result)) {
+    if (typeof result[key] === 'string') {
+      result[key] = sanitizePdfText(result[key]);
+    }
+  }
+  return result;
 }
 
 function loadHtmlImage(url) {
@@ -236,14 +223,14 @@ export async function generateListingBrochure(data) {
     page.drawText(String(safe.listingNumber), {
       x: contentX,
       y,
-      size: 9,
+      size: 11,
       font: helvBold,
-      color: PALETTE.gold,
+      color: PALETTE.red,
     });
-    y -= 14;
+    y -= 22;
   }
 
-  const titleSize = 17;
+  const titleSize = 20;
   const titleLines = wrapText(safe.title, helvBold, titleSize, contentWidth);
   for (const line of titleLines) {
     page.drawText(line, {
@@ -253,19 +240,7 @@ export async function generateListingBrochure(data) {
       font: helvBold,
       color: PALETTE.navy,
     });
-    y -= titleSize + 4;
-  }
-
-  if (safe.location) {
-    y -= 4;
-    page.drawText(String(safe.location).toUpperCase(), {
-      x: contentX,
-      y,
-      size: 9,
-      font: helv,
-      color: PALETTE.muted,
-    });
-    y -= 14;
+    y -= titleSize + 5;
   }
 
   // gold divider
@@ -279,60 +254,50 @@ export async function generateListingBrochure(data) {
   });
   y -= 18;
 
-  // ---------- Two gallery images side by side ----------
-  const imgUrls = data.galleryUrls?.length ? data.galleryUrls.slice(0, 2) : (data.imageUrl ? [data.imageUrl] : []);
-  if (imgUrls.length > 0) {
-    const embedPromises = imgUrls.map((u) => tryEmbedImage(pdfDoc, u));
-    const embedded = (await Promise.all(embedPromises)).filter(Boolean);
-
-    if (embedded.length === 2) {
-      const gap = 12;
-      const halfW = (contentWidth - gap) / 2;
-      const maxImgH = 140;
-      const heights = embedded.map((img) => {
-        const ratio = img.height / img.width;
-        return Math.min(maxImgH, halfW * ratio);
-      });
-      const drawH = Math.max(...heights);
-      y -= drawH;
-      for (let i = 0; i < 2; i++) {
-        const img = embedded[i];
-        const ratio = img.height / img.width;
-        const h = Math.min(maxImgH, halfW * ratio);
-        const w = h / ratio;
-        const x = contentX + i * (halfW + gap) + (halfW - w) / 2;
-        const imgY = y + (drawH - h);
-        page.drawImage(img, { x, y: imgY, width: w, height: h });
-      }
-      y -= 14;
-    } else if (embedded.length === 1) {
-      const img = embedded[0];
-      const ratio = img.height / img.width;
-      const drawH = Math.min(150, contentWidth * ratio);
-      const drawW = drawH / ratio;
-      const drawX = contentX + (contentWidth - drawW) / 2;
-      y -= drawH;
-      page.drawImage(img, { x: drawX, y, width: drawW, height: drawH });
-      y -= 14;
-    }
+  // ---------- Detail rows (vary by listing type) ----------
+  let rows;
+  if (safe.pdfType === 'plot-sale') {
+    rows = [
+      ['Location', safe.location],
+      ['Sector', safe.sector],
+      ['Plot Number', safe.plotNumber],
+      ['Area', safe.area],
+      ['Access Road', safe.accessRoad],
+      ['Stage', safe.stage],
+      ['Sale Price', safe.salePrice],
+      ['Comments', safe.comments],
+    ];
+  } else if (safe.pdfType === 'plot-jv') {
+    rows = [
+      ['Location', safe.location],
+      ['Sector', safe.sector],
+      ['Plot Number', safe.plotNumber],
+      ['Area', safe.area],
+      ['Access Road', safe.accessRoad],
+      ['Stage', safe.stage],
+      ['JV Ratio', safe.jvRatio],
+      ['JV Deposit Price', safe.jvDepositPrice],
+      ['Comments', safe.comments],
+    ];
+  } else {
+    rows = [
+      ['Location', safe.location],
+      ['Nearest Train Station', safe.nearestTrain],
+      ['Total Area', safe.area],
+      ['Suitable For', safe.suitableFor],
+      ['Opportunity', safe.opportunity],
+      ['Key Points', safe.keyPoints],
+      ['Special Features', safe.specialFeatures],
+      ['Comments', safe.comments],
+      ['Price', safe.price],
+      ['Status', safe.status],
+    ];
   }
+  rows = rows.filter(([, v]) => v);
 
-  // ---------- Detail rows ----------
-  const rows = [
-    ['Nearest Train Station', safe.nearestTrain],
-    ['Total Area', safe.area],
-    ['Suitable For', safe.suitableFor],
-    ['Opportunity', safe.opportunity],
-    ['Key Points', safe.keyPoints],
-    ['Special Features', safe.specialFeatures],
-    ['Comments', safe.comments],
-    ['Price', safe.price],
-    ['Status', safe.status],
-  ].filter(([, v]) => v);
-
-  const labelSize = 8;
-  const valueSize = 11;
-  const lineGap = 6;
+  const labelSize = 12;
+  const valueSize = 15;
+  const lineGap = 12;
 
   for (const [label, value] of rows) {
     const valueLines = wrapText(value, helv, valueSize, contentWidth);
@@ -357,51 +322,6 @@ export async function generateListingBrochure(data) {
       y -= valueSize + 2;
     }
     y -= lineGap;
-  }
-
-  // ---------- Description ----------
-  if (safe.description && y > minY + 60) {
-    page.drawText('DESCRIPTION', {
-      x: contentX,
-      y,
-      size: labelSize,
-      font: helvBold,
-      color: PALETTE.gold,
-    });
-    y -= labelSize + 4;
-    const descLines = wrapText(safe.description, helv, valueSize, contentWidth);
-    for (const line of descLines) {
-      if (y < minY + 14) break;
-      page.drawText(line, {
-        x: contentX,
-        y,
-        size: valueSize,
-        font: helv,
-        color: PALETTE.text,
-      });
-      y -= valueSize + 2;
-    }
-    y -= lineGap;
-  }
-
-  // ---------- Microsite URL ----------
-  if (safe.listingUrl && y > minY + 18) {
-    y -= 4;
-    page.drawText('VIEW FULL MICROSITE', {
-      x: contentX,
-      y,
-      size: labelSize,
-      font: helvBold,
-      color: PALETTE.gold,
-    });
-    y -= labelSize + 3;
-    page.drawText(String(safe.listingUrl), {
-      x: contentX,
-      y,
-      size: 10,
-      font: helvOblique,
-      color: PALETTE.navy,
-    });
   }
 
   const bytes = await pdfDoc.save();
@@ -440,27 +360,24 @@ export function buildBrochureData(item, type) {
   if (!item) return null;
   if (type === 'plot') {
     const isJv = item.plotType === 'jv';
-    const plotGallery = item.gallery?.length ? item.gallery : [item.img].filter(Boolean);
     return {
+      pdfType: isJv ? 'plot-jv' : 'plot-sale',
       title: item.title,
       listingNumber: item.listingNumber,
       location: item.location,
+      sector: item.sector,
+      plotNumber: item.plotNumber,
       area: item.area,
-      suitableFor: item.sector ? `Sector: ${item.sector}` : '',
-      opportunity: item.accessRoad ? `Access road: ${item.accessRoad}` : '',
-      price: isJv ? item.jvOnPrice : item.salePrice,
-      status: item.stage,
-      specialComments: item.validityDays
-        ? `Validity: ${item.validityDays} days`
-        : '',
-      description: item.snapshot?.join(' ') || item.description || '',
-      imageUrl: item.img,
-      galleryUrls: plotGallery.slice(0, 2),
-      listingUrl: `${SITE_URL}/plot/${item.slug}`,
+      accessRoad: item.accessRoad,
+      stage: item.stage,
+      salePrice: !isJv ? item.salePrice : '',
+      jvRatio: isJv ? item.jvRatio : '',
+      jvDepositPrice: isJv ? item.jvOnPrice : '',
+      comments: item.comments || '',
     };
   }
-  const gallery = item.gallery?.length ? item.gallery : [item.img].filter(Boolean);
   return {
+    pdfType: 'land',
     title: item.name,
     listingNumber: item.listingNumber,
     location: item.loc,
@@ -475,11 +392,6 @@ export function buildBrochureData(item, type) {
     comments: item.comments ?? item.specialComments ?? '',
     price: item.price,
     status: item.status,
-    specialComments: item.specialComments,
-    description: item.snapshot?.join(' ') || item.description || '',
-    imageUrl: item.img,
-    galleryUrls: gallery.slice(0, 2),
-    listingUrl: `${SITE_URL}/land/${item.slug}`,
   };
 }
 
@@ -491,7 +403,9 @@ export async function generateBrochureFile(item, type) {
   const data = buildBrochureData(item, type);
   if (!data) throw new Error('Missing listing data for brochure.');
   const blob = await generateListingBrochure(data);
-  const fileName = `${item.slug || 'wingsmark'}-brochure.pdf`;
+  const numMatch = (item.listingNumber || '').match(/(\d+)/);
+  const num = numMatch ? numMatch[1].padStart(4, '0') : '0001';
+  const fileName = `thewingsmarkinfraalisting#${num}.pdf`;
   return new File([blob], fileName, { type: 'application/pdf' });
 }
 

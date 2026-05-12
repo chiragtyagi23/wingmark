@@ -52,7 +52,7 @@ function Contact({ formSubmitted, onFormSubmit }) {
             <div className="gold-divider" />
             <p className="section-p">
               Incorporated as a Limited Liability Partnership (LLP) in May 2026, The Wingsmark Infraa brings a fresh yet experienced approach to Navi
-              Mumbai's real estate landscape.
+              Mumbai's Real Estate landscape.
             </p>
 
             <div className="contact-offices">

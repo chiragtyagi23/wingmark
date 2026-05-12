@@ -74,9 +74,9 @@ function LandDetailPage() {
     { label: 'Title', value: listing.name, wide: true, preline: true },
     { label: 'Location', value: listing.loc, wide: true, preline: true },
     { label: 'Nearest train station', value: listing.nearestStation, preline: true },
-    { label: 'Total Area', value: listing.area },
+    { label: 'Total Area', value: listing.area, preline: true },
     { label: 'Suitable for', value: listing.suitableFor, wide: true, preline: true },
-    { label: 'Opportunity', value: splitToBullets(listing.opportunity), wide: true, preline: true },
+    { label: 'Opportunity', value: listing.skipOpportunitySplit ? listing.opportunity : splitToBullets(listing.opportunity), wide: true, preline: true },
     { label: 'Key points', value: formatMultiline(listing.keyPoints), wide: true, preline: true },
     { label: 'Special Features', value: formatMultiline(listing.specialFeatures), wide: true, preline: true },
     { label: 'Comments', value: formatMultiline(commentsText), wide: true, preline: true },
@@ -114,13 +114,13 @@ function LandDetailPage() {
             </div>
           </div>
           <h1 className="land-detail-title">{listing.name}</h1>
-          <div className="land-detail-loc">{listing.loc}</div>
+          <div className="land-detail-loc" style={{ whiteSpace: 'pre-line' }}>{listing.loc}</div>
           <div className="land-detail-meta">
             <div>
               <div className="land-price-label">{listing.label}</div>
               <div className="land-price">{listing.price}</div>
             </div>
-            <div className="land-detail-area">{listing.area}</div>
+            <div className="land-detail-area" style={{ whiteSpace: 'pre-line' }}>{listing.area}</div>
           </div>
         </div>
       </div>

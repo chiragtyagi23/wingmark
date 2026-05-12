@@ -149,7 +149,7 @@ function LandPage() {
                           img: listing.img,
                         }}
                       />
-                      <div className="land-enter">Enter ↵</div>
+                      <div className="land-enter">Details ↵</div>
                     </div>
                   </div>
                 </Link>

@@ -52,6 +52,7 @@ function PlotDetailPage() {
           wide: true,
         }
       : null,
+    plot.comments ? { label: 'Comments', value: plot.comments, wide: true, preline: true } : null,
   ].filter((b) => b && b.value);
 
   return (

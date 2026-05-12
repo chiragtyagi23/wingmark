@@ -56,18 +56,18 @@ export const marketNews = [
 
 export const landBanners = [
   {
-    img: 'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=1600&q=80',
+    img: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/91/d4/ab/the-forest-club-resort.jpg?w=900&h=-1&s=1',
     title: 'Karjat Eco-Resort Plots',
     sub: 'Bungalow plots set in nature, just a drive from Mumbai',
   },
   {
-    img: 'https://plus.unsplash.com/premium_photo-1661963869605-4b5f4c8e55f2?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3Dhttps://images.unsplash.com/photo-1623018035782-b269248df916?w=1600&q=80',
+    img: 'https://images.pexels.com/photos/27732803/pexels-photo-27732803.jpeg',
     title: 'Industrial &amp; Logistics Belt',
     sub: 'Khopoli and Pen — strategic highway-access parcels',
   },
   {
-    img: 'https://images.unsplash.com/photo-1591389703635-e15a07b842d7?q=80&w=1333&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    title: 'Alibagh Industrial Zone',
+    img: 'https://media.assettype.com/freepressjournal/2026-05-07/4qg9l0rr/Untitled-design-2026-05-07T135756.898.jpg?width=1200',
+    title: 'Alibaug Industrial Zone',
     sub: 'High-growth corridor with airport-led commercial potential',
   },
   {
@@ -104,23 +104,57 @@ export const plotBanners = [
 // at the bottom of this file (PS# for plotType: 'sale', PJ# for 'jv').
 const _plotListingsRaw = [
   {
-    slug: 'pushpak-nagar-plot-11-sector-2-panvel',
+    slug: 'taloja-plot-9-sector-8',
     plotType: 'sale',
-    img: '/pushpak-aerial.png',
-    title: '990 sq mtr plot for sale at Pushpak Nagar, Panvel',
-    location: 'Village Kundevahal, Dapoli · Pushpak Nagar, Taluka Panvel, District Raigad',
-    sector: 'Sector 2',
-    area: '989.66 sq mtr',
-    plotNumber: 'Plot No. 11',
-    accessRoad: '20 mtr wide road facing',
-    stage: 'Agreement stage',
+    img: '/cidco-taloja-plot9.png',
+    title: '800 mts Plot for Sale at Taloja',
+    location: 'Taloja Panchanand Nagar, Phase 1',
+    sector: 'Sector 8',
+    area: '799.57 sq mtr',
+    plotNumber: 'Plot No. 9',
+    accessRoad: '15 mtr wide road',
+    stage: 'Triparty',
+    salePrice: '₹ 1.10 Lacs per sq mtr',
+    badge: 'Plot for Sale',
+    snapshot: [
+      'CIDCO-confirmed plot in Taloja Panchanand Nagar, Sector 8 — 12.5% scheme (Phase I).',
+      'Plot No. 9 — 799.57 sq mtr on a 15 mtr wide road — Triparty stage.',
+    ],
+    gallery: [
+      '/cidco-taloja-plot9.png',
+    ],
+    media: [],
+    files: [
+      { name: 'CIDCO Confirmation — Plot No. 9, Sector 8, Taloja.png', url: '/cidco-taloja-plot9.png' },
+    ],
+    googleLocationUrl:
+      'https://www.google.com/maps/search/?api=1&query=19.0867,73.1249',
+    location_geo: {
+      lat: 19.0867,
+      lng: 73.1249,
+      address:
+        'Plot No. 9, Sector 8, Taloja Panchanand Nagar, Navi Mumbai',
+    },
+  },
+  {
+    slug: 'pushpak-nagar-plot-383-sector-3-panvel',
+    plotType: 'sale',
+    img: '/cidco-pushpak-plot383.png',
+    title: '400 mts Plot for Sale at Pushpak Nagar',
+    location: 'Pushpak Nagar, Pushpak Node',
+    sector: 'Sector 3',
+    area: '399.83 sq mtr',
+    plotNumber: 'Plot No. 383',
+    accessRoad: '15 mtr wide road',
+    stage: 'Triparty',
     salePrice: '₹ 1.30 Lacs per sq mtr',
     badge: 'Plot for Sale',
     snapshot: [
-      'Pushpak Nagar (CIDCO node) parcel on a 20 mtr wide road in Sector 2.',
-      'Plot No. 11 — 989.66 sq mtr — currently at agreement stage.',
+      'CIDCO-confirmed plot at Pushpak Nagar, Sector 3 — 22.5% scheme.',
+      'Plot No. 383 — 399.83 sq mtr on a 15 mtr wide road — Triparty stage.',
     ],
     gallery: [
+      '/cidco-pushpak-plot383.png',
       '/pushpak-aerial.png',
       '/pushpak-plot-map.png',
       '/pushpak-site.png',
@@ -128,6 +162,7 @@ const _plotListingsRaw = [
     ],
     media: [],
     files: [
+      { name: 'CIDCO Confirmation — Plot No. 383, Sector 3, Pushpak Nagar.png', url: '/cidco-pushpak-plot383.png' },
       { name: 'CIDCO Plot Demarcation (Simankan Naksha).png', url: '/pushpak-plot-map.png' },
       { name: 'CIDCO Handover Receipt (Tabaa Paveti).png', url: '/pushpak-handover.png' },
     ],
@@ -137,33 +172,42 @@ const _plotListingsRaw = [
       lat: 18.9655454,
       lng: 73.06807261,
       address:
-        'Plot No. 11, Sector 2, Pushpak Nagar (Village Kundevahal, Dapoli), Taluka Panvel, District Raigad, Maharashtra',
+        'Plot No. 383, Sector 3, Pushpak Nagar, Pushpak Node, Navi Mumbai',
     },
   },
   {
-    slug: 'sample-plot-for-jv',
+    slug: 'dronagiri-plot-41-sector-59-jv',
     plotType: 'jv',
-    img: 'https://images.unsplash.com/photo-1669003154058-e1876138ac3c?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    title: 'Sample Plot for Joint Venture',
-    location: 'Panvel, Maharashtra',
-    sector: 'Sector 17',
-    area: '1.2 Acres',
-    plotNumber: 'PJ-17-004',
-    accessRoad: '18 mtr DP road',
-    stage: 'Ready for JV — feasibility report available',
-    jvRatio: '60 : 40',
-    jvOnPrice: '₹ 4.5 Cr (non-refundable)',
-    validityDays: 45,
+    img: '/cidco-dronagiri-plot41.png',
+    title: '750 mtr Corner Plot for JV at Dronagiri',
+    location: 'Dronagiri',
+    sector: 'Sector 59',
+    area: '749.75 sq mtr',
+    plotNumber: 'Plot No. 41',
+    accessRoad: '15 × 15 mtr (corner plot)',
+    stage: 'Intent cleared, Triparty in process',
+    jvRatio: '50 : 50',
+    jvOnPrice: '₹ 15,000 per sq mtr',
     badge: 'Plot for JV',
+    comments: 'Corner plot with dual road access (15 mtr × 15 mtr)',
     snapshot: [
-      'Structured JV proposal with feasibility report.',
-      'Wide DP road access on a development-ready parcel.',
+      'CIDCO corner plot at Dronagiri, Sector 59 — dual 15 mtr road frontage.',
+      'Plot No. 41 — 749.75 sq mtr — JV 50:50, intent cleared, Triparty in process.',
     ],
-    gallery: [],
+    gallery: [
+      '/cidco-dronagiri-plot41.png',
+    ],
     media: [],
-    files: [],
-    googleLocationUrl: '',
-    location_geo: { lat: 19.0227, lng: 73.2045, address: 'Sector 17, Panvel' },
+    files: [
+      { name: 'CIDCO Simankan Nakasha — Plot No. 41, Sector 59, Dronagiri.png', url: '/cidco-dronagiri-plot41.png' },
+    ],
+    googleLocationUrl:
+      'https://www.google.com/maps/search/?api=1&query=18.8530,72.9670',
+    location_geo: {
+      lat: 18.853,
+      lng: 72.967,
+      address: 'Plot No. 41, Sector 59, Dronagiri, Navi Mumbai',
+    },
   },
 ];
 
@@ -302,11 +346,11 @@ const _landListingsRaw = [
     type: 'sale',
     category: 'premium',
     img: '/wardoli-location-1.png',
-    loc: 'Village Wardoli · Near Wadhwa Wise City',
+    loc: '• Village Wardoli\n• Near Wadhwa Wise City',
     name: 'Prime Mountain facing land for sale at Panvel',
-    area: '20 Acres (R zone approx 13 acres · Green zone approx 7 acres)',
+    area: '20 Acres\n(R zone — approx 13 acres · Green zone — approx 7 acres)',
     label: 'Price',
-    price: '₹ 60 Cr',
+    price: '₹ 65 Cr',
     badge: 'For Sale',
     nearestStation:
       'Upcoming Mohape station on Panvel-Karjat rail corridor (1.5 km) · Panvel Railway Station (10 km)',
@@ -314,9 +358,10 @@ const _landListingsRaw = [
       'Township / mixed use development with NA plotting and premium Bungalows / row houses',
     opportunity:
       'Top developers like Wadhwa, Godrej & Hiranandani have already delivered possession in their township projects',
+    skipOpportunitySplit: true,
     status: 'Clear title single investor deal',
     specialComments:
-      'Excellent connectivity and promising infrastructure development — Old Mumbai-Pune Highway is 3 km away, with top universities, upcoming mall and hospital within a 5 km radius.',
+      '• Excellent connectivity and promising infrastructure development\n• Old Mumbai-Pune Highway is 3 km away\n• Top universities, upcoming mall and hospital within a 5 km radius',
     snapshot: [
       'Suitable for township / mixed-use development, NA plotting, premium bungalows and row houses.',
       'Top developers like Wadhwa, Godrej and Hiranandani already have possession-ready township projects nearby.',
@@ -497,9 +542,11 @@ const _landListingsRaw = [
    recomputes the `listingNumber` for every item — no manual edits.
    ===================================================== */
 
+const pad4 = (n) => String(n).padStart(4, '0');
+
 export const landListings = _landListingsRaw.map((item, idx) => ({
   ...item,
-  listingNumber: `L${idx + 1}`,
+  listingNumber: `Listing#: L/${pad4(idx + 1)}`,
 }));
 
 let _psSeq = 0;
@@ -507,10 +554,10 @@ let _pjSeq = 0;
 export const plotListings = _plotListingsRaw.map((item) => {
   if (item.plotType === 'jv') {
     _pjSeq += 1;
-    return { ...item, listingNumber: `PJ${_pjSeq}` };
+    return { ...item, listingNumber: `Listing#: PJ/${pad4(_pjSeq)}` };
   }
   _psSeq += 1;
-  return { ...item, listingNumber: `PS${_psSeq}` };
+  return { ...item, listingNumber: `Listing#: PS/${pad4(_psSeq)}` };
 });
 
 export const navLinks = [

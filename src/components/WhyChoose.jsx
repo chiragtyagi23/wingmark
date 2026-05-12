@@ -16,7 +16,8 @@ function WhyChoose() {
               <ShieldCheck size={30} strokeWidth={1.6} />
             </div>
             <div className="why-title">Trusted &amp; Transparent</div>
-            <div className="why-p">Every transaction backed by complete legal clarity and stakeholder-first values. Your investment is protected.</div>
+            <div className="why-p">Every transaction backed by complete legal clarity and stakeholder-first values.
+            <br />Your investment is protected.</div>
           </div>
           <div className="why-card reveal reveal-delay-1">
             <div className="why-icon">
@@ -37,7 +38,7 @@ function WhyChoose() {
               <Users size={30} strokeWidth={1.6} />
             </div>
             <div className="why-title">Diverse Expertise</div>
-            <div className="why-p">Our team spans real estate, facility management, hospitality, construction, and legal - 30+ years of combined excellence.</div>
+            <div className="why-p">Our team spans Real Estate, Facility Management, Hospitality, Construction, and Legal - 30+ years of combined excellence.</div>
           </div>
         </div>
       </div>

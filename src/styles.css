@@ -724,6 +724,8 @@ section {
   aspect-ratio: 4/5;
   object-fit: cover;
   filter: grayscale(20%);
+  border: 3px solid transparent;
+  border-image: linear-gradient(to top, var(--royal), var(--gold)) 1;
 }
 
 .about-img-frame {
@@ -953,7 +955,7 @@ section {
 .loc-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
+  gap: 10px;
 }
 
 .loc-card {
@@ -961,6 +963,8 @@ section {
   overflow: hidden;
   aspect-ratio: 3/2;
   cursor: pointer;
+  border: 3px solid transparent;
+  border-image: linear-gradient(to top, var(--royal), var(--gold)) 1;
 }
 
 .loc-card img {
@@ -1105,6 +1109,25 @@ section {
   font-size: 13px;
   color: var(--med-gray);
   line-height: 1.8;
+}
+
+ul.why-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+ul.why-bullets li {
+  position: relative;
+  padding-left: 16px;
+}
+
+ul.why-bullets li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+  font-weight: 700;
 }
 
 #investor {
