@@ -1,11 +1,32 @@
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
+import fontkit from '@pdf-lib/fontkit';
+
+let _fontRegCache = null;
+let _fontBoldCache = null;
+
+async function fetchFontPair() {
+  if (_fontRegCache && _fontBoldCache)
+    return { reg: _fontRegCache, bold: _fontBoldCache };
+  try {
+    const [r1, r2] = await Promise.all([
+      fetch('/NotoSans-Regular.ttf'),
+      fetch('/NotoSans-Bold.ttf'),
+    ]);
+    if (!r1.ok || !r2.ok) return null;
+    _fontRegCache = await r1.arrayBuffer();
+    _fontBoldCache = await r2.arrayBuffer();
+    return { reg: _fontRegCache, bold: _fontBoldCache };
+  } catch {
+    return null;
+  }
+}
 
 /**
  * Letterhead files in /public — first fetch that returns 200 wins.
  * (Users sometimes save with different spelling/casing.)
  */
 const LETTERHEAD_CANDIDATES = [
-  '/black beige Modern Business Letterhead (2).pdf',
+  '/black beige Modern Business Letterhead (3).pdf',
 ].map((p) => encodeURI(p));
 
 /**
@@ -15,7 +36,6 @@ const LETTERHEAD_CANDIDATES = [
 export function sanitizePdfText(text) {
   if (text == null || text === undefined) return '';
   let s = String(text)
-    .replace(/\u20B9/g, 'Rs.')
     .replace(/\u00A0/g, ' ')
     .replace(/[\u2018\u2019\u2032]/g, "'")
     .replace(/[\u201C\u201D\u2033]/g, '"')
@@ -26,6 +46,10 @@ export function sanitizePdfText(text) {
   for (const ch of s) {
     const code = ch.charCodeAt(0);
     if (code === 0x0a || code === 0x0d || code === 0x09) {
+      out += ch;
+      continue;
+    }
+    if (code === 0x20b9) {
       out += ch;
       continue;
     }
@@ -219,9 +243,18 @@ export async function generateListingBrochure(data) {
     ignoreEncryption: true,
   });
 
-  const helv = await pdfDoc.embedFont(StandardFonts.Helvetica);
-  const helvBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
-  const helvOblique = await pdfDoc.embedFont(StandardFonts.HelveticaOblique);
+  pdfDoc.registerFontkit(fontkit);
+  const fontPair = await fetchFontPair();
+  let helv, helvBold, helvOblique;
+  if (fontPair) {
+    helv = await pdfDoc.embedFont(fontPair.reg, { subset: true });
+    helvBold = await pdfDoc.embedFont(fontPair.bold, { subset: true });
+    helvOblique = helv;
+  } else {
+    helv = await pdfDoc.embedFont(StandardFonts.Helvetica);
+    helvBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+    helvOblique = await pdfDoc.embedFont(StandardFonts.HelveticaOblique);
+  }
 
   const pages = pdfDoc.getPages();
   if (!pages.length) {
@@ -240,7 +273,7 @@ export async function generateListingBrochure(data) {
   const minY = footerSpace;
   let y = height - headerSpace;
 
-  // ---------- Listing number badge (centered, #143F67 bg, red text) ----------
+  // ---------- Listing number badge (centered, white bg, blue border) ----------
   if (safe.listingNumber) {
     const badgeText = String(safe.listingNumber).toUpperCase();
     const badgeFontSize = 13;
@@ -257,8 +290,8 @@ export async function generateListingBrochure(data) {
       y: badgeY,
       width: badgeW,
       height: badgeH,
-      color: PALETTE.navy,
-      borderColor: PALETTE.gold,
+      color: rgb(1, 1, 1),
+      borderColor: PALETTE.navy,
       borderWidth: 1.5,
     });
 
@@ -272,36 +305,29 @@ export async function generateListingBrochure(data) {
     y -= badgeH + 24;
   }
 
-  // ---------- Title in a gold-bordered box ----------
+  // ---------- Title with red underline ----------
   const titleSize = 20;
-  const titleBoxPad = 16;
-  const titleLines = wrapText(safe.title, helvBold, titleSize, contentWidth - titleBoxPad * 2);
-  const titleTextH = titleLines.length * (titleSize + 5);
-  const titleBlockH = titleTextH + titleBoxPad * 2;
-
-  page.drawRectangle({
-    x: contentX,
-    y: y - titleBlockH,
-    width: contentWidth,
-    height: titleBlockH,
-    borderColor: PALETTE.gold,
-    borderWidth: 1.5,
-  });
-
-  let titleY = y - titleBoxPad - (titleBlockH - titleTextH) / 2;
+  const titleLines = wrapText(safe.title, helvBold, titleSize, contentWidth);
   for (const line of titleLines) {
     const lineW = helvBold.widthOfTextAtSize(line, titleSize);
     const lineX = contentX + (contentWidth - lineW) / 2;
     page.drawText(line, {
       x: lineX,
-      y: titleY,
+      y,
       size: titleSize,
       font: helvBold,
       color: PALETTE.navy,
     });
-    titleY -= titleSize + 5;
+    y -= titleSize + 1;
   }
-  y -= titleBlockH + 28;
+  page.drawRectangle({
+    x: contentX,
+    y: y + 2,
+    width: contentWidth,
+    height: 2,
+    color: PALETTE.red,
+  });
+  y -= 30;
 
   // ---------- Detail rows (vary by listing type) ----------
   let rows;
@@ -350,16 +376,25 @@ export async function generateListingBrochure(data) {
 
   for (const [label, value] of rows) {
     const valueLines = wrapText(value, helv, valueSize, contentWidth);
-    const blockHeight = labelSize + 4 + valueLines.length * (valueSize + 2) + lineGap;
+    const blockHeight = labelSize + 8 + valueLines.length * (valueSize + 2) + lineGap;
     if (y - blockHeight < minY) break;
-    page.drawText(label.toUpperCase(), {
+    const labelText = label.toUpperCase();
+    const labelW = helvBold.widthOfTextAtSize(labelText, labelSize);
+    page.drawText(labelText, {
       x: contentX,
       y,
       size: labelSize,
       font: helvBold,
       color: PALETTE.gold,
     });
-    y -= labelSize + 4;
+    page.drawRectangle({
+      x: contentX,
+      y: y - 3,
+      width: labelW,
+      height: 1.2,
+      color: PALETTE.red,
+    });
+    y -= labelSize + 10;
     for (const line of valueLines) {
       page.drawText(line, {
         x: contentX,
