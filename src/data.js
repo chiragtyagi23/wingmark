@@ -373,6 +373,7 @@ const _landListingsRaw = [
     ],
     media: [
       { url: '/wardoli-road-construction.mp4', title: 'Road for site – under construction' },
+      { url: '/wardoli-towards-site.mp4', title: 'Towards site' },
     ],
     files: [
       { name: 'Gat Book map.pdf', url: '/wardoli-gat-book-map.pdf' },
@@ -544,11 +545,12 @@ const _landListingsRaw = [
    recomputes the `listingNumber` for every item — no manual edits.
    ===================================================== */
 
-const pad4 = (n) => String(n).padStart(4, '0');
+/** 3-digit series (001–099, 100) — max 100 listings per series */
+const pad3 = (n) => String(n).padStart(3, '0');
 
 export const landListings = _landListingsRaw.map((item, idx) => ({
   ...item,
-  listingNumber: `Listing#: L/${pad4(idx + 1)}`,
+  listingNumber: `Listing #: L/${pad3(idx + 1)}`,
 }));
 
 let _psSeq = 0;
@@ -556,10 +558,10 @@ let _pjSeq = 0;
 export const plotListings = _plotListingsRaw.map((item) => {
   if (item.plotType === 'jv') {
     _pjSeq += 1;
-    return { ...item, listingNumber: `Listing#: PJ/${pad4(_pjSeq)}` };
+    return { ...item, listingNumber: `Listing #: PJ/${pad3(_pjSeq)}` };
   }
   _psSeq += 1;
-  return { ...item, listingNumber: `Listing#: PS/${pad4(_psSeq)}` };
+  return { ...item, listingNumber: `Listing #: PS/${pad3(_psSeq)}` };
 });
 
 export const navLinks = [

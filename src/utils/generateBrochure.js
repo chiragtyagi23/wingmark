@@ -580,7 +580,7 @@ export async function generateBrochureFile(item, type) {
   if (!data) throw new Error('Missing listing data for brochure.');
   const blob = await generateListingBrochure(data);
   const numMatch = (item.listingNumber || '').match(/(\d+)/);
-  const num = numMatch ? numMatch[1].padStart(4, '0') : '0001';
+  const num = numMatch ? numMatch[1].padStart(3, '0') : '001';
   const fileName = `TheWingsMarkInfraa-listing#${num}.pdf`;
   return new File([blob], fileName, { type: 'application/pdf' });
 }
