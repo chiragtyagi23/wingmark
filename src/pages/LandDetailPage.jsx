@@ -1,19 +1,17 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Navigation, ExternalLink } from 'lucide-react';
-import { landListings } from '../data';
-import ShareBrochureButton from '../components/ShareBrochureButton';
+import { Navigation, ExternalLink, Download } from 'lucide-react';
 import AddToCartButton from '../components/AddToCartButton';
+import landListings from '../api/land.json';
 
 function LandDetailPage() {
   const { slug } = useParams();
-  const listing = landListings.find((item) => item.slug === slug);
+  const listing = landListings.find((l) => l.slug === slug) || null;
   const [galleryIndex, setGalleryIndex] = useState(0);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'auto' });
   }, [slug]);
-
 
   if (!listing) {
     return (
@@ -295,7 +293,14 @@ function LandDetailPage() {
         </section>
 
         <div className="land-detail-cta">
-          <ShareBrochureButton listing={listing} type="land" />
+          <button
+            type="button"
+            className="btn-download-all-documents"
+            onClick={() => window.dispatchEvent(new Event('wingsmark-open-documents-modal'))}
+          >
+            <Download size={16} />
+            <span>Download All Documents</span>
+          </button>
           <Link to="/#contact" className="btn-gold">
             Enquire About This Listing
           </Link>

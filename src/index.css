@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design tokens — some legacy rules still use var(--*) */
+@layer base {
+  :root {
+    --silver: #cdcdcd;
+    --med-gray: #b0b0b0;
+    --royal: #0e385e;
+    --steel: #1c4669;
+    --charcoal: #0a1a2f;
+    --ink: #06121f;
+    --dark-gray: #616263;
+    --gold: #f7c61b;
+    --red: #9a0704;
+    --white: #fafafa;
+  }
+
+  html {
+    @apply scroll-smooth overflow-x-hidden;
+  }
+
+  body {
+    @apply overflow-x-hidden bg-charcoal font-sans text-silver antialiased;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-charcoal;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gold;
+  }
+
+  #about,
+  #services,
+  #locations,
+  #investor,
+  #team,
+  #contact,
+  #news,
+  #why,
+  #contact-cta,
+  #plot-sale,
+  #land {
+    @apply scroll-mt-[140px] max-[900px]:scroll-mt-[92px] max-[600px]:scroll-mt-[86px] max-[380px]:scroll-mt-20;
+  }
+
+  section {
+    @apply relative;
+  }
+}
+
+/* Scroll-reveal (App.jsx toggles .visible) */
+@layer components {
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition:
+      opacity 0.7s ease,
+      transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 {
+    transition-delay: 0.1s;
+  }
+
+  .reveal-delay-2 {
+    transition-delay: 0.2s;
+  }
+
+  .reveal-delay-3 {
+    transition-delay: 0.3s;
+  }
+
+  .reveal-delay-4 {
+    transition-delay: 0.4s;
+  }
+}

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { MapPin, Send, RefreshCw, Navigation } from 'lucide-react';
 
 const HQ_ADDRESS =
-  'Shop 2, Sai Leela CHS, New Sector 50, Seawoods, Navi Mumbai – 400 706';
+  'Shop 2, Sai Leela CHS, New Sector 50, Seawoods, Navi Mumbai - 400 706';
 const HQ_GEO = { lat: 19.0188, lng: 73.019 };
 const DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${HQ_GEO.lat},${HQ_GEO.lng}`;
 

@@ -1,0 +1,11 @@
+[
+  { "href": "/#about", "label": "About" },
+  { "href": "/#services", "label": "Services" },
+  { "to": "/land", "label": "Land" },
+  { "to": "/plot", "label": "Plots" },
+  { "href": "/#locations", "label": "Locations" },
+  { "href": "/#investor", "label": "Investors" },
+  { "href": "/#news", "label": "News" },
+  { "href": "/#team", "label": "Team" },
+  { "href": "/#contact", "label": "Contact Us", "cta": true }
+]

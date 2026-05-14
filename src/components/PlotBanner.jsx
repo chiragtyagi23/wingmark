@@ -1,15 +1,18 @@
 import { useEffect, useState } from 'react';
-import { landBanners as plotBanners } from '../data';
+import plotBanners from '../api/plot-banners.json';
 
 function PlotBanner() {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
+    if (plotBanners.length === 0) return undefined;
     const id = window.setInterval(() => {
       setIndex((i) => (i + 1) % plotBanners.length);
     }, 5000);
     return () => window.clearInterval(id);
   }, []);
+
+  if (plotBanners.length === 0) return <div className="land-banner" />;
 
   return (
     <div className="land-banner">

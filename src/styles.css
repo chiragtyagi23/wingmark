@@ -1,419 +1,7 @@
-:root {
-  --silver: #CDCDCD;
-  --med-gray: #B0B0B0;
-  --royal: #0E385E;
-  --steel: #1C4669;
-  --charcoal: #0A1A2F;
-  --ink: #06121F;
-  --dark-gray: #616263;
-  --gold: #F7C61B;
-  --red: #9A0704;
-  --white: #FAFAFA;
-}
+/* Design tokens, reset, scrollbar — duplicated in src/index.css (@tailwind base); kept var(--*) for rules below. */
+/* Navbar — Tailwind in Navbar.jsx */
 
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  scroll-behavior: smooth;
-  overflow-x: hidden;
-}
-
-body {
-  font-family: 'Montserrat', sans-serif;
-  background: var(--charcoal);
-  color: var(--silver);
-  overflow-x: hidden;
-}
-
-button,
-input,
-select,
-textarea {
-  font: inherit;
-}
-
-::-webkit-scrollbar {
-  width: 4px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--charcoal);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--gold);
-}
-
-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 4vw;
-  height: 140px;
-  background: rgba(248, 244, 236, 0.94);
-  backdrop-filter: blur(18px);
-  border-bottom: 1px solid rgba(10, 26, 47, 0.08);
-  border-bottom: 1px solid rgba(247, 198, 27, 0.12);
-  transition: all 0.4s ease;
-  gap: 32px;
-}
-
-nav.scrolled {
-  height: 110px;
-  background: rgba(250, 247, 240, 0.98);
-  border-bottom-color: rgba(247, 198, 27, 0.45);
-  box-shadow: 0 2px 10px rgba(10, 26, 47, 0.08);
-}
-
-nav.scrolled .logo-img {
-  height: 110px;
-}
-
-/* Group 1: logo + brand text — sits on the LEFT */
-.nav-logo {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  text-decoration: none;
-  flex-shrink: 0;
-}
-
-.logo-mark {
-  width: 42px;
-  height: 42px;
-  background: linear-gradient(135deg, var(--gold), #c49b10);
-  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 700;
-  font-size: 18px;
-  color: var(--charcoal);
-  flex-shrink: 0;
-}
-
-.logo-img {
-  height: 200px;
-  width: auto;
-  display: block;
-  flex-shrink: 0;
-  object-fit: contain;
-  filter: drop-shadow(0 2px 4px rgba(10, 26, 47, 0.18));
-  transition: transform 0.3s ease, height 0.3s ease;
-}
-
-.nav-logo:hover .logo-mark {
-  transform: rotate(15deg);
-}
-
-.nav-logo:hover .logo-img {
-  transform: scale(1.04);
-}
-
-.logo-text {
-  line-height: 1.15;
-}
-
-.logo-text .brand {
-  font-family: 'Cormorant Garamond', serif;
-  color: var(--charcoal);
-  display: flex;
-  flex-direction: column;
-  line-height: 0.95;
-}
-
-.logo-text .brand-the {
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  font-style: italic;
-  color: #6a543a;
-}
-
-.logo-text .brand-name {
-  font-size: 22px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  white-space: nowrap;
-}
-
-.logo-text .sub {
-  margin-top: 4px;
-  font-size: 9.5px;
-  font-weight: 500;
-  letter-spacing: 0.22em;
-  color: #b88a04;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-/* Group 2: nav links + CTA — sits on the RIGHT (pushed by space-between on parent) */
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  list-style: none;
-  flex-shrink: 0;
-  margin-left: auto;
-}
-
-.nav-links a {
-  text-decoration: none;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--charcoal);
-  position: relative;
-  padding: 8px 0;
-  transition: color 0.3s;
-  white-space: nowrap;
-}
-
-.nav-links a::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: var(--gold);
-  transition: width 0.3s ease;
-}
-
-.nav-links a:hover {
-  color: var(--gold);
-}
-
-.nav-links a:hover::after {
-  width: 100%;
-}
-
-.nav-cta {
-  background: var(--gold);
-  color: var(--charcoal) !important;
-  padding: 10px 22px !important;
-  border-radius: 2px;
-  font-weight: 700 !important;
-  letter-spacing: 0.1em !important;
-  font-size: 12px !important;
-  transition: background 0.3s, transform 0.2s !important;
-}
-
-.nav-cta:hover {
-  background: #e0b015 !important;
-  transform: translateY(-1px);
-}
-
-.nav-cta::after {
-  display: none !important;
-}
-
-.hamburger {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  cursor: pointer;
-  background: none;
-  border: none;
-  padding: 4px;
-}
-
-.hamburger span {
-  width: 24px;
-  height: 2px;
-  background: var(--charcoal);
-  transition: all 0.3s;
-  display: block;
-}
-
-#hero {
-  position: relative;
-  height: 100vh;
-  min-height: 720px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  padding-top: 140px;
-}
-
-.hero-bg {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(160deg, rgba(14,56,94,0.85) 0%, rgba(10, 26, 47,0.78) 55%, rgba(247,198,27,0.15) 100%),
-    url('https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1800&q=80') center/cover no-repeat;
-  transform-origin: center;
-  animation: heroZoom 20s ease-in-out infinite alternate;
-}
-
-@keyframes heroZoom {
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(1.06);
-  }
-}
-
-.hero-grid-overlay {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background-image:
-    linear-gradient(rgba(247,198,27,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(247,198,27,0.04) 1px, transparent 1px);
-  background-size: 80px 80px;
-}
-
-.hero-content {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  max-width: 880px;
-  padding: 0 24px;
-}
-
-.hero-stats {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 3;
-}
-
-.hero-stats .stats-bar {
-  background: rgba(14, 56, 94, 0.78);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  padding: 22px 5vw;
-}
-
-@media (max-width: 900px) {
-  #hero {
-    padding-top: 88px;
-  }
-}
-
-@media (max-width: 768px) {
-  #hero {
-    min-height: 640px;
-  }
-  .hero-stats .stats-bar {
-    padding: 16px 4vw;
-  }
-}
-
-@media (max-width: 600px) {
-  #hero {
-    padding-top: 82px;
-  }
-}
-
-@media (max-width: 380px) {
-  #hero {
-    padding-top: 76px;
-  }
-}
-
-.hero-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(247,198,27,0.12);
-  border: 1px solid rgba(247,198,27,0.35);
-  padding: 7px 18px;
-  border-radius: 2px;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 28px;
-  animation: fadeDown 0.8s ease 0.2s both;
-}
-
-.hero-badge::before {
-  content: '';
-  width: 6px;
-  height: 6px;
-  background: var(--gold);
-  border-radius: 50%;
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.5;
-    transform: scale(1.4);
-  }
-}
-
-.hero-h1 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(42px, 7vw, 88px);
-  font-weight: 500;
-  line-height: 1.06;
-  color: var(--white);
-  margin-bottom: 8px;
-  animation: fadeDown 0.8s ease 0.4s both;
-}
-
-.hero-h1 em {
-  font-style: italic;
-  color: var(--gold);
-}
-
-.hero-h1 strong {
-  font-weight: 700;
-  display: block;
-}
-
-.hero-h3 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(24px, 4vw, 48px);
-  font-weight: 300;
-  line-height: 1.1;
-  color: var(--white);
-}
-
-.hero-h3 strong {
-  font-weight: 200;
-  display: block;
-}
-
-.hero-tagline {
-  font-size: clamp(12px, 1.5vw, 15px);
-  font-weight: 400;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--silver);
-  margin: 20px 0 40px;
-  animation: fadeDown 0.8s ease 0.6s both;
-}
-
-.hero-btns {
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-  flex-wrap: wrap;
-  animation: fadeDown 0.8s ease 0.8s both;
-}
+/* Hero — Tailwind + .anim-* in Hero.jsx */
 
 .btn-gold,
 .btn-outline,
@@ -506,103 +94,6 @@ nav.scrolled .logo-img {
   color: var(--white);
 }
 
-.hero-scroll {
-  position: absolute;
-  bottom: 36px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  animation: fadeDown 1s ease 1.2s both;
-  cursor: pointer;
-}
-
-.hero-scroll span {
-  font-size: 9px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--med-gray);
-}
-
-.scroll-line {
-  width: 1px;
-  height: 48px;
-  background: linear-gradient(to bottom, var(--gold), transparent);
-  animation: scrollPulse 2s ease infinite;
-}
-
-@keyframes scrollPulse {
-  0%, 100% {
-    opacity: 0.3;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeDown {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.stats-bar {
-  background: var(--royal);
-  border-top: 2px solid var(--gold);
-  border-bottom: 1px solid rgba(247,198,27,0.2);
-  padding: 28px 5vw;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0;
-}
-
-.stat-item {
-  text-align: center;
-  padding: 12px 20px;
-  border-right: 1px solid rgba(205,205,205,0.12);
-  position: relative;
-}
-
-.stat-item:last-child {
-  border-right: none;
-}
-
-.stat-num {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 32px;
-  font-weight: 700;
-  color: var(--white);
-  line-height: 1;
-  margin: 0 auto 10px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 78px;
-  height: 78px;
-  padding: 0 18px;
-  border-radius: 999px;
-  letter-spacing: 0.02em;
-}
-
-.stat-label {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--med-gray);
-}
-
-section {
-  position: relative;
-}
-
 .section-badge {
   display: inline-flex;
   align-items: center;
@@ -645,60 +136,6 @@ section {
   line-height: 1.9;
   color: var(--med-gray);
   max-width: 560px;
-}
-
-#about,
-#services,
-#locations,
-#investor,
-#team,
-#contact,
-#news,
-#why,
-#contact-cta {
-  scroll-margin-top: 140px;
-}
-
-@media (max-width: 900px) {
-  #about,
-  #services,
-  #locations,
-  #investor,
-  #team,
-  #contact,
-  #news,
-  #why,
-  #contact-cta {
-    scroll-margin-top: 92px;
-  }
-}
-
-@media (max-width: 600px) {
-  #about,
-  #services,
-  #locations,
-  #investor,
-  #team,
-  #contact,
-  #news,
-  #why,
-  #contact-cta {
-    scroll-margin-top: 86px;
-  }
-}
-
-@media (max-width: 380px) {
-  #about,
-  #services,
-  #locations,
-  #investor,
-  #team,
-  #contact,
-  #news,
-  #why,
-  #contact-cta {
-    scroll-margin-top: 80px;
-  }
 }
 
 #about {
@@ -2120,76 +1557,7 @@ footer::before {
   margin: 24px auto;
 }
 
-.mobile-nav {
-  position: fixed;
-  inset: 0;
-  z-index: 999;
-  background: rgba(14,56,94,0.98);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 28px;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s;
-}
-
-.mobile-nav.open {
-  opacity: 1;
-  pointer-events: all;
-}
-
-.mobile-nav a {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 32px;
-  font-weight: 400;
-  color: var(--white);
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-.mobile-nav a:hover {
-  color: var(--gold);
-}
-
-.mobile-close {
-  position: absolute;
-  top: 24px;
-  right: 5vw;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--silver);
-  font-size: 32px;
-}
-
-.reveal {
-  opacity: 0;
-  transform: translateY(32px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
-
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.reveal-delay-1 {
-  transition-delay: 0.1s;
-}
-
-.reveal-delay-2 {
-  transition-delay: 0.2s;
-}
-
-.reveal-delay-3 {
-  transition-delay: 0.3s;
-}
-
-.reveal-delay-4 {
-  transition-delay: 0.4s;
-}
+/* Mobile menu + scroll-reveal — Tailwind / index.css */
 
 @media (max-width: 1024px) {
   .about-grid,
@@ -2219,10 +1587,6 @@ footer::before {
 }
 
 @media (max-width: 768px) {
-  .stats-bar {
-    grid-template-columns: 1fr 1fr;
-  }
-
   .services-grid,
   .loc-grid,
   .land-grid,
@@ -2297,45 +1661,7 @@ footer::before {
   margin: 0;
 }
 
-.ticker-wrap {
-  background: var(--gold);
-  padding: 10px 0;
-  overflow: hidden;
-  border-top: 1px solid #e0b015;
-}
-
-.ticker {
-  display: flex;
-  gap: 60px;
-  white-space: nowrap;
-  animation: ticker 30s linear infinite;
-}
-
-.ticker-item {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--charcoal);
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.ticker-item::after {
-  content: '◆';
-  font-size: 8px;
-}
-
-@keyframes ticker {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
+/* Ticker + page loader — Tailwind in Ticker.jsx / PageLoader.jsx */
 
 .glass {
   background: rgba(255,255,255,0.03);
@@ -2396,81 +1722,7 @@ footer::before {
   transition: all 0.3s;
 }
 
-.page-loader {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 9999;
-  background: var(--charcoal);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 24px;
-  transition: opacity 0.6s ease;
-}
-
-.page-loader.hidden {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.loader-logo {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(42px, 12vw, 64px);
-  font-weight: 300;
-  color: var(--white);
-  letter-spacing: 0.1em;
-  text-align: center;
-  padding: 0 20px;
-}
-
-.loader-logo-the {
-  font-size: 0.55em;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  font-style: italic;
-}
-
-.loader-logo em {
-  font-style: italic;
-  color: var(--gold);
-}
-
-.loader-bar {
-  width: 200px;
-  height: 1px;
-  background: rgba(247,198,27,0.15);
-  position: relative;
-  overflow: hidden;
-}
-
-.loader-bar-fill {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  background: var(--gold);
-  animation: load 1.8s ease forwards;
-}
-
-@keyframes load {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
-}
-
-.loader-text {
-  font-size: 9px;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--dark-gray);
-}
+/* @keyframes load — kept below for .anim-load-bar */
 
 /* ===== Land page banner carousel ===== */
 .land-banner {
@@ -3765,17 +3017,8 @@ footer::before {
   .about-inner,
   .contact-inner,
   .loc-grid,
-  .stats-bar,
   .news-grid {
     max-width: 1480px;
-  }
-
-  .hero-content {
-    max-width: 1040px;
-  }
-
-  .land-detail-body {
-    max-width: 1280px;
   }
 
   .section-h2 {
@@ -3795,21 +3038,12 @@ footer::before {
   .about-inner,
   .contact-inner,
   .loc-grid,
-  .stats-bar,
   .news-grid {
     max-width: 1680px;
   }
 
-  .hero-content {
-    max-width: 1180px;
-  }
-
   .land-detail-body {
     max-width: 1440px;
-  }
-
-  nav {
-    padding: 0 7vw;
   }
 
   section,
@@ -3824,10 +3058,6 @@ footer::before {
   #team {
     padding-left: 7vw;
     padding-right: 7vw;
-  }
-
-  .hero-bg {
-    background-size: cover;
   }
 
   .land-grid {
@@ -3847,58 +3077,17 @@ footer::before {
   .about-inner,
   .contact-inner,
   .loc-grid,
-  .stats-bar,
   .news-grid {
     max-width: 2000px;
-  }
-
-  .hero-content {
-    max-width: 1400px;
   }
 
   .section-h2 {
     font-size: clamp(56px, 4vw, 96px);
   }
-
-  .hero-h1 {
-    font-size: clamp(72px, 6vw, 128px);
-  }
 }
 
 /* ---------- Tablets / small laptops (1024px-1280px) ---------- */
 @media (max-width: 1280px) and (min-width: 1025px) {
-  nav {
-    padding: 0 3vw;
-    height: 100px;
-    gap: 20px;
-  }
-  .logo-img {
-    height: 96px;
-  }
-  nav.scrolled {
-    height: 86px;
-  }
-  nav.scrolled .logo-img {
-    height: 80px;
-  }
-  .logo-text .brand {
-    font-size: 18px;
-  }
-  .logo-text .sub {
-    font-size: 9px;
-    letter-spacing: 0.14em;
-  }
-  .nav-links {
-    gap: 18px;
-  }
-  .nav-links a {
-    font-size: 11.5px;
-    letter-spacing: 0.08em;
-  }
-  .nav-cta {
-    padding: 9px 18px !important;
-    font-size: 11px !important;
-  }
   .land-grid,
   .services-grid,
   .news-grid {
@@ -3916,26 +3105,9 @@ footer::before {
 
 /* ---------- Small tablets / large phones landscape (768-1024px) ---------- */
 @media (max-width: 1024px) and (min-width: 769px) {
-  nav {
-    padding: 0 4vw;
-    height: 100px;
-  }
-  nav.scrolled {
-    height: 86px;
-  }
-  .logo-img {
-    height: 100px;
-  }
-  nav.scrolled .logo-img {
-    height: 84px;
-  }
   .land-grid,
   .news-grid {
     grid-template-columns: repeat(2, 1fr);
-  }
-  .stats-bar {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
   }
   .land-detail-body {
     padding: 56px 5vw 100px;
@@ -3976,14 +3148,6 @@ footer::before {
     font-size: 13px;
     line-height: 1.7;
   }
-  .hero-content {
-    padding: 0 18px;
-  }
-  .hero-h1,
-  .hero-title {
-    font-size: clamp(36px, 9vw, 64px);
-    line-height: 1.05;
-  }
   .land-page-section {
     padding: 56px 0 80px;
   }
@@ -4021,18 +3185,6 @@ footer::before {
     height: 56vh;
     min-height: 360px;
   }
-  .stats-bar {
-    grid-template-columns: 1fr 1fr;
-    gap: 18px;
-    padding: 28px 5vw;
-  }
-  .stat-num {
-    font-size: 32px;
-  }
-  .stat-label {
-    font-size: 9px;
-    letter-spacing: 0.16em;
-  }
   .gallery-thumbs {
     grid-template-columns: repeat(4, 1fr);
   }
@@ -4056,14 +3208,6 @@ footer::before {
   .invest-card {
     padding: 22px;
   }
-  .ticker-item {
-    font-size: 9px;
-    letter-spacing: 0.14em;
-  }
-  .nav-cta {
-    padding: 9px 16px !important;
-    font-size: 11px !important;
-  }
 }
 
 /* ---------- Small phones (<=480px) ---------- */
@@ -4071,21 +3215,11 @@ footer::before {
   body {
     font-size: 13px;
   }
-  .hero-h1,
-  .hero-title {
-    font-size: clamp(30px, 10vw, 48px);
-  }
-  .hero-content {
-    padding: 0 14px;
-  }
   .section-h2 {
     font-size: clamp(24px, 8vw, 36px);
   }
   .section-p {
     font-size: 12.5px;
-  }
-  #hero {
-    min-height: 560px;
   }
   .land-banner {
     height: 50vh;
@@ -4094,36 +3228,6 @@ footer::before {
   .land-detail-hero {
     height: 48vh;
     min-height: 320px;
-  }
-  .stats-bar {
-    grid-template-columns: 1fr 1fr;
-    gap: 4px;
-    padding: 14px 4vw;
-  }
-  .hero-stats .stats-bar {
-    padding: 12px 4vw;
-  }
-  .stat-item {
-    padding: 6px 6px;
-    border-right: none;
-  }
-  .stat-item:nth-child(odd) {
-    border-right: 1px solid rgba(205, 205, 205, 0.12);
-  }
-  .stat-item:nth-child(4) {
-    grid-column: auto;
-  }
-  .stat-num {
-    font-size: 22px;
-    min-width: 0;
-    height: 48px;
-    padding: 0 12px;
-    margin: 0 auto 6px;
-  }
-  .stat-label {
-    font-size: 9px;
-    letter-spacing: 0.12em;
-    line-height: 1.25;
   }
   .land-page-section {
     padding: 40px 0 64px;
@@ -4210,13 +3314,6 @@ footer::before {
   .map-with-direction {
     margin-top: 28px;
   }
-  .nav-cta {
-    display: none !important;
-  }
-  .ticker-item {
-    font-size: 8.5px;
-    gap: 10px;
-  }
   .footer-grid {
     gap: 28px;
   }
@@ -4266,27 +3363,6 @@ footer::before {
 
 /* ---------- Very small phones (<=360px) — minimum supported ---------- */
 @media (max-width: 360px) {
-  .stats-bar {
-    grid-template-columns: 1fr 1fr;
-    padding: 12px 4vw;
-    gap: 2px;
-  }
-  .stat-item {
-    padding: 5px 4px;
-  }
-  .stat-num {
-    font-size: 20px;
-    height: 42px;
-    padding: 0 10px;
-    margin-bottom: 4px;
-  }
-  .stat-label {
-    font-size: 8.5px;
-    letter-spacing: 0.1em;
-  }
-  .stat-item:nth-child(4) {
-    grid-column: auto;
-  }
   .gallery-thumbs {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -4297,11 +3373,6 @@ footer::before {
 
 /* ---------- Landscape orientation on short screens (<=520px tall) ---------- */
 @media (max-height: 520px) and (orientation: landscape) {
-  #hero {
-    min-height: 460px;
-    height: auto;
-    padding: 100px 0 40px;
-  }
   .land-banner,
   .land-detail-hero {
     height: 88vh;
@@ -4318,136 +3389,6 @@ footer::before {
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
-  }
-}
-
-/* =====================================================================
-   NAVBAR RESPONSIVE OVERHAUL
-   The site has 9 nav links + a logo with brand text. On tablets and
-   smaller laptops (anything below ~1180px) there isn't enough room for
-   all of that to fit on one row, so the navbar wraps / overflows.
-   Switch to the hamburger menu earlier and shrink the logo
-   progressively as the viewport shrinks.
-   ===================================================================== */
-
-/* Switch to hamburger menu for tablets and smaller (<= 1180px) */
-@media (max-width: 1180px) {
-  .nav-links {
-    display: none !important;
-  }
-  .hamburger {
-    display: flex !important;
-  }
-  nav {
-    height: 104px;
-    padding: 0 4vw;
-  }
-  nav.scrolled {
-    height: 88px;
-  }
-  .logo-img {
-    height: 96px;
-  }
-  nav.scrolled .logo-img {
-    height: 80px;
-  }
-  .logo-text .brand {
-    font-size: 18px;
-  }
-  .logo-text .sub {
-    font-size: 10px;
-    letter-spacing: 0.14em;
-  }
-}
-
-/* Tablets (<= 900px) — shrink text, keep visible */
-@media (max-width: 900px) {
-  nav {
-    height: 88px;
-    padding: 0 4vw;
-  }
-  nav.scrolled {
-    height: 74px;
-  }
-  .logo-img {
-    height: 72px;
-  }
-  nav.scrolled .logo-img {
-    height: 60px;
-  }
-  .nav-logo {
-    gap: 8px;
-  }
-  .logo-text .brand-the {
-    font-size: 10px;
-  }
-  .logo-text .brand-name {
-    font-size: 18px;
-  }
-  .logo-text .sub {
-    font-size: 8px;
-    letter-spacing: 0.12em;
-  }
-}
-
-/* Phones (<= 600px) — consistent sizing across all phones */
-@media (max-width: 600px) {
-  nav {
-    height: 82px;
-  }
-  nav.scrolled {
-    height: 68px;
-  }
-  .logo-img {
-    height: 66px;
-  }
-  nav.scrolled .logo-img {
-    height: 74px;
-  }
-  .nav-logo {
-    gap: 6px;
-  }
-  .logo-text .brand-the {
-    font-size: 9px;
-  }
-  .logo-text .brand-name {
-    font-size: 16px;
-  }
-  .logo-text .sub {
-    font-size: 7.5px;
-    letter-spacing: 0.1em;
-  }
-  .hamburger span {
-    width: 24px;
-  }
-}
-
-/* Small phones (<= 380px) */
-@media (max-width: 380px) {
-  nav {
-    height: 76px;
-  }
-  nav.scrolled {
-    height: 64px;
-  }
-  .logo-img {
-    height: 110px;
-  }
-  nav.scrolled .logo-img {
-    height: 88px;
-  }
-  .nav-logo {
-    gap: 5px;
-  }
-  .logo-text .brand-the {
-    font-size: 12px;
-  }
-  .logo-text .brand-name {
-    font-size: 18px;
-  }
-  .logo-text .sub {
-    font-size: 8px;
-    letter-spacing: 0.08em;
   }
 }
 
@@ -5795,5 +4736,100 @@ body.has-sticky-cta {
     flex-wrap: wrap;
     gap: 8px;
   }
+}
+
+/* ------------------------------------------------------------------
+   Animation helpers — Tailwind layout in JSX; timing here only.
+   ------------------------------------------------------------------ */
+@keyframes heroZoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.06);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.4);
+  }
+}
+
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes load {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.anim-hero-zoom {
+  animation: heroZoom 20s ease-in-out infinite alternate;
+}
+
+.anim-fade-down-delay-2 {
+  animation: fadeDown 0.8s ease 0.2s both;
+}
+
+.anim-fade-down-delay-4 {
+  animation: fadeDown 0.8s ease 0.4s both;
+}
+
+.anim-fade-down-delay-6 {
+  animation: fadeDown 0.8s ease 0.6s both;
+}
+
+.anim-fade-down-delay-8 {
+  animation: fadeDown 0.8s ease 0.8s both;
+}
+
+.anim-pulse-dot {
+  animation: pulse 2s infinite;
+}
+
+.anim-ticker {
+  animation: ticker 30s linear infinite;
+}
+
+.anim-load-bar {
+  animation: load 1.8s ease forwards;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin {
+  animation: spin 0.8s linear infinite;
 }
 

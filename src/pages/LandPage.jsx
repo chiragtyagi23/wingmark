@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import LandBanner from '../components/LandBanner';
 import AddToCartButton from '../components/AddToCartButton';
-import { landListings, landCategories } from '../data';
+import landListings from '../api/land.json';
+import landCategories from '../api/land-categories.json';
 
 function LandPage() {
   const [activeCategory, setActiveCategory] = useState('all');
@@ -12,6 +13,7 @@ function LandPage() {
     window.scrollTo({ top: 0, behavior: 'auto' });
   }, []);
 
+  const categories = landCategories;
   const filtered = landListings.filter((listing) => {
     const categoryOk = activeCategory === 'all' || listing.category === activeCategory;
     const typeOk = activeType === 'all' || listing.type === activeType;
@@ -64,7 +66,7 @@ function LandPage() {
           </div>
 
           <div className="land-categories">
-            {landCategories.map((cat) => (
+            {categories.map((cat) => (
               <button
                 key={cat.id}
                 className={`category-pill ${activeCategory === cat.id ? 'active' : ''}`}

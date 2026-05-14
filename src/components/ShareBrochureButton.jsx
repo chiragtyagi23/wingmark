@@ -21,6 +21,8 @@ function ShareBrochureButton({
   listing,
   type = 'land',
   label = 'Send This Listing on WhatsApp',
+  /** When set, replaces default `btn-share-brochure` (e.g. sticky bar pill). */
+  buttonClassName,
 }) {
   const [busy, setBusy] = useState(false);
 
@@ -48,7 +50,7 @@ function ShareBrochureButton({
   return (
     <button
       type="button"
-      className="btn-share-brochure"
+      className={buttonClassName || 'btn-share-brochure'}
       onClick={handleShare}
       disabled={busy}
       aria-busy={busy}

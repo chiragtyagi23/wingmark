@@ -1,4 +1,4 @@
-import { marketNews } from '../data';
+import marketNews from '../api/market-news.json';
 
 function News() {
   return (

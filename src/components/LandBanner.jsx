@@ -1,15 +1,18 @@
 import { useEffect, useState } from 'react';
-import { landBanners } from '../data';
+import landBanners from '../api/land-banners.json';
 
 function LandBanner() {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
+    if (landBanners.length === 0) return undefined;
     const id = window.setInterval(() => {
       setIndex((i) => (i + 1) % landBanners.length);
     }, 5000);
     return () => window.clearInterval(id);
   }, []);
+
+  if (landBanners.length === 0) return <div className="land-banner" />;
 
   return (
     <div className="land-banner">

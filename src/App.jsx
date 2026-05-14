@@ -20,6 +20,20 @@ if (typeof window !== 'undefined' && 'scrollRestoration' in window.history) {
   window.history.scrollRestoration = 'manual';
 }
 
+function scrollToHashTarget(hash, behavior) {
+  const id = hash.replace(/^#/, '');
+  if (!id) return;
+  const tryScroll = () => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior });
+    } else {
+      window.setTimeout(tryScroll, 50);
+    }
+  };
+  window.setTimeout(tryScroll, 60);
+}
+
 function ScrollManager() {
   const location = useLocation();
   const isInitialLoadRef = useRef(true);
@@ -29,27 +43,16 @@ function ScrollManager() {
       isInitialLoadRef.current = false;
 
       if (location.hash) {
-        window.history.replaceState(
-          null,
-          '',
-          location.pathname + location.search
-        );
+        scrollToHashTarget(location.hash, 'auto');
+        return;
       }
+
       window.scrollTo({ top: 0, behavior: 'auto' });
       return;
     }
 
     if (location.hash) {
-      const id = location.hash.replace('#', '');
-      const tryScroll = () => {
-        const el = document.getElementById(id);
-        if (el) {
-          el.scrollIntoView({ behavior: 'smooth' });
-        } else {
-          window.setTimeout(tryScroll, 50);
-        }
-      };
-      window.setTimeout(tryScroll, 60);
+      scrollToHashTarget(location.hash, 'smooth');
       return;
     }
 
@@ -118,11 +121,6 @@ function Layout() {
       });
 
       setActiveSection(current);
-
-      const hash = current && current !== 'hero' ? `/#${current}` : '/';
-      if (window.location.pathname + window.location.hash !== hash) {
-        window.history.replaceState(null, '', hash);
-      }
     };
 
     handleActiveSection();

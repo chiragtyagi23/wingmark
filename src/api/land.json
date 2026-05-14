@@ -1,0 +1,256 @@
+[
+  {
+    "listingNumber": "Listing #: L/001",
+    "slug": "rohinjan-premium-land-sale",
+    "type": "sale",
+    "category": "premium",
+    "img": "/rohinjan-grid-map.png",
+    "loc": "Sector 37 next to Rainbow Life",
+    "name": "Premium Land for Sale at Rohinjan near Amandoot metro station",
+    "area": "6 Acres",
+    "label": "Price",
+    "price": "₹ 40 Cr per acre",
+    "badge": "For Sale",
+    "nearestStation": "Amandoot metro station",
+    "suitableFor": "Residential complex / Mixed use development with commercial shops and offices",
+    "opportunity": "Excellent opportunity for development with a ready market demand",
+    "status": "Clear title single investor deal",
+    "snapshot": [
+      "Suitable for Residential complex / Mixed use development with commercial shops and offices.",
+      "Excellent opportunity for development with ready market demand."
+    ],
+    "gallery": [
+      "/rohinjan-location.png"
+    ],
+    "media": [
+      {
+        "title": "WhatsApp Video (2)",
+        "url": "/wardoli-media-1.mp4",
+        "kind": "video"
+      },
+      {
+        "title": "WhatsApp Video (1)",
+        "url": "/wardoli-media-2.mp4",
+        "kind": "video"
+      },
+      {
+        "title": "WhatsApp Video",
+        "url": "/wardoli-media-3.mp4",
+        "kind": "video"
+      }
+    ],
+    "files": [
+      {
+        "name": "Project Brochure.pdf",
+        "url": "#"
+      },
+      {
+        "name": "Title Documents.pdf",
+        "url": "#"
+      }
+    ],
+    "locationImage": "/rohinjan-location.png",
+    "location": {
+      "lat": 19.0318,
+      "lng": 73.1046,
+      "address": "Sector 37, Rohinjan, near Rainbow Life"
+    }
+  },
+  {
+    "listingNumber": "Listing #: L/002",
+    "slug": "upper-kharghar-jv-dhansar",
+    "type": "jv",
+    "category": "affordable",
+    "img": "/dhansar-listing.jpg",
+    "loc": "Village Dhansar · Near Shilphata - Kharghar Highway",
+    "name": "JV Proposal with building plans and feasibility report at Upper Kharghar",
+    "area": "131 Guntha · Ratio 60 : 40",
+    "label": "On amount",
+    "price": "₹ 10 Cr\n(non refundable)",
+    "badge": "Joint Venture",
+    "suitableFor": "Entry level developers",
+    "opportunity": "Low risk affordable market with increasing demand vis a vis infrastructure improvement",
+    "status": "Clear title single investor deal",
+    "snapshot": [
+      "Suitable for entry level developers.",
+      "Low risk affordable market with increasing demand due to infrastructure improvement."
+    ],
+    "gallery": [
+      "/dhansar-listing.jpg"
+    ],
+    "media": [],
+    "files": [
+      {
+        "name": "DHANSAR 131 GUNTHE FEASIBILITY REPORT.pdf",
+        "url": "/dhansar-131-gunthe-feasibility-report.pdf"
+      },
+      {
+        "name": "DHANSAR 173 PODIUM Model.pdf",
+        "url": "/dhansar-173-podium-model.pdf"
+      }
+    ],
+    "location": {
+      "lat": 19.0284,
+      "lng": 73.153,
+      "address": "Village Dhansar, Upper Kharghar"
+    }
+  },
+  {
+    "listingNumber": "Listing #: L/003",
+    "slug": "rohinjan-kharghar-premium-sale",
+    "type": "sale",
+    "category": "luxury",
+    "img": "/rohinjan-location.png",
+    "loc": "Village Rohinjan · Close to Sector 37 · Near Reliance BP petrol pump / Clan City",
+    "name": "Premium Land for Sale at Rohinjan (Kharghar)",
+    "area": "8.25 Acres",
+    "label": "Price",
+    "price": "₹ 40 Cr per acre (Negotiable on prompt payment)",
+    "badge": "For Sale",
+    "nearestStation": "1.5 km from Amandoot metro station",
+    "suitableFor": "Mixed use development. Established brands with good track record",
+    "opportunity": "Strong demand for luxury and aspiring housing segment. Growing market demand with limited players offering niche product",
+    "status": "Clear title in R zone of Panvel Municipal Corporation",
+    "specialComments": "This is a prime land parcel on 24 mtr access road and is ideal for developers, builders & investors looking for good returns from fast sales.",
+    "snapshot": [
+      "Suitable for mixed-use development and established brands with strong track record.",
+      "Strong demand from luxury and aspiring housing segment with limited niche competition."
+    ],
+    "gallery": [
+      "/rohinjan-grid-map.png"
+    ],
+    "media": [],
+    "files": [
+      {
+        "name": "Rohinjan original New DP Final Grid_A1.pdf",
+        "url": "/rohinjan-new-dp-final-grid-a1.pdf"
+      },
+      {
+        "name": "Rohinjan - 10 and 11 map.pdf",
+        "url": "/rohinjan-10-11-map.pdf"
+      }
+    ],
+    "locationImage": "/rohinjan-grid-map.png",
+    "location": {
+      "lat": 19.0318,
+      "lng": 73.1046,
+      "address": "Village Rohinjan, Kharghar"
+    }
+  },
+  {
+    "listingNumber": "Listing #: L/004",
+    "slug": "panvel-wardoli-mountain-facing",
+    "type": "sale",
+    "category": "premium",
+    "img": "/wardoli-location-1.png",
+    "loc": "• Village Wardoli\n• Near Wadhwa Wise City",
+    "name": "Prime Mountain facing land for sale at Panvel",
+    "area": "20 Acres\n(R zone — approx 13 acres · Green zone — approx 7 acres)",
+    "label": "Price",
+    "price": "₹ 65 Cr",
+    "badge": "For Sale",
+    "nearestStation": "Upcoming Mohape station on Panvel-Karjat rail corridor (1.5 km) · Panvel Railway Station (10 km)",
+    "suitableFor": "Township / mixed use development with NA plotting and premium Bungalows / row houses",
+    "opportunity": "Top developers like Wadhwa, Godrej & Hiranandani have already delivered possession in their township projects",
+    "skipOpportunitySplit": true,
+    "status": "Clear title single investor deal",
+    "specialComments": "• Excellent connectivity and promising infrastructure development\n• Old Mumbai-Pune Highway is 3 km away\n• Top universities, upcoming mall and hospital within a 5 km radius",
+    "snapshot": [
+      "Suitable for township / mixed-use development, NA plotting, premium bungalows and row houses.",
+      "Top developers like Wadhwa, Godrej and Hiranandani already have possession-ready township projects nearby."
+    ],
+    "gallery": [
+      "/wardoli-location-1.png",
+      "/wardoli-location-2.png",
+      "/wardoli-location-3.png"
+    ],
+    "media": [
+      {
+        "url": "/wardoli-road-construction.mp4",
+        "title": "Road for site – under construction"
+      },
+      {
+        "url": "/wardoli-towards-site.mp4",
+        "title": "Towards site"
+      }
+    ],
+    "files": [
+      {
+        "name": "Gat Book map.pdf",
+        "url": "/wardoli-gat-book-map.pdf"
+      },
+      {
+        "name": "7-12. Ferfar.pdf",
+        "url": "/wardoli-7-12-ferfar.pdf"
+      },
+      {
+        "name": "Wardoli-Bhingarwadi Naina area.pdf",
+        "url": "/wardoli-bhingarwadi-naina-area.pdf"
+      }
+    ],
+    "locationImage": "/wardoli-location-1.png",
+    "googleLocationUrl": "https://maps.app.goo.gl/ueeHTgaq7vpVfhjx6",
+    "location": {
+      "lat": 19.0227,
+      "lng": 73.2045,
+      "address": "Village Wardoli, Panvel"
+    }
+  },
+  {
+    "listingNumber": "Listing #: L/005",
+    "slug": "rameshwar-vaibhav-hill-station-1000-acres",
+    "type": "sale",
+    "category": "luxury",
+    "img": "/rameshwar-plot-area-1.png",
+    "loc": "• Rameshwar Vaibhav Hill Station is situated at Village Tadgaon, Taluka Sudhagad, District Raigad, Maharashtra\n• Located in the eastern ranges of Sahyadri mountains at a height of 1675 ft. above sea level\n• Mumbai - 104 kms (via Atal Setu 70 kms)\n• Navi Mumbai International Airport (NMIA) - 55 km\n• Panvel - 40 km\n• Khalapur Toll plaza - 38 km\n• Khopoli - Pali Road (National Highway NH548A) - 12 km",
+    "name": "1000+ acres N.A. Land for Hill Station on sale near Khopoli",
+    "area": "1160 acres",
+    "label": "Price",
+    "price": "₹ 700 Cr",
+    "badge": "For Sale",
+    "nearestStation": "Khopoli - Approx 27 kms",
+    "suitableFor": "Hill-station and mixed-use development on the lines of Lake City — townships, resort communities, premium villas and second homes (similar to Lavasa and Amby Valley)",
+    "opportunity": "• Declared by State Government as a hill station & a high priority tourist destination\n• Project is surrounded by dense forest\n• Land pattern is a mix of hilly as well table land\n• Pristine natural beauty providing a much needed relief away from the noise, traffic & city pollution\n• Optical fibre cables laid at the site with an operational telephone exchange nearby\n• Water is available through out the year through natural springs\n• Tar road is constructed\n• Red soil at site",
+    "skipOpportunitySplit": true,
+    "keyPoints": [
+      "Clear Title Non Agriculture Land (NA)",
+      "Master Layout Approved",
+      "Surrounded by 10,000 Acres of Reserve Forest",
+      "Hill Station Approval as per Government GR (similar to Lavasa and Amby Valley)",
+      "Helipad on Site",
+      "Daily State Transport Bus Service from Pen and Khopoli Station",
+      "Loan & Mortgage Free Bankable Title",
+      "Bank Valuation & Title Report from Yardi Prabhu"
+    ],
+    "specialFeatures": "Famous picnic spots nearby:\n• Imagica Amusement & Water Park\n• Ballaleshwar Ganpati Temple (Ashta Vinayayak) at Pali\n• Saras Gadh Fort - A popular spot for Trekking and Rock Climbing\n• Archaeologically beautiful temple of \"Lord Rameshwar\"\n• Uddhar Rameshwar Temple\n• Unhere Hot Water Springs",
+    "comments": "Approvals for the project;\n• Asst. Director Town Planning, Raigad under Resolution No. NA/SNO/-13 to 114 SS-A/3930 dated 15th December 1986, Town Planning Department, Government of Maharashtra\n• Tahasildar, Sudhagad, District - Raigad, Revenue Department. Government of Maharashtra, under Resolution No. NA/SR/360, dated 19th December 1986\n• The Sarpanch, Group Gram Panchayat, Tadgaon, District Raigad under Resolution number 123 dated 30th November 1985\n• Maharashtra Tourism Development Corporation Ltd. Under Resolution No. MTDC / DEV / RAIGAD - 776 dated 13th September 1986\n• No Objection Certificate (N.O.C.) granted by District Health Office, Raigad Zilla Parishad.\n• Executive Engineer, Mahad (Public Works Department, Mahad)\n• Executive Engineer, Raigad Zilla Parishad, Government of Maharashtra.\n• Maharashtra Electricity Board.\n• Superintendent of Police, District Raigad.\n• Foreign Investment Promotion Board (FIPB) and Cabinet Committee on Foreign Investment (CCFI) allowing foreign direct Investment in this Mixed Use Infrastructure Project",
+    "status": "Clear title deal",
+    "snapshot": [
+      "Government-approved hill station — 1160 acres NA land, ringed by ~10,000 acres of reserve forest.",
+      "1675 ft above sea level — strong road and rail connectivity to Mumbai, Khopoli and NMIA."
+    ],
+    "gallery": [
+      "/rameshwar-plot-area-1.png",
+      "/rameshwar-plot-area-2.png",
+      "/rameshwar-plot-area-3.png",
+      "/rameshwar-plot-area-4.png"
+    ],
+    "media": [],
+    "files": [
+      {
+        "name": "Salient Features (Project Brief).pdf",
+        "url": "/rameshwar-salient-features.pdf"
+      },
+      {
+        "name": "7-12 (VC) Land Record.pdf",
+        "url": "/rameshwar-7-12-vc.pdf"
+      }
+    ],
+    "googleLocationUrl": "https://goo.gl/maps/9kmCiELvPxQtziLC7",
+    "location": {
+      "lat": 18.63825,
+      "lng": 73.19953,
+      "address": "Rameshwar Vaibhav Hill Station, Village Tadgaon, Taluka Sudhagad, District Raigad, Maharashtra"
+    }
+  }
+]

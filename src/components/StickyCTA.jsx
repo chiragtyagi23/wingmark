@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Hand, Download, ShoppingCart } from 'lucide-react';
-import { landListings, plotListings } from '../data';
+import { Hand, ShoppingCart } from 'lucide-react';
+import ShareBrochureButton from './ShareBrochureButton';
 import LeadModal from './LeadModal';
 import VisitedPanel from './VisitedPanel';
 import { useVisitedListings } from '../hooks/useVisitedListings';
+import landListings from '../api/land.json';
+import plotListings from '../api/plots.json';
 import {
   generateBrochureFile,
   shareBrochureFiles,
@@ -106,13 +108,30 @@ function StickyCTA() {
     listingTitle = plot?.title || '';
     listingFiles = (plot?.files || []).filter((f) => f?.url && f.url !== '#');
   }
-  const hasFiles = listingFiles.length > 0;
 
-  const openBrochure = () => setActiveModal('brochure');
+  let detailListing = null;
+  let detailType = 'land';
+  if (landMatch) {
+    detailListing = landListings.find((l) => l.slug === landMatch[1]) || null;
+    detailType = 'land';
+  } else if (plotMatch) {
+    detailListing = plotListings.find((p) => p.slug === plotMatch[1]) || null;
+    detailType = 'plot';
+  }
+
+  const openBrochure = useCallback(() => setActiveModal('brochure'), []);
   const openInterest = () => setActiveModal('interest');
   const closeModal = () => {
     setActiveModal(null);
   };
+
+  useEffect(() => {
+    if (!isDetailPage) return undefined;
+    const onOpenDocuments = () => openBrochure();
+    window.addEventListener('wingsmark-open-documents-modal', onOpenDocuments);
+    return () =>
+      window.removeEventListener('wingsmark-open-documents-modal', onOpenDocuments);
+  }, [isDetailPage, openBrochure]);
 
   // Reserve bottom space (and tag <body>) only while the bar is visible
   // so other pages don't leave an unused gap below the footer.
@@ -154,14 +173,13 @@ function StickyCTA() {
       <div className="sticky-cta">
         <div className="sticky-cta-inner">
           <div className="sticky-cta-left">
-            <button
-              type="button"
-              className="sticky-cta-btn sticky-cta-btn--outline"
-              onClick={openBrochure}
-            >
-              <Download size={16} />
-              <span>Download All Documents</span>
-            </button>
+            {detailListing ? (
+              <ShareBrochureButton
+                listing={detailListing}
+                type={detailType}
+                buttonClassName="sticky-cta-btn sticky-cta-btn--share-wa"
+              />
+            ) : null}
           </div>
 
           {listingTitle && (

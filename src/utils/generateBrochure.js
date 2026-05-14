@@ -579,9 +579,14 @@ export async function generateBrochureFile(item, type) {
   const data = buildBrochureData(item, type);
   if (!data) throw new Error('Missing listing data for brochure.');
   const blob = await generateListingBrochure(data);
-  const numMatch = (item.listingNumber || '').match(/(\d+)/);
-  const num = numMatch ? numMatch[1].padStart(3, '0') : '001';
-  const fileName = `TheWingsMarkInfraa-listing#${num}.pdf`;
+
+  // Extract the listing code (e.g. "L/004", "PS/001", "PJ/001") from
+  // strings like "Listing #: L/004" and make it filename-safe.
+  const codeMatch = (item.listingNumber || '').match(/([A-Z]+)\s*\/\s*(\d+)/i);
+  const code = codeMatch
+    ? `${codeMatch[1].toUpperCase()}-${codeMatch[2].padStart(3, '0')}`
+    : 'L-001';
+  const fileName = `Wingsmark-${code}.pdf`;
   return new File([blob], fileName, { type: 'application/pdf' });
 }
 

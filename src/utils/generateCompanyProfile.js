@@ -9,11 +9,9 @@ const PALETTE = {
   white: rgb(1, 1, 1),
 };
 
+/** Same letterhead base as `generateBrochure.js` — file must exist under `/public`. */
 const LETTERHEAD_CANDIDATES = [
-  '/black beige Modern Business Letterhead.pdf',
-  '/Black Beige Modern Business Letterhead.pdf',
-  '/White Green and Gold Modern Minimal Business Letterhead.pdf',
-  '/letterhead.pdf',
+  '/black beige Modern Business Letterhead (3).pdf',
 ].map((p) => encodeURI(p));
 
 async function fetchLetterheadBytes() {
@@ -127,13 +125,13 @@ export async function generateCompanyProfilePdf() {
 
   // ---- Leadership ----
   drawLabel('Leadership');
-  drawParagraph('Mehhul Badani — 80708 88111 / 99309 49066', { font: helvBold, color: PALETTE.navy });
-  drawParagraph('Key Roles: Founder, COO, Strategic Advisor & Designated Partner', { fontSize: 9 });
+  drawParagraph('Mehhul Badani', { font: helvBold, color: PALETTE.navy });
+  drawParagraph('Key Roles: COO, Strategic Advisor & Designated Partner', { fontSize: 9 });
   y -= 2;
-  drawParagraph('Vijay C Gaaikwad — 95525 10383', { font: helvBold, color: PALETTE.navy });
+  drawParagraph('Vijay C Gaaikwad ', { font: helvBold, color: PALETTE.navy });
   drawParagraph('Key Roles: Founder, Land Acquisition, Govt Liaisoning & Designated Partner', { fontSize: 9 });
   y -= 2;
-  drawParagraph('Advocate Sathyam Acharya — 98195 20866', { font: helvBold, color: PALETTE.navy });
+  drawParagraph('Advocate Sathyam Acharya', { font: helvBold, color: PALETTE.navy });
   drawParagraph('Key Roles: Verification, Documentation, Legal Advisor', { fontSize: 9 });
 
   // ---- Office ----

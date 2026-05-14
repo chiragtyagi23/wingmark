@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PlotBanner from '../components/PlotBanner';
 import AddToCartButton from '../components/AddToCartButton';
-import { plotListings } from '../data';
+import plotListings from '../api/plots.json';
 
 function PlotPage() {
   const [activeType, setActiveType] = useState('all');

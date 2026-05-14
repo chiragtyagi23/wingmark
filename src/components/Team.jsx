@@ -1,5 +1,3 @@
-import { Scale } from 'lucide-react';
-
 function Team() {
   return (
     <section id="team">
@@ -59,8 +57,8 @@ function Team() {
           <div className="team-card reveal reveal-delay-2">
             <div className="team-card-accent" style={{ background: 'linear-gradient(90deg, var(--charcoal), var(--royal))' }} />
             <div className="team-card-img">
-              <div className="team-avatar">
-                <Scale size={36} />
+              <div className="team-avatar team-avatar-photo">
+                <img src="/adv-sathyam-acharya.png" alt="Adv. Sathyam Acharya" />
               </div>
             </div>
             <div className="team-card-body">

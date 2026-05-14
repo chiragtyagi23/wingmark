@@ -1,0 +1,5 @@
+[
+  { "id": "all", "label": "All Listings" },
+  { "id": "commercial", "label": "Commercial" },
+  { "id": "bungalow", "label": "Bungalow Plots" }
+]

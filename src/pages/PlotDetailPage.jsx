@@ -1,19 +1,17 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Navigation, ExternalLink } from 'lucide-react';
-import { plotListings } from '../data';
-import ShareBrochureButton from '../components/ShareBrochureButton';
+import { Navigation, ExternalLink, Download } from 'lucide-react';
 import AddToCartButton from '../components/AddToCartButton';
+import plotListings from '../api/plots.json';
 
 function PlotDetailPage() {
   const { slug } = useParams();
-  const plot = plotListings.find((item) => item.slug === slug);
+  const plot = plotListings.find((p) => p.slug === slug) || null;
   const [galleryIndex, setGalleryIndex] = useState(0);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'auto' });
   }, [slug]);
-
 
   if (!plot) {
     return (
@@ -260,7 +258,14 @@ function PlotDetailPage() {
         </section>
 
         <div className="land-detail-cta">
-          <ShareBrochureButton listing={plot} type="plot" />
+          <button
+            type="button"
+            className="btn-download-all-documents"
+            onClick={() => window.dispatchEvent(new Event('wingsmark-open-documents-modal'))}
+          >
+            <Download size={16} />
+            <span>Download All Documents</span>
+          </button>
           <Link to="/#contact" className="btn-gold">
             Enquire About This Plot
           </Link>
