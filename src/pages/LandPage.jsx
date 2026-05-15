@@ -7,7 +7,7 @@ import ListingTextValue from '../components/ListingTextValue';
 import { locationPreview } from '../utils/listingTextFormat';
 import landCategories from '../api/land-categories.json';
 
-function LandPage() {
+function  LandPage() {
   const [activeCategory, setActiveCategory] = useState('all');
   const [activeType, setActiveType] = useState('all');
 
@@ -160,7 +160,7 @@ function LandPage() {
                           img: listing.img,
                         }}
                       />
-                      <div className="land-enter">Details ↵</div>
+                      <div className="land-enter">Details</div>
                     </div>
                   </div>
                 </Link>
