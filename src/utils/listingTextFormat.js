@@ -92,3 +92,29 @@ export function formatLandOpportunity(item) {
   if (item.skipOpportunitySplit) return String(item.opportunity);
   return splitToBullets(item.opportunity);
 }
+
+/** One leading bullet per field; extra lines hang under the first (PDF + detail). */
+export function formatSingleBullet(val) {
+  if (val == null || val === '') return '';
+  const lines = String(val)
+    .split(/\n+/)
+    .map((l) => l.replace(BULLET_PREFIX, '').trim())
+    .filter(Boolean);
+  if (!lines.length) return '';
+  if (lines.length === 1) return `• ${lines[0]}`;
+  return `• ${lines[0]}\n${lines.slice(1).join('\n')}`;
+}
+
+/** Suitable For — bullets from existing • lines, " / " splits, or comma/period splits. */
+export function formatSuitableFor(val) {
+  if (val == null || val === '') return '';
+  if (isBulletContent(val)) return formatMultiline(val);
+  const text = String(val).trim();
+  if (/\s\/\s/.test(text)) {
+    const parts = text.split(/\s+\/\s+/).map((s) => s.trim()).filter(Boolean);
+    if (parts.length > 1) {
+      return parts.map((s) => `• ${s}`).join('\n');
+    }
+  }
+  return splitToBullets(val);
+}

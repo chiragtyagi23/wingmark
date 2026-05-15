@@ -1,6 +1,11 @@
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 import fontkit from '@pdf-lib/fontkit';
-import { formatLandOpportunity, formatMultiline } from './listingTextFormat';
+import {
+  formatLandOpportunity,
+  formatMultiline,
+  formatSingleBullet,
+  formatSuitableFor,
+} from './listingTextFormat';
 
 let _fontRegCache = null;
 let _fontBoldCache = null;
@@ -217,28 +222,66 @@ async function tryEmbedImage(pdfDoc, url) {
   }
 }
 
+const PDF_BULLET_PREFIX = /^\s*[•\u2022\-–—]\s*/;
+const PDF_BULLET_LEAD = '• ';
+
+/** Word-wrap plain text (no bullet) to fit `maxWidth`. */
+function wrapWords(text, font, fontSize, maxWidth) {
+  if (!text) return [];
+  const words = String(text).split(/\s+/).filter(Boolean);
+  const lines = [];
+  let line = '';
+  for (const w of words) {
+    const candidate = line ? `${line} ${w}` : w;
+    if (font.widthOfTextAtSize(candidate, fontSize) > maxWidth && line) {
+      lines.push(line);
+      line = w;
+    } else {
+      line = candidate;
+    }
+  }
+  if (line) lines.push(line);
+  return lines;
+}
+
 /**
- * Pure word-wrap based on the rendered width of `font` at `fontSize`.
- * Returns an array of lines that fit inside `maxWidth`.
+ * Word-wrap for PDF body copy. Bullet paragraphs use a hanging indent so
+ * wrapped lines align under the text after "• ", not under the bullet.
+ * @returns {{ text: string, indent: number }[]}
  */
 function wrapText(text, font, fontSize, maxWidth) {
   if (!text) return [];
   const paragraphs = String(text).split(/\n+/);
   const lines = [];
-  for (const p of paragraphs) {
-    const words = p.split(/\s+/);
-    let line = '';
-    for (const w of words) {
-      const candidate = line ? `${line} ${w}` : w;
-      const wWidth = font.widthOfTextAtSize(candidate, fontSize);
-      if (wWidth > maxWidth && line) {
-        lines.push(line);
-        line = w;
-      } else {
-        line = candidate;
+  const bulletIndent = font.widthOfTextAtSize(PDF_BULLET_LEAD, fontSize);
+
+  let hangContinuation = false;
+
+  for (const raw of paragraphs) {
+    const p = raw.trim();
+    if (!p) continue;
+
+    if (PDF_BULLET_PREFIX.test(p)) {
+      hangContinuation = true;
+      const body = p.replace(PDF_BULLET_PREFIX, '').trim();
+      const bodyLines = wrapWords(body, font, fontSize, maxWidth - bulletIndent);
+      for (let i = 0; i < bodyLines.length; i += 1) {
+        lines.push({
+          text: i === 0 ? PDF_BULLET_LEAD + bodyLines[i] : bodyLines[i],
+          indent: i === 0 ? 0 : bulletIndent,
+        });
+      }
+    } else if (hangContinuation) {
+      const contLines = wrapWords(p, font, fontSize, maxWidth - bulletIndent);
+      for (const cl of contLines) {
+        lines.push({ text: cl, indent: bulletIndent });
+      }
+    } else {
+      hangContinuation = false;
+      for (const plain of wrapWords(p, font, fontSize, maxWidth)) {
+        lines.push({ text: plain, indent: 0 });
       }
     }
-    if (line) lines.push(line);
   }
   return lines;
 }
@@ -539,7 +582,7 @@ export async function generateListingBrochure(data) {
 
   // ---------- Title with red underline (first text page only) ----------
   const titleSize = 20;
-  const titleLines = wrapText(safe.title, helvBold, titleSize, contentWidth);
+  const titleLines = wrapWords(safe.title, helvBold, titleSize, contentWidth);
   for (const line of titleLines) {
     const lineW = helvBold.widthOfTextAtSize(line, titleSize);
     const lineX = contentX + (contentWidth - lineW) / 2;
@@ -591,19 +634,17 @@ export async function generateListingBrochure(data) {
       ['Comments / Approvals', safe.comments],
       ['Price', safe.price],
       ['Status', safe.status],
-      ['Snapshot', safe.snapshot],
-      ['Google Maps', safe.googleMapsUrl],
-      ['Address', safe.address],
-      ['Microsite', safe.listingUrl],
     ];
   }
   rows = rows.filter(([, v]) => v);
 
   const labelSize = 12;
   const valueSize = 15;
-  const lineGap = 12;
-  /** Body copy: true black for readability on letterhead (not navy). */
-  const bodyInk = rgb(0, 0, 0);
+  const lineGap = 10;
+  const valueLineHeight = valueSize + 2;
+  const labelBlockHeight = labelSize + 10;
+  /** Body copy: same dark navy as the listing title. */
+  const bodyInk = PALETTE.navy;
 
   let drawPage = page;
   let yCursor = y;
@@ -614,49 +655,61 @@ export async function generateListingBrochure(data) {
     return pdfDoc.getPages().at(-1);
   };
 
+  /** Continue on a new letterhead page — no extra badge (maximises usable height). */
+  const continueOnNewPage = async () => {
+    drawPage = await startFreshPage();
+    yCursor = height - headerSpace;
+  };
+
   for (const [label, value] of rows) {
     const valueLines = wrapText(value, helv, valueSize, contentWidth);
-    const blockHeight = labelSize + 8 + valueLines.length * (valueSize + 2) + lineGap;
-    if (yCursor - blockHeight < minY) {
-      drawPage = await startFreshPage();
-      yCursor = contentYAfterListingBadge(
-        drawPage,
-        helvBold,
-        contentX,
-        contentWidth,
-        height,
-        headerSpace,
-        safe.listingNumber
-      );
-    }
+    if (!valueLines.length) continue;
+
     const labelText = label.toUpperCase();
     const labelW = helvBold.widthOfTextAtSize(labelText, labelSize);
-    // Location value lines should match the gold "location point" style on the banner.
-    const valueInk = label === 'Location' ? PALETTE.gold : bodyInk;
-    drawPage.drawText(labelText, {
-      x: contentX,
-      y: yCursor,
-      size: labelSize,
-      font: helvBold,
-      color: PALETTE.gold,
-    });
-    drawPage.drawRectangle({
-      x: contentX,
-      y: yCursor - 3,
-      width: labelW,
-      height: 1.2,
-      color: PALETTE.gold,
-    });
-    yCursor -= labelSize + 10;
-    for (const line of valueLines) {
-      drawPage.drawText(line, {
+    const drawFieldLabel = () => {
+      drawPage.drawText(labelText, {
         x: contentX,
+        y: yCursor,
+        size: labelSize,
+        font: helvBold,
+        color: PALETTE.gold,
+      });
+      drawPage.drawRectangle({
+        x: contentX,
+        y: yCursor - 3,
+        width: labelW,
+        height: 1.2,
+        color: PALETTE.gold,
+      });
+      yCursor -= labelBlockHeight;
+    };
+
+    let lineIdx = 0;
+    let labelDrawn = false;
+
+    while (lineIdx < valueLines.length) {
+      const needsLabel = !labelDrawn;
+      const required = (needsLabel ? labelBlockHeight : 0) + valueLineHeight;
+      if (yCursor - required < minY) {
+        await continueOnNewPage();
+        labelDrawn = false;
+        continue;
+      }
+      if (needsLabel) {
+        drawFieldLabel();
+        labelDrawn = true;
+      }
+      const row = valueLines[lineIdx];
+      drawPage.drawText(row.text, {
+        x: contentX + (row.indent || 0),
         y: yCursor,
         size: valueSize,
         font: helv,
-        color: valueInk,
+        color: bodyInk,
       });
-      yCursor -= valueSize + 2;
+      yCursor -= valueLineHeight;
+      lineIdx += 1;
     }
     yCursor -= lineGap;
   }
@@ -731,15 +784,15 @@ export function buildBrochureData(item, type) {
     title: item.name,
     listingNumber: item.listingNumber,
     location: item.loc,
-    nearestTrain: item.nearestStation,
-    area: item.area,
-    suitableFor: item.suitableFor,
+    nearestTrain: formatSingleBullet(item.nearestStation),
+    area: formatSingleBullet(item.area),
+    suitableFor: formatSuitableFor(item.suitableFor),
     opportunity: formatLandOpportunity(item),
     keyPoints: formatMultiline(item.keyPoints),
     specialFeatures: formatMultiline(item.specialFeatures || ''),
     comments: formatMultiline(item.comments ?? item.specialComments ?? ''),
-    price: item.price,
-    status: item.status,
+    price: formatSingleBullet(item.price),
+    status: formatSingleBullet(item.status),
     imageUrl: item.img || '',
     locationImageUrl:
       (item.locationImage && item.locationImage !== item.img

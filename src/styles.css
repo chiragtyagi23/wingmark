@@ -2516,7 +2516,8 @@ footer::before {
   font-weight: 400;
 }
 
-.land-detail-loc-list {
+.land-detail-loc-list,
+.land-detail-loc-list.listing-bullet-list {
   color: var(--gold);
 }
 
@@ -2531,6 +2532,7 @@ footer::before {
 }
 
 .land-detail-loc-list li::marker,
+.land-detail-loc-list.listing-bullet-list li::marker,
 .listing-bullet-list li::marker {
   color: var(--gold);
 }
