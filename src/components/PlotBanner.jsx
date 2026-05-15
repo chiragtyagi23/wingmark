@@ -1,70 +1,26 @@
-import { useEffect, useState } from 'react';
 import plotBanners from '../api/plot-banners.json';
 
+const defaultBanner = {
+  title: 'PLOTS <em>FOR SALE &amp; JV</em>',
+  sub: 'Curated plot parcels with title clarity, access roads and clear development stages.',
+};
+
 function PlotBanner() {
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    if (plotBanners.length === 0) return undefined;
-    const id = window.setInterval(() => {
-      setIndex((i) => (i + 1) % plotBanners.length);
-    }, 5000);
-    return () => window.clearInterval(id);
-  }, []);
-
-  if (plotBanners.length === 0) return <div className="land-banner" />;
+  const banner = plotBanners[0] ?? defaultBanner;
 
   return (
-    <div className="land-banner">
-      {plotBanners.map((banner, i) => (
-        <div
-          key={banner.img}
-          className={`land-banner-slide ${i === index ? 'active' : ''}`}
-          style={{ backgroundImage: `url(${banner.img})` }}
-        >
-          <div className="land-banner-overlay" />
-          <div className="land-banner-content">
-            <div className="section-badge">
-              <span>Plots - Sale &amp; Joint Venture</span>
-            </div>
-            <h1
-              className="land-banner-title"
-              dangerouslySetInnerHTML={{ __html: banner.title }}
-            />
-            <p
-              className="land-banner-sub"
-              dangerouslySetInnerHTML={{ __html: banner.sub }}
-            />
-          </div>
+    <header className="listing-page-header">
+      <div className="listing-page-header-inner">
+        <div className="section-badge">
+          <span>Plot Listings</span>
         </div>
-      ))}
-
-      <div className="land-banner-dots">
-        {plotBanners.map((banner, i) => (
-          <button
-            key={banner.img}
-            className={`land-banner-dot ${i === index ? 'active' : ''}`}
-            onClick={() => setIndex(i)}
-            aria-label={`Show banner ${i + 1}`}
-          />
-        ))}
+        <h1
+          className="listing-page-header-title"
+          dangerouslySetInnerHTML={{ __html: banner.title }}
+        />
+        <p className="listing-page-header-sub" dangerouslySetInnerHTML={{ __html: banner.sub }} />
       </div>
-
-      <button
-        className="land-banner-arrow prev"
-        onClick={() => setIndex((i) => (i - 1 + plotBanners.length) % plotBanners.length)}
-        aria-label="Previous banner"
-      >
-        ‹
-      </button>
-      <button
-        className="land-banner-arrow next"
-        onClick={() => setIndex((i) => (i + 1) % plotBanners.length)}
-        aria-label="Next banner"
-      >
-        ›
-      </button>
-    </div>
+    </header>
   );
 }
 

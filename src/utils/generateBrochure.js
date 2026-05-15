@@ -1,4 +1,4 @@
-import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
+import { PDFDocument, PDFName, PDFString, StandardFonts, rgb } from 'pdf-lib';
 import fontkit from '@pdf-lib/fontkit';
 import {
   formatLandOpportunity,
@@ -100,7 +100,54 @@ const PALETTE = {
   red: rgb(0.84, 0.18, 0.18),
   text: rgb(0.06, 0.14, 0.26),
   muted: rgb(0.40, 0.43, 0.48),
+  mapLink: rgb(0.08, 0.35, 0.65),
 };
+
+/** Google Maps share link from listing data (explicit URL or lat/lng fallback). */
+export function resolveGoogleMapsUrl(item, type) {
+  if (!item) return '';
+  const explicit = item.googleLocationUrl;
+  if (explicit != null && String(explicit).trim() !== '') {
+    return String(explicit).trim();
+  }
+  const geo = type === 'plot' ? item.location_geo : item.location;
+  if (geo?.lat != null && geo?.lng != null) {
+    return `https://www.google.com/maps/search/?api=1&query=${geo.lat},${geo.lng}`;
+  }
+  return '';
+}
+
+function resolveMapAddress(item, type) {
+  if (!item) return '';
+  if (type === 'plot') return item.location_geo?.address || '';
+  return item.location?.address || '';
+}
+
+/** Clickable URI annotation over drawn map-link text (PDF bottom-left origin). */
+function addUriLinkAnnotation(page, pdfDoc, url, rect) {
+  if (!url || !rect) return;
+  const { context } = pdfDoc;
+  const link = context.register(
+    context.obj({
+      Type: 'Annot',
+      Subtype: 'Link',
+      Rect: rect,
+      Border: [0, 0, 0],
+      A: {
+        Type: 'Action',
+        S: 'URI',
+        URI: PDFString.of(url),
+      },
+    })
+  );
+  const annotsKey = PDFName.of('Annots');
+  const existing = page.node.lookup(annotsKey);
+  if (existing) {
+    existing.push(link);
+  } else {
+    page.node.set(annotsKey, context.obj([link]));
+  }
+}
 
 async function fetchAsArrayBuffer(url) {
   const res = await fetch(url);
@@ -524,7 +571,6 @@ async function appendListingGalleryPages(pdfDoc, galleryUrls, pageWidth, pageHei
  *   listingUrl?: string,
  *   snapshot?: string,
  *   googleMapsUrl?: string,
- *   address?: string,
  *   galleryUrls?: string[],
  * }} data
  * @returns {Promise<Blob>}
@@ -636,6 +682,9 @@ export async function generateListingBrochure(data) {
       ['Status', safe.status],
     ];
   }
+  if (safe.googleMapsUrl) {
+    rows.push(['Google Maps', safe.googleMapsUrl]);
+  }
   rows = rows.filter(([, v]) => v);
 
   const labelSize = 12;
@@ -687,6 +736,9 @@ export async function generateListingBrochure(data) {
 
     let lineIdx = 0;
     let labelDrawn = false;
+    const isGoogleMaps = label === 'Google Maps';
+    const mapUrl = isGoogleMaps ? safe.googleMapsUrl : '';
+    let linkRect = null;
 
     while (lineIdx < valueLines.length) {
       const needsLabel = !labelDrawn;
@@ -694,6 +746,7 @@ export async function generateListingBrochure(data) {
       if (yCursor - required < minY) {
         await continueOnNewPage();
         labelDrawn = false;
+        linkRect = null;
         continue;
       }
       if (needsLabel) {
@@ -706,10 +759,23 @@ export async function generateListingBrochure(data) {
         y: yCursor,
         size: valueSize,
         font: helv,
-        color: bodyInk,
+        color: isGoogleMaps ? PALETTE.mapLink : bodyInk,
       });
+      if (isGoogleMaps && mapUrl) {
+        const lineBottom = yCursor - 2;
+        const lineTop = yCursor + valueSize;
+        if (!linkRect) {
+          linkRect = [contentX, lineBottom, contentX + contentWidth, lineTop];
+        } else {
+          linkRect[1] = Math.min(linkRect[1], lineBottom);
+          linkRect[3] = Math.max(linkRect[3], lineTop);
+        }
+      }
       yCursor -= valueLineHeight;
       lineIdx += 1;
+    }
+    if (isGoogleMaps && linkRect && mapUrl) {
+      addUriLinkAnnotation(drawPage, pdfDoc, mapUrl, linkRect);
     }
     yCursor -= lineGap;
   }
@@ -776,6 +842,7 @@ export function buildBrochureData(item, type) {
       imageUrl: item.img || '',
       locationImageUrl: secondImg,
       listingUrl: `${SITE_URL}/plot/${item.slug}`,
+      googleMapsUrl: resolveGoogleMapsUrl(item, 'plot'),
       galleryUrls: collectGalleryUrls(item),
     };
   }
@@ -802,8 +869,7 @@ export function buildBrochureData(item, type) {
       '',
     listingUrl: `${SITE_URL}/land/${item.slug}`,
     snapshot: formatMultiline(item.snapshot || []),
-    googleMapsUrl: item.googleLocationUrl || '',
-    address: item.location?.address || '',
+    googleMapsUrl: resolveGoogleMapsUrl(item, 'land'),
     galleryUrls: collectGalleryUrls(item),
   };
 }
@@ -879,10 +945,11 @@ export function buildWhatsAppListingMessage(item, type) {
     }
   }
 
-  const mapAddr = item.location?.address || item.location_geo?.address;
-  if (item.googleLocationUrl) {
+  const mapsUrl = resolveGoogleMapsUrl(item, type);
+  const mapAddr = resolveMapAddress(item, type);
+  if (mapsUrl) {
     add('');
-    add(`Google Maps:\n${item.googleLocationUrl}`);
+    add(`Google Maps:\n${mapsUrl}`);
   }
   if (mapAddr) add(`Address: ${mapAddr}`);
 

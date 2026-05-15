@@ -22,7 +22,7 @@ function Locations() {
             />
             <div className="loc-card-overlay">
               <div className="loc-name">Kharghar</div>
-              <div className="loc-tag">Navi Mumbai</div>
+              <div className="loc-tag">Navi Mumbai's</div>
               <div className="loc-card-body">
                 <p>Rapidly developing node with strong infrastructure, green spaces and premium residential demand.</p>
               </div>
@@ -36,7 +36,7 @@ function Locations() {
             />
             <div className="loc-card-overlay">
               <div className="loc-name">Panvel</div>
-              <div className="loc-tag">Navi Mumbai Gateway</div>
+              <div className="loc-tag">Navi Mumbai's Gateway</div>
               <div className="loc-card-body">
                 <p>Strategic hub adjacent to NAINA and upcoming Navi Mumbai International Airport.</p>
               </div>
@@ -50,7 +50,7 @@ function Locations() {
             />
             <div className="loc-card-overlay">
               <div className="loc-name">Khopoli</div>
-              <div className="loc-tag">Industrial corridor</div>
+              <div className="loc-tag">Next Growth corridor</div>
               <div className="loc-card-body">
                 <p>Industrial corridor from Khopoli with strong logistics, manufacturing adjacency, and land upside.</p>
               </div>
@@ -64,7 +64,7 @@ function Locations() {
             />
             <div className="loc-card-overlay">
               <div className="loc-name">Karjat</div>
-              <div className="loc-tag">Nature &amp; Growth</div>
+              <div className="loc-tag">Eco Living</div>
               <div className="loc-card-body">
                 <p>Premium resort and villa destination with expanding connectivity and eco-tourism potential.</p>
               </div>
@@ -76,10 +76,7 @@ function Locations() {
               alt="Mumbai 3.0 - next-generation metropolitan growth"
               loading="lazy"
             />
-            <div
-              className="loc-card-overlay"
-              style={{ background: 'linear-gradient(to top, rgba(14,56,94,0.97) 0%, rgba(247,198,27,0.22) 100%)' }}
-            >
+            <div className="loc-card-overlay">
               <div className="loc-name">Mumbai 3.0</div>
               <div className="loc-tag">Priority Focus Area</div>
               <div className="loc-card-body">

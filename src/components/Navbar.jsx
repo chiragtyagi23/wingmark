@@ -32,7 +32,7 @@ function Navbar({ scrolled, activeSection, onMobileOpen }) {
     <nav
       id="mainNav"
       className={clsx(
-        'fixed inset-x-0 top-0 z-[1000] flex items-center justify-between gap-2 border-b px-[4vw] backdrop-blur-[18px] transition-all duration-300 ease-out max-[1180px]:gap-1.5',
+        'fixed inset-x-0 top-0 z-[1000] flex items-center justify-between gap-2 border-b pr-2 backdrop-blur-[18px] transition-all duration-300 ease-out max-[1180px]:gap-1.5',
         scrolled
           ? 'h-[118px] border-[rgba(247,198,27,0.45)] bg-[rgba(250,247,240,0.98)] shadow-[0_2px_10px_rgba(10,26,47,0.08)] max-[1180px]:h-[96px] max-[900px]:h-[84px] max-[600px]:h-[80px] max-[380px]:h-[92px]'
           : 'h-[140px] border-[rgba(247,198,27,0.12)] bg-[rgba(248,244,236,0.94)] max-[1180px]:h-[104px] max-[900px]:h-[88px] max-[600px]:h-[82px] max-[380px]:h-[76px]'
@@ -54,7 +54,7 @@ function Navbar({ scrolled, activeSection, onMobileOpen }) {
           <span className="navbar-brand-text text-[13px] font-bold italic leading-none tracking-[0.18em] text-[#6a543a] max-[900px]:text-[10px] max-[600px]:text-[9px] max-[380px]:text-xs">
             The
           </span>
-          <span className="navbar-brand-text -mt-px whitespace-nowrap text-[22px] font-bold leading-[0.88] tracking-[0.04em] text-charcoal max-[1180px]:text-lg max-[900px]:text-lg max-[600px]:text-base max-[380px]:text-lg">
+          <span className="navbar-brand-text -mt-px whitespace-nowrap text-[24px] font-bold leading-[0.88] tracking-[0.04em] text-charcoal max-[900px]:text-[22px] max-[600px]:text-xl max-[380px]:text-[22px]">
             Wingsmark Infraa
           </span>
           <span className="navbar-brand-text mt-px whitespace-nowrap text-[9.5px] font-bold uppercase leading-none tracking-[0.22em] text-[#b88a04] max-[1180px]:text-[10px] max-[900px]:text-[8px] max-[600px]:text-[7.5px] max-[380px]:text-[8px]">

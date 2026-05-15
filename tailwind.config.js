@@ -17,7 +17,8 @@ export default {
       },
       fontFamily: {
         sans: ['Montserrat', 'system-ui', 'sans-serif'],
-        serif: ['Cormorant Garamond', 'Georgia', 'serif'],
+        serif: ['Times New Roman', 'Times', 'serif'],
+        times: ['Times New Roman', 'Times', 'serif'],
       },
     },
   },

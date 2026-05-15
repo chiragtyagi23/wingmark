@@ -44,16 +44,16 @@ function Hero() {
         aria-hidden
       />
       <div className="relative z-[3] w-full max-w-[880px] px-6 py-6 text-center">
-        <div className="anim-fade-down-delay-2 mb-7 inline-flex items-center gap-2 rounded-sm border border-[rgba(247,198,27,0.35)] bg-[rgba(247,198,27,0.12)] px-[18px] py-[7px] text-[10px] font-bold uppercase tracking-[0.22em] text-gold">
+        {/* <div className="anim-fade-down-delay-2 mb-7 inline-flex items-center gap-2 rounded-sm border border-[rgba(247,198,27,0.35)] bg-[rgba(247,198,27,0.12)] px-[18px] py-[7px] text-[10px] font-bold uppercase tracking-[0.22em] text-gold">
           <span className="anim-pulse-dot h-1.5 w-1.5 shrink-0 rounded-full bg-gold" aria-hidden />
           <span>Navi Mumbai · Mumbai 3.0 · Est. 2026</span>
-        </div>
-        <h1 className="anim-fade-down-delay-4 mb-2 font-serif text-[clamp(42px,7vw,88px)] font-medium leading-[1.06] text-white">
+        </div> */}
+        <h1 className="anim-fade-down-delay-4 mb-2 font-times text-[clamp(30px,7vw,88px)] font-bold leading-[1.06] text-white">
           <em className="italic text-gold">Trust &amp; Value</em>
           <br />
         </h1>
-        <h3 className="font-serif text-[clamp(24px,4vw,48px)] font-light leading-tight text-white">
-          <strong className="block font-extralight">in Every Acre.</strong>
+        <h3 className="font-times text-[clamp(24px,4vw,48px)] font-bold leading-tight text-white">
+          <strong className="block font-bold">in Every Acre.</strong>
         </h3>
         <p className="anim-fade-down-delay-6 mx-auto my-5 mb-8 max-w-2xl text-[clamp(12px,1.5vw,15px)] font-normal uppercase tracking-[0.16em] text-silver max-[480px]:mb-5">
           Premium Land Acquisition · Infrastructure Growth · High-Return Investments

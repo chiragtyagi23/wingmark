@@ -40,7 +40,7 @@
   h4,
   h5,
   h6 {
-    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-family: 'Times New Roman', Times, serif;
     line-height: 1.2;
     color: var(--white);
   }
@@ -228,6 +228,13 @@
   #mainNav .navbar-brand-text {
     font-family: 'Times New Roman', Times, serif;
     font-weight: 700;
+  }
+
+  #hero h1,
+  #hero h3,
+  #hero h1 em,
+  #hero h3 strong {
+    font-family: 'Times New Roman', Times, serif !important;
   }
 
   /* Scrolled navbar: logo fills bar (no shrink vs hero on tablet/mobile) */

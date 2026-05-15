@@ -12,7 +12,7 @@ function LandBanner() {
     return () => window.clearInterval(id);
   }, []);
 
-  if (landBanners.length === 0) return <div className="land-banner" />;
+  if (landBanners.length === 0) return <div className="land-banner" aria-hidden />;
 
   return (
     <div className="land-banner">
@@ -43,6 +43,7 @@ function LandBanner() {
         {landBanners.map((banner, i) => (
           <button
             key={banner.img}
+            type="button"
             className={`land-banner-dot ${i === index ? 'active' : ''}`}
             onClick={() => setIndex(i)}
             aria-label={`Show banner ${i + 1}`}
@@ -51,6 +52,7 @@ function LandBanner() {
       </div>
 
       <button
+        type="button"
         className="land-banner-arrow prev"
         onClick={() => setIndex((i) => (i - 1 + landBanners.length) % landBanners.length)}
         aria-label="Previous banner"
@@ -58,6 +60,7 @@ function LandBanner() {
         ‹
       </button>
       <button
+        type="button"
         className="land-banner-arrow next"
         onClick={() => setIndex((i) => (i + 1) % landBanners.length)}
         aria-label="Next banner"

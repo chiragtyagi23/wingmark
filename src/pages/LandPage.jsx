@@ -6,10 +6,12 @@ import landListings from '../api/land.json';
 import ListingTextValue from '../components/ListingTextValue';
 import { locationPreview } from '../utils/listingTextFormat';
 import landCategories from '../api/land-categories.json';
+import LeadModal from '../components/LeadModal';
 
 function  LandPage() {
   const [activeCategory, setActiveCategory] = useState('all');
   const [activeType, setActiveType] = useState('all');
+  const [enquiryOpen, setEnquiryOpen] = useState(false);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'auto' });
@@ -169,13 +171,29 @@ function  LandPage() {
           )}
 
           <div className="cta-btn-pair land-page-cta">
-            <Link to="/#contact" className="btn-gold">
+            <button
+              type="button"
+              className="btn-gold"
+              onClick={() => setEnquiryOpen(true)}
+            >
               Enquire About Listings
-            </Link>
+            </button>
             <Link to="/#contact" className="btn-outline">
               Submit Your Land for Listing
             </Link>
           </div>
+          <LeadModal
+            open={enquiryOpen}
+            onClose={() => setEnquiryOpen(false)}
+            title="Post Your Enquiry"
+            submitLabel="Submit"
+            onSubmit={(data) => {
+              console.log('[Land listings enquiry]', data);
+              setEnquiryOpen(false);
+            }}
+            context="Land Deals — Listings Enquiry"
+            variant="blue"
+          />
           </div>
       </section>
     </>

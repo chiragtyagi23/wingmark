@@ -108,7 +108,7 @@ function StickyCTA() {
   }
 
   const openBrochure = useCallback(() => setActiveModal('brochure'), []);
-  const openInterest = () => setActiveModal('interest');
+  const openInterest = useCallback(() => setActiveModal('interest'), []);
   const closeModal = () => {
     setActiveModal(null);
   };
@@ -116,10 +116,14 @@ function StickyCTA() {
   useEffect(() => {
     if (!isDetailPage) return undefined;
     const onOpenDocuments = () => openBrochure();
+    const onOpenInterest = () => openInterest();
     window.addEventListener('wingsmark-open-documents-modal', onOpenDocuments);
-    return () =>
+    window.addEventListener('wingsmark-open-interest-modal', onOpenInterest);
+    return () => {
       window.removeEventListener('wingsmark-open-documents-modal', onOpenDocuments);
-  }, [isDetailPage, openBrochure]);
+      window.removeEventListener('wingsmark-open-interest-modal', onOpenInterest);
+    };
+  }, [isDetailPage, openBrochure, openInterest]);
 
   // Reserve bottom space (and tag <body>) only while the bar is visible
   // so other pages don't leave an unused gap below the footer.

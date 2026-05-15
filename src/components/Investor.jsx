@@ -45,7 +45,7 @@ function Investor() {
 
             <div style={{ marginTop: 40 }}>
               <button type="button" className="btn-gold" onClick={() => setModalOpen(true)}>
-                Schedule an Investor Consultation
+                Schedule a Consultation
               </button>
             </div>
 

@@ -58,11 +58,6 @@ function LandDetailPage() {
   return (
     <>
       <div className="land-detail-hero">
-        <div
-          className="land-detail-hero-bg"
-          style={{ backgroundImage: `url(${listing.img})` }}
-        />
-        <div className="land-detail-hero-overlay" />
         <div className="land-detail-hero-content">
           <div className="land-detail-hero-top">
             <Link to="/land" className="land-detail-back">
@@ -273,9 +268,13 @@ function LandDetailPage() {
             <Download size={16} />
             <span>Download All Documents</span>
           </button>
-          <Link to="/#contact" className="btn-gold">
+          <button
+            type="button"
+            className="btn-gold"
+            onClick={() => window.dispatchEvent(new Event('wingsmark-open-interest-modal'))}
+          >
             Enquire About This Listing
-          </Link>
+          </button>
           <Link to="/land" className="btn-outline">
             Back to Land Deals
           </Link>

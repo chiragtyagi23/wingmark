@@ -94,7 +94,7 @@
 .cta-btn-pair .btn-gold,
 .cta-btn-pair .btn-outline {
   width: 100%;
-  min-height: 56px;
+  
   padding: 16px 28px;
   justify-content: center;
   text-align: center;
@@ -161,7 +161,7 @@
 }
 
 .section-h2 {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Times New Roman', Times, serif;
   font-size: clamp(36px, 4.5vw, 58px);
   font-weight: 400;
   line-height: 1.1;
@@ -233,7 +233,7 @@
 }
 
 .about-accent .num {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Times New Roman', Times, serif;
   font-size: 38px;
   font-weight: 700;
   color: var(--gold);
@@ -370,7 +370,7 @@
   position: absolute;
   top: 24px;
   right: 28px;
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Times New Roman', Times, serif;
   font-size: 52px;
   font-weight: 700;
   color: rgba(247,198,27,0.06);
@@ -387,7 +387,7 @@
 }
 
 .service-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Times New Roman', Times, serif;
   font-size: 28px;
   font-weight: 600;
   color: var(--white);
@@ -478,7 +478,7 @@
 }
 
 .loc-name {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Times New Roman', Times, serif;
   font-size: 28px;
   font-weight: 600;
   color: var(--white);
@@ -581,7 +581,7 @@
 }
 
 .why-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Times New Roman', Times, serif;
   font-size: 24px;
   font-weight: 600;
   color: var(--white);
@@ -627,7 +627,7 @@ ul.why-bullets li::before {
   right: -40px;
   top: 50%;
   transform: translateY(-50%);
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Times New Roman', Times, serif;
   font-size: 200px;
   font-weight: 700;
   color: rgba(247,198,27,0.03);
@@ -658,7 +658,7 @@ ul.why-bullets li::before {
 }
 
 .invest-point-num {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Times New Roman', Times, serif;
   font-size: 32px;
   font-weight: 700;
   color: var(--gold);
@@ -712,7 +712,7 @@ ul.why-bullets li::before {
 }
 
 .invest-card-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Times New Roman', Times, serif;
   font-size: 24px;
   color: var(--white);
   margin-bottom: 10px;
@@ -835,7 +835,7 @@ ul.why-bullets li::before {
 }
 
 .team-avatar span {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Times New Roman', Times, serif;
   font-size: 38px;
   font-weight: 700;
   color: var(--gold);
@@ -859,7 +859,7 @@ ul.why-bullets li::before {
 }
 
 .team-name {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Times New Roman', Times, serif;
   font-size: 30px;
   font-weight: 600;
   color: var(--white);
@@ -1048,7 +1048,7 @@ ul.why-bullets li::before {
 }
 
 .land-name {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Times New Roman', Times, serif;
   font-size: 24px;
   color: var(--white);
   margin-bottom: 12px;
@@ -1075,11 +1075,11 @@ ul.why-bullets li::before {
 
 .land-price {
   font-family: Montserrat, system-ui, sans-serif;
-  font-size: 22px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 500;
   color: #ffffff;
   white-space: pre-line;
-  line-height: 1.35;
+  line-height: 1.5;
 }
 
 .land-price-label {
@@ -1274,7 +1274,7 @@ ul.why-bullets li::before {
 }
 
 .office-type {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Times New Roman', Times, serif;
   font-size: 22px;
   color: var(--white);
   margin-bottom: 8px;
@@ -1294,7 +1294,7 @@ ul.why-bullets li::before {
 }
 
 .contact-form-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Times New Roman', Times, serif;
   font-size: 30px;
   color: var(--white);
   margin-bottom: 8px;
@@ -1432,7 +1432,7 @@ footer::before {
 }
 
 .footer-brand-name {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Times New Roman', Times, serif;
   font-size: 26px;
   font-weight: 600;
   color: var(--white);
@@ -1598,7 +1598,7 @@ footer::before {
 }
 
 .page-header h1 {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Times New Roman', Times, serif;
   font-size: clamp(40px, 6vw, 72px);
   font-weight: 300;
   color: var(--white);
@@ -1622,7 +1622,7 @@ footer::before {
   right: 0;
   top: 50%;
   transform: translateY(-50%);
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Times New Roman', Times, serif;
   font-size: 180px;
   font-weight: 700;
   color: rgba(247,198,27,0.04);
@@ -1834,7 +1834,52 @@ footer::before {
 
 /* @keyframes load — kept below for .anim-load-bar */
 
-/* ===== Land page banner carousel ===== */
+/* ===== Listing list page header (solid blue, no image banner) ===== */
+.listing-page-header {
+  position: relative;
+  width: 100%;
+  margin-top: 140px;
+  padding: 48px 6vw 56px;
+  overflow: hidden;
+  background: linear-gradient(160deg, var(--royal) 0%, var(--charcoal) 60%);
+}
+
+.listing-page-header-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  color: var(--white);
+}
+
+.listing-page-header-title {
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 500;
+  font-size: clamp(32px, 4.5vw, 56px);
+  line-height: 1.1;
+  margin: 16px 0 12px;
+  color: var(--white);
+}
+
+.listing-page-header-title em {
+  color: var(--gold);
+  font-style: italic;
+}
+
+.listing-page-header-sub {
+  font-size: 15px;
+  letter-spacing: 0.05em;
+  line-height: 1.6;
+  color: #ffffff;
+  max-width: 640px;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .listing-page-header {
+    padding: 36px 5vw 44px;
+  }
+}
+
+/* ===== Land page image banner carousel ===== */
 .land-banner {
   position: relative;
   width: 100%;
@@ -1883,7 +1928,7 @@ footer::before {
 }
 
 .land-banner-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Times New Roman', Times, serif;
   font-weight: 500;
   font-size: clamp(36px, 5vw, 64px);
   line-height: 1.1;
@@ -1966,13 +2011,20 @@ footer::before {
     height: 64vh;
     min-height: 420px;
   }
+
   .land-banner-arrow {
     width: 38px;
     height: 38px;
     font-size: 22px;
   }
-  .land-banner-arrow.prev { left: 12px; }
-  .land-banner-arrow.next { right: 12px; }
+
+  .land-banner-arrow.prev {
+    left: 12px;
+  }
+
+  .land-banner-arrow.next {
+    right: 12px;
+  }
 }
 
 /* ===== Land page (route) ===== */
@@ -2223,7 +2275,7 @@ footer::before {
 }
 
 .land-showcase-h3 {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Times New Roman', Times, serif;
   font-weight: 500;
   color: var(--white);
   font-size: 22px;
@@ -2291,34 +2343,16 @@ footer::before {
   position: relative;
   width: 100%;
   height: auto;
-  min-height: max(440px, 62vh);
+  min-height: auto;
   margin-top: 148px;
   overflow: visible;
-}
-
-.land-detail-hero-bg {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  transform: scale(1.05);
-}
-
-.land-detail-hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(10, 26, 47, 0.55) 0%,
-    rgba(10, 26, 47, 0.4) 40%,
-    rgba(10, 26, 47, 0.95) 100%
-  );
+  background: linear-gradient(160deg, var(--royal) 0%, var(--charcoal) 60%);
 }
 
 .land-detail-hero-content {
   position: relative;
   z-index: 2;
-  min-height: max(440px, 62vh);
+  min-height: auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -2487,7 +2521,7 @@ footer::before {
 }
 
 .news-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Times New Roman', Times, serif;
   font-weight: 500;
   font-size: 24px;
   line-height: 1.25;
@@ -2526,7 +2560,7 @@ footer::before {
 }
 
 .land-detail-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Times New Roman', Times, serif;
   font-weight: 500;
   font-size: clamp(32px, 4vw, 52px);
   line-height: 1.25;
@@ -2640,7 +2674,7 @@ footer::before {
 }
 
 .land-detail-h {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Times New Roman', Times, serif;
   font-weight: 500;
   font-size: 32px;
   color: var(--white);
@@ -2708,7 +2742,7 @@ footer::before {
 }
 
 .listing-num-value {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Times New Roman', Times, serif;
   font-size: 22px;
   font-weight: 700;
   letter-spacing: 0.1em;
@@ -3311,11 +3345,12 @@ footer::before {
   }
   .land-detail-hero {
     height: auto;
-    min-height: 400px;
+    min-height: auto;
     overflow: visible;
   }
   .land-detail-hero-content {
     height: auto;
+    min-height: auto;
     padding: 36px 5vw 32px;
   }
   .listing-details-grid {
@@ -3360,15 +3395,15 @@ footer::before {
   /* Hero grows with long titles/locations — fixed vh caused overlap on phones */
   .land-detail-hero {
     height: auto;
-    min-height: min(52vh, 480px);
+    min-height: auto;
     overflow: visible;
   }
   .land-detail-hero-content {
     height: auto;
-    min-height: min(52vh, 480px);
+    min-height: auto;
     justify-content: flex-end;
     gap: 12px;
-    padding: 96px 5vw 32px;
+    padding: 32px 5vw 28px;
   }
   .land-detail-title {
     font-size: clamp(26px, 7vw, 42px);
@@ -3410,10 +3445,6 @@ footer::before {
     padding: 8px 16px;
     letter-spacing: 0.08em;
   }
-  .land-banner {
-    height: 56vh;
-    min-height: 360px;
-  }
   .gallery-thumbs {
     grid-template-columns: repeat(4, 1fr);
   }
@@ -3450,12 +3481,8 @@ footer::before {
   .section-p {
     font-size: 16px;
   }
-  .land-banner {
-    height: 50vh;
-    min-height: 300px;
-  }
   .land-detail-hero {
-    min-height: 280px;
+    min-height: auto;
   }
   .land-detail-hero-content {
     padding: 76px 5vw 22px;
@@ -3604,13 +3631,9 @@ footer::before {
 
 /* ---------- Landscape orientation on short screens (<=520px tall) ---------- */
 @media (max-height: 520px) and (orientation: landscape) {
-  .land-banner {
-    height: 88vh;
-    min-height: 320px;
-  }
   .land-detail-hero {
     height: auto;
-    min-height: 260px;
+    min-height: auto;
     overflow: visible;
   }
 }
@@ -3630,6 +3653,7 @@ footer::before {
 /* Sync banner margin-top with the responsive navbar heights */
 @media (max-width: 1180px) {
   .land-banner,
+  .listing-page-header,
   .land-detail-hero,
   .land-detail-missing {
     margin-top: 112px;
@@ -3638,6 +3662,7 @@ footer::before {
 
 @media (max-width: 900px) {
   .land-banner,
+  .listing-page-header,
   .land-detail-hero,
   .land-detail-missing {
     margin-top: 96px;
@@ -3646,6 +3671,7 @@ footer::before {
 
 @media (max-width: 600px) {
   .land-banner,
+  .listing-page-header,
   .land-detail-hero,
   .land-detail-missing {
     margin-top: 90px;
@@ -3654,6 +3680,7 @@ footer::before {
 
 @media (max-width: 380px) {
   .land-banner,
+  .listing-page-header,
   .land-detail-hero,
   .land-detail-missing {
     margin-top: 84px;
@@ -3703,7 +3730,7 @@ footer::before {
   align-items: center;
   justify-content: center;
   gap: 14px;
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Times New Roman', Times, serif;
   font-size: 28px;
   font-weight: 600;
   color: var(--gold);
@@ -3895,7 +3922,7 @@ footer::before {
 .sticky-cta-title {
   flex: 1;
   text-align: center;
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Times New Roman', Times, serif;
   font-size: 16px;
   color: #ffffff;
   letter-spacing: 0.02em;
@@ -3946,20 +3973,20 @@ footer::before {
   cursor: progress;
 }
 
-/* I Am Interested — sky blue, white label + icon */
+/* I Am Interested */
 .sticky-cta-btn--primary {
-  background: #7dd3fc;
+  background: #24a0ed;
   color: #ffffff;
-  border: 1px solid #38bdf8;
+  border: 1px solid #1e8fd4;
   font-weight: 800;
 }
 
 .sticky-cta-btn--primary:hover {
-  background: #38bdf8;
-  border-color: #0ea5e9;
+  background: #1e8fd4;
+  border-color: #1878b5;
   color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(14, 165, 233, 0.45);
+  box-shadow: 0 6px 18px rgba(36, 160, 237, 0.45);
 }
 
 /* Waving hand animation on hover */
@@ -4272,7 +4299,7 @@ body.has-sticky-cta {
 }
 
 .lead-modal-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Times New Roman', Times, serif;
   font-size: 28px;
   font-weight: 600;
   text-align: center;
@@ -4346,7 +4373,7 @@ body.has-sticky-cta {
   align-items: center;
   justify-content: center;
   gap: 12px;
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Times New Roman', Times, serif;
   font-size: 22px;
   font-weight: 600;
   color: var(--royal);
@@ -4473,7 +4500,7 @@ body.has-sticky-cta {
 }
 
 .lead-modal-success-h {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Times New Roman', Times, serif;
   font-size: 24px;
   font-weight: 600;
   color: var(--charcoal);
@@ -4674,7 +4701,7 @@ body.has-sticky-cta {
 
 .visited-panel-title {
   margin: 0;
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Times New Roman', Times, serif;
   font-size: 24px;
   font-weight: 700;
   color: var(--gold);
@@ -4974,7 +5001,7 @@ body.has-sticky-cta {
 }
 
 .visited-empty-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Times New Roman', Times, serif;
   font-size: 18px;
   font-weight: 700;
   color: #0a1d33;

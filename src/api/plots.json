@@ -22,10 +22,10 @@
     "files": [
       { "name": "CIDCO Confirmation - Plot No. 9, Sector 8, Taloja.png", "url": "/cidco-taloja-plot9.png" }
     ],
-    "googleLocationUrl": "https://www.google.com/maps/search/?api=1&query=19.0867,73.1249",
+    "googleLocationUrl": "https://maps.app.goo.gl/tRAYFRgGDuyj2zBb9",
     "location_geo": {
-      "lat": 19.0867,
-      "lng": 73.1249,
+      "lat": 19.0794354,
+      "lng": 73.0954953,
       "address": "Plot No. 9, Sector 8, Taloja Panchanand Nagar, Navi Mumbai"
     }
   },
@@ -60,10 +60,10 @@
       { "name": "CIDCO Plot Demarcation (Simankan Naksha).png", "url": "/pushpak-plot-map.png" },
       { "name": "CIDCO Handover Receipt (Tabaa Paveti).png", "url": "/pushpak-handover.png" }
     ],
-    "googleLocationUrl": "https://www.google.com/maps/search/?api=1&query=18.9655454,73.06807261",
+    "googleLocationUrl": "https://maps.app.goo.gl/Dkttamzy4CJrPqG59",
     "location_geo": {
-      "lat": 18.9655454,
-      "lng": 73.06807261,
+      "lat": 18.9725054,
+      "lng": 73.077269,
       "address": "Plot No. 383, Sector 3, Pushpak Nagar, Pushpak Node, Navi Mumbai"
     }
   },
@@ -92,10 +92,10 @@
     ],
     "media": [],
     "files": [],
-    "googleLocationUrl": "https://www.google.com/maps/search/?api=1&query=Hotel+Shabri+Vashi+Sector+15",
+    "googleLocationUrl": "https://maps.app.goo.gl/Wmg9EZ72wnUw91WN6",
     "location_geo": {
-      "lat": 19.0872,
-      "lng": 72.9938,
+      "lat": 19.0765,
+      "lng": 72.9982,
       "address": "Sector 15, Vashi, Navi Mumbai (near Hotel Shabri)"
     }
   },
@@ -125,10 +125,10 @@
     "files": [
       { "name": "CIDCO Simankan Nakasha - Plot B-80, Sector 8, Ulwe.png", "url": "/cidco-ulwe-plot-b80.png" }
     ],
-    "googleLocationUrl": "https://www.google.com/maps/search/?api=1&query=Ulwe+Sector+8+Navi+Mumbai",
+    "googleLocationUrl": "https://maps.app.goo.gl/5BVrtAAfaBWhSyM29",
     "location_geo": {
-      "lat": 19.0245,
-      "lng": 73.0328,
+      "lat": 18.9673211,
+      "lng": 73.0154376,
       "address": "Plot B-80, Sector 8, Ulwe, Navi Mumbai"
     }
   },
@@ -157,10 +157,10 @@
     "files": [
       { "name": "CIDCO Simankan Nakasha - Plot No. 41, Sector 59, Dronagiri.png", "url": "/cidco-dronagiri-plot41.png" }
     ],
-    "googleLocationUrl": "https://www.google.com/maps/search/?api=1&query=18.8530,72.9670",
+    "googleLocationUrl": "https://maps.app.goo.gl/tRAYFRgGDuyj2zBb9",
     "location_geo": {
-      "lat": 18.853,
-      "lng": 72.967,
+      "lat": 19.0794354,
+      "lng": 73.0954953,
       "address": "Plot No. 41, Sector 59, Dronagiri, Navi Mumbai"
     }
   }
