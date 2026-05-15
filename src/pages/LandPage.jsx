@@ -169,7 +169,7 @@ function LandPage() {
           )}
 
           <div style={{ textAlign: 'center', marginTop: 48 }}>
-            <Link to="/#contact" className="btn-gold">
+            <Link to="/#contact" className="mb-2.5 btn-gold">
               Enquire About Listings
             </Link>
             &nbsp;&nbsp;&nbsp;

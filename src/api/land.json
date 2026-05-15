@@ -182,7 +182,7 @@
     "slug": "rameshwar-vaibhav-hill-station-1000-acres",
     "type": "sale",
     "category": "luxury",
-    "img": "/rameshwar-plot-area-1.png",
+    "img": "/rameshwar-site-road.png",
     "loc": "• Rameshwar Vaibhav Hill Station is situated at Village Tadgaon, Taluka Sudhagad, District Raigad, Maharashtra\n• Located in the eastern ranges of Sahyadri mountains at a height of 1675 ft. above sea level\n• Mumbai - 104 kms (via Atal Setu 70 kms)\n• Navi Mumbai International Airport (NMIA) - 55 km\n• Panvel - 40 km\n• Khalapur Toll plaza - 38 km\n• Khopoli - Pali Road (National Highway NH548A) - 12 km",
     "name": "1000+ acres N.A. Land for Hill Station on sale near Khopoli",
     "area": "1160 acres",
@@ -211,12 +211,19 @@
       "1675 ft above sea level - strong road and rail connectivity to Mumbai, Khopoli and NMIA."
     ],
     "gallery": [
+      "/rameshwar-site-road.png",
+      "/rameshwar-site-boundary.png",
       "/rameshwar-plot-area-1.png",
       "/rameshwar-plot-area-2.png",
       "/rameshwar-plot-area-3.png",
       "/rameshwar-plot-area-4.png"
     ],
-    "media": [],
+    "media": [
+      {
+        "url": "/rameshwar-site-video.mp4",
+        "title": "Site video"
+      }
+    ],
     "files": [
       {
         "name": "Salient Features (Project Brief).pdf",

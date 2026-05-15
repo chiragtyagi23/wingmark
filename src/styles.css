@@ -965,7 +965,6 @@ ul.why-bullets li::before {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: 8px;
 }
 
 .land-loc-list {

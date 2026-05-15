@@ -74,10 +74,10 @@ function StatsBar({ variant = 'default' }) {
     'border-r border-white/12 px-5 py-3 text-center last:border-r-0 max-[768px]:[&:nth-child(2n)]:border-r-0';
 
   const num =
-    'mx-auto mb-2.5 inline-flex h-[78px] min-w-[78px] items-center justify-center rounded-full border-0 bg-transparent px-[18px] font-serif text-[32px] font-bold leading-none tracking-wide text-white';
+    'mx-auto mb-2.5 inline-flex h-[78px] min-w-[78px] items-center justify-center rounded-full border-0 bg-transparent px-[18px] font-sans text-[32px] font-bold leading-none tracking-wide text-white';
 
   const label =
-    'text-[10px] font-semibold uppercase tracking-[0.16em] text-med-gray';
+    'text-[10px] font-semibold uppercase tracking-[0.16em] text-white';
 
   return (
     <div className={shell} ref={containerRef}>

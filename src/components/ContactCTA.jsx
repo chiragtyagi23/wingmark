@@ -15,8 +15,8 @@ function ContactCTA() {
           Whether you're an Individual Investor, an NRI Looking to Invest in India's Fastest-Growing Region, or a Landowner Seeking the Right
           Partner - We're here to deliver Trust &amp; Value.
         </p>
-        <div className="hero-btns">
-          <button type="button" className="btn-gold" onClick={() => setModalOpen(true)}>Start a Conversation</button>
+        <div className="hero-btns ">
+          <button type="button" className="mb-2.5 btn-gold" onClick={() => setModalOpen(true)}>Start a Conversation</button>
           <LeadModal
               open={modalOpen}
               onClose={() => setModalOpen(false)}
