@@ -42,7 +42,7 @@ function Footer() {
               <span className="-mt-px font-serif text-[22px] font-semibold leading-[0.88] tracking-[0.04em] text-white max-md:text-lg">
                 Wingsmark Infraa
               </span>
-              <span className="mt-px text-[10.5px] font-bold uppercase leading-none tracking-[0.2em] text-white max-md:text-[9px] max-md:tracking-[0.08em]">
+              <span className="mt-px text-[10.5px] font-bold uppercase leading-none tracking-[0.2em] text-gold max-md:text-[9px] max-md:tracking-[0.08em]">
                 Land | Infrastructure | Growth
               </span>
             </div>

@@ -54,7 +54,7 @@ function Navbar({ scrolled, activeSection, onMobileOpen }) {
           <span className="text-[13px] font-bold italic leading-none tracking-[0.18em] text-[#6a543a] max-[900px]:text-[10px] max-[600px]:text-[9px] max-[380px]:text-xs">
             The
           </span>
-          <span className="navbar-brand-name -mt-px whitespace-nowrap text-[22px] font-extrabold leading-[0.88] tracking-[0.04em] text-charcoal max-[1180px]:text-lg max-[900px]:text-lg max-[600px]:text-base max-[380px]:text-lg">
+          <span className="navbar-brand-name -mt-px whitespace-nowrap font-serif text-[22px] font-bold leading-[0.88] tracking-[0.04em] text-charcoal max-[1180px]:text-lg max-[900px]:text-lg max-[600px]:text-base max-[380px]:text-lg">
             Wingsmark Infraa
           </span>
           <span className="mt-px whitespace-nowrap text-[9.5px] font-bold uppercase leading-none tracking-[0.22em] text-[#b88a04] max-[1180px]:text-[10px] max-[900px]:text-[8px] max-[600px]:text-[7.5px] max-[380px]:text-[8px]">
