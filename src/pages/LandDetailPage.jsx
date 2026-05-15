@@ -2,7 +2,13 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Navigation, ExternalLink, Download } from 'lucide-react';
 import AddToCartButton from '../components/AddToCartButton';
+import ListingTextValue from '../components/ListingTextValue';
 import landListings from '../api/land.json';
+import {
+  formatMultiline,
+  formatLandOpportunity,
+  locationPreview,
+} from '../utils/listingTextFormat';
 
 function LandDetailPage() {
   const { slug } = useParams();
@@ -28,44 +34,6 @@ function LandDetailPage() {
   const directionLink = `https://www.google.com/maps/dir/?api=1&destination=${listing.location.lat},${listing.location.lng}`;
   const gallery = listing.gallery?.length ? listing.gallery : [listing.img];
 
-  const formatMultiline = (val) => {
-    if (val == null || val === '') return '';
-    if (Array.isArray(val)) {
-      return val
-        .map((s) => String(s).replace(/^\s*[•\u2022\-–]\s*/, '').trim())
-        .filter(Boolean)
-        .map((s) => `• ${s}`)
-        .join('\n');
-    }
-    return String(val);
-  };
-
-  // Split a paragraph into bullet points on commas and periods, while
-  // preserving acronyms like "N.A.", abbreviations like "Mr.", numeric
-  // figures like "1,000", and dotted segments inside words.
-  const splitToBullets = (val) => {
-    if (!val) return '';
-    if (Array.isArray(val)) return formatMultiline(val);
-    const text = String(val)
-      // protect common patterns so we don't split inside them
-      .replace(/(\d),(\d)/g, '$1<KEEPCOMMA>$2')
-      .replace(/\b([A-Z])\.(?=[A-Z]\.)/g, '$1<KEEPDOT>')
-      .replace(/\b(Mr|Mrs|Ms|Dr|St|Jr|Sr|vs|etc|approx|aka|i\.e|e\.g)\./gi,
-        '$1<KEEPDOT>');
-    const parts = text
-      .split(/[,.]+(?:\s+|$)/)
-      .map((s) =>
-        s
-          .replace(/<KEEPCOMMA>/g, ',')
-          .replace(/<KEEPDOT>/g, '.')
-          .replace(/^[\s\-–—•]+|[\s\-–—•]+$/g, '')
-          .trim()
-      )
-      .filter(Boolean);
-    if (parts.length <= 1) return parts[0] || String(val).trim();
-    return parts.map((s) => `• ${s}`).join('\n');
-  };
-
   const commentsText = listing.comments ?? listing.specialComments;
 
   const detailBlocks = [
@@ -74,7 +42,12 @@ function LandDetailPage() {
     { label: 'Nearest train station', value: listing.nearestStation, preline: true },
     { label: 'Total Area', value: listing.area, wide: true, preline: true },
     { label: 'Suitable for', value: listing.suitableFor, wide: true, preline: true },
-    { label: 'Opportunity', value: listing.skipOpportunitySplit ? listing.opportunity : splitToBullets(listing.opportunity), wide: true, preline: true },
+    {
+      label: 'Opportunity',
+      value: formatLandOpportunity(listing),
+      wide: true,
+      preline: true,
+    },
     { label: 'Key points', value: formatMultiline(listing.keyPoints), wide: true, preline: true },
     { label: 'Special Features', value: formatMultiline(listing.specialFeatures), wide: true, preline: true },
     { label: 'Comments', value: formatMultiline(commentsText), wide: true, preline: true },
@@ -112,7 +85,11 @@ function LandDetailPage() {
             </div>
           </div>
           <h1 className="land-detail-title">{listing.name}</h1>
-          <div className="land-detail-loc" style={{ whiteSpace: 'pre-line' }}>{listing.loc}</div>
+          <ListingTextValue
+            value={listing.loc}
+            listClassName="land-detail-loc-list"
+            className="land-detail-loc"
+          />
           <div className="land-detail-meta">
             <div>
               <div className="land-price-label">{listing.label}</div>
@@ -134,7 +111,7 @@ function LandDetailPage() {
                 slug: listing.slug,
                 listingNumber: listing.listingNumber,
                 title: listing.name,
-                location: listing.loc,
+                location: locationPreview(listing.loc),
                 price: listing.price,
                 img: listing.img,
               }}
@@ -154,16 +131,11 @@ function LandDetailPage() {
               return (
                 <div key={block.label} className={cls}>
                   <div className="listing-block-label">{block.label}</div>
-                  <div
-                    className={[
-                      'listing-block-value',
-                      block.preline ? 'listing-block-value--preline' : '',
-                    ]
-                      .filter(Boolean)
-                      .join(' ')}
-                  >
-                    {block.value}
-                  </div>
+                  <ListingTextValue
+                    value={block.value}
+                    className="listing-block-value"
+                    preline={block.preline}
+                  />
                 </div>
               );
             })}

@@ -25,7 +25,7 @@ function PlotBanner() {
           <div className="land-banner-overlay" />
           <div className="land-banner-content">
             <div className="section-badge">
-              <span>Plots — Sale &amp; Joint Venture</span>
+              <span>Plots - Sale &amp; Joint Venture</span>
             </div>
             <h1
               className="land-banner-title"

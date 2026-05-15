@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import {
   BrowserRouter,
   Routes,
@@ -59,6 +59,26 @@ function ScrollManager() {
     window.scrollTo({ top: 0, behavior: 'auto' });
   }, [location.pathname, location.hash]);
 
+  /** Beat browser scroll restoration on hard refresh (home with no hash → stay on hero). */
+  useLayoutEffect(() => {
+    if (location.pathname !== '/' || location.hash) return;
+    window.scrollTo(0, 0);
+    const id = window.requestAnimationFrame(() => {
+      window.scrollTo(0, 0);
+    });
+    return () => window.cancelAnimationFrame(id);
+  }, [location.pathname, location.hash]);
+
+  useEffect(() => {
+    const onPageShow = () => {
+      if (window.location.pathname === '/' && !window.location.hash) {
+        window.scrollTo(0, 0);
+      }
+    };
+    window.addEventListener('pageshow', onPageShow);
+    return () => window.removeEventListener('pageshow', onPageShow);
+  }, []);
+
   return null;
 }
 
@@ -108,7 +128,7 @@ function Layout() {
       return;
     }
 
-    const sections = Array.from(document.querySelectorAll('section[id], div[id]'));
+    const sections = Array.from(document.querySelectorAll('section[id]'));
 
     const handleActiveSection = () => {
       const scrollY = window.scrollY;

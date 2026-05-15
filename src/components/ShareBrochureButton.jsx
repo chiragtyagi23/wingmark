@@ -1,21 +1,6 @@
 import { useState } from 'react';
 import { Loader2 } from 'lucide-react';
-import {
-  buildBrochureData,
-  generateBrochureFile,
-  shareBrochureFiles,
-} from '../utils/generateBrochure';
-
-function buildShareText({ title, location, price, listingUrl }) {
-  const lines = [`*${title || 'Listing'}*`];
-  if (location) lines.push(`Location: ${location}`);
-  if (price) lines.push(`Price: ${price}`);
-  if (listingUrl) {
-    lines.push('');
-    lines.push(`View full microsite: ${listingUrl}`);
-  }
-  return lines.join('\n');
-}
+import { generateBrochureFile, shareBrochureFiles } from '../utils/generateBrochure';
 
 function ShareBrochureButton({
   listing,
@@ -32,10 +17,7 @@ function ShareBrochureButton({
 
     try {
       const file = await generateBrochureFile(listing, type);
-      const data = buildBrochureData(listing, type);
-      const fallbackText =
-        `${buildShareText(data)}\n\n(Brochure PDF just downloaded — please drag it into this chat to attach.)`;
-      await shareBrochureFiles([file], fallbackText);
+      await shareBrochureFiles([file]);
     } catch (err) {
       console.error('Brochure share failed', err);
       const msg = (err && err.message) || String(err);

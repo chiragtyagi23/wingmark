@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Hero from '../components/Hero';
+import StatsBar from '../components/StatsBar';
 import Ticker from '../components/Ticker';
 import About from '../components/About';
 import Services from '../components/Services';
@@ -17,6 +18,7 @@ function HomePage() {
   return (
     <>
       <Hero />
+      <StatsBar variant="hero" />
       <Ticker />
       <About />
       <Services />

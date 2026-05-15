@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import LandBanner from '../components/LandBanner';
 import AddToCartButton from '../components/AddToCartButton';
 import landListings from '../api/land.json';
+import ListingTextValue from '../components/ListingTextValue';
+import { locationPreview } from '../utils/listingTextFormat';
 import landCategories from '../api/land-categories.json';
 
 function LandPage() {
@@ -107,7 +109,14 @@ function LandPage() {
                       <div className="land-card-num">{listing.listingNumber}</div>
                     )}
                     <div className="land-name">{listing.name}</div>
-                    <div className="land-loc"><span className="land-loc-label">Location: </span>{listing.loc}</div>
+                    <div className="land-loc">
+                      <span className="land-loc-label">Location</span>
+                      <ListingTextValue
+                        value={listing.loc}
+                        listClassName="land-loc-list"
+                        className="land-loc-text"
+                      />
+                    </div>
                     <div className="land-card-details">
                       <div className="land-card-detail-row">
                         <span>Total Area</span>

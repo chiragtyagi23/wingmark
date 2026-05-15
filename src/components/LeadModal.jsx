@@ -18,6 +18,8 @@ function LeadModal({
   onSubmit,
   context,
   variant,
+  /** When `'red'`, primary submit uses danger styling (e.g. Download All Documents). */
+  submitTone = 'default',
 }) {
   const [form, setForm] = useState(initialForm);
   const [challenge, setChallenge] = useState(makeChallenge);
@@ -179,7 +181,12 @@ function LeadModal({
 
             {error && <div className="lead-modal-error">{error}</div>}
 
-            <button type="submit" className="lead-modal-submit">
+            <button
+              type="submit"
+              className={`lead-modal-submit${
+                submitTone === 'red' ? ' lead-modal-submit--danger' : ''
+              }`}
+            >
               <Send size={14} />
               {submitLabel}
             </button>

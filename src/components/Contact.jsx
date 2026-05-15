@@ -120,7 +120,7 @@ function Contact({ formSubmitted, onFormSubmit }) {
                   <label>Enquiry Type</label>
                   <select>
                     <option value="">Select enquiry type</option>
-                    <option>Land for Sale — Buyer</option>
+                    <option>Land for Sale - Buyer</option>
                     <option>Joint Venture Opportunity</option>
                     <option>NRI / Investor Enquiry</option>
                     <option>Submit My Land for Sale</option>
@@ -182,7 +182,7 @@ function Contact({ formSubmitted, onFormSubmit }) {
                   disabled={formSubmitted}
                 >
                   <Send size={14} />
-                  {formSubmitted ? '✓ Enquiry Sent — We will be in touch shortly!' : 'Submit Enquiry'}
+                  {formSubmitted ? '✓ Enquiry Sent - We will be in touch shortly!' : 'Submit Enquiry'}
                 </button>
               </div>
             </div>

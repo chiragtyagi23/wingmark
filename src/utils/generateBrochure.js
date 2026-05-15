@@ -1,5 +1,6 @@
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 import fontkit from '@pdf-lib/fontkit';
+import { formatLandOpportunity, formatMultiline } from './listingTextFormat';
 
 let _fontRegCache = null;
 let _fontBoldCache = null;
@@ -22,10 +23,11 @@ async function fetchFontPair() {
 }
 
 /**
- * Letterhead files in /public — first fetch that returns 200 wins.
+ * Letterhead files in /public - first fetch that returns 200 wins.
  * (Users sometimes save with different spelling/casing.)
  */
 const LETTERHEAD_CANDIDATES = [
+  '/black beige Modern Business Letterhead (5).pdf',
   '/black beige Modern Business Letterhead (3).pdf',
 ].map((p) => encodeURI(p));
 
@@ -50,6 +52,11 @@ export function sanitizePdfText(text) {
       continue;
     }
     if (code === 0x20b9) {
+      out += ch;
+      continue;
+    }
+    /* Bullet (same as listing UI) - requires embedded Unicode font (Noto). */
+    if (code === 0x2022) {
       out += ch;
       continue;
     }
@@ -96,16 +103,40 @@ async function fetchAsArrayBuffer(url) {
   return await res.arrayBuffer();
 }
 
-const SKIP_SANITIZE = new Set(['imageUrl', 'locationImageUrl', 'listingUrl']);
+const SKIP_SANITIZE = new Set(['imageUrl', 'locationImageUrl', 'listingUrl', 'googleMapsUrl']);
 
 function sanitizeBrochureData(data) {
   const result = { ...data };
   for (const key of Object.keys(result)) {
+    if (key === 'galleryUrls') continue;
     if (typeof result[key] === 'string' && !SKIP_SANITIZE.has(key)) {
       result[key] = sanitizePdfText(result[key]);
     }
   }
   return result;
+}
+
+/** WhatsApp / brochure gallery: max 8 images = 2 compilation pages × 4 images. */
+export const MAX_BROCHURE_GALLERY_IMAGES = 8;
+
+/** Ordered unique image URLs for gallery pages (hero, gallery, extra location shot). */
+function collectGalleryUrls(item) {
+  if (!item) return [];
+  const urls = [];
+  const seen = new Set();
+  const add = (u) => {
+    if (u == null || u === '' || u === '#') return;
+    const s = String(u).trim();
+    if (!s || seen.has(s)) return;
+    seen.add(s);
+    urls.push(s);
+  };
+  add(item.img);
+  if (Array.isArray(item.gallery)) {
+    for (const g of item.gallery) add(g);
+  }
+  add(item.locationImage);
+  return urls.slice(0, MAX_BROCHURE_GALLERY_IMAGES);
 }
 
 /**
@@ -212,9 +243,224 @@ function wrapText(text, font, fontSize, maxWidth) {
   return lines;
 }
 
+/** Gallery pages: clean header strip (no letterhead watermark). */
+const GALLERY_HEADER_H = 92;
+const GALLERY_PAGE_MARGIN = 36;
+const GALLERY_CELL_GAP = 10;
+
+function drawGalleryHeaderOnly(pg, pageWidth, pageHeight, helvBold) {
+  const bandH = GALLERY_HEADER_H;
+  pg.drawRectangle({
+    x: 0,
+    y: pageHeight - bandH,
+    width: pageWidth,
+    height: bandH,
+    color: PALETTE.navy,
+  });
+  const title = 'THE WINGSMARK INFRAA';
+  const sz = 15;
+  const tw = helvBold.widthOfTextAtSize(title, sz);
+  const textY = pageHeight - bandH / 2 - sz * 0.32;
+  pg.drawText(title, {
+    x: (pageWidth - tw) / 2,
+    y: textY,
+    size: sz,
+    font: helvBold,
+    color: PALETTE.gold,
+  });
+  pg.drawRectangle({
+    x: 0,
+    y: pageHeight - bandH - 3,
+    width: pageWidth,
+    height: 3,
+    color: PALETTE.gold,
+  });
+}
+
 /**
- * Generate a single-page (or two-page) brochure PDF by drawing the
- * listing's content onto the existing letterhead.
+ * @param {'cover'|'contain'} mode cover = fill cell (one full-page image); contain = fit inside cell
+ */
+function drawImageInCell(page, emb, cellX, cellY, cellW, cellH, mode) {
+  const iw = emb.width;
+  const ih = emb.height;
+  const ar = iw / ih;
+  const arC = cellW / cellH;
+  let drawW;
+  let drawH;
+  if (mode === 'cover') {
+    if (ar > arC) {
+      drawH = cellH;
+      drawW = drawH * ar;
+    } else {
+      drawW = cellW;
+      drawH = drawW / ar;
+    }
+  } else if (ar > arC) {
+    drawW = cellW;
+    drawH = drawW / ar;
+  } else {
+    drawH = cellH;
+    drawW = drawH * ar;
+  }
+  const drawX = cellX + (cellW - drawW) / 2;
+  const drawY = cellY + (cellH - drawH) / 2;
+  page.drawRectangle({
+    x: cellX,
+    y: cellY,
+    width: cellW,
+    height: cellH,
+    color: rgb(1, 1, 1),
+  });
+  page.drawImage(emb, {
+    x: drawX,
+    y: drawY,
+    width: drawW,
+    height: drawH,
+  });
+  page.drawRectangle({
+    x: cellX,
+    y: cellY,
+    width: cellW,
+    height: cellH,
+    borderColor: PALETTE.gold,
+    borderWidth: 2,
+  });
+}
+
+/** Bottom-left (x,y), width, height for each cell; n = 1..4 */
+function galleryCellRects(n, pageWidth, pageHeight) {
+  const margin = GALLERY_PAGE_MARGIN;
+  const areaYMin = margin;
+  const areaYMax = pageHeight - GALLERY_HEADER_H - 18;
+  const W = pageWidth - 2 * margin;
+  const H = areaYMax - areaYMin;
+  const g = GALLERY_CELL_GAP;
+  const cells = [];
+  if (n <= 0) return cells;
+  if (n === 1) {
+    cells.push({ x: margin, y: areaYMin, w: W, h: H });
+  } else if (n === 2) {
+    const ch = (H - g) / 2;
+    cells.push({ x: margin, y: areaYMin + ch + g, w: W, h: ch });
+    cells.push({ x: margin, y: areaYMin, w: W, h: ch });
+  } else if (n === 3) {
+    const hTop = Math.round((H - g) * 0.56);
+    const hBot = H - g - hTop;
+    cells.push({ x: margin, y: areaYMin + hBot + g, w: W, h: hTop });
+    const bw = (W - g) / 2;
+    cells.push({ x: margin, y: areaYMin, w: bw, h: hBot });
+    cells.push({ x: margin + bw + g, y: areaYMin, w: bw, h: hBot });
+  } else {
+    const ch = (H - g) / 2;
+    const cw = (W - g) / 2;
+    cells.push({ x: margin, y: areaYMin, w: cw, h: ch });
+    cells.push({ x: margin + cw + g, y: areaYMin, w: cw, h: ch });
+    cells.push({ x: margin, y: areaYMin + ch + g, w: cw, h: ch });
+    cells.push({ x: margin + cw + g, y: areaYMin + ch + g, w: cw, h: ch });
+  }
+  return cells;
+}
+
+/** Letterhead source files sometimes ship with extra blank pages - keep only page 1. */
+function trimDocToSinglePage(doc) {
+  const n = doc.getPageCount();
+  for (let i = n - 1; i >= 1; i -= 1) {
+    doc.removePage(i);
+  }
+}
+
+/**
+ * Listing # badge on text (letterhead) pages - not used on image gallery pages.
+ * Returns Y for the next content (title or body) below the badge.
+ */
+function contentYAfterListingBadge(
+  targetPage,
+  helvBold,
+  contentX,
+  contentWidth,
+  pageHeight,
+  headerSpace,
+  listingNumber
+) {
+  let y = pageHeight - headerSpace;
+  if (!listingNumber || !String(listingNumber).trim()) return y;
+  const badgeText = String(listingNumber).toUpperCase();
+  const badgeFontSize = 13;
+  const badgePadH = 18;
+  const badgePadV = 8;
+  const badgeTextWidth = helvBold.widthOfTextAtSize(badgeText, badgeFontSize);
+  const badgeW = badgeTextWidth + badgePadH * 2;
+  const badgeH = badgeFontSize + badgePadV * 2;
+  const badgeX = contentX + (contentWidth - badgeW) / 2;
+  const badgeY = y - badgeH + badgePadV;
+
+  targetPage.drawRectangle({
+    x: badgeX,
+    y: badgeY,
+    width: badgeW,
+    height: badgeH,
+    color: rgb(1, 1, 1),
+    borderColor: PALETTE.navy,
+    borderWidth: 1.5,
+  });
+
+  targetPage.drawText(badgeText, {
+    x: badgeX + badgePadH,
+    y: badgeY + badgePadV,
+    size: badgeFontSize,
+    font: helvBold,
+    color: PALETTE.red,
+  });
+  return y - badgeH - 24;
+}
+
+/**
+ * After text pages: blank pages with Wingsmark header only + listing images.
+ * Up to 4 images per page; max {@link MAX_BROCHURE_GALLERY_IMAGES} images (2 pages).
+ * Layouts: 1 full, 2 landscape strips, 3 (1+2), 4 (2x2).
+ */
+async function appendListingGalleryPages(pdfDoc, galleryUrls, pageWidth, pageHeight, helvBold) {
+  const urls = (galleryUrls || []).slice(0, MAX_BROCHURE_GALLERY_IMAGES);
+  if (!urls.length) return;
+  for (let i = 0; i < urls.length; i += 4) {
+    const batch = urls.slice(i, i + 4);
+    const n = batch.length;
+    const pg = pdfDoc.addPage([pageWidth, pageHeight]);
+    pg.drawRectangle({
+      x: 0,
+      y: 0,
+      width: pageWidth,
+      height: pageHeight,
+      color: rgb(1, 1, 1),
+    });
+    drawGalleryHeaderOnly(pg, pageWidth, pageHeight, helvBold);
+    const cells = galleryCellRects(n, pageWidth, pageHeight);
+    const embeds = await Promise.all(batch.map((u) => tryEmbedImage(pdfDoc, u)));
+    for (let j = 0; j < n; j++) {
+      const cell = cells[j];
+      const emb = embeds[j];
+      if (!emb) {
+        pg.drawRectangle({
+          x: cell.x,
+          y: cell.y,
+          width: cell.w,
+          height: cell.h,
+          color: rgb(0.96, 0.96, 0.96),
+          borderColor: PALETTE.gold,
+          borderWidth: 2,
+        });
+        continue;
+      }
+      const mode = n === 1 ? 'cover' : 'contain';
+      drawImageInCell(pg, emb, cell.x, cell.y, cell.w, cell.h, mode);
+    }
+  }
+}
+
+/**
+ * Multi-page brochure: listing text on letterhead (with overflow pages),
+ * then optional gallery pages (Wingsmark header only, no watermark) with
+ * up to four images per page, maximum eight images (two gallery pages).
  *
  * @param {{
  *   title: string,
@@ -233,6 +479,10 @@ function wrapText(text, font, fontSize, maxWidth) {
  *   description?: string,
  *   imageUrl?: string,
  *   listingUrl?: string,
+ *   snapshot?: string,
+ *   googleMapsUrl?: string,
+ *   address?: string,
+ *   galleryUrls?: string[],
  * }} data
  * @returns {Promise<Blob>}
  */
@@ -242,6 +492,12 @@ export async function generateListingBrochure(data) {
   const pdfDoc = await PDFDocument.load(letterheadBytes, {
     ignoreEncryption: true,
   });
+  /** Pristine pages for overflow (page 0 must not be copied after content is drawn on it). */
+  const lhTemplate = await PDFDocument.load(letterheadBytes, {
+    ignoreEncryption: true,
+  });
+  trimDocToSinglePage(pdfDoc);
+  trimDocToSinglePage(lhTemplate);
 
   pdfDoc.registerFontkit(fontkit);
   const fontPair = await fetchFontPair();
@@ -271,41 +527,17 @@ export async function generateListingBrochure(data) {
   const contentX = margin;
   const contentWidth = width - margin * 2;
   const minY = footerSpace;
-  let y = height - headerSpace;
+  let y = contentYAfterListingBadge(
+    page,
+    helvBold,
+    contentX,
+    contentWidth,
+    height,
+    headerSpace,
+    safe.listingNumber
+  );
 
-  // ---------- Listing number badge (centered, white bg, blue border) ----------
-  if (safe.listingNumber) {
-    const badgeText = String(safe.listingNumber).toUpperCase();
-    const badgeFontSize = 13;
-    const badgePadH = 18;
-    const badgePadV = 8;
-    const badgeTextWidth = helvBold.widthOfTextAtSize(badgeText, badgeFontSize);
-    const badgeW = badgeTextWidth + badgePadH * 2;
-    const badgeH = badgeFontSize + badgePadV * 2;
-    const badgeX = contentX + (contentWidth - badgeW) / 2;
-    const badgeY = y - badgeH + badgePadV;
-
-    page.drawRectangle({
-      x: badgeX,
-      y: badgeY,
-      width: badgeW,
-      height: badgeH,
-      color: rgb(1, 1, 1),
-      borderColor: PALETTE.navy,
-      borderWidth: 1.5,
-    });
-
-    page.drawText(badgeText, {
-      x: badgeX + badgePadH,
-      y: badgeY + badgePadV,
-      size: badgeFontSize,
-      font: helvBold,
-      color: PALETTE.red,
-    });
-    y -= badgeH + 24;
-  }
-
-  // ---------- Title with red underline ----------
+  // ---------- Title with red underline (first text page only) ----------
   const titleSize = 20;
   const titleLines = wrapText(safe.title, helvBold, titleSize, contentWidth);
   for (const line of titleLines) {
@@ -356,9 +588,13 @@ export async function generateListingBrochure(data) {
       ['Opportunity', safe.opportunity],
       ['Key Points', safe.keyPoints],
       ['Special Features', safe.specialFeatures],
-      ['Comments', safe.comments],
+      ['Comments / Approvals', safe.comments],
       ['Price', safe.price],
       ['Status', safe.status],
+      ['Snapshot', safe.snapshot],
+      ['Google Maps', safe.googleMapsUrl],
+      ['Address', safe.address],
+      ['Microsite', safe.listingUrl],
     ];
   }
   rows = rows.filter(([, v]) => v);
@@ -366,129 +602,72 @@ export async function generateListingBrochure(data) {
   const labelSize = 12;
   const valueSize = 15;
   const lineGap = 12;
+  /** Body copy: true black for readability on letterhead (not navy). */
+  const bodyInk = rgb(0, 0, 0);
+
+  let drawPage = page;
+  let yCursor = y;
+
+  const startFreshPage = async () => {
+    const [np] = await pdfDoc.copyPages(lhTemplate, [0]);
+    pdfDoc.addPage(np);
+    return pdfDoc.getPages().at(-1);
+  };
 
   for (const [label, value] of rows) {
     const valueLines = wrapText(value, helv, valueSize, contentWidth);
     const blockHeight = labelSize + 8 + valueLines.length * (valueSize + 2) + lineGap;
-    if (y - blockHeight < minY) break;
+    if (yCursor - blockHeight < minY) {
+      drawPage = await startFreshPage();
+      yCursor = contentYAfterListingBadge(
+        drawPage,
+        helvBold,
+        contentX,
+        contentWidth,
+        height,
+        headerSpace,
+        safe.listingNumber
+      );
+    }
     const labelText = label.toUpperCase();
     const labelW = helvBold.widthOfTextAtSize(labelText, labelSize);
-    page.drawText(labelText, {
+    // Location value lines should match the gold "location point" style on the banner.
+    const valueInk = label === 'Location' ? PALETTE.gold : bodyInk;
+    drawPage.drawText(labelText, {
       x: contentX,
-      y,
+      y: yCursor,
       size: labelSize,
       font: helvBold,
       color: PALETTE.gold,
     });
-    page.drawRectangle({
+    drawPage.drawRectangle({
       x: contentX,
-      y: y - 3,
+      y: yCursor - 3,
       width: labelW,
       height: 1.2,
       color: PALETTE.gold,
     });
-    y -= labelSize + 10;
+    yCursor -= labelSize + 10;
     for (const line of valueLines) {
-      page.drawText(line, {
+      drawPage.drawText(line, {
         x: contentX,
-        y,
+        y: yCursor,
         size: valueSize,
         font: helv,
-        color: PALETTE.text,
+        color: valueInk,
       });
-      y -= valueSize + 2;
+      yCursor -= valueSize + 2;
     }
-    y -= lineGap;
+    yCursor -= lineGap;
   }
 
-  // ---------- Two image boxes in gold frames (COMMENTED OUT FOR NOW) ----------
-  /*
-  const rawImgUrls = [data.imageUrl, data.locationImageUrl].filter(Boolean);
-  const imgUrls = [...new Set(rawImgUrls)];
-
-  if (imgUrls.length > 0) {
-    const embedResults = await Promise.all(imgUrls.map((u) => tryEmbedImage(pdfDoc, u)));
-    const embeds = embedResults.filter(Boolean);
-
-    if (embeds.length > 0) {
-      const boxBorder = 2;
-      const boxPad = 5;
-      const gap = 14;
-      const spaceLeft = y - minY - 10;
-      const needNewPage = spaceLeft < 120;
-
-      let targetPage = page;
-      let imgY0;
-      const imgAreaH = 220;
-
-      if (needNewPage) {
-        const [lhPage] = await PDFDocument.load(letterheadBytes, {
-          ignoreEncryption: true,
-        }).then((d) => {
-          const ps = d.getPages();
-          return pdfDoc.copyPages(d, ps.map((_, i) => i));
-        });
-        pdfDoc.addPage(lhPage);
-        targetPage = pdfDoc.getPages().at(-1);
-        imgY0 = height - headerSpace;
-      } else {
-        imgY0 = y;
-      }
-
-      const totalAvail = contentWidth;
-      const boxW =
-        embeds.length === 2
-          ? (totalAvail - gap) / 2
-          : totalAvail * 0.6;
-      const imgW = boxW - (boxBorder + boxPad) * 2;
-      const maxImgH = needNewPage
-        ? imgAreaH
-        : Math.min(imgAreaH, spaceLeft - (boxBorder + boxPad) * 2);
-
-      const imgDraws = embeds.map((emb) => {
-        const aspect = emb.width / emb.height;
-        let drawW = imgW;
-        let drawH = drawW / aspect;
-        if (drawH > maxImgH) {
-          drawH = maxImgH;
-          drawW = drawH * aspect;
-        }
-        return { emb, drawW, drawH };
-      });
-
-      const tallest = Math.max(...imgDraws.map((d) => d.drawH));
-      const boxH = tallest + (boxBorder + boxPad) * 2;
-      const boxY = imgY0 - boxH - 4;
-      const startX =
-        embeds.length === 2
-          ? contentX
-          : contentX + (totalAvail - boxW) / 2;
-      let curX = startX;
-
-      for (const { emb, drawW, drawH } of imgDraws) {
-        targetPage.drawRectangle({
-          x: curX,
-          y: boxY,
-          width: boxW,
-          height: boxH,
-          borderColor: PALETTE.gold,
-          borderWidth: boxBorder,
-        });
-
-        const imgX = curX + (boxW - drawW) / 2;
-        const imgYPos = boxY + (boxH - drawH) / 2;
-        targetPage.drawImage(emb, {
-          x: imgX,
-          y: imgYPos,
-          width: drawW,
-          height: drawH,
-        });
-
-        curX += boxW + gap;
-      }
-    }
-  }
-  */
+  await appendListingGalleryPages(
+    pdfDoc,
+    safe.galleryUrls || [],
+    width,
+    height,
+    helvBold
+  );
 
   const bytes = await pdfDoc.save();
   return new Blob([bytes], { type: 'application/pdf' });
@@ -543,6 +722,8 @@ export function buildBrochureData(item, type) {
       comments: item.comments || '',
       imageUrl: item.img || '',
       locationImageUrl: secondImg,
+      listingUrl: `${SITE_URL}/plot/${item.slug}`,
+      galleryUrls: collectGalleryUrls(item),
     };
   }
   return {
@@ -553,12 +734,10 @@ export function buildBrochureData(item, type) {
     nearestTrain: item.nearestStation,
     area: item.area,
     suitableFor: item.suitableFor,
-    opportunity: item.opportunity,
-    keyPoints: Array.isArray(item.keyPoints)
-      ? item.keyPoints.join('\n')
-      : item.keyPoints || '',
-    specialFeatures: item.specialFeatures || '',
-    comments: item.comments ?? item.specialComments ?? '',
+    opportunity: formatLandOpportunity(item),
+    keyPoints: formatMultiline(item.keyPoints),
+    specialFeatures: formatMultiline(item.specialFeatures || ''),
+    comments: formatMultiline(item.comments ?? item.specialComments ?? ''),
     price: item.price,
     status: item.status,
     imageUrl: item.img || '',
@@ -568,7 +747,100 @@ export function buildBrochureData(item, type) {
         : null) ||
       item.gallery?.find((g) => g !== item.img) ||
       '',
+    listingUrl: `${SITE_URL}/land/${item.slug}`,
+    snapshot: formatMultiline(item.snapshot || []),
+    googleMapsUrl: item.googleLocationUrl || '',
+    address: item.location?.address || '',
+    galleryUrls: collectGalleryUrls(item),
   };
+}
+
+/** WhatsApp prefill URLs can fail if the message is huge; clip long blobs. */
+const WHATSAPP_MESSAGE_MAX = 3600;
+
+function clipText(text, maxChars) {
+  if (text == null || text === '') return '';
+  const s = String(text).replace(/\r\n/g, '\n').trim();
+  if (!s) return '';
+  if (s.length <= maxChars) return s;
+  return `${s.slice(0, maxChars).trim()}…`;
+}
+
+/**
+ * Rich plain-text message for WhatsApp with the full listing snapshot
+ * (location, area, pricing, opportunity, key points, maps link, microsite).
+ * Used beside the brochure PDF on share / desktop fallback.
+ */
+export function buildWhatsAppListingMessage(item, type) {
+  if (!item) return '';
+  const d = buildBrochureData(item, type);
+  if (!d) return '';
+
+  const lines = [];
+  const add = (line) => {
+    if (line != null && String(line).trim() !== '') lines.push(String(line).trim());
+  };
+
+  if (type === 'plot') {
+    add(`*${d.title || 'Plot listing'}*`);
+    add(d.listingNumber);
+    add(`Location:\n${clipText(d.location, 900)}`);
+    add(d.sector ? `Sector: ${d.sector}` : '');
+    add(d.plotNumber ? `Plot number: ${d.plotNumber}` : '');
+    add(d.area ? `Area: ${d.area}` : '');
+    add(d.accessRoad ? `Access road: ${d.accessRoad}` : '');
+    add(d.stage ? `Stage: ${d.stage}` : '');
+    if (d.pdfType === 'plot-jv') {
+      add(d.jvRatio ? `JV ratio: ${d.jvRatio}` : '');
+      add(d.jvDepositPrice ? `JV on price: ${d.jvDepositPrice}` : '');
+    } else {
+      add(d.salePrice ? `Sale price: ${d.salePrice}` : '');
+    }
+    const c = clipText(d.comments, 1400);
+    if (c) add(`Comments:\n${c}`);
+  } else {
+    add(`*${d.title || 'Land listing'}*`);
+    add(d.listingNumber);
+    add(`Location:\n${clipText(d.location, 1400)}`);
+    add(d.nearestTrain ? `Nearest station: ${d.nearestTrain}` : '');
+    add(d.area ? `Total area: ${d.area}` : '');
+    const sf = clipText(d.suitableFor, 700);
+    if (sf) add(`Suitable for:\n${sf}`);
+    const opp = clipText(d.opportunity, 1600);
+    if (opp) add(`Opportunity:\n${opp}`);
+    const kp = clipText(d.keyPoints, 1200);
+    if (kp) add(`Key points:\n${kp}`);
+    const sp = clipText(d.specialFeatures, 1000);
+    if (sp) add(`Special features:\n${sp}`);
+    const cm = clipText(d.comments, 1600);
+    if (cm) add(`Comments / approvals:\n${cm}`);
+    add(d.price ? `Price: ${d.price}` : '');
+    add(d.status ? `Status: ${d.status}` : '');
+  }
+
+  if (Array.isArray(item.snapshot) && item.snapshot.length) {
+    add('');
+    add('*Snapshot*');
+    for (const s of item.snapshot) {
+      if (s) add(`• ${String(s).trim()}`);
+    }
+  }
+
+  const mapAddr = item.location?.address || item.location_geo?.address;
+  if (item.googleLocationUrl) {
+    add('');
+    add(`Google Maps:\n${item.googleLocationUrl}`);
+  }
+  if (mapAddr) add(`Address: ${mapAddr}`);
+
+  add('');
+  add(`*Microsite (full listing)*\n${d.listingUrl}`);
+
+  let out = lines.join('\n');
+  if (out.length > WHATSAPP_MESSAGE_MAX) {
+    out = `${out.slice(0, WHATSAPP_MESSAGE_MAX - 80).trim()}\n\n…(trimmed for WhatsApp - full detail is in the PDF.)`;
+  }
+  return out;
 }
 
 /**
@@ -591,14 +863,11 @@ export async function generateBrochureFile(item, type) {
 }
 
 /**
- * Share an array of one or more brochure files. On mobile this opens
- * the native share sheet (PDFs auto-attach). On desktop the files are
- * downloaded sequentially and a WhatsApp Web chat opens to the fixed
- * number so the user can drag-drop them in.
- *
- * Returns true if any share/download path executed.
+ * Share brochure file(s) only (no caption text - WhatsApp receives the PDF alone).
+ * On mobile: native share sheet with files only. On desktop: download each file,
+ * then open WhatsApp Web without a prefilled message.
  */
-export async function shareBrochureFiles(files, fallbackText) {
+export async function shareBrochureFiles(files) {
   if (!files || !files.length) return false;
 
   const canShareFiles =
@@ -630,12 +899,7 @@ export async function shareBrochureFiles(files, fallbackText) {
     }
   }
 
-  const fallbackMsg =
-    fallbackText ||
-    `${files.length} brochure${files.length === 1 ? '' : 's'} just downloaded — please attach from your device.`;
-  const waUrl =
-    `https://wa.me/${WHATSAPP_BROCHURE_NUMBER}?text=` +
-    encodeURIComponent(fallbackMsg);
+  const waUrl = `https://wa.me/${WHATSAPP_BROCHURE_NUMBER}`;
   setTimeout(() => {
     window.open(waUrl, '_blank', 'noopener,noreferrer');
   }, files.length * 220 + 250);

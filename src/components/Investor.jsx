@@ -24,7 +24,7 @@ function Investor() {
                 <div className="invest-point-num">01</div>
                 <div className="invest-point-content">
                   <h4>Airport Proximity Advantage</h4>
-                  <p>Lands within the Navi Mumbai International Airport influence zone — historically proven to deliver exceptional returns.</p>
+                  <p>Lands within the Navi Mumbai International Airport influence zone - historically proven to deliver exceptional returns.</p>
                 </div>
               </div>
               <div className="invest-point">

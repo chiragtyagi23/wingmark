@@ -38,7 +38,7 @@ function AddToCartButton({ entry, size = 'sm', className = '' }) {
       onClick={handleClick}
       aria-pressed={inCart}
       aria-label={inCart ? 'Remove from cart' : 'Add to cart'}
-      title={inCart ? 'Added to cart — click to remove' : 'Add to cart'}
+      title={inCart ? 'Added to cart - click to remove' : 'Add to cart'}
     >
       {inCart ? <Check size={14} /> : <ShoppingCart size={14} />}
       <span>{inCart ? 'Added' : 'Add to Cart'}</span>

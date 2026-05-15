@@ -15,6 +15,8 @@
     --gold: #f7c61b;
     --red: #9a0704;
     --white: #fafafa;
+    --body-size: 16px;
+    --body-leading: 1.5;
   }
 
   html {
@@ -22,7 +24,55 @@
   }
 
   body {
-    @apply overflow-x-hidden bg-charcoal font-sans text-silver antialiased;
+    @apply overflow-x-hidden bg-charcoal font-sans text-base text-silver antialiased;
+  }
+
+  p {
+    font-family: Montserrat, system-ui, sans-serif;
+    font-size: var(--body-size);
+    line-height: var(--body-leading);
+  }
+
+  /* Heading scale — body is 16px; headings stay clearly larger */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    line-height: 1.2;
+    color: var(--white);
+  }
+
+  h1 {
+    font-size: clamp(2.25rem, 5vw, 3.75rem);
+    font-weight: 500;
+  }
+
+  h2 {
+    font-size: clamp(1.875rem, 3.5vw, 2.625rem);
+    font-weight: 500;
+  }
+
+  h3 {
+    font-size: clamp(1.375rem, 2.5vw, 1.75rem);
+    font-weight: 600;
+  }
+
+  h4 {
+    font-size: 1.125rem;
+    font-weight: 700;
+  }
+
+  h5 {
+    font-size: 0.9375rem;
+    font-weight: 700;
+  }
+
+  h6 {
+    font-size: 0.875rem;
+    font-weight: 700;
   }
 
   button,
@@ -92,5 +142,151 @@
 
   .reveal-delay-4 {
     transition-delay: 0.4s;
+  }
+
+  /* Body copy — match base `p` (16px Montserrat) */
+  .section-p,
+  .pillar-p,
+  .why-p,
+  .team-intro,
+  .team-bio,
+  .cta-p,
+  .contact-form-sub,
+  .news-summary,
+  .invest-card-p,
+  .invest-point-content p,
+  .land-detail-desc,
+  .visited-panel-sub,
+  .footer-brand p,
+  .listing-block-value,
+  .lead-modal-success-p {
+    font-family: Montserrat, system-ui, sans-serif;
+    font-size: var(--body-size);
+    line-height: var(--body-leading);
+  }
+
+  /* Section & card headings — sized above 16px body */
+  .section-h2 {
+    font-size: clamp(2rem, 4.5vw, 3.625rem);
+  }
+
+  .why-title,
+  .invest-card-title,
+  .news-title,
+  .visited-panel-title,
+  .lead-modal-title {
+    font-size: clamp(1.375rem, 2.2vw, 1.5rem);
+  }
+
+  .team-name,
+  .contact-form-title {
+    font-size: clamp(1.625rem, 2.5vw, 1.875rem);
+  }
+
+  .service-title,
+  .loc-name {
+    font-size: clamp(1.5rem, 2.5vw, 1.75rem);
+  }
+
+  .land-detail-h {
+    font-size: clamp(1.625rem, 2.5vw, 2rem);
+  }
+
+  .invest-point-content h4 {
+    font-size: 1.125rem;
+  }
+
+  .footer-brand-logo-wrap {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+    line-height: 0;
+    overflow: hidden;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 16px rgba(247, 198, 27, 0.12);
+  }
+
+  .footer-brand-logo {
+    display: block;
+    width: auto;
+    height: 170px;
+    max-width: none;
+    transform: scale(1.14);
+    transform-origin: center;
+  }
+
+  @media (max-width: 768px) {
+    .footer-brand-logo {
+      height: 122px;
+      transform: scale(1.12);
+    }
+  }
+
+  /* Scrolled navbar: logo fills bar (no shrink vs hero on tablet/mobile) */
+  #mainNav .navbar-brand-logo {
+    display: block;
+    width: auto;
+    flex-shrink: 0;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(10, 26, 47, 0.18));
+    transition: height 0.3s ease, transform 0.3s ease;
+    transform-origin: left center;
+  }
+
+  #mainNav .navbar-brand-logo--scrolled {
+    height: 118px;
+    transform: scale(1.06);
+  }
+
+  #mainNav .navbar-brand-logo--hero {
+    height: 200px;
+    transform: scale(1.05);
+  }
+
+  @media (max-width: 1180px) {
+    #mainNav .navbar-brand-logo--scrolled {
+      height: 92px;
+    }
+
+    #mainNav .navbar-brand-logo--hero {
+      height: 96px;
+    }
+  }
+
+  @media (max-width: 900px) {
+    #mainNav .navbar-brand-logo--scrolled {
+      height: 80px;
+      transform: scale(1.08);
+    }
+
+    #mainNav .navbar-brand-logo--hero {
+      height: 72px;
+      transform: none;
+    }
+  }
+
+  @media (max-width: 600px) {
+    #mainNav .navbar-brand-logo--scrolled {
+      height: 76px;
+    }
+
+    #mainNav .navbar-brand-logo--hero {
+      height: 66px;
+    }
+  }
+
+  @media (max-width: 380px) {
+    #mainNav .navbar-brand-logo--scrolled {
+      height: 108px;
+      transform: scale(1.06);
+    }
+
+    #mainNav .navbar-brand-logo--hero {
+      height: 110px;
+      transform: scale(1.05);
+    }
   }
 }

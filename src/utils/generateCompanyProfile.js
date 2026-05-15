@@ -9,7 +9,7 @@ const PALETTE = {
   white: rgb(1, 1, 1),
 };
 
-/** Same letterhead base as `generateBrochure.js` — file must exist under `/public`. */
+/** Same letterhead base as `generateBrochure.js` - file must exist under `/public`. */
 const LETTERHEAD_CANDIDATES = [
   '/black beige Modern Business Letterhead (3).pdf',
 ].map((p) => encodeURI(p));
@@ -115,9 +115,9 @@ export async function generateCompanyProfilePdf() {
 
   // ---- Services ----
   drawLabel('Our Services');
-  drawBullet('Land — Acquisition, Dispute Resolution & Legal Clearance');
-  drawBullet('Development — Bungalow & Villa plotting in Mumbai 3.0, Redevelopment in Mumbai');
-  drawBullet('New Projects — Sales Strategy, Marketing & Distribution');
+  drawBullet('Land - Acquisition, Dispute Resolution & Legal Clearance');
+  drawBullet('Development - Bungalow & Villa plotting in Mumbai 3.0, Redevelopment in Mumbai');
+  drawBullet('New Projects - Sales Strategy, Marketing & Distribution');
 
   // ---- Corporate Identity ----
   drawLabel('Corporate Identity');

@@ -108,7 +108,7 @@ function VisitedPanel({
             <h3 className="visited-panel-title">Recently Viewed</h3>
             <p className="visited-panel-sub">
               {entries.length === 0
-                ? 'No listings yet — explore Land Deals or Plots to add some.'
+                ? 'No listings yet - explore Land Deals or Plots to add some.'
                 : `${entries.length} listing${entries.length === 1 ? '' : 's'} explored`}
             </p>
           </div>
@@ -180,7 +180,7 @@ function VisitedPanel({
               </div>
               <div className="visited-empty-title">Nothing here yet</div>
               <div className="visited-empty-sub">
-                Open any land or plot listing — it will be saved here so you can
+                Open any land or plot listing - it will be saved here so you can
                 jump back any time.
               </div>
             </div>

@@ -29,7 +29,7 @@ function PlotPage() {
               PLOTS <em>FOR SALE &amp; JV</em>
             </h2>
             <p className="section-p" style={{ margin: '0 auto', textAlign: 'center' }}>
-              Each plot listing carries a structured snapshot — Location, Sector, Area, Plot Number, Access Road, Stage, Price (or JV ratio) and a Validity window. Up to 5 images, 5 videos, 5 files and a Google location are available per plot.
+              Each plot listing carries a structured snapshot - Location, Sector, Area, Plot Number, Access Road, Stage, Price (or JV ratio) and a Validity window. Up to 5 images, 5 videos, 5 files and a Google location are available per plot.
             </p>
           </div>
 

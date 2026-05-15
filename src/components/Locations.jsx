@@ -17,7 +17,7 @@ function Locations() {
           <div className="loc-card reveal">
             <img
               src="/footprint-kharghar.png"
-              alt="Kharghar — Utsav Chowk, Navi Mumbai"
+              alt="Kharghar - Utsav Chowk, Navi Mumbai"
               loading="lazy"
             />
             <div className="loc-card-overlay">
@@ -31,7 +31,7 @@ function Locations() {
           <div className="loc-card reveal reveal-delay-1">
             <img
               src="/footprint-panvel.png"
-              alt="Panvel — regional connectivity and gateway growth"
+              alt="Panvel - regional connectivity and gateway growth"
               loading="lazy"
             />
             <div className="loc-card-overlay">
@@ -45,7 +45,7 @@ function Locations() {
           <div className="loc-card reveal reveal-delay-2">
             <img
               src="/footprint-khopoli.png"
-              alt="Khopoli — industrial corridor and logistics belt"
+              alt="Khopoli - industrial corridor and logistics belt"
               loading="lazy"
             />
             <div className="loc-card-overlay">
@@ -59,7 +59,7 @@ function Locations() {
           <div className="loc-card reveal">
             <img
               src="/footprint-karjat.png"
-              alt="Karjat — resort and villa destination"
+              alt="Karjat - resort and villa destination"
               loading="lazy"
             />
             <div className="loc-card-overlay">
@@ -73,7 +73,7 @@ function Locations() {
           <div className="loc-card reveal reveal-delay-2">
             <img
               src="/footprint-mumbai30.png"
-              alt="Mumbai 3.0 — next-generation metropolitan growth"
+              alt="Mumbai 3.0 - next-generation metropolitan growth"
               loading="lazy"
             />
             <div
@@ -83,7 +83,7 @@ function Locations() {
               <div className="loc-name">Mumbai 3.0</div>
               <div className="loc-tag">⭐ Priority Focus Area</div>
               <div className="loc-card-body">
-                <p>The next evolution of Mumbai's urban expansion — the highest growth potential corridor of our era.</p>
+                <p>The next evolution of Mumbai's urban expansion - the highest growth potential corridor of our era.</p>
               </div>
             </div>
           </div>

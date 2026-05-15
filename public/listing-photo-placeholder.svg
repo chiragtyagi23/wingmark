@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-label="Site photo pending">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a1a2f"/>
+      <stop offset="100%" stop-color="#1c4669"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <rect x="80" y="80" width="1040" height="640" rx="8" fill="none" stroke="#f7c61b" stroke-width="2" stroke-dasharray="12 8" opacity="0.55"/>
+  <g fill="none" stroke="#f7c61b" stroke-width="3" opacity="0.7">
+    <path d="M520 310h160v180H520z"/>
+    <circle cx="600" cy="370" r="36"/>
+    <path d="M480 490l80-70 60 55 90-100 110 115"/>
+  </g>
+  <text x="600" y="560" text-anchor="middle" fill="#fafafa" font-family="system-ui, sans-serif" font-size="32" font-weight="600">Site photo pending</text>
+  <text x="600" y="605" text-anchor="middle" fill="#cdcdcd" font-family="system-ui, sans-serif" font-size="18">Upload verified images for this listing</text>
+</svg>

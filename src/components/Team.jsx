@@ -29,7 +29,10 @@ function Team() {
                 <span className="team-role">Designated Partner</span>
               </div>
               <div className="team-bio">
-              A Strategic Leader with Deep Expertise in Real Estate Operations, Stakeholder Management, and Growth Strategy. Mehhul drives The Wingsmark Infraa's Operational Excellence and Long-Term Value Creation across all Business Verticals.
+                A strategic leader with deep expertise in Real Estate operations,
+                stakeholder management, and growth strategy. Mehhul drives The Wingsmark
+                Infraa&apos;s operational excellence and long-term value creation across all
+                business verticals.
               </div>
             </div>
           </div>
@@ -49,8 +52,9 @@ function Team() {
                 <span className="team-role">Designated Partner</span>
               </div>
               <div className="team-bio">
-                The Founding Force behind The Wingsmark Infraa, Vijay brings Unparalleled Government Liaison Expertise and Deep Knowledge of
-                Navi Mumbai's Land Ecosystem, Enabling Smooth, Dispute-Free Transactions for every Stakeholder.
+                The founding force behind The Wingsmark Infraa, Vijay brings unparalleled
+                government liaison expertise and deep knowledge of Navi Mumbai&apos;s land
+                ecosystem, enabling smooth, dispute-free transactions for every stakeholder.
               </div>
             </div>
           </div>
@@ -69,7 +73,9 @@ function Team() {
                 <span className="team-role">Legal Advisor</span>
               </div>
               <div className="team-bio">
-                Our in-house legal counsel, Advocate Sathyam ensures every transaction undergoes rigorous title verification, documentation scrutiny and regulatory compliance - safeguarding our clients at every stage.
+                Our in-house legal counsel, Advocate Sathyam ensures every transaction
+                undergoes rigorous title verification, documentation scrutiny and regulatory
+                compliance, safeguarding our clients at every stage.
               </div>
             </div>
           </div>

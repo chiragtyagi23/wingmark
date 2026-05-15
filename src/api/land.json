@@ -4,7 +4,7 @@
     "slug": "rohinjan-premium-land-sale",
     "type": "sale",
     "category": "premium",
-    "img": "/rohinjan-grid-map.png",
+    "img": "/listing-photo-placeholder.svg",
     "loc": "Sector 37 next to Rainbow Life",
     "name": "Premium Land for Sale at Rohinjan near Amandoot metro station",
     "area": "6 Acres",
@@ -19,26 +19,8 @@
       "Suitable for Residential complex / Mixed use development with commercial shops and offices.",
       "Excellent opportunity for development with ready market demand."
     ],
-    "gallery": [
-      "/rohinjan-location.png"
-    ],
-    "media": [
-      {
-        "title": "WhatsApp Video (2)",
-        "url": "/wardoli-media-1.mp4",
-        "kind": "video"
-      },
-      {
-        "title": "WhatsApp Video (1)",
-        "url": "/wardoli-media-2.mp4",
-        "kind": "video"
-      },
-      {
-        "title": "WhatsApp Video",
-        "url": "/wardoli-media-3.mp4",
-        "kind": "video"
-      }
-    ],
+    "gallery": [],
+    "media": [],
     "files": [
       {
         "name": "Project Brochure.pdf",
@@ -49,7 +31,6 @@
         "url": "#"
       }
     ],
-    "locationImage": "/rohinjan-location.png",
     "location": {
       "lat": 19.0318,
       "lng": 73.1046,
@@ -145,7 +126,7 @@
     "img": "/wardoli-location-1.png",
     "loc": "• Village Wardoli\n• Near Wadhwa Wise City",
     "name": "Prime Mountain facing land for sale at Panvel",
-    "area": "20 Acres\n(R zone — approx 13 acres · Green zone — approx 7 acres)",
+    "area": "20 Acres\n(R zone - approx 13 acres · Green zone - approx 7 acres)",
     "label": "Price",
     "price": "₹ 65 Cr",
     "badge": "For Sale",
@@ -167,7 +148,7 @@
     "media": [
       {
         "url": "/wardoli-road-construction.mp4",
-        "title": "Road for site – under construction"
+        "title": "Road for site - under construction"
       },
       {
         "url": "/wardoli-towards-site.mp4",
@@ -209,7 +190,7 @@
     "price": "₹ 700 Cr",
     "badge": "For Sale",
     "nearestStation": "Khopoli - Approx 27 kms",
-    "suitableFor": "Hill-station and mixed-use development on the lines of Lake City — townships, resort communities, premium villas and second homes (similar to Lavasa and Amby Valley)",
+    "suitableFor": "Hill-station and mixed-use development on the lines of Lake City - townships, resort communities, premium villas and second homes (similar to Lavasa and Amby Valley)",
     "opportunity": "• Declared by State Government as a hill station & a high priority tourist destination\n• Project is surrounded by dense forest\n• Land pattern is a mix of hilly as well table land\n• Pristine natural beauty providing a much needed relief away from the noise, traffic & city pollution\n• Optical fibre cables laid at the site with an operational telephone exchange nearby\n• Water is available through out the year through natural springs\n• Tar road is constructed\n• Red soil at site",
     "skipOpportunitySplit": true,
     "keyPoints": [
@@ -226,8 +207,8 @@
     "comments": "Approvals for the project;\n• Asst. Director Town Planning, Raigad under Resolution No. NA/SNO/-13 to 114 SS-A/3930 dated 15th December 1986, Town Planning Department, Government of Maharashtra\n• Tahasildar, Sudhagad, District - Raigad, Revenue Department. Government of Maharashtra, under Resolution No. NA/SR/360, dated 19th December 1986\n• The Sarpanch, Group Gram Panchayat, Tadgaon, District Raigad under Resolution number 123 dated 30th November 1985\n• Maharashtra Tourism Development Corporation Ltd. Under Resolution No. MTDC / DEV / RAIGAD - 776 dated 13th September 1986\n• No Objection Certificate (N.O.C.) granted by District Health Office, Raigad Zilla Parishad.\n• Executive Engineer, Mahad (Public Works Department, Mahad)\n• Executive Engineer, Raigad Zilla Parishad, Government of Maharashtra.\n• Maharashtra Electricity Board.\n• Superintendent of Police, District Raigad.\n• Foreign Investment Promotion Board (FIPB) and Cabinet Committee on Foreign Investment (CCFI) allowing foreign direct Investment in this Mixed Use Infrastructure Project",
     "status": "Clear title deal",
     "snapshot": [
-      "Government-approved hill station — 1160 acres NA land, ringed by ~10,000 acres of reserve forest.",
-      "1675 ft above sea level — strong road and rail connectivity to Mumbai, Khopoli and NMIA."
+      "Government-approved hill station - 1160 acres NA land, ringed by ~10,000 acres of reserve forest.",
+      "1675 ft above sea level - strong road and rail connectivity to Mumbai, Khopoli and NMIA."
     ],
     "gallery": [
       "/rameshwar-plot-area-1.png",

@@ -7,11 +7,7 @@ import VisitedPanel from './VisitedPanel';
 import { useVisitedListings } from '../hooks/useVisitedListings';
 import landListings from '../api/land.json';
 import plotListings from '../api/plots.json';
-import {
-  generateBrochureFile,
-  shareBrochureFiles,
-  SITE_URL,
-} from '../utils/generateBrochure';
+import { generateBrochureFile, shareBrochureFiles } from '../utils/generateBrochure';
 
 function StickyCTA() {
   const location = useLocation();
@@ -67,15 +63,7 @@ function StickyCTA() {
         return;
       }
 
-      const summaryLines = selectedEntries
-        .map((e) => `• ${e.title} — ${SITE_URL}/${e.type}/${e.slug}`)
-        .join('\n');
-      const fallbackText =
-        files.length === 1
-          ? `Brochure attached.\n\n${summaryLines}\n\n(PDF just downloaded — please attach it here.)`
-          : `${files.length} brochures attached.\n\n${summaryLines}\n\n(PDFs just downloaded — please attach them here.)`;
-
-      await shareBrochureFiles(files, fallbackText);
+      await shareBrochureFiles(files);
 
       if (failures.length) {
         alert(`Some brochures failed:\n\n${failures.join('\n')}`);
@@ -234,6 +222,7 @@ function StickyCTA() {
         onClose={closeModal}
         title="Download All Documents"
         submitLabel="Submit"
+        submitTone="red"
         onSubmit={handleBrochureSubmit}
         context={listingTitle}
       />
