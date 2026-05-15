@@ -225,6 +225,11 @@
     }
   }
 
+  #mainNav .navbar-brand-name {
+    font-weight: 800;
+    -webkit-font-smoothing: antialiased;
+  }
+
   /* Scrolled navbar: logo fills bar (no shrink vs hero on tablet/mobile) */
   #mainNav .navbar-brand-logo {
     display: block;

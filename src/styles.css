@@ -76,6 +76,50 @@
   transform: translateY(-2px);
 }
 
+/* Stacked CTA pairs — equal width & height (ContactCTA, land/plot pages, etc.) */
+.hero-btns,
+.cta-btn-pair {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 14px;
+  width: 100%;
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-btns .btn-gold,
+.hero-btns .btn-outline,
+.cta-btn-pair .btn-gold,
+.cta-btn-pair .btn-outline {
+  width: 100%;
+  min-height: 56px;
+  padding: 16px 28px;
+  justify-content: center;
+  text-align: center;
+  line-height: 1.35;
+  box-sizing: border-box;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.hero-btns .btn-outline,
+.cta-btn-pair .btn-outline {
+  padding: 15px 28px;
+}
+
+#contact-cta .hero-btns,
+#contact-cta .cta-btn-pair {
+  margin-top: 0;
+}
+
+.land-page-cta,
+.plot-page-cta {
+  margin-top: 48px;
+}
+
 .btn-ghost {
   background: transparent;
   color: var(--silver);
@@ -973,7 +1017,7 @@ ul.why-bullets li::before {
   margin: 0;
   padding-left: 1.15rem;
   font-family: Montserrat, system-ui, sans-serif;
-  font-size: 13px;
+  font-size: 16px;
   line-height: 1.5;
   font-weight: 400;
   text-transform: none;
@@ -996,7 +1040,7 @@ ul.why-bullets li::before {
 
 .land-loc-text {
   font-family: Montserrat, system-ui, sans-serif;
-  font-size: 13px;
+  font-size: 16px;
   line-height: 1.5;
   color: #ffffff;
   text-transform: none;
@@ -1312,7 +1356,8 @@ ul.why-bullets li::before {
 
 .form-group input::placeholder,
 .form-group textarea::placeholder {
-  color: var(--dark-gray);
+  color: #ffffff;
+  opacity: 0.85;
 }
 
 .form-group textarea {
@@ -2492,7 +2537,7 @@ footer::before {
 }
 
 .land-detail-loc {
-  font-size: 13px;
+  font-size: 16px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--gold);
@@ -2508,7 +2553,7 @@ footer::before {
   margin: 0;
   padding-left: 1.25rem;
   font-family: Montserrat, system-ui, sans-serif;
-  font-size: 13px;
+  font-size: 16px;
   line-height: 1.5;
   text-transform: none;
   letter-spacing: normal;
@@ -2542,7 +2587,7 @@ footer::before {
 }
 
 .listing-block .listing-bullet-list {
-  font-size: 13px;
+  font-size: 16px;
   color: #ffffff;
   font-style: normal;
 }
@@ -2563,7 +2608,7 @@ footer::before {
 }
 
 .land-detail-area {
-  font-size: 13px;
+  font-size: 16px;
   color: #ffffff;
   letter-spacing: 0.05em;
 }
@@ -2711,7 +2756,7 @@ footer::before {
 }
 
 .listing-block--wide .listing-block-value {
-  font-size: 17px;
+  font-size: 16px;
 }
 
 .listing-block--accent .listing-block-label {
@@ -2842,7 +2887,8 @@ footer::before {
 }
 
 .land-card-detail-row strong {
-  font-size: 13px;
+  font-family: Montserrat, system-ui, sans-serif;
+  font-size: 16px;
   color: #ffffff;
   font-weight: 500;
   line-height: 1.5;
@@ -3330,8 +3376,8 @@ footer::before {
   }
   .land-detail-loc {
     letter-spacing: 0.1em;
-    font-size: 12px;
-    line-height: 1.6;
+    font-size: 16px;
+    line-height: 1.5;
   }
   .land-detail-meta {
     flex-direction: column;
@@ -3352,7 +3398,7 @@ footer::before {
     gap: 14px;
   }
   .listing-block-value {
-    font-size: 15px;
+    font-size: 16px;
   }
   .land-filters,
   .land-categories {
@@ -4149,7 +4195,8 @@ body.has-sticky-cta {
 }
 
 .lead-modal-card--blue .lead-modal-field input::placeholder {
-  color: rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+  opacity: 0.85;
 }
 
 .lead-modal-card--blue .lead-modal-field input:focus {

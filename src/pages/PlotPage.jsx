@@ -148,11 +148,10 @@ function PlotPage() {
             </div>
           )}
 
-          <div style={{ textAlign: 'center', marginTop: 48 }}>
+          <div className="cta-btn-pair plot-page-cta">
             <Link to="/#contact" className="btn-gold">
               Enquire About Plots
             </Link>
-            &nbsp;&nbsp;&nbsp;
             <Link to="/#contact" className="btn-outline">
               Submit Your Plot for Listing
             </Link>
