@@ -1,17 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PlotBanner from '../components/PlotBanner';
 import AddToCartButton from '../components/AddToCartButton';
 import plotListings from '../api/plots.json';
 import ListingTextValue from '../components/ListingTextValue';
 import { formatLocation, formatPlotDetailField } from '../utils/listingTextFormat';
+import { savePlotListScroll } from '../utils/listScrollRestore';
 
 function PlotPage() {
   const [activeType, setActiveType] = useState('all');
-
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'auto' });
-  }, []);
 
   const filtered = plotListings.filter(
     (plot) => activeType === 'all' || plot.plotType === activeType
@@ -68,6 +65,7 @@ function PlotPage() {
                   to={`/plot/${plot.slug}`}
                   className="land-card"
                   data-type={plot.plotType}
+                  onClick={savePlotListScroll}
                 >
                   <div className="land-card-thumb">
                     <img src={plot.img} alt={plot.title} loading="lazy" />

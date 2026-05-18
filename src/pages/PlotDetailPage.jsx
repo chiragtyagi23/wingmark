@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Navigation, ExternalLink, Download } from 'lucide-react';
 import AddToCartButton from '../components/AddToCartButton';
 import plotListings from '../api/plots.json';
@@ -9,11 +9,18 @@ import {
   formatPlotDetailField,
   formatLocation,
 } from '../utils/listingTextFormat';
+import { navigateBackToPlotList } from '../utils/listScrollRestore';
 
 function PlotDetailPage() {
   const { slug } = useParams();
+  const navigate = useNavigate();
   const plot = plotListings.find((p) => p.slug === slug) || null;
   const [galleryIndex, setGalleryIndex] = useState(0);
+
+  const backToPlotList = (event) => {
+    event?.preventDefault?.();
+    navigateBackToPlotList(navigate);
+  };
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'auto' });
@@ -24,9 +31,9 @@ function PlotDetailPage() {
     return (
       <div className="land-detail-missing">
         <h2>Plot listing not found.</h2>
-        <Link to="/plot" className="btn-gold">
+        <button type="button" className="btn-gold" onClick={backToPlotList}>
           Back to All Plots
-        </Link>
+        </button>
       </div>
     );
   }
@@ -65,9 +72,9 @@ function PlotDetailPage() {
       <div className="land-detail-hero">
         <div className="land-detail-hero-content">
           <div className="land-detail-hero-top">
-            <Link to="/plot" className="land-detail-back">
+            <button type="button" className="land-detail-back" onClick={backToPlotList}>
               ← All Plots
-            </Link>
+            </button>
           </div>
           <div className="land-detail-hero-tags">
             {plot.listingNumber && (
@@ -283,9 +290,9 @@ function PlotDetailPage() {
           >
             Enquire About This Plot
           </button>
-          <Link to="/plot" className="btn-outline">
+          <button type="button" className="btn-outline" onClick={backToPlotList}>
             Back to All Plots
-          </Link>
+          </button>
         </div>
       </div>
     </>

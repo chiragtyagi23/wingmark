@@ -15,6 +15,7 @@ import LandPage from './pages/LandPage';
 import LandDetailPage from './pages/LandDetailPage';
 import PlotPage from './pages/PlotPage';
 import PlotDetailPage from './pages/PlotDetailPage';
+import { resolveListScrollRestore } from './utils/listScrollRestore';
 
 if (typeof window !== 'undefined' && 'scrollRestoration' in window.history) {
   window.history.scrollRestoration = 'manual';
@@ -38,7 +39,7 @@ function ScrollManager() {
   const location = useLocation();
   const isInitialLoadRef = useRef(true);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (isInitialLoadRef.current) {
       isInitialLoadRef.current = false;
 
@@ -53,6 +54,12 @@ function ScrollManager() {
 
     if (location.hash) {
       scrollToHashTarget(location.hash, 'smooth');
+      return;
+    }
+
+    const restoreY = resolveListScrollRestore(location.pathname, location.state);
+    if (restoreY != null) {
+      window.scrollTo({ top: restoreY, behavior: 'auto' });
       return;
     }
 

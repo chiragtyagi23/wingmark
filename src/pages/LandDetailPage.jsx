@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Navigation, ExternalLink, Download } from 'lucide-react';
 import AddToCartButton from '../components/AddToCartButton';
 import ListingTextValue from '../components/ListingTextValue';
@@ -9,10 +9,18 @@ import {
   formatLandDetailField,
   formatLocation,
 } from '../utils/listingTextFormat';
+import { navigateBackToLandList } from '../utils/listScrollRestore';
+
 function LandDetailPage() {
   const { slug } = useParams();
+  const navigate = useNavigate();
   const listing = landListings.find((l) => l.slug === slug) || null;
   const [galleryIndex, setGalleryIndex] = useState(0);
+
+  const backToLandDeals = (event) => {
+    event?.preventDefault?.();
+    navigateBackToLandList(navigate);
+  };
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'auto' });
@@ -23,9 +31,9 @@ function LandDetailPage() {
     return (
       <div className="land-detail-missing">
         <h2>Listing not found.</h2>
-        <Link to="/land" className="btn-gold">
+        <button type="button" className="btn-gold" onClick={backToLandDeals}>
           Back to All Listings
-        </Link>
+        </button>
       </div>
     );
   }
@@ -63,9 +71,9 @@ function LandDetailPage() {
       <div className="land-detail-hero">
         <div className="land-detail-hero-content">
           <div className="land-detail-hero-top">
-            <Link to="/land" className="land-detail-back">
+            <button type="button" className="land-detail-back" onClick={backToLandDeals}>
               ← Land Deals
-            </Link>
+            </button>
           </div>
           <div className="land-detail-hero-tags">
             {listing.listingNumber && (
@@ -272,9 +280,9 @@ function LandDetailPage() {
           >
             Enquire About This Listing
           </button>
-          <Link to="/land" className="btn-outline">
+          <button type="button" className="btn-outline" onClick={backToLandDeals}>
             Back to Land Deals
-          </Link>
+          </button>
         </div>
       </div>
     </>

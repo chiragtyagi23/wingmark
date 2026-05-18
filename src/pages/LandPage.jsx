@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import LandBanner from '../components/LandBanner';
 import AddToCartButton from '../components/AddToCartButton';
 import landListings from '../api/land.json';
 import ListingTextValue from '../components/ListingTextValue';
 import { formatLandDetailField, formatLocation } from '../utils/listingTextFormat';
+import { saveLandListScroll } from '../utils/listScrollRestore';
 import landCategories from '../api/land-categories.json';
 import LeadModal from '../components/LeadModal';
 
@@ -12,10 +13,6 @@ function  LandPage() {
   const [activeCategory, setActiveCategory] = useState('all');
   const [activeType, setActiveType] = useState('all');
   const [enquiryOpen, setEnquiryOpen] = useState(false);
-
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'auto' });
-  }, []);
 
   const categories = landCategories;
   const filtered = landListings.filter((listing) => {
@@ -93,6 +90,7 @@ function  LandPage() {
                   to={`/land/${listing.slug}`}
                   className="land-card"
                   data-type={listing.type}
+                  onClick={saveLandListScroll}
                 >
                   <div className="land-card-thumb">
                     <img src={listing.img} alt={listing.name} loading="lazy" />

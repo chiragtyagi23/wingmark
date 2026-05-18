@@ -2375,6 +2375,17 @@ footer::before {
   transition: all 0.25s ease;
 }
 
+button.land-detail-back,
+button.btn-outline,
+button.btn-gold {
+  font-family: inherit;
+}
+
+button.land-detail-back {
+  background: transparent;
+  cursor: pointer;
+}
+
 .land-detail-back:hover {
   border-color: var(--gold);
   color: var(--gold);
