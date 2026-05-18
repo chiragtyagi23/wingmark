@@ -39,7 +39,7 @@ export function isBulletContent(val) {
  */
 export function formatLocation(val) {
   if (val == null || val === '') return '';
-  if (isBulletContent(val)) return formatMultiline(val);
+  if (isBulletContent(val)) return formatAsBulletList(val);
   const text = String(val).trim();
 
   if (text.includes('·')) {
@@ -66,19 +66,31 @@ export function formatLocation(val) {
   return formatAsBulletList(text);
 }
 
+/** Join cleaned lines as a bullet list string (no recursion). */
+function joinBulletLines(lines) {
+  const clean = lines
+    .map((l) => String(l).replace(BULLET_PREFIX, '').trim())
+    .filter(Boolean);
+  if (!clean.length) return '';
+  return clean.map((s) => `• ${s}`).join('\n');
+}
+
 /** Format any listing field as a bullet list (except title — pass plain text for title). */
 export function formatAsBulletList(val) {
   if (val == null || val === '') return '';
-  if (isBulletContent(val) || /[•\u2022]/.test(String(val))) {
-    return formatMultiline(val);
+  if (Array.isArray(val)) {
+    return joinBulletLines(val);
   }
-  const lines = String(val)
-    .split(/\n+/)
-    .map((l) => l.replace(BULLET_PREFIX, '').trim())
-    .filter(Boolean);
-  if (!lines.length) return '';
-  if (lines.length === 1) return `• ${lines[0]}`;
-  return lines.map((s) => `• ${s}`).join('\n');
+  const items = parseBulletItems(val);
+  if (items.length > 0) {
+    return joinBulletLines(items);
+  }
+  const text = String(val).trim();
+  if (!text) return '';
+  if (/\n/.test(text)) {
+    return joinBulletLines(text.split(/\n+/));
+  }
+  return `• ${text.replace(BULLET_PREFIX, '').trim()}`;
 }
 
 /** Detail-page value for land listings (title stays plain). */
@@ -92,10 +104,13 @@ export function formatLandDetailField(label, value, listing) {
     return opp ? formatAsBulletList(opp) : '';
   }
   if (key === 'suitable for') return formatSuitableFor(value);
+  if (key === 'nearest train station') return formatAsBulletList(value);
   if (key === 'key points' || key === 'special features') {
     return formatAsBulletList(splitToBullets(value));
   }
-  if (key === 'comments') return formatAsBulletList(formatMultiline(value));
+  if (key === 'comments' || key === 'comments / approvals') {
+    return formatAsBulletList(value);
+  }
   return formatAsBulletList(value);
 }
 
@@ -106,7 +121,7 @@ export function formatPlotDetailField(label, value) {
   if (key === 'title') return String(value);
   if (key === 'location') return formatLocation(value);
   if (key === 'comments') {
-    return formatAsBulletList(formatMultiline(value));
+    return formatAsBulletList(value);
   }
   return formatAsBulletList(value);
 }
@@ -135,7 +150,17 @@ export function formatMultiline(val) {
       .map((s) => `• ${s}`)
       .join('\n');
   }
-  return String(val);
+  const text = String(val).trim();
+  if (!text) return '';
+  if (/\n/.test(text)) {
+    return text
+      .split(/\n+/)
+      .map((line) => line.replace(BULLET_PREFIX, '').trim())
+      .filter(Boolean)
+      .map((s) => `• ${s}`)
+      .join('\n');
+  }
+  return formatAsBulletList(text);
 }
 
 /**
@@ -145,8 +170,8 @@ export function formatMultiline(val) {
 export function splitToBullets(val) {
   if (!val) return '';
   const existing = parseBulletItems(val);
-  if (existing.length > 1) return formatMultiline(val);
-  if (Array.isArray(val)) return formatMultiline(val);
+  if (existing.length > 1) return formatAsBulletList(val);
+  if (Array.isArray(val)) return formatAsBulletList(val);
   const text = String(val)
     .replace(/(\d),(\d)/g, '$1<KEEPCOMMA>$2')
     .replace(/\b([A-Z])\.(?=[A-Z]\.)/g, '$1<KEEPDOT>')
@@ -176,16 +201,9 @@ export function formatLandOpportunity(item) {
   return splitToBullets(item.opportunity);
 }
 
-/** One leading bullet per field; extra lines hang under the first (PDF + detail). */
+/** PDF / share copy — every line is a bullet (including multiline station lists). */
 export function formatSingleBullet(val) {
-  if (val == null || val === '') return '';
-  const lines = String(val)
-    .split(/\n+/)
-    .map((l) => l.replace(BULLET_PREFIX, '').trim())
-    .filter(Boolean);
-  if (!lines.length) return '';
-  if (lines.length === 1) return `• ${lines[0]}`;
-  return `• ${lines[0]}\n${lines.slice(1).join('\n')}`;
+  return formatAsBulletList(val);
 }
 
 /**
@@ -213,7 +231,7 @@ export function buildListingGallery(item) {
 /** Suitable For — bullets from existing • lines, " / " splits, or comma/period splits. */
 export function formatSuitableFor(val) {
   if (val == null || val === '') return '';
-  if (isBulletContent(val)) return formatMultiline(val);
+  if (isBulletContent(val)) return formatAsBulletList(val);
   const text = String(val).trim();
   if (/\s\/\s/.test(text)) {
     const parts = text.split(/\s+\/\s+/).map((s) => s.trim()).filter(Boolean);

@@ -1,11 +1,13 @@
 import { PDFDocument, PDFName, PDFString, StandardFonts, rgb } from 'pdf-lib';
 import fontkit from '@pdf-lib/fontkit';
 import {
+  formatAsBulletList,
   formatLandOpportunity,
   formatLocation,
   formatMultiline,
   formatSingleBullet,
   formatSuitableFor,
+  splitToBullets,
 } from './listingTextFormat';
 
 let _fontRegCache = null;
@@ -900,13 +902,19 @@ export function buildBrochureData(item, type) {
     title: item.name,
     listingNumber: item.listingNumber,
     location: formatLocation(item.loc),
-    nearestTrain: formatSingleBullet(item.nearestStation),
-    area: formatSingleBullet(item.area),
+    nearestTrain: formatLocation(item.nearestStation),
+    area: formatAsBulletList(item.area),
     suitableFor: formatSuitableFor(item.suitableFor),
-    opportunity: formatLandOpportunity(item),
-    keyPoints: formatMultiline(item.keyPoints),
+    opportunity: item.opportunity
+      ? formatAsBulletList(formatLandOpportunity(item))
+      : '',
+    keyPoints: item.keyPoints
+      ? Array.isArray(item.keyPoints)
+        ? formatMultiline(item.keyPoints)
+        : formatAsBulletList(splitToBullets(item.keyPoints))
+      : '',
     specialFeatures: formatMultiline(item.specialFeatures || ''),
-    comments: formatMultiline(item.comments ?? item.specialComments ?? ''),
+    comments: formatAsBulletList(item.comments ?? item.specialComments ?? ''),
     jvTerms: item.jvTerms ? formatSingleBullet(item.jvTerms) : '',
     jvOnPrice: item.type === 'jv' ? formatSingleBullet(item.price) : '',
     price: formatSingleBullet(item.price),

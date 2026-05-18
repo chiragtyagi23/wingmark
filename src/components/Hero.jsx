@@ -48,16 +48,17 @@ function Hero() {
           <span className="anim-pulse-dot h-1.5 w-1.5 shrink-0 rounded-full bg-gold" aria-hidden />
           <span>Navi Mumbai · Mumbai 3.0 · Est. 2026</span>
         </div> */}
-        <h1 className="anim-fade-down-delay-4 mb-2 font-times text-[clamp(30px,7vw,88px)] font-bold leading-[1.06] text-white">
-          <em className="italic text-gold">Trust &amp; Value</em>
-          <br />
-        </h1>
-        <h3 className="font-times text-[clamp(24px,4vw,48px)] font-bold leading-tight text-white">
-          <strong className="block font-bold">in Every Acre.</strong>
-        </h3>
-        <p className="anim-fade-down-delay-6 mx-auto my-5 mb-8 max-w-2xl text-[clamp(12px,1.5vw,15px)] font-normal uppercase tracking-[0.16em] text-silver max-[480px]:mb-5">
-          Premium Land Acquisition · Infrastructure Growth · High-Return Investments
-        </p>
+        <div className="hero-intro anim-fade-down-delay-4">
+          <h1 className="hero-title">
+            <em className="hero-title-accent">Trust &amp; Value</em>
+            <span className="hero-title-line">in Every Acre.</span>
+          </h1>
+          <ul className="hero-points anim-fade-down-delay-6" aria-label="Key focus areas">
+            <li>Premium Land Acquisition</li>
+            <li>Infrastructure Growth</li>
+            <li>High-Return Investments</li>
+          </ul>
+        </div>
         <div className="anim-fade-down-delay-8 flex flex-wrap justify-center gap-4">
           <Link to="/land" className={btnGold}>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
