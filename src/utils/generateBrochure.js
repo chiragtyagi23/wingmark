@@ -2,6 +2,7 @@ import { PDFDocument, PDFName, PDFString, StandardFonts, rgb } from 'pdf-lib';
 import fontkit from '@pdf-lib/fontkit';
 import {
   formatLandOpportunity,
+  formatLocation,
   formatMultiline,
   formatSingleBullet,
   formatSuitableFor,
@@ -877,7 +878,7 @@ export function buildBrochureData(item, type) {
       pdfType: isJv ? 'plot-jv' : 'plot-sale',
       title: item.title,
       listingNumber: item.listingNumber,
-      location: item.location,
+      location: formatLocation(item.location),
       sector: item.sector,
       plotNumber: item.plotNumber,
       area: item.area,
@@ -898,7 +899,7 @@ export function buildBrochureData(item, type) {
     pdfType: 'land',
     title: item.name,
     listingNumber: item.listingNumber,
-    location: item.loc,
+    location: formatLocation(item.loc),
     nearestTrain: formatSingleBullet(item.nearestStation),
     area: formatSingleBullet(item.area),
     suitableFor: formatSuitableFor(item.suitableFor),

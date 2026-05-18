@@ -7,6 +7,7 @@ import landListings from '../api/land.json';
 import {
   buildListingGallery,
   formatLandDetailField,
+  formatLocation,
 } from '../utils/listingTextFormat';
 function LandDetailPage() {
   const { slug } = useParams();
@@ -83,7 +84,7 @@ function LandDetailPage() {
           </div>
           <h1 className="land-detail-title">{listing.name}</h1>
           <ListingTextValue
-            value={listing.loc}
+            value={formatLocation(listing.loc)}
             listClassName="land-detail-loc-list"
             className="land-detail-loc"
           />

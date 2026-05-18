@@ -7,6 +7,7 @@ import ListingTextValue from '../components/ListingTextValue';
 import {
   buildListingGallery,
   formatPlotDetailField,
+  formatLocation,
 } from '../utils/listingTextFormat';
 
 function PlotDetailPage() {
@@ -90,7 +91,7 @@ function PlotDetailPage() {
           </div>
           <h1 className="land-detail-title">{plot.title}</h1>
           <ListingTextValue
-            value={plot.location}
+            value={formatLocation(plot.location)}
             listClassName="land-detail-loc-list"
             className="land-detail-loc"
           />

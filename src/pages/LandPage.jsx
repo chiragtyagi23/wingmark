@@ -4,7 +4,7 @@ import LandBanner from '../components/LandBanner';
 import AddToCartButton from '../components/AddToCartButton';
 import landListings from '../api/land.json';
 import ListingTextValue from '../components/ListingTextValue';
-import { formatLandDetailField } from '../utils/listingTextFormat';
+import { formatLandDetailField, formatLocation } from '../utils/listingTextFormat';
 import landCategories from '../api/land-categories.json';
 import LeadModal from '../components/LeadModal';
 
@@ -114,7 +114,7 @@ function  LandPage() {
                     <div className="land-loc">
                       <span className="land-loc-label">Location</span>
                       <ListingTextValue
-                        value={listing.loc}
+                        value={formatLocation(listing.loc)}
                         listClassName="land-loc-list"
                         className="land-loc-text"
                       />

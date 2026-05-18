@@ -4,7 +4,7 @@ import PlotBanner from '../components/PlotBanner';
 import AddToCartButton from '../components/AddToCartButton';
 import plotListings from '../api/plots.json';
 import ListingTextValue from '../components/ListingTextValue';
-import { formatPlotDetailField } from '../utils/listingTextFormat';
+import { formatLocation, formatPlotDetailField } from '../utils/listingTextFormat';
 
 function PlotPage() {
   const [activeType, setActiveType] = useState('all');
@@ -91,7 +91,14 @@ function PlotPage() {
                       <div className="land-card-num">{plot.listingNumber}</div>
                     )}
                     <div className="land-name">{plot.title}</div>
-                    <div className="land-loc"><span className="land-loc-label">Location: </span>{plot.location}</div>
+                    <div className="land-loc">
+                      <span className="land-loc-label">Location</span>
+                      <ListingTextValue
+                        value={formatLocation(plot.location)}
+                        listClassName="land-loc-list"
+                        className="land-loc-text"
+                      />
+                    </div>
                     <div className="land-card-details">
                       <div className="land-card-detail-row">
                         <span>Area</span>

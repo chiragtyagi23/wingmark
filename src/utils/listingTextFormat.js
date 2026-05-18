@@ -34,6 +34,38 @@ export function isBulletContent(val) {
   return items.length === 1 && /[•\u2022]/.test(String(val));
 }
 
+/**
+ * Location — bullets from existing • lines, middle-dot (·), " / ", or a single • line.
+ */
+export function formatLocation(val) {
+  if (val == null || val === '') return '';
+  if (isBulletContent(val)) return formatMultiline(val);
+  const text = String(val).trim();
+
+  if (text.includes('·')) {
+    const parts = text
+      .split(/\s*·\s*/)
+      .map((s) => s.replace(BULLET_PREFIX, '').trim())
+      .filter(Boolean);
+    if (parts.length > 1) {
+      return parts.map((s) => `• ${s}`).join('\n');
+    }
+  }
+
+  if (/\s\/\s/.test(text)) {
+    const parts = text.split(/\s+\/\s+/).map((s) => s.trim()).filter(Boolean);
+    if (parts.length > 1) {
+      return parts.map((s) => `• ${s}`).join('\n');
+    }
+  }
+
+  if (/\n/.test(text)) {
+    return formatAsBulletList(text);
+  }
+
+  return formatAsBulletList(text);
+}
+
 /** Format any listing field as a bullet list (except title — pass plain text for title). */
 export function formatAsBulletList(val) {
   if (val == null || val === '') return '';
@@ -54,6 +86,7 @@ export function formatLandDetailField(label, value, listing) {
   if (value == null || value === '') return '';
   const key = String(label).toLowerCase();
   if (key === 'title') return String(value);
+  if (key === 'location') return formatLocation(value);
   if (key === 'opportunity' && listing) {
     const opp = formatLandOpportunity(listing);
     return opp ? formatAsBulletList(opp) : '';
@@ -69,8 +102,10 @@ export function formatLandDetailField(label, value, listing) {
 /** Detail-page value for plot listings (title stays plain). */
 export function formatPlotDetailField(label, value) {
   if (value == null || value === '') return '';
-  if (String(label).toLowerCase() === 'title') return String(value);
-  if (String(label).toLowerCase() === 'comments') {
+  const key = String(label).toLowerCase();
+  if (key === 'title') return String(value);
+  if (key === 'location') return formatLocation(value);
+  if (key === 'comments') {
     return formatAsBulletList(formatMultiline(value));
   }
   return formatAsBulletList(value);
@@ -78,7 +113,7 @@ export function formatPlotDetailField(label, value) {
 
 /** Short location line for cards (first bullet or first line). */
 export function locationPreview(loc) {
-  const items = parseBulletItems(loc);
+  const items = parseBulletItems(formatLocation(loc));
   if (items.length) return items[0];
   const line = String(loc || '')
     .split(/\n/)[0]
