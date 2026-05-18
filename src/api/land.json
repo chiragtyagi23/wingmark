@@ -281,7 +281,7 @@
     "slug": "upper-kharghar-26-acres-adivali-sale",
     "type": "sale",
     "category": "premium",
-    "img": "/adivali-26acres-map.png",
+    "img": "/adivali-26acres-site-day.png",
     "loc": "• Village Adivali & Dhansar\n• Next to HP petrol pump",
     "name": "26 Acres land for sale in Upper Kharghar",
     "area": "• 1063.70 guntha\n• (26.5925 acres)",
@@ -296,9 +296,16 @@
       "₹ 60 L per guntha — deal value approx. ₹ 638.22 Cr; clear title."
     ],
     "gallery": [
+      "/adivali-26acres-site-day.png",
+      "/adivali-26acres-site-night.png",
       "/adivali-26acres-map.png"
     ],
-    "media": [],
+    "media": [
+      {
+        "url": "/adivali-26acres-site.mp4",
+        "title": "Site video"
+      }
+    ],
     "files": [
       {
         "name": "Amotion 6 - Gat book.pdf",
