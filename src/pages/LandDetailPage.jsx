@@ -230,21 +230,13 @@ function LandDetailPage() {
         <section className="land-detail-section" id="location">
           <h2 className="land-detail-h">Google Location</h2>
           <div className="map-embed">
-            {listing.locationImage ? (
-              <img
-                src={listing.locationImage}
-                alt={`${listing.name} location preview`}
-                loading="lazy"
-              />
-            ) : (
-              <iframe
-                src={`https://www.google.com/maps?q=${listing.location.lat},${listing.location.lng}&z=14&output=embed`}
-                title={`${listing.name} location`}
-                loading="lazy"
-                allowFullScreen
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-            )}
+            <iframe
+              src={`https://www.google.com/maps?q=${listing.location.lat},${listing.location.lng}&z=14&output=embed`}
+              title={`${listing.name} location`}
+              loading="lazy"
+              allowFullScreen
+              referrerPolicy="no-referrer-when-downgrade"
+            />
           </div>
           <div className="map-meta">
             <div>
