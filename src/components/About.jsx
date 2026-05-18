@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Download, Loader2 } from 'lucide-react';
-import { generateCompanyProfilePdf } from '../utils/generateCompanyProfile';
+
+const COMPANY_PROFILE_URL = '/company-profile.pdf';
+const COMPANY_PROFILE_FILENAME = 'The Wingsmark Infraa - Company Profile.pdf';
 
 function About() {
   const [busy, setBusy] = useState(false);
@@ -9,18 +11,20 @@ function About() {
     if (busy) return;
     setBusy(true);
     try {
-      const blob = await generateCompanyProfilePdf();
+      const res = await fetch(COMPANY_PROFILE_URL);
+      if (!res.ok) throw new Error(`Failed to load company profile (${res.status})`);
+      const blob = await res.blob();
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'The Wingsmark Infraa - Company Profile.pdf';
+      a.download = COMPANY_PROFILE_FILENAME;
       document.body.appendChild(a);
       a.click();
       a.remove();
       setTimeout(() => URL.revokeObjectURL(url), 1500);
     } catch (err) {
       console.error('[Company profile PDF]', err);
-      alert('Could not generate the company profile. Please try again.');
+      alert('Could not download the company profile. Please try again.');
     } finally {
       setBusy(false);
     }

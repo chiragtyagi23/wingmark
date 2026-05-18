@@ -222,12 +222,12 @@
     ],
     "files": [
       {
-        "name": "Salient Features (Project Brief).pdf",
-        "url": "/rameshwar-salient-features.pdf"
-      },
-      {
         "name": "7-12 (VC) Land Record.pdf",
         "url": "/rameshwar-7-12-vc.pdf"
+      },
+      {
+        "name": "Survey List.pdf",
+        "url": "/rameshwar-survey-list.pdf"
       }
     ],
     "googleLocationUrl": "https://goo.gl/maps/9kmCiELvPxQtziLC7",
