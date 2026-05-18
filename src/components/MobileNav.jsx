@@ -34,15 +34,17 @@ function MobileNav({ open, onClose }) {
 
   return (
     <div
-      className={`fixed inset-0 z-[999] flex flex-col items-center justify-center bg-[rgba(14,56,94,0.98)] transition-opacity duration-300 ${
+      className={`fixed inset-0 z-[1050] flex flex-col items-center justify-center bg-[rgba(14,56,94,0.98)] transition-opacity duration-300 ${
         open ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
       }`}
       id="mobileNav"
+      aria-hidden={!open}
     >
       <button
         type="button"
-        className="absolute right-[5vw] top-6 cursor-pointer border-none bg-transparent text-[32px] text-silver"
+        className="absolute right-[5vw] top-6 flex h-11 w-11 cursor-pointer items-center justify-center rounded-sm border border-white/20 bg-white/5 text-[28px] leading-none text-white transition-colors hover:border-gold hover:text-gold"
         onClick={onClose}
+        aria-label="Close menu"
       >
         ✕
       </button>

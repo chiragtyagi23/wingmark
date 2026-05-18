@@ -2,7 +2,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
 import navLinks from '../api/nav-links.json';
 
-function Navbar({ scrolled, activeSection, onMobileOpen }) {
+function Navbar({ scrolled, activeSection, mobileOpen = false, onMobileToggle }) {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -32,7 +32,7 @@ function Navbar({ scrolled, activeSection, onMobileOpen }) {
     <nav
       id="mainNav"
       className={clsx(
-        'fixed inset-x-0 top-0 z-[1000] flex items-center justify-between gap-2 border-b pr-2 backdrop-blur-[18px] transition-all duration-300 ease-out max-[1180px]:gap-1.5',
+        'fixed inset-x-0 top-0 z-[1100] flex items-center justify-between gap-2 border-b pr-2 backdrop-blur-[18px] transition-all duration-300 ease-out max-[1180px]:gap-1.5',
         scrolled
           ? 'h-[118px] border-[rgba(247,198,27,0.45)] bg-[rgba(250,247,240,0.98)] shadow-[0_2px_10px_rgba(10,26,47,0.08)] max-[1180px]:h-[96px] max-[900px]:h-[84px] max-[600px]:h-[80px] max-[380px]:h-[92px]'
           : 'h-[140px] border-[rgba(247,198,27,0.12)] bg-[rgba(248,244,236,0.94)] max-[1180px]:h-[104px] max-[900px]:h-[88px] max-[600px]:h-[82px] max-[380px]:h-[76px]'
@@ -102,13 +102,30 @@ function Navbar({ scrolled, activeSection, onMobileOpen }) {
 
       <button
         type="button"
-        className="hidden max-[1180px]:flex flex-col gap-1.5 border-none bg-transparent p-1 cursor-pointer"
-        onClick={onMobileOpen}
-        aria-label="Menu"
+        className="relative hidden max-[1180px]:flex h-10 w-10 shrink-0 flex-col items-center justify-center gap-1.5 border-none bg-transparent p-1 cursor-pointer"
+        onClick={onMobileToggle}
+        aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+        aria-expanded={mobileOpen}
+        aria-controls="mobileNav"
       >
-        <span className="block h-0.5 w-6 bg-charcoal transition-all" />
-        <span className="block h-0.5 w-6 bg-charcoal transition-all" />
-        <span className="block h-0.5 w-6 bg-charcoal transition-all" />
+        <span
+          className={clsx(
+            'block h-0.5 w-6 origin-center bg-charcoal transition-all duration-300',
+            mobileOpen && 'translate-y-2 rotate-45'
+          )}
+        />
+        <span
+          className={clsx(
+            'block h-0.5 w-6 bg-charcoal transition-all duration-300',
+            mobileOpen && 'scale-x-0 opacity-0'
+          )}
+        />
+        <span
+          className={clsx(
+            'block h-0.5 w-6 origin-center bg-charcoal transition-all duration-300',
+            mobileOpen && '-translate-y-2 -rotate-45'
+          )}
+        />
       </button>
     </nav>
   );

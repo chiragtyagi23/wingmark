@@ -155,7 +155,8 @@ function Layout() {
       <Navbar
         scrolled={navScrolled}
         activeSection={activeSection}
-        onMobileOpen={() => setMobileOpen(true)}
+        mobileOpen={mobileOpen}
+        onMobileToggle={() => setMobileOpen((open) => !open)}
       />
       <ScrollManager />
       <Routes>
