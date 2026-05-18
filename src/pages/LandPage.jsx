@@ -4,10 +4,7 @@ import LandBanner from '../components/LandBanner';
 import AddToCartButton from '../components/AddToCartButton';
 import landListings from '../api/land.json';
 import ListingTextValue from '../components/ListingTextValue';
-import {
-  formatAsBulletList,
-  formatLandDetailField,
-} from '../utils/listingTextFormat';
+import { formatLandDetailField } from '../utils/listingTextFormat';
 import landCategories from '../api/land-categories.json';
 import LeadModal from '../components/LeadModal';
 
