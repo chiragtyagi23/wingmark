@@ -5,6 +5,7 @@ import {
   formatLandOpportunity,
   formatLocation,
   formatMultiline,
+  formatPlotDetailField,
   formatSingleBullet,
   formatSuitableFor,
   splitToBullets,
@@ -514,8 +515,9 @@ function contentYAfterListingBadge(
 }
 
 /**
- * Pre-made brochure image PDFs in `/public/brochures/listing-NNN.pdf`
- * (e.g. L/004 → `listing-004.pdf`). Override per listing with `brochurePdf`.
+ * Pre-made brochure image PDFs in `/public/brochures/`
+ * — land L/NNN → `listing-NNN.pdf`, plot PS/NNN → `plot-NNN.pdf`.
+ * Override per listing with `brochurePdf`.
  */
 export function resolveStaticBrochureGalleryUrl(listingNumber, brochurePdf) {
   if (brochurePdf != null && String(brochurePdf).trim() !== '') {
@@ -523,8 +525,12 @@ export function resolveStaticBrochureGalleryUrl(listingNumber, brochurePdf) {
     return p.startsWith('/') ? p : `/${p}`;
   }
   const m = String(listingNumber || '').match(/([A-Z]+)\s*\/\s*(\d+)/i);
-  if (!m || m[1].toUpperCase() !== 'L') return null;
-  return `/brochures/listing-${m[2].padStart(3, '0')}.pdf`;
+  if (!m) return null;
+  const prefix = m[1].toUpperCase();
+  const num = m[2].padStart(3, '0');
+  if (prefix === 'L') return `/brochures/listing-${num}.pdf`;
+  if (prefix === 'PS') return `/brochures/plot-${num}.pdf`;
+  return null;
 }
 
 /** Append image pages from a static brochure PDF (skip blank first page). */
@@ -592,7 +598,7 @@ async function appendListingGalleryPages(pdfDoc, galleryUrls, pageWidth, pageHei
 
 /**
  * Multi-page brochure: listing text on letterhead (with overflow pages),
- * then static image pages from `/public/brochures/listing-NNN.pdf` when present,
+ * then static image pages from `/public/brochures/listing-NNN.pdf` or `plot-NNN.pdf` when present,
  * otherwise dynamically built gallery pages (max eight images).
  *
  * @param {{
@@ -880,21 +886,22 @@ export function buildBrochureData(item, type) {
       pdfType: isJv ? 'plot-jv' : 'plot-sale',
       title: item.title,
       listingNumber: item.listingNumber,
-      location: formatLocation(item.location),
-      sector: item.sector,
-      plotNumber: item.plotNumber,
-      area: item.area,
-      accessRoad: item.accessRoad,
-      stage: item.stage,
-      salePrice: !isJv ? item.salePrice : '',
-      jvRatio: isJv ? item.jvRatio : '',
-      jvDepositPrice: isJv ? item.jvOnPrice : '',
-      comments: item.comments || '',
+      location: formatPlotDetailField('Location', item.location),
+      sector: formatPlotDetailField('Sector', item.sector),
+      plotNumber: formatPlotDetailField('Plot Number', item.plotNumber),
+      area: formatPlotDetailField('Area', item.area),
+      accessRoad: formatPlotDetailField('Access Road', item.accessRoad),
+      stage: formatPlotDetailField('Stage', item.stage),
+      salePrice: !isJv ? formatPlotDetailField('Sale Price', item.salePrice) : '',
+      jvRatio: isJv ? formatPlotDetailField('JV Ratio', item.jvRatio) : '',
+      jvDepositPrice: isJv ? formatPlotDetailField('JV on Price', item.jvOnPrice) : '',
+      comments: item.comments ? formatPlotDetailField('Comments', item.comments) : '',
       imageUrl: item.img || '',
       locationImageUrl: secondImg,
       listingUrl: `${SITE_URL}/plot/${item.slug}`,
       googleMapsUrl: resolveGoogleMapsUrl(item, 'plot'),
       galleryUrls: collectGalleryUrls(item),
+      brochurePdf: item.brochurePdf || '',
     };
   }
   return {
