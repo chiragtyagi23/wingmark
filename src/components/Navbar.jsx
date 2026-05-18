@@ -50,7 +50,7 @@ function Navbar({ scrolled, activeSection, mobileOpen = false, onMobileToggle })
           src="/wingsmark-logo.png"
           alt="The Wingsmark Infraa"
         />
-        <div className="flex flex-col gap-0 leading-none text-charcoal">
+        <div className="flex flex-col gap-0.5 leading-none text-charcoal">
           <span className="navbar-brand-text text-[13px] font-bold italic leading-none tracking-[0.18em] text-[#6a543a] max-[900px]:text-[10px] max-[600px]:text-[9px] max-[380px]:text-xs">
             The
           </span>

@@ -192,6 +192,7 @@
   .team-name,
   .contact-form-title {
     font-size: clamp(1.625rem, 2.5vw, 1.875rem);
+    line-height: 1.2;
   }
 
   .service-title,
