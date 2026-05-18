@@ -15,7 +15,7 @@
     --gold: #f7c61b;
     --red: #9a0704;
     --white: #fafafa;
-    --body-size: 16px;
+    --body-size: 12px;
     --body-leading: 1.5;
   }
 
@@ -33,7 +33,7 @@
     line-height: var(--body-leading);
   }
 
-  /* Heading scale — body is 16px; headings stay clearly larger */
+  /* Heading scale — body is 12px; headings stay clearly larger */
   h1,
   h2,
   h3,
@@ -144,7 +144,7 @@
     transition-delay: 0.4s;
   }
 
-  /* Body copy — match base `p` (16px Montserrat) */
+  /* Body copy — match base `p` (12px Montserrat) */
   .section-p,
   .pillar-p,
   .why-p,
@@ -165,12 +165,15 @@
     line-height: var(--body-leading);
   }
 
-  /* Section & card headings — sized above 16px body */
+  /* Section & card headings — sized above 12px body */
   .section-h2 {
     font-size: clamp(2rem, 4.5vw, 3.625rem);
   }
 
-  .why-title,
+  .why-title {
+    font-size: 20px;
+  }
+
   .invest-card-title,
   .news-title,
   .visited-panel-title,

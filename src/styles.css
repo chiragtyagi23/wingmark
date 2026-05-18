@@ -176,7 +176,7 @@
 
 .section-p {
   font-family: Montserrat, system-ui, sans-serif;
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 400;
   line-height: 1.5;
   color: #ffffff;
@@ -281,7 +281,7 @@
 
 .pillar-p {
   font-family: Montserrat, system-ui, sans-serif;
-  font-size: 16px;
+  font-size: 12px;
   color: #ffffff;
   line-height: 1.5;
 }
@@ -582,7 +582,7 @@
 
 .why-title {
   font-family: 'Times New Roman', Times, serif;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 600;
   color: var(--white);
   margin-bottom: 12px;
@@ -590,7 +590,7 @@
 
 .why-p {
   font-family: Montserrat, system-ui, sans-serif;
-  font-size: 16px;
+  font-size: 12px;
   color: #ffffff;
   line-height: 1.5;
 }
@@ -668,7 +668,7 @@ ul.why-bullets li::before {
 
 .invest-point-content h4 {
   font-family: Montserrat, system-ui, sans-serif;
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--white);
   margin-bottom: 6px;
@@ -678,7 +678,7 @@ ul.why-bullets li::before {
 
 .invest-point-content p {
   font-family: Montserrat, system-ui, sans-serif;
-  font-size: 16px;
+  font-size: 12px;
   color: #ffffff;
   line-height: 1.5;
 }
@@ -720,7 +720,7 @@ ul.why-bullets li::before {
 
 .invest-card-p {
   font-family: Montserrat, system-ui, sans-serif;
-  font-size: 16px;
+  font-size: 12px;
   color: #ffffff;
   line-height: 1.5;
 }
@@ -758,7 +758,7 @@ ul.why-bullets li::before {
 
 .team-intro {
   font-family: Montserrat, system-ui, sans-serif;
-  font-size: 16px;
+  font-size: 12px;
   color: #ffffff;
   line-height: 1.5;
   max-width: 720px;
@@ -885,7 +885,7 @@ ul.why-bullets li::before {
 
 .team-bio {
   font-family: Montserrat, system-ui, sans-serif;
-  font-size: 16px;
+  font-size: 12px;
   color: #ffffff;
   line-height: 1.5;
 }
@@ -1017,7 +1017,7 @@ ul.why-bullets li::before {
   margin: 0;
   padding-left: 1.15rem;
   font-family: Montserrat, system-ui, sans-serif;
-  font-size: 16px;
+  font-size: 12px;
   line-height: 1.5;
   font-weight: 400;
   text-transform: none;
@@ -1040,7 +1040,7 @@ ul.why-bullets li::before {
 
 .land-loc-text {
   font-family: Montserrat, system-ui, sans-serif;
-  font-size: 16px;
+  font-size: 12px;
   line-height: 1.5;
   color: #ffffff;
   text-transform: none;
@@ -1075,7 +1075,7 @@ ul.why-bullets li::before {
 
 .land-price {
   font-family: Montserrat, system-ui, sans-serif;
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 500;
   color: #ffffff;
   white-space: pre-line;
@@ -1224,7 +1224,7 @@ ul.why-bullets li::before {
 
 .cta-p {
   font-family: Montserrat, system-ui, sans-serif;
-  font-size: 16px;
+  font-size: 12px;
   color: #ffffff;
   line-height: 1.5;
   margin-bottom: 40px;
@@ -1302,7 +1302,7 @@ ul.why-bullets li::before {
 
 .contact-form-sub {
   font-family: Montserrat, system-ui, sans-serif;
-  font-size: 16px;
+  font-size: 12px;
   line-height: 1.5;
   color: #ffffff;
   margin-bottom: 32px;
@@ -1464,7 +1464,7 @@ footer::before {
 
 .footer-brand p {
   font-family: Montserrat, system-ui, sans-serif;
-  font-size: 16px;
+  font-size: 12px;
   color: #ffffff;
   line-height: 1.5;
   margin: 0 0 16px;
@@ -2531,7 +2531,7 @@ footer::before {
 
 .news-summary {
   font-family: Montserrat, system-ui, sans-serif;
-  font-size: 16px;
+  font-size: 12px;
   line-height: 1.5;
   color: #ffffff;
   flex: 1;
@@ -2571,7 +2571,7 @@ footer::before {
 }
 
 .land-detail-loc {
-  font-size: 16px;
+  font-size: 12px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--gold);
@@ -2587,7 +2587,7 @@ footer::before {
   margin: 0;
   padding-left: 1.25rem;
   font-family: Montserrat, system-ui, sans-serif;
-  font-size: 16px;
+  font-size: 12px;
   line-height: 1.5;
   text-transform: none;
   letter-spacing: normal;
@@ -2621,7 +2621,7 @@ footer::before {
 }
 
 .listing-block .listing-bullet-list {
-  font-size: 16px;
+  font-size: 12px;
   color: #ffffff;
   font-style: normal;
 }
@@ -2642,7 +2642,7 @@ footer::before {
 }
 
 .land-detail-area {
-  font-size: 16px;
+  font-size: 12px;
   color: #ffffff;
   letter-spacing: 0.05em;
 }
@@ -2717,7 +2717,7 @@ footer::before {
   color: var(--gold);
   border: 2px solid var(--gold);
   letter-spacing: 0.18em;
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
 }
@@ -2784,13 +2784,13 @@ footer::before {
 
 .listing-block-value {
   color: #ffffff;
-  font-size: 16px;
+  font-size: 12px;
   line-height: 1.5;
   font-weight: 400;
 }
 
 .listing-block--wide .listing-block-value {
-  font-size: 16px;
+  font-size: 12px;
 }
 
 .listing-block--accent .listing-block-label {
@@ -2922,7 +2922,7 @@ footer::before {
 
 .land-card-detail-row strong {
   font-family: Montserrat, system-ui, sans-serif;
-  font-size: 16px;
+  font-size: 12px;
   color: #ffffff;
   font-weight: 500;
   line-height: 1.5;
@@ -2960,7 +2960,7 @@ footer::before {
 
 .land-detail-desc {
   font-family: Montserrat, system-ui, sans-serif;
-  font-size: 16px;
+  font-size: 12px;
   line-height: 1.5;
   color: #ffffff;
   white-space: pre-wrap;
@@ -3364,7 +3364,7 @@ footer::before {
 /* ---------- Mobile common (<=768px) reinforcements ---------- */
 @media (max-width: 768px) {
   body {
-    font-size: 16px;
+    font-size: 12px;
   }
   .land-inner,
   .footer-grid,
@@ -3382,7 +3382,7 @@ footer::before {
     line-height: 1.15;
   }
   .section-p {
-    font-size: 16px;
+    font-size: 12px;
     line-height: 1.5;
   }
   .land-page-section {
@@ -3411,7 +3411,7 @@ footer::before {
   }
   .land-detail-loc {
     letter-spacing: 0.1em;
-    font-size: 16px;
+    font-size: 12px;
     line-height: 1.5;
   }
   .land-detail-meta {
@@ -3433,7 +3433,7 @@ footer::before {
     gap: 14px;
   }
   .listing-block-value {
-    font-size: 16px;
+    font-size: 12px;
   }
   .land-filters,
   .land-categories {
@@ -3473,13 +3473,13 @@ footer::before {
 /* ---------- Small phones (<=480px) ---------- */
 @media (max-width: 480px) {
   body {
-    font-size: 16px;
+    font-size: 12px;
   }
   .section-h2 {
     font-size: clamp(26px, 8vw, 38px);
   }
   .section-p {
-    font-size: 16px;
+    font-size: 12px;
   }
   .land-detail-hero {
     min-height: auto;
@@ -3923,7 +3923,7 @@ footer::before {
   flex: 1;
   text-align: center;
   font-family: 'Times New Roman', Times, serif;
-  font-size: 16px;
+  font-size: 12px;
   color: #ffffff;
   letter-spacing: 0.02em;
   white-space: nowrap;
@@ -4392,7 +4392,7 @@ body.has-sticky-cta {
 
 .lead-modal-captcha-input {
   text-align: center;
-  font-size: 16px !important;
+  font-size: 12px !important;
   font-weight: 600 !important;
   padding: 8px !important;
   border: 1.5px solid rgba(14, 56, 94, 0.35) !important;
@@ -4509,7 +4509,7 @@ body.has-sticky-cta {
 
 .lead-modal-success-p {
   font-family: Montserrat, system-ui, sans-serif;
-  font-size: 16px;
+  font-size: 12px;
   color: #555;
   line-height: 1.5;
   margin-bottom: 22px;
@@ -4711,7 +4711,7 @@ body.has-sticky-cta {
 .visited-panel-sub {
   margin: 4px 0 0;
   font-family: Montserrat, system-ui, sans-serif;
-  font-size: 16px;
+  font-size: 12px;
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.78);
   letter-spacing: 0.02em;

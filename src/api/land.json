@@ -236,5 +236,44 @@
       "lng": 73.19953,
       "address": "Rameshwar Vaibhav Hill Station, Village Tadgaon, Taluka Sudhagad, District Raigad, Maharashtra"
     }
+  },
+  {
+    "listingNumber": "Listing #: L/006",
+    "slug": "upper-kharghar-5-acres-jv-dhansar",
+    "type": "jv",
+    "category": "affordable",
+    "img": "/dhansar-5acres-jv-toll-plaza.png",
+    "loc": "• Village Dhansar\n• Close to toll plaza\n• Opp Romy Lodge",
+    "name": "5 Acres land for JV in Upper Kharghar",
+    "area": "5 acres",
+    "label": "JV On Price",
+    "price": "₹ 18 L per guntha\n(₹ 7.20 Cr per acre)",
+    "badge": "Joint Venture",
+    "jvTerms": "60/40",
+    "nearestStation": "• Taloja - 2 km\n• Amandoot Metro station - 4 km\n• Upcoming Pisarve Depot metro station on Kharghar to Kalyan corridor - 1 km",
+    "keyPoints": "Highway Touch land",
+    "status": "Clear title single owner land",
+    "snapshot": [
+      "5 acres highway-touch land near toll plaza, opposite Romy Lodge.",
+      "JV 60/40 on ₹ 18 L per guntha (₹ 7.20 Cr per acre); clear title single owner."
+    ],
+    "gallery": [
+      "/dhansar-5acres-jv-toll-plaza.png",
+      "/dhansar-5acres-jv-romy-lodge.png",
+      "/dhansar-5acres-jv-site-gate.png"
+    ],
+    "media": [
+      {
+        "url": "/dhansar-5acres-jv-site.mp4",
+        "title": "Site video"
+      }
+    ],
+    "files": [],
+    "googleLocationUrl": "https://maps.app.goo.gl/XvmbATY4nkQb9JKk9",
+    "location": {
+      "lat": 19.0284,
+      "lng": 73.153,
+      "address": "Village Dhansar, Upper Kharghar, near toll plaza"
+    }
   }
 ]

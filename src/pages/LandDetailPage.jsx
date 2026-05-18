@@ -5,6 +5,7 @@ import AddToCartButton from '../components/AddToCartButton';
 import ListingTextValue from '../components/ListingTextValue';
 import landListings from '../api/land.json';
 import {
+  buildListingGallery,
   formatMultiline,
   formatLandOpportunity,
   locationPreview,
@@ -17,6 +18,7 @@ function LandDetailPage() {
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'auto' });
+    setGalleryIndex(0);
   }, [slug]);
 
   if (!listing) {
@@ -32,7 +34,7 @@ function LandDetailPage() {
 
   const mapLink = listing.googleLocationUrl ?? `https://www.google.com/maps/search/?api=1&query=${listing.location.lat},${listing.location.lng}`;
   const directionLink = `https://www.google.com/maps/dir/?api=1&destination=${listing.location.lat},${listing.location.lng}`;
-  const gallery = listing.gallery?.length ? listing.gallery : [listing.img];
+  const gallery = buildListingGallery(listing);
 
   const commentsText = listing.comments ?? listing.specialComments;
 
@@ -51,7 +53,8 @@ function LandDetailPage() {
     { label: 'Key points', value: formatMultiline(listing.keyPoints), wide: true, preline: true },
     { label: 'Special Features', value: formatMultiline(listing.specialFeatures), wide: true, preline: true },
     { label: 'Comments', value: formatMultiline(commentsText), wide: true, preline: true },
-    { label: 'Price', value: listing.price },
+    { label: 'JV Terms', value: listing.jvTerms, preline: true },
+    { label: listing.label || 'Price', value: listing.price, preline: true },
     { label: 'Status', value: listing.status, wide: true, preline: true },
   ].filter((block) => block.value);
 

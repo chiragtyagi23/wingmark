@@ -678,7 +678,8 @@ export async function generateListingBrochure(data) {
       ['Key Points', safe.keyPoints],
       ['Special Features', safe.specialFeatures],
       ['Comments / Approvals', safe.comments],
-      ['Price', safe.price],
+      ...(safe.jvTerms ? [['JV Terms', safe.jvTerms]] : []),
+      ...(safe.jvOnPrice ? [['JV On Price', safe.jvOnPrice]] : [['Price', safe.price]]),
       ['Status', safe.status],
     ];
   }
@@ -858,6 +859,8 @@ export function buildBrochureData(item, type) {
     keyPoints: formatMultiline(item.keyPoints),
     specialFeatures: formatMultiline(item.specialFeatures || ''),
     comments: formatMultiline(item.comments ?? item.specialComments ?? ''),
+    jvTerms: item.jvTerms ? formatSingleBullet(item.jvTerms) : '',
+    jvOnPrice: item.type === 'jv' ? formatSingleBullet(item.price) : '',
     price: formatSingleBullet(item.price),
     status: formatSingleBullet(item.status),
     imageUrl: item.img || '',
@@ -923,6 +926,8 @@ export function buildWhatsAppListingMessage(item, type) {
     add(`Location:\n${clipText(d.location, 1400)}`);
     add(d.nearestTrain ? `Nearest station: ${d.nearestTrain}` : '');
     add(d.area ? `Total area: ${d.area}` : '');
+    add(d.jvTerms ? `JV terms: ${d.jvTerms}` : '');
+    add(d.jvOnPrice ? `JV on price: ${d.jvOnPrice}` : !d.jvTerms && d.price ? `Price: ${d.price}` : '');
     const sf = clipText(d.suitableFor, 700);
     if (sf) add(`Suitable for:\n${sf}`);
     const opp = clipText(d.opportunity, 1600);
@@ -933,7 +938,7 @@ export function buildWhatsAppListingMessage(item, type) {
     if (sp) add(`Special features:\n${sp}`);
     const cm = clipText(d.comments, 1600);
     if (cm) add(`Comments / approvals:\n${cm}`);
-    add(d.price ? `Price: ${d.price}` : '');
+    if (!d.jvOnPrice && d.price) add(`Price: ${d.price}`);
     add(d.status ? `Status: ${d.status}` : '');
   }
 

@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { Navigation, ExternalLink, Download } from 'lucide-react';
 import AddToCartButton from '../components/AddToCartButton';
 import plotListings from '../api/plots.json';
+import { buildListingGallery } from '../utils/listingTextFormat';
 
 function PlotDetailPage() {
   const { slug } = useParams();
@@ -11,6 +12,7 @@ function PlotDetailPage() {
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'auto' });
+    setGalleryIndex(0);
   }, [slug]);
 
   if (!plot) {
@@ -29,7 +31,7 @@ function PlotDetailPage() {
     plot.googleLocationUrl ||
     `https://www.google.com/maps/search/?api=1&query=${plot.location_geo.lat},${plot.location_geo.lng}`;
   const directionLink = `https://www.google.com/maps/dir/?api=1&destination=${plot.location_geo.lat},${plot.location_geo.lng}`;
-  const gallery = plot.gallery?.length ? plot.gallery : [plot.img];
+  const gallery = buildListingGallery(plot);
 
   const detailBlocks = [
     { label: 'Title', value: plot.title, wide: true },
@@ -137,7 +139,7 @@ function PlotDetailPage() {
 
         <section className="land-detail-section" id="gallery">
           <h2 className="land-detail-h">Images <span className="land-detail-h-sub">(up to 5)</span></h2>
-          {gallery.length > 0 && plot.gallery?.length ? (
+          {gallery.length > 0 ? (
             <div className="gallery-wrap">
               <div className="gallery-main">
                 <img

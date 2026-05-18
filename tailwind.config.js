@@ -20,6 +20,9 @@ export default {
         serif: ['Times New Roman', 'Times', 'serif'],
         times: ['Times New Roman', 'Times', 'serif'],
       },
+      fontSize: {
+        base: ['12px', { lineHeight: '1.5' }],
+      },
     },
   },
   plugins: [],

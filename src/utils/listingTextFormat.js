@@ -105,6 +105,28 @@ export function formatSingleBullet(val) {
   return `• ${lines[0]}\n${lines.slice(1).join('\n')}`;
 }
 
+/**
+ * Detail-page gallery: cover (`img`) first, then `gallery` URLs (deduped).
+ * Omits `locationImage` so maps stay in the location block only.
+ */
+export function buildListingGallery(item) {
+  if (!item) return [];
+  const urls = [];
+  const seen = new Set();
+  const add = (u) => {
+    if (u == null || u === '' || u === '#') return;
+    const s = String(u).trim();
+    if (!s || seen.has(s)) return;
+    seen.add(s);
+    urls.push(s);
+  };
+  add(item.img);
+  if (Array.isArray(item.gallery)) {
+    for (const g of item.gallery) add(g);
+  }
+  return urls;
+}
+
 /** Suitable For — bullets from existing • lines, " / " splits, or comma/period splits. */
 export function formatSuitableFor(val) {
   if (val == null || val === '') return '';
