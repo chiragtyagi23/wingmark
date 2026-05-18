@@ -93,8 +93,7 @@ function PlotPage() {
                       <span className="land-loc-label">Location</span>
                       <ListingTextValue
                         value={formatLocation(plot.location)}
-                        listClassName="land-loc-list"
-                        className="land-loc-text"
+                        listClassName="land-card-bullet-list"
                       />
                     </div>
                     <div className="land-card-details">

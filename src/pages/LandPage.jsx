@@ -109,15 +109,14 @@ function  LandPage() {
                       <div className="land-card-num">{listing.listingNumber}</div>
                     )}
                     <div className="land-name">{listing.name}</div>
-                    <div className="land-loc">
-                      <span className="land-loc-label">Location</span>
-                      <ListingTextValue
-                        value={formatLocation(listing.loc)}
-                        listClassName="land-loc-list"
-                        className="land-loc-text"
-                      />
-                    </div>
                     <div className="land-card-details">
+                      <div className="land-card-detail-row">
+                        <span>Location</span>
+                        <ListingTextValue
+                          value={formatLocation(listing.loc)}
+                          listClassName="land-card-bullet-list"
+                        />
+                      </div>
                       <div className="land-card-detail-row">
                         <span>Total Area</span>
                         <ListingTextValue

@@ -1004,18 +1004,9 @@ ul.why-bullets li::before {
 
 .land-loc-label {
   display: block;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--gold);
 }
 
 .land-loc-list {
-  list-style: disc;
-  list-style-position: outside;
-  margin: 0;
-  padding-left: 1.15rem;
   font-family: Montserrat, system-ui, sans-serif;
   font-size: 12px;
   line-height: 1.5;
@@ -1023,19 +1014,6 @@ ul.why-bullets li::before {
   text-transform: none;
   letter-spacing: normal;
   color: #ffffff;
-}
-
-.land-loc-list li {
-  margin-bottom: 0.4em;
-  padding-left: 0.15rem;
-}
-
-.land-loc-list li::marker {
-  color: var(--gold);
-}
-
-.land-loc-list li:last-child {
-  margin-bottom: 0;
 }
 
 .land-loc-text {
@@ -2917,13 +2895,17 @@ button.land-detail-back {
   border-top: 1px solid rgba(205, 205, 205, 0.08);
 }
 
-.land-card-detail-row {
+.land-card-detail-row,
+.land-loc {
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
 
-.land-card-detail-row span {
+.land-loc-label,
+.land-card-detail-row > span,
+.land-price-label {
+  display: block;
   font-size: 9px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -2931,19 +2913,54 @@ button.land-detail-back {
   font-weight: 700;
 }
 
-.land-card-detail-row .land-card-bullet-list,
-.land-card-detail-row .listing-bullet-list {
+/* Listing cards — one bullet column for Location, fields, and price */
+.land-card .land-loc-list,
+.land-card .land-card-bullet-list,
+.land-card .land-card-detail-row .listing-bullet-list,
+.land-card-footer .land-card-bullet-list,
+.land-card-footer .listing-bullet-list.land-card-bullet-list {
+  list-style: none;
   margin: 0;
-  padding-left: 1.1em;
-  list-style: disc;
+  padding: 0;
 }
 
-.land-card-detail-row .land-card-bullet-list li,
-.land-card-detail-row .listing-bullet-list li {
+.land-card .land-loc-list li,
+.land-card .land-card-bullet-list li,
+.land-card .land-card-detail-row .listing-bullet-list li,
+.land-card-footer .land-card-bullet-list li,
+.land-card-footer .listing-bullet-list.land-card-bullet-list li {
+  position: relative;
+  padding-left: 0.85rem;
+  margin: 0 0 0.35em;
+  font-family: Montserrat, system-ui, sans-serif;
   font-size: 12px;
   line-height: 1.5;
   color: #ffffff;
   font-weight: 500;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.land-card .land-loc-list li::before,
+.land-card .land-card-bullet-list li::before,
+.land-card .land-card-detail-row .listing-bullet-list li::before,
+.land-card-footer .land-card-bullet-list li::before,
+.land-card-footer .listing-bullet-list.land-card-bullet-list li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--gold);
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.land-card .land-loc-list li:last-child,
+.land-card .land-card-bullet-list li:last-child,
+.land-card .land-card-detail-row .listing-bullet-list li:last-child,
+.land-card-footer .land-card-bullet-list li:last-child,
+.land-card-footer .listing-bullet-list.land-card-bullet-list li:last-child {
+  margin-bottom: 0;
 }
 
 .land-card-footer .land-card-bullet-list {
@@ -2998,11 +3015,33 @@ button.land-detail-back {
 
 .land-detail-cta {
   display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  justify-content: center;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 14px;
+  width: 100%;
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
   border-top: 1px solid rgba(97, 98, 99, 0.2);
   padding-top: 48px;
+}
+
+.land-detail-cta .btn-gold,
+.land-detail-cta .btn-outline,
+.land-detail-cta .btn-download-all-documents {
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+  box-sizing: border-box;
+  padding: 16px 28px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1.35;
+}
+
+.land-detail-cta .btn-outline {
+  padding: 15px 28px;
 }
 
 .btn-download-all-documents {
