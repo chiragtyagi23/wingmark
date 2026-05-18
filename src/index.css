@@ -19,12 +19,20 @@
     --body-leading: 1.5;
   }
 
+  @media (min-width: 769px) {
+    :root {
+      --body-size: 16px;
+    }
+  }
+
   html {
     @apply scroll-smooth overflow-x-hidden;
   }
 
   body {
-    @apply overflow-x-hidden bg-charcoal font-sans text-base text-silver antialiased;
+    @apply overflow-x-hidden bg-charcoal font-sans text-silver antialiased;
+    font-size: var(--body-size);
+    line-height: var(--body-leading);
   }
 
   p {
@@ -33,7 +41,7 @@
     line-height: var(--body-leading);
   }
 
-  /* Heading scale — body is 12px; headings stay clearly larger */
+  /* Heading scale — body 12px mobile / 16px desktop; headings stay larger */
   h1,
   h2,
   h3,

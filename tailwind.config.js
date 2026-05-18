@@ -21,7 +21,7 @@ export default {
         times: ['Times New Roman', 'Times', 'serif'],
       },
       fontSize: {
-        base: ['12px', { lineHeight: '1.5' }],
+        base: ['var(--body-size, 12px)', { lineHeight: 'var(--body-leading, 1.5)' }],
       },
     },
   },

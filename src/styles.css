@@ -176,9 +176,9 @@
 
 .section-p {
   font-family: Montserrat, system-ui, sans-serif;
-  font-size: 12px;
+  font-size: var(--body-size, 12px);
   font-weight: 400;
-  line-height: 1.5;
+  line-height: var(--body-leading, 1.5);
   color: #ffffff;
   max-width: 560px;
 }
@@ -281,9 +281,9 @@
 
 .pillar-p {
   font-family: Montserrat, system-ui, sans-serif;
-  font-size: 12px;
+  font-size: var(--body-size, 12px);
   color: #ffffff;
-  line-height: 1.5;
+  line-height: var(--body-leading, 1.5);
 }
 
 #services {
@@ -590,9 +590,9 @@
 
 .why-p {
   font-family: Montserrat, system-ui, sans-serif;
-  font-size: 12px;
+  font-size: var(--body-size, 12px);
   color: #ffffff;
-  line-height: 1.5;
+  line-height: var(--body-leading, 1.5);
 }
 
 ul.why-bullets {
@@ -720,9 +720,9 @@ ul.why-bullets li::before {
 
 .invest-card-p {
   font-family: Montserrat, system-ui, sans-serif;
-  font-size: 12px;
+  font-size: var(--body-size, 12px);
   color: #ffffff;
-  line-height: 1.5;
+  line-height: var(--body-leading, 1.5);
 }
 
 .invest-card-tag {
@@ -758,9 +758,9 @@ ul.why-bullets li::before {
 
 .team-intro {
   font-family: Montserrat, system-ui, sans-serif;
-  font-size: 12px;
+  font-size: var(--body-size, 12px);
   color: #ffffff;
-  line-height: 1.5;
+  line-height: var(--body-leading, 1.5);
   max-width: 720px;
   margin: 0 auto 16px;
   text-align: center;
@@ -885,9 +885,9 @@ ul.why-bullets li::before {
 
 .team-bio {
   font-family: Montserrat, system-ui, sans-serif;
-  font-size: 12px;
+  font-size: var(--body-size, 12px);
   color: #ffffff;
-  line-height: 1.5;
+  line-height: var(--body-leading, 1.5);
 }
 
 .team-card-accent {
@@ -1224,9 +1224,9 @@ ul.why-bullets li::before {
 
 .cta-p {
   font-family: Montserrat, system-ui, sans-serif;
-  font-size: 12px;
+  font-size: var(--body-size, 12px);
   color: #ffffff;
-  line-height: 1.5;
+  line-height: var(--body-leading, 1.5);
   margin-bottom: 40px;
 }
 
@@ -1302,8 +1302,8 @@ ul.why-bullets li::before {
 
 .contact-form-sub {
   font-family: Montserrat, system-ui, sans-serif;
-  font-size: 12px;
-  line-height: 1.5;
+  font-size: var(--body-size, 12px);
+  line-height: var(--body-leading, 1.5);
   color: #ffffff;
   margin-bottom: 32px;
 }
@@ -2531,8 +2531,8 @@ footer::before {
 
 .news-summary {
   font-family: Montserrat, system-ui, sans-serif;
-  font-size: 12px;
-  line-height: 1.5;
+  font-size: var(--body-size, 12px);
+  line-height: var(--body-leading, 1.5);
   color: #ffffff;
   flex: 1;
   margin: 0;
@@ -2621,7 +2621,7 @@ footer::before {
 }
 
 .listing-block .listing-bullet-list {
-  font-size: 12px;
+  font-size: var(--body-size, 12px);
   color: #ffffff;
   font-style: normal;
 }
@@ -2784,13 +2784,13 @@ footer::before {
 
 .listing-block-value {
   color: #ffffff;
-  font-size: 12px;
-  line-height: 1.5;
+  font-size: var(--body-size, 12px);
+  line-height: var(--body-leading, 1.5);
   font-weight: 400;
 }
 
 .listing-block--wide .listing-block-value {
-  font-size: 12px;
+  font-size: var(--body-size, 12px);
 }
 
 .listing-block--accent .listing-block-label {
@@ -2979,8 +2979,8 @@ footer::before {
 
 .land-detail-desc {
   font-family: Montserrat, system-ui, sans-serif;
-  font-size: 12px;
-  line-height: 1.5;
+  font-size: var(--body-size, 12px);
+  line-height: var(--body-leading, 1.5);
   color: #ffffff;
   white-space: pre-wrap;
 }
@@ -3401,8 +3401,8 @@ footer::before {
     line-height: 1.15;
   }
   .section-p {
-    font-size: 12px;
-    line-height: 1.5;
+    font-size: var(--body-size, 12px);
+    line-height: var(--body-leading, 1.5);
   }
   .land-page-section {
     padding: 56px 0 80px;
@@ -3452,7 +3452,7 @@ footer::before {
     gap: 14px;
   }
   .listing-block-value {
-    font-size: 12px;
+    font-size: var(--body-size, 12px);
   }
   .land-filters,
   .land-categories {
