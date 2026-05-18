@@ -155,7 +155,13 @@ async function fetchAsArrayBuffer(url) {
   return await res.arrayBuffer();
 }
 
-const SKIP_SANITIZE = new Set(['imageUrl', 'locationImageUrl', 'listingUrl', 'googleMapsUrl']);
+const SKIP_SANITIZE = new Set([
+  'imageUrl',
+  'locationImageUrl',
+  'listingUrl',
+  'googleMapsUrl',
+  'brochurePdf',
+]);
 
 function sanitizeBrochureData(data) {
   const result = { ...data };
@@ -505,6 +511,40 @@ function contentYAfterListingBadge(
 }
 
 /**
+ * Pre-made brochure image PDFs in `/public/brochures/listing-NNN.pdf`
+ * (e.g. L/004 → `listing-004.pdf`). Override per listing with `brochurePdf`.
+ */
+export function resolveStaticBrochureGalleryUrl(listingNumber, brochurePdf) {
+  if (brochurePdf != null && String(brochurePdf).trim() !== '') {
+    const p = String(brochurePdf).trim();
+    return p.startsWith('/') ? p : `/${p}`;
+  }
+  const m = String(listingNumber || '').match(/([A-Z]+)\s*\/\s*(\d+)/i);
+  if (!m || m[1].toUpperCase() !== 'L') return null;
+  return `/brochures/listing-${m[2].padStart(3, '0')}.pdf`;
+}
+
+/** Append image pages from a static brochure PDF (skip blank first page). */
+async function appendStaticBrochureGalleryPages(pdfDoc, listingNumber, brochurePdf) {
+  const url = resolveStaticBrochureGalleryUrl(listingNumber, brochurePdf);
+  if (!url) return false;
+  try {
+    const bytes = await fetchAsArrayBuffer(url);
+    const galleryDoc = await PDFDocument.load(bytes, { ignoreEncryption: true });
+    const n = galleryDoc.getPageCount();
+    if (n <= 1) return false;
+    /** Page 0 is empty in supplied templates — image pages start at index 1. */
+    const indices = Array.from({ length: n - 1 }, (_, i) => i + 1);
+    const copied = await pdfDoc.copyPages(galleryDoc, indices);
+    copied.forEach((page) => pdfDoc.addPage(page));
+    return true;
+  } catch (e) {
+    console.warn('[brochure] static gallery PDF failed:', url, e);
+    return false;
+  }
+}
+
+/**
  * After text pages: blank pages with Wingsmark header only + listing images.
  * Up to 4 images per page; max {@link MAX_BROCHURE_GALLERY_IMAGES} images (2 pages).
  * Layouts: 1 full, 2 landscape strips, 3 (1+2), 4 (2x2).
@@ -549,8 +589,8 @@ async function appendListingGalleryPages(pdfDoc, galleryUrls, pageWidth, pageHei
 
 /**
  * Multi-page brochure: listing text on letterhead (with overflow pages),
- * then optional gallery pages (Wingsmark header only, no watermark) with
- * up to four images per page, maximum eight images (two gallery pages).
+ * then static image pages from `/public/brochures/listing-NNN.pdf` when present,
+ * otherwise dynamically built gallery pages (max eight images).
  *
  * @param {{
  *   title: string,
@@ -781,13 +821,20 @@ export async function generateListingBrochure(data) {
     yCursor -= lineGap;
   }
 
-  await appendListingGalleryPages(
+  const usedStaticGallery = await appendStaticBrochureGalleryPages(
     pdfDoc,
-    safe.galleryUrls || [],
-    width,
-    height,
-    helvBold
+    safe.listingNumber,
+    safe.brochurePdf
   );
+  if (!usedStaticGallery) {
+    await appendListingGalleryPages(
+      pdfDoc,
+      safe.galleryUrls || [],
+      width,
+      height,
+      helvBold
+    );
+  }
 
   const bytes = await pdfDoc.save();
   return new Blob([bytes], { type: 'application/pdf' });
@@ -874,6 +921,7 @@ export function buildBrochureData(item, type) {
     snapshot: formatMultiline(item.snapshot || []),
     googleMapsUrl: resolveGoogleMapsUrl(item, 'land'),
     galleryUrls: collectGalleryUrls(item),
+    brochurePdf: item.brochurePdf || '',
   };
 }
 
@@ -968,6 +1016,22 @@ export function buildWhatsAppListingMessage(item, type) {
   return out;
 }
 
+/** Short WhatsApp caption sent with the brochure PDF (listing # + Google Maps). */
+export function buildShortBrochureShareMessage(item, type) {
+  if (!item) return '';
+  const d = buildBrochureData(item, type);
+  if (!d) return '';
+
+  const lines = [];
+  if (d.listingNumber) lines.push(d.listingNumber);
+  if (d.title) lines.push(d.title);
+
+  const mapsUrl = d.googleMapsUrl || resolveGoogleMapsUrl(item, type);
+  if (mapsUrl) lines.push(`Google Maps: ${mapsUrl}`);
+
+  return lines.join('\n').trim();
+}
+
 /**
  * Build a single brochure PDF as a `File` ready for `navigator.share`
  * or for direct download.
@@ -988,12 +1052,14 @@ export async function generateBrochureFile(item, type) {
 }
 
 /**
- * Share brochure file(s) only (no caption text - WhatsApp receives the PDF alone).
- * On mobile: native share sheet with files only. On desktop: download each file,
- * then open WhatsApp Web without a prefilled message.
+ * Share brochure PDF(s) with a short text caption (listing #, Google Maps link).
+ * Mobile: native share sheet (file + text when supported). Desktop: download PDF(s),
+ * then open WhatsApp Web with the message prefilled.
  */
-export async function shareBrochureFiles(files) {
+export async function shareBrochureFiles(files, text = '') {
   if (!files || !files.length) return false;
+
+  const message = String(text || '').trim();
 
   const canShareFiles =
     typeof navigator !== 'undefined' &&
@@ -1002,7 +1068,15 @@ export async function shareBrochureFiles(files) {
 
   if (canShareFiles) {
     try {
-      await navigator.share({ files });
+      const payload = { files };
+      if (message) {
+        if (navigator.canShare({ files, text: message })) {
+          payload.text = message;
+        } else {
+          payload.text = message;
+        }
+      }
+      await navigator.share(payload);
       return true;
     } catch (err) {
       if (err && err.name === 'AbortError') return false;
@@ -1024,7 +1098,9 @@ export async function shareBrochureFiles(files) {
     }
   }
 
-  const waUrl = `https://wa.me/${WHATSAPP_BROCHURE_NUMBER}`;
+  const waUrl = message
+    ? `https://wa.me/${WHATSAPP_BROCHURE_NUMBER}?text=${encodeURIComponent(message)}`
+    : `https://wa.me/${WHATSAPP_BROCHURE_NUMBER}`;
   setTimeout(() => {
     window.open(waUrl, '_blank', 'noopener,noreferrer');
   }, files.length * 220 + 250);

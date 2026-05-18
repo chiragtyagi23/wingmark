@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import { Loader2 } from 'lucide-react';
-import { generateBrochureFile, shareBrochureFiles } from '../utils/generateBrochure';
+import {
+  buildShortBrochureShareMessage,
+  generateBrochureFile,
+  shareBrochureFiles,
+} from '../utils/generateBrochure';
 
 function ShareBrochureButton({
   listing,
@@ -17,7 +21,8 @@ function ShareBrochureButton({
 
     try {
       const file = await generateBrochureFile(listing, type);
-      await shareBrochureFiles([file]);
+      const text = buildShortBrochureShareMessage(listing, type);
+      await shareBrochureFiles([file], text);
     } catch (err) {
       console.error('Brochure share failed', err);
       const msg = (err && err.message) || String(err);

@@ -3,7 +3,11 @@ import { Link, useParams } from 'react-router-dom';
 import { Navigation, ExternalLink, Download } from 'lucide-react';
 import AddToCartButton from '../components/AddToCartButton';
 import plotListings from '../api/plots.json';
-import { buildListingGallery } from '../utils/listingTextFormat';
+import ListingTextValue from '../components/ListingTextValue';
+import {
+  buildListingGallery,
+  formatPlotDetailField,
+} from '../utils/listingTextFormat';
 
 function PlotDetailPage() {
   const { slug } = useParams();
@@ -32,28 +36,28 @@ function PlotDetailPage() {
     `https://www.google.com/maps/search/?api=1&query=${plot.location_geo.lat},${plot.location_geo.lng}`;
   const directionLink = `https://www.google.com/maps/dir/?api=1&destination=${plot.location_geo.lat},${plot.location_geo.lng}`;
   const gallery = buildListingGallery(plot);
+  const priceValue = isJv ? plot.jvOnPrice : plot.salePrice;
 
-  const detailBlocks = [
-    { label: 'Title', value: plot.title, wide: true },
-    { label: 'Location', value: plot.location, wide: true },
-    { label: 'Sector', value: plot.sector },
-    { label: 'Area', value: plot.area },
-    { label: 'Plot Number', value: plot.plotNumber },
-    { label: 'Access Road', value: plot.accessRoad },
-    { label: 'Stage', value: plot.stage, wide: true },
-    isJv
-      ? { label: 'JV Ratio', value: plot.jvRatio }
-      : { label: 'Sale Price', value: plot.salePrice },
-    isJv ? { label: 'JV on Price', value: plot.jvOnPrice } : null,
-    plot.validityDays
-      ? {
-          label: 'Validity',
-          value: `${plot.validityDays} days`,
-          wide: true,
-        }
-      : null,
-    plot.comments ? { label: 'Comments', value: plot.comments, wide: true, preline: true } : null,
-  ].filter((b) => b && b.value);
+  const detailRows = [
+    ['Location', plot.location],
+    ['Sector', plot.sector],
+    ['Area', plot.area],
+    ['Plot Number', plot.plotNumber],
+    ['Access Road', plot.accessRoad],
+    ['Stage', plot.stage],
+    isJv ? ['JV Ratio', plot.jvRatio] : ['Sale Price', plot.salePrice],
+    isJv ? ['JV on Price', plot.jvOnPrice] : null,
+    plot.validityDays ? ['Validity', `${plot.validityDays} days`] : null,
+    plot.comments ? ['Comments', plot.comments] : null,
+  ];
+  const detailBlocks = detailRows
+    .filter((r) => r && r[1])
+    .map(([label, raw]) => ({
+      label,
+      value: formatPlotDetailField(label, raw),
+      wide: true,
+      preline: true,
+    }));
 
   return (
     <>
@@ -85,17 +89,21 @@ function PlotDetailPage() {
             ) : null}
           </div>
           <h1 className="land-detail-title">{plot.title}</h1>
-          <div className="land-detail-loc">{plot.location}</div>
+          <ListingTextValue
+            value={plot.location}
+            listClassName="land-detail-loc-list"
+            className="land-detail-loc"
+          />
           <div className="land-detail-meta">
             <div>
               <div className="land-price-label">
                 {isJv ? 'JV on Price' : 'Sale Price'}
               </div>
-              <div className="land-price">
-                {isJv ? plot.jvOnPrice : plot.salePrice}
-              </div>
+              <div className="land-price">{priceValue}</div>
             </div>
-            <div className="land-detail-area">{plot.area}</div>
+            <div className="land-detail-area" style={{ whiteSpace: 'pre-line' }}>
+              {plot.area}
+            </div>
           </div>
         </div>
       </div>
@@ -112,7 +120,7 @@ function PlotDetailPage() {
                 listingNumber: plot.listingNumber,
                 title: plot.title,
                 location: plot.location,
-                price: isJv ? plot.jvOnPrice : plot.salePrice,
+                price: priceValue,
                 img: plot.img,
               }}
               size="lg"
@@ -130,7 +138,11 @@ function PlotDetailPage() {
               return (
                 <div key={block.label} className={cls}>
                   <div className="listing-block-label">{block.label}</div>
-                  <div className="listing-block-value">{block.value}</div>
+                  <ListingTextValue
+                    value={block.value}
+                    className="listing-block-value"
+                    preline={block.preline}
+                  />
                 </div>
               );
             })}

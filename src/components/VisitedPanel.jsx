@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { X, Trash2, ImageOff, Send, Loader2 } from 'lucide-react';
+import ListingTextValue from './ListingTextValue';
+import { getCartDisplayDetails } from '../utils/buildCartEntry';
 
 /**
  * Recently-viewed listings popup. Displays everything tracked by
@@ -188,6 +190,7 @@ function VisitedPanel({
             entries.map((entry) => {
               const isChecked = selected.has(entry.id);
               const target = `/${entry.type}/${entry.slug}`;
+              const details = getCartDisplayDetails(entry);
               return (
                 <div
                   key={entry.id}
@@ -228,11 +231,22 @@ function VisitedPanel({
                         )}
                       </div>
                       <div className="visited-row-title">{entry.title}</div>
-                      {entry.location && (
-                        <div className="visited-row-loc">{entry.location}</div>
-                      )}
-                      {entry.price && (
-                        <div className="visited-row-price">{entry.price}</div>
+                      {details.length > 0 && (
+                        <ul className="visited-row-details">
+                          {details.map((block) => (
+                            <li key={block.label} className="visited-row-detail">
+                              <span className="visited-row-detail-label">
+                                {block.label}
+                              </span>
+                              <ListingTextValue
+                                value={block.value}
+                                listClassName="visited-row-detail-list"
+                                className="visited-row-detail-value"
+                                preline={block.preline}
+                              />
+                            </li>
+                          ))}
+                        </ul>
                       )}
                     </div>
                   </Link>

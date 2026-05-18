@@ -4,7 +4,10 @@ import LandBanner from '../components/LandBanner';
 import AddToCartButton from '../components/AddToCartButton';
 import landListings from '../api/land.json';
 import ListingTextValue from '../components/ListingTextValue';
-import { locationPreview } from '../utils/listingTextFormat';
+import {
+  formatAsBulletList,
+  formatLandDetailField,
+} from '../utils/listingTextFormat';
 import landCategories from '../api/land-categories.json';
 import LeadModal from '../components/LeadModal';
 
@@ -122,24 +125,36 @@ function  LandPage() {
                     <div className="land-card-details">
                       <div className="land-card-detail-row">
                         <span>Total Area</span>
-                        <strong>{listing.area}</strong>
+                        <ListingTextValue
+                          value={formatLandDetailField('Total Area', listing.area, listing)}
+                          listClassName="land-card-bullet-list"
+                        />
                       </div>
                       {listing.suitableFor && (
                         <div className="land-card-detail-row">
                           <span>Suitable For</span>
-                          <strong>{listing.suitableFor}</strong>
+                          <ListingTextValue
+                            value={formatLandDetailField('Suitable for', listing.suitableFor, listing)}
+                            listClassName="land-card-bullet-list"
+                          />
                         </div>
                       )}
                       {listing.opportunity && (
                         <div className="land-card-detail-row">
                           <span>Opportunity</span>
-                          <strong>{listing.opportunity}</strong>
+                          <ListingTextValue
+                            value={formatLandDetailField('Opportunity', listing.opportunity, listing)}
+                            listClassName="land-card-bullet-list"
+                          />
                         </div>
                       )}
                       {listing.status && (
                         <div className="land-card-detail-row">
                           <span>Status</span>
-                          <strong>{listing.status}</strong>
+                          <ListingTextValue
+                            value={formatLandDetailField('Status', listing.status, listing)}
+                            listClassName="land-card-bullet-list"
+                          />
                         </div>
                       )}
                     </div>
@@ -147,7 +162,11 @@ function  LandPage() {
                   <div className="land-card-footer">
                     <div>
                       <div className="land-price-label">{listing.label}</div>
-                      <div className="land-price">{listing.price}</div>
+                      <ListingTextValue
+                        value={formatLandDetailField(listing.label || 'Price', listing.price, listing)}
+                        listClassName="land-card-bullet-list"
+                        className="land-price"
+                      />
                     </div>
                     <div className="land-card-actions">
                       <AddToCartButton

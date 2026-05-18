@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import PlotBanner from '../components/PlotBanner';
 import AddToCartButton from '../components/AddToCartButton';
 import plotListings from '../api/plots.json';
+import ListingTextValue from '../components/ListingTextValue';
+import { formatPlotDetailField } from '../utils/listingTextFormat';
 
 function PlotPage() {
   const [activeType, setActiveType] = useState('all');
@@ -93,24 +95,36 @@ function PlotPage() {
                     <div className="land-card-details">
                       <div className="land-card-detail-row">
                         <span>Area</span>
-                        <strong>{plot.area}</strong>
+                        <ListingTextValue
+                          value={formatPlotDetailField('Area', plot.area)}
+                          listClassName="land-card-bullet-list"
+                        />
                       </div>
                       {plot.plotNumber && (
                         <div className="land-card-detail-row">
                           <span>Plot Number</span>
-                          <strong>{plot.plotNumber}</strong>
+                          <ListingTextValue
+                            value={formatPlotDetailField('Plot Number', plot.plotNumber)}
+                            listClassName="land-card-bullet-list"
+                          />
                         </div>
                       )}
                       {plot.accessRoad && (
                         <div className="land-card-detail-row">
                           <span>Road Facing</span>
-                          <strong>{plot.accessRoad}</strong>
+                          <ListingTextValue
+                            value={formatPlotDetailField('Access Road', plot.accessRoad)}
+                            listClassName="land-card-bullet-list"
+                          />
                         </div>
                       )}
                       {plot.stage && (
                         <div className="land-card-detail-row">
                           <span>Status</span>
-                          <strong>{plot.stage}</strong>
+                          <ListingTextValue
+                            value={formatPlotDetailField('Stage', plot.stage)}
+                            listClassName="land-card-bullet-list"
+                          />
                         </div>
                       )}
                     </div>
@@ -120,9 +134,14 @@ function PlotPage() {
                       <div className="land-price-label">
                         {plot.plotType === 'jv' ? 'JV on Price' : 'Sale Price'}
                       </div>
-                      <div className="land-price">
-                        {plot.plotType === 'jv' ? plot.jvOnPrice : plot.salePrice}
-                      </div>
+                      <ListingTextValue
+                        value={formatPlotDetailField(
+                          plot.plotType === 'jv' ? 'JV on Price' : 'Sale Price',
+                          plot.plotType === 'jv' ? plot.jvOnPrice : plot.salePrice
+                        )}
+                        listClassName="land-card-bullet-list"
+                        className="land-price"
+                      />
                     </div>
                     <div className="land-card-actions">
                       <AddToCartButton

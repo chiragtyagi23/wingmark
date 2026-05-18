@@ -275,5 +275,50 @@
       "lng": 73.153,
       "address": "Village Dhansar, Upper Kharghar, near toll plaza"
     }
+  },
+  {
+    "listingNumber": "Listing #: L/007",
+    "slug": "upper-kharghar-26-acres-adivali-sale",
+    "type": "sale",
+    "category": "premium",
+    "img": "/adivali-26acres-map.png",
+    "loc": "• Village Adivali & Dhansar\n• Next to HP petrol pump",
+    "name": "26 Acres land for sale in Upper Kharghar",
+    "area": "• 1063.70 guntha\n• (26.5925 acres)",
+    "label": "Sale Price",
+    "price": "• ₹ 60 L per guntha\n• (₹ 24 Cr per acre)\n• Deal value ₹ 638.22 Cr",
+    "badge": "For Sale",
+    "nearestStation": "• Taloja - 3 km\n• Amandoot Metro station - 5 km\n• Upcoming Pisarve Depot metro station on Kharghar to Kalyan corridor - 2 km",
+    "keyPoints": "Highway Touch land",
+    "status": "Clear title land",
+    "snapshot": [
+      "1063.70 guntha (26.59 acres) highway-touch land at Adivali & Dhansar, next to HP petrol pump.",
+      "₹ 60 L per guntha — deal value approx. ₹ 638.22 Cr; clear title."
+    ],
+    "gallery": [
+      "/adivali-26acres-map.png"
+    ],
+    "media": [],
+    "files": [
+      {
+        "name": "Amotion 6 - Gat book.pdf",
+        "url": "/adivali-gat-book-6.pdf"
+      },
+      {
+        "name": "Adivali - Land record.pdf",
+        "url": "/adivali-land-record.pdf"
+      },
+      {
+        "name": "Panvel Municipal DP Plan.pdf",
+        "url": "/panvel-municipal-dp-plan.pdf"
+      }
+    ],
+    "locationImage": "/adivali-26acres-map.png",
+    "googleLocationUrl": "https://maps.app.goo.gl/ZzaMDENEqZKvzgsr5",
+    "location": {
+      "lat": 19.0295,
+      "lng": 73.151,
+      "address": "Village Adivali & Dhansar, Upper Kharghar, near HP petrol pump"
+    }
   }
 ]

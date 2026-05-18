@@ -28,7 +28,52 @@ export function parseBulletItems(val) {
 }
 
 export function isBulletContent(val) {
-  return parseBulletItems(val).length > 1;
+  if (val == null || val === '') return false;
+  const items = parseBulletItems(val);
+  if (items.length > 1) return true;
+  return items.length === 1 && /[•\u2022]/.test(String(val));
+}
+
+/** Format any listing field as a bullet list (except title — pass plain text for title). */
+export function formatAsBulletList(val) {
+  if (val == null || val === '') return '';
+  if (isBulletContent(val) || /[•\u2022]/.test(String(val))) {
+    return formatMultiline(val);
+  }
+  const lines = String(val)
+    .split(/\n+/)
+    .map((l) => l.replace(BULLET_PREFIX, '').trim())
+    .filter(Boolean);
+  if (!lines.length) return '';
+  if (lines.length === 1) return `• ${lines[0]}`;
+  return lines.map((s) => `• ${s}`).join('\n');
+}
+
+/** Detail-page value for land listings (title stays plain). */
+export function formatLandDetailField(label, value, listing) {
+  if (value == null || value === '') return '';
+  const key = String(label).toLowerCase();
+  if (key === 'title') return String(value);
+  if (key === 'opportunity' && listing) {
+    const opp = formatLandOpportunity(listing);
+    return opp ? formatAsBulletList(opp) : '';
+  }
+  if (key === 'suitable for') return formatSuitableFor(value);
+  if (key === 'key points' || key === 'special features') {
+    return formatAsBulletList(splitToBullets(value));
+  }
+  if (key === 'comments') return formatAsBulletList(formatMultiline(value));
+  return formatAsBulletList(value);
+}
+
+/** Detail-page value for plot listings (title stays plain). */
+export function formatPlotDetailField(label, value) {
+  if (value == null || value === '') return '';
+  if (String(label).toLowerCase() === 'title') return String(value);
+  if (String(label).toLowerCase() === 'comments') {
+    return formatAsBulletList(formatMultiline(value));
+  }
+  return formatAsBulletList(value);
 }
 
 /** Short location line for cards (first bullet or first line). */
@@ -82,7 +127,10 @@ export function splitToBullets(val) {
         .trim()
     )
     .filter(Boolean);
-  if (parts.length <= 1) return parts[0] || String(val).trim();
+  if (parts.length <= 1) {
+    const single = (parts[0] || String(val).trim()).replace(BULLET_PREFIX, '').trim();
+    return single ? `• ${single}` : '';
+  }
   return parts.map((s) => `• ${s}`).join('\n');
 }
 

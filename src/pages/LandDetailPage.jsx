@@ -6,11 +6,8 @@ import ListingTextValue from '../components/ListingTextValue';
 import landListings from '../api/land.json';
 import {
   buildListingGallery,
-  formatMultiline,
-  formatLandOpportunity,
-  locationPreview,
+  formatLandDetailField,
 } from '../utils/listingTextFormat';
-
 function LandDetailPage() {
   const { slug } = useParams();
   const listing = landListings.find((l) => l.slug === slug) || null;
@@ -38,25 +35,27 @@ function LandDetailPage() {
 
   const commentsText = listing.comments ?? listing.specialComments;
 
-  const detailBlocks = [
-    { label: 'Title', value: listing.name, wide: true, preline: true },
-    { label: 'Location', value: listing.loc, wide: true, preline: true },
-    { label: 'Nearest train station', value: listing.nearestStation, preline: true },
-    { label: 'Total Area', value: listing.area, wide: true, preline: true },
-    { label: 'Suitable for', value: listing.suitableFor, wide: true, preline: true },
-    {
-      label: 'Opportunity',
-      value: formatLandOpportunity(listing),
+  const detailRows = [
+    ['Location', listing.loc],
+    ['Nearest train station', listing.nearestStation],
+    ['Total Area', listing.area],
+    ['Suitable for', listing.suitableFor],
+    ['Opportunity', listing.opportunity],
+    ['Key points', listing.keyPoints],
+    ['Special Features', listing.specialFeatures],
+    ['Comments', commentsText],
+    ['JV Terms', listing.jvTerms],
+    [listing.label || 'Price', listing.price],
+    ['Status', listing.status],
+  ];
+  const detailBlocks = detailRows
+    .filter(([, v]) => v)
+    .map(([label, raw]) => ({
+      label,
+      value: formatLandDetailField(label, raw, listing),
       wide: true,
       preline: true,
-    },
-    { label: 'Key points', value: formatMultiline(listing.keyPoints), wide: true, preline: true },
-    { label: 'Special Features', value: formatMultiline(listing.specialFeatures), wide: true, preline: true },
-    { label: 'Comments', value: formatMultiline(commentsText), wide: true, preline: true },
-    { label: 'JV Terms', value: listing.jvTerms, preline: true },
-    { label: listing.label || 'Price', value: listing.price, preline: true },
-    { label: 'Status', value: listing.status, wide: true, preline: true },
-  ].filter((block) => block.value);
+    }));
 
   return (
     <>
@@ -93,7 +92,9 @@ function LandDetailPage() {
               <div className="land-price-label">{listing.label}</div>
               <div className="land-price">{listing.price}</div>
             </div>
-            <div className="land-detail-area" style={{ whiteSpace: 'pre-line' }}>{listing.area}</div>
+            <div className="land-detail-area" style={{ whiteSpace: 'pre-line' }}>
+              {listing.area}
+            </div>
           </div>
         </div>
       </div>
@@ -109,7 +110,7 @@ function LandDetailPage() {
                 slug: listing.slug,
                 listingNumber: listing.listingNumber,
                 title: listing.name,
-                location: locationPreview(listing.loc),
+                location: listing.loc,
                 price: listing.price,
                 img: listing.img,
               }}

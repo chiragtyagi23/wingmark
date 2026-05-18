@@ -7,7 +7,11 @@ import VisitedPanel from './VisitedPanel';
 import { useVisitedListings } from '../hooks/useVisitedListings';
 import landListings from '../api/land.json';
 import plotListings from '../api/plots.json';
-import { generateBrochureFile, shareBrochureFiles } from '../utils/generateBrochure';
+import {
+  buildShortBrochureShareMessage,
+  generateBrochureFile,
+  shareBrochureFiles,
+} from '../utils/generateBrochure';
 
 function StickyCTA() {
   const location = useLocation();
@@ -39,6 +43,7 @@ function StickyCTA() {
         .filter(Boolean);
 
       const files = [];
+      const shareTexts = [];
       const failures = [];
       for (const entry of selectedEntries) {
         const full = lookupListing(entry);
@@ -49,6 +54,8 @@ function StickyCTA() {
         try {
           const file = await generateBrochureFile(full, entry.type);
           files.push(file);
+          const caption = buildShortBrochureShareMessage(full, entry.type);
+          if (caption) shareTexts.push(caption);
         } catch (e) {
           console.error('[brochure] generation failed for', entry.id, e);
           failures.push(entry.title || entry.slug);
@@ -63,7 +70,7 @@ function StickyCTA() {
         return;
       }
 
-      await shareBrochureFiles(files);
+      await shareBrochureFiles(files, shareTexts.join('\n\n'));
 
       if (failures.length) {
         alert(`Some brochures failed:\n\n${failures.join('\n')}`);

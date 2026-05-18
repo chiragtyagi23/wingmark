@@ -2920,6 +2920,25 @@ footer::before {
   font-weight: 700;
 }
 
+.land-card-detail-row .land-card-bullet-list,
+.land-card-detail-row .listing-bullet-list {
+  margin: 0;
+  padding-left: 1.1em;
+  list-style: disc;
+}
+
+.land-card-detail-row .land-card-bullet-list li,
+.land-card-detail-row .listing-bullet-list li {
+  font-size: 12px;
+  line-height: 1.5;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.land-card-footer .land-card-bullet-list {
+  margin-top: 4px;
+}
+
 .land-card-detail-row strong {
   font-family: Montserrat, system-ui, sans-serif;
   font-size: 12px;

@@ -10,7 +10,9 @@ function ListingTextValue({ value, className = '', listClassName = '', preline =
   if (isBulletContent(value)) {
     const items = parseBulletItems(value);
     return (
-      <ul className={['listing-bullet-list', listClassName].filter(Boolean).join(' ')}>
+      <ul
+        className={['listing-bullet-list', listClassName, className].filter(Boolean).join(' ')}
+      >
         {items.map((item) => (
           <li key={item}>{item}</li>
         ))}
