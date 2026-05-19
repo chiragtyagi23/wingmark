@@ -514,6 +514,29 @@ function contentYAfterListingBadge(
   return y - badgeH - 24;
 }
 
+const LISTING_FOOTER_FONT_SIZE = 9;
+const LISTING_FOOTER_BOTTOM = 28;
+
+/** Plain listing # at bottom-left (every page). */
+function drawListingNumberFooter(page, font, margin, listingNumber) {
+  const text = listingNumber != null ? String(listingNumber).trim() : '';
+  if (!text) return;
+  page.drawText(text, {
+    x: margin,
+    y: LISTING_FOOTER_BOTTOM,
+    size: LISTING_FOOTER_FONT_SIZE,
+    font,
+    color: PALETTE.muted,
+  });
+}
+
+function stampListingNumberFooters(pdfDoc, listingNumber, font, margin) {
+  if (!listingNumber || !String(listingNumber).trim()) return;
+  for (const page of pdfDoc.getPages()) {
+    drawListingNumberFooter(page, font, margin, listingNumber);
+  }
+}
+
 /**
  * Pre-made brochure image PDFs in `/public/brochures/`
  * — land L/NNN → `listing-NNN.pdf`, plot PS/NNN → `plot-NNN.pdf`.
@@ -844,6 +867,8 @@ export async function generateListingBrochure(data) {
       helvBold
     );
   }
+
+  stampListingNumberFooters(pdfDoc, safe.listingNumber, helv, margin);
 
   const bytes = await pdfDoc.save();
   return new Blob([bytes], { type: 'application/pdf' });
