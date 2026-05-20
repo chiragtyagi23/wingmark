@@ -526,7 +526,7 @@ function drawListingNumberFooter(page, font, margin, listingNumber) {
     y: LISTING_FOOTER_BOTTOM,
     size: LISTING_FOOTER_FONT_SIZE,
     font,
-    color: PALETTE.muted,
+    color: PALETTE.navy,
   });
 }
 

@@ -54,7 +54,8 @@ function About() {
           <div className="gold-divider" />
           <p className="section-p">
             The Wingsmark Infraa is a Navi Mumbai based Real Estate Advisory specializing in land acquisition, land development &amp;
-            offering sales &amp; marketing strategy for new developments. Our core strength is land liaisoning backed with the promise of high
+            offering sales &amp; marketing strategy for new developments. 
+            <br /><br />Our core strength is land liaisoning backed with the promise of high
             returns for our stake holders.
           </p>
           <p className="section-p" style={{ marginTop: 16 }}>
