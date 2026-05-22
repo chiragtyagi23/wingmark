@@ -134,6 +134,40 @@
     }
   },
   {
+    "listingNumber": "Listing #: PS/005",
+    "slug": "pushpak-nagar-jodi-plots-207-208-sector-3-panvel",
+    "plotType": "sale",
+    "img": "/pushpak-plot-207-208-map.png",
+    "title": "Jodi Plots for Sale at Pushpak Nagar, Panvel",
+    "location": "Pushpak Nagar, Panvel",
+    "sector": "Sector 3",
+    "area": "Plot 207: 200 sq mtr (corner plot)\nPlot 208: 220 sq mtr\nCombined: 420 sq mtr",
+    "plotNumber": "Plot No. 207 & 208 (Jodi - sold together)",
+    "accessRoad": "11 mtr wide road (Plot 207 - corner plot)",
+    "stage": "Triparty Done",
+    "salePrice": "₹ 3 Cr each (₹ 6 Cr total for both plots)",
+    "badge": "Plot for Sale",
+    "comments": "• Both plots to be sold together (Jodi)\n• 2 different plot owners - only one investor\n• Clear marketable title\n• Payment ratio 70:30 (30% cash)\n\nPayment schedule & terms:\n• 50% down payment at the time of MOU, before posting public notice\n• Balance 50% within 75 days max in two equal installments of 25% each",
+    "snapshot": [
+      "Jodi plots at Pushpak Nagar, Sector 3 - Plot 207 (200 sq mtr, corner) & Plot 208 (220 sq mtr) on 11 mtr road, backing onto Garden (Plot 206).",
+      "Triparty done - ₹ 3 Cr each - sold together only; 70:30 payment ratio; 50% down at MOU, balance in two 25% installments within 75 days."
+    ],
+    "gallery": [
+      "/pushpak-plot-207-208-map.png"
+    ],
+    "media": [],
+    "files": [
+      { "name": "Pushpak Node Map - Sector 3 (Plots 207 & 208).pdf", "url": "/pushpak-node-map.pdf" },
+      { "name": "Sector 3 layout - Plots 207 & 208 (site map).png", "url": "/pushpak-plot-207-208-map.png" }
+    ],
+    "googleLocationUrl": "https://maps.app.goo.gl/Dkttamzy4CJrPqG59",
+    "location_geo": {
+      "lat": 18.9725054,
+      "lng": 73.077269,
+      "address": "Plot No. 207 & 208, Sector 3, Pushpak Nagar, Pushpak Node, Panvel, Navi Mumbai"
+    }
+  },
+  {
     "listingNumber": "Listing #: PJ/001",
     "slug": "dronagiri-plot-41-sector-59-jv",
     "plotType": "jv",
