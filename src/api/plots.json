@@ -137,6 +137,8 @@
     "listingNumber": "Listing #: PS/005",
     "slug": "pushpak-nagar-jodi-plots-207-208-sector-3-panvel",
     "plotType": "sale",
+    "brochurePdf": "/pushpak-plot-005-map.pdf",
+    "mapPdf": "/pushpak-plot-005-map.pdf",
     "img": "/pushpak-plot-207-208-map.png",
     "title": "Jodi Plots for Sale at Pushpak Nagar, Panvel",
     "location": "Pushpak Nagar, Panvel",
@@ -152,12 +154,10 @@
       "Jodi plots at Pushpak Nagar, Sector 3 - Plot 207 (200 sq mtr, corner) & Plot 208 (220 sq mtr) on 11 mtr road, backing onto Garden (Plot 206).",
       "Triparty done - ₹ 3 Cr each - sold together only; 70:30 payment ratio; 50% down at MOU, balance in two 25% installments within 75 days."
     ],
-    "gallery": [
-      "/pushpak-plot-207-208-map.png"
-    ],
+    "gallery": [],
     "media": [],
     "files": [
-      { "name": "Pushpak Node Map - Sector 3 (Plots 207 & 208).pdf", "url": "/pushpak-node-map.pdf" },
+      { "name": "Pushpak Nagar Sector 3 - Plot map (Plots 207 & 208).pdf", "url": "/pushpak-plot-005-map.pdf" },
       { "name": "Sector 3 layout - Plots 207 & 208 (site map).png", "url": "/pushpak-plot-207-208-map.png" }
     ],
     "googleLocationUrl": "https://maps.app.goo.gl/Dkttamzy4CJrPqG59",

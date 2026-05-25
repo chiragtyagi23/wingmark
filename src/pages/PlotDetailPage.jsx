@@ -44,6 +44,7 @@ function PlotDetailPage() {
     `https://www.google.com/maps/search/?api=1&query=${plot.location_geo.lat},${plot.location_geo.lng}`;
   const directionLink = `https://www.google.com/maps/dir/?api=1&destination=${plot.location_geo.lat},${plot.location_geo.lng}`;
   const gallery = buildListingGallery(plot);
+  const mapPdf = plot.mapPdf || null;
   const priceValue = isJv ? plot.jvOnPrice : plot.salePrice;
 
   const detailRows = [
@@ -158,27 +159,53 @@ function PlotDetailPage() {
         </section>
 
         <section className="land-detail-section" id="gallery">
-          <h2 className="land-detail-h">Images <span className="land-detail-h-sub">(up to 5)</span></h2>
-          {gallery.length > 0 ? (
-            <div className="gallery-wrap">
+          <h2 className="land-detail-h">
+            {mapPdf ? 'Plot Map' : 'Images'}{' '}
+            <span className="land-detail-h-sub">
+              {mapPdf ? '(PDF)' : '(up to 5)'}
+            </span>
+          </h2>
+          {mapPdf ? (
+            <div className="gallery-wrap gallery-wrap--pdf">
+              <div className="gallery-main gallery-main--pdf">
+                <iframe
+                  src={`${mapPdf}#view=FitH&toolbar=0&navpanes=0`}
+                  title={`${plot.title} - plot map`}
+                />
+              </div>
+              <a
+                href={mapPdf}
+                target="_blank"
+                rel="noreferrer"
+                className="gallery-pdf-open"
+              >
+                Open map PDF in new tab
+              </a>
+            </div>
+          ) : gallery.length > 0 ? (
+            <div
+              className={`gallery-wrap${gallery.length === 1 ? ' gallery-wrap--single' : ''}`}
+            >
               <div className="gallery-main">
                 <img
                   src={gallery[galleryIndex]}
                   alt={`${plot.title} ${galleryIndex + 1}`}
                 />
               </div>
-              <div className="gallery-thumbs">
-                {gallery.map((src, i) => (
-                  <button
-                    key={src}
-                    className={`gallery-thumb ${i === galleryIndex ? 'active' : ''}`}
-                    onClick={() => setGalleryIndex(i)}
-                    aria-label={`Show image ${i + 1}`}
-                  >
-                    <img src={src} alt="" loading="lazy" />
-                  </button>
-                ))}
-              </div>
+              {gallery.length > 1 ? (
+                <div className="gallery-thumbs">
+                  {gallery.map((src, i) => (
+                    <button
+                      key={src}
+                      className={`gallery-thumb ${i === galleryIndex ? 'active' : ''}`}
+                      onClick={() => setGalleryIndex(i)}
+                      aria-label={`Show image ${i + 1}`}
+                    >
+                      <img src={src} alt="" loading="lazy" />
+                    </button>
+                  ))}
+                </div>
+              ) : null}
             </div>
           ) : (
             <div className="land-detail-empty">No images uploaded yet.</div>

@@ -3082,22 +3082,70 @@ button.land-detail-back {
   display: flex;
   flex-direction: column;
   gap: 14px;
+  max-width: 100%;
 }
 
 .gallery-main {
+  position: relative;
+  box-sizing: border-box;
   width: 100%;
-  height: 60vh;
+  height: min(60vh, 540px);
+  min-height: 280px;
   max-height: 540px;
   background: var(--charcoal);
   overflow: hidden;
-  border: 1px solid rgba(97, 98, 99, 0.2);
+  border: 2px solid var(--gold);
 }
 
 .gallery-main img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  bottom: 12px;
+  left: 12px;
   display: block;
+  width: calc(100% - 24px);
+  height: calc(100% - 24px);
+  max-width: calc(100% - 24px);
+  max-height: calc(100% - 24px);
+  object-fit: contain;
+  object-position: center;
+}
+
+.gallery-wrap--single .gallery-main {
+  height: min(55vh, 500px);
+  max-height: min(55vh, 500px);
+}
+
+/* Plot map PDF (PS/005 etc.) */
+.gallery-main--pdf {
+  height: min(75vh, 720px);
+  max-height: min(75vh, 720px);
+}
+
+.gallery-main--pdf iframe {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  bottom: 12px;
+  left: 12px;
+  width: calc(100% - 24px);
+  height: calc(100% - 24px);
+  border: 0;
+  background: #fff;
+}
+
+.gallery-pdf-open {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.gallery-pdf-open:hover {
+  text-decoration: underline;
 }
 
 .gallery-thumbs {
@@ -3283,7 +3331,16 @@ button.land-detail-back {
 
 @media (max-width: 768px) {
   .gallery-main {
-    height: 42vh;
+    height: min(42vh, 420px);
+    min-height: 220px;
+  }
+  .gallery-wrap--single .gallery-main {
+    height: min(48vh, 400px);
+    max-height: min(48vh, 400px);
+  }
+  .gallery-main--pdf {
+    height: min(65vh, 560px);
+    max-height: min(65vh, 560px);
   }
   .gallery-thumb {
     height: 70px;
@@ -3428,7 +3485,11 @@ button.land-detail-back {
     grid-template-columns: 1fr 1fr;
   }
   .gallery-main {
-    height: 50vh;
+    height: min(50vh, 480px);
+  }
+  .gallery-main--pdf {
+    height: min(70vh, 640px);
+    max-height: min(70vh, 640px);
   }
 }
 
@@ -3572,8 +3633,12 @@ button.land-detail-back {
     font-size: clamp(22px, 8vw, 32px);
   }
   .gallery-main {
-    height: 36vh;
-    min-height: 220px;
+    height: min(36vh, 360px);
+    min-height: 200px;
+  }
+  .gallery-main--pdf {
+    height: min(58vh, 480px);
+    max-height: min(58vh, 480px);
   }
   .gallery-thumbs {
     grid-template-columns: repeat(3, 1fr);
