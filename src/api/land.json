@@ -328,5 +328,45 @@
       "lng": 73.151,
       "address": "Village Adivali & Dhansar, Upper Kharghar, near HP petrol pump"
     }
+  },
+  {
+    "listingNumber": "Listing #: L/008",
+    "slug": "giravale-82-guntha-jv-panvel",
+    "type": "jv",
+    "category": "premium",
+    "brochurePdf": "/giravale-jv-map.pdf",
+    "img": "/giravale-jv-sector-map.png",
+    "loc": "• Village Giravale\n• Near Today Group\n• Opposite Yogakshema Residency",
+    "name": "82 Guntha Land for JV at Panvel",
+    "area": "• 82 Guntha\n• Approx 2 acres",
+    "label": "JV On Price",
+    "price": "• ₹ 10 Lakhs per guntha (₹ 10,000 per sq mtr)\n• Effective deposit ₹ 8.20 Cr",
+    "badge": "Joint Venture",
+    "jvTerms": "Total area to be given to farmer - 1,25,000 sq ft",
+    "status": "Clear title",
+    "snapshot": [
+      "82 guntha (~2 acres) JV land at Village Giravale, Panvel - near Today Group, opposite Yogakshema Residency.",
+      "JV on ₹ 10 L per guntha (₹ 10,000 per sq mtr) - effective deposit ₹ 8.20 Cr; farmer share 1,25,000 sq ft."
+    ],
+    "gallery": [
+      "/giravale-jv-sector-map.png",
+      "/giravale-jv-plot-map.png",
+      "/giravale-jv-naksha.png",
+      "/giravale-jv-7-12.png"
+    ],
+    "media": [],
+    "files": [
+      {
+        "name": "Girvale 1.pdf",
+        "url": "/giravale-jv-map.pdf"
+      }
+    ],
+    "locationImage": "/giravale-jv-sector-map.png",
+    "googleLocationUrl": "https://maps.app.goo.gl/Jwi3mTM47zTYx1dSA",
+    "location": {
+      "lat": 18.9787,
+      "lng": 73.189,
+      "address": "Village Giravale, Panvel - near Today Group, opposite Yogakshema Residency"
+    }
   }
 ]

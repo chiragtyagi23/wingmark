@@ -153,22 +153,26 @@ function LandDetailPage() {
         <section className="land-detail-section" id="gallery">
           <h2 className="land-detail-h">Images</h2>
           {gallery.length > 0 ? (
-            <div className="gallery-wrap">
+            <div
+              className={`gallery-wrap${gallery.length === 1 ? ' gallery-wrap--single' : ''}`}
+            >
               <div className="gallery-main">
                 <img src={gallery[galleryIndex]} alt={`${listing.name} ${galleryIndex + 1}`} />
               </div>
-              <div className="gallery-thumbs">
-                {gallery.map((src, i) => (
-                  <button
-                    key={src}
-                    className={`gallery-thumb ${i === galleryIndex ? 'active' : ''}`}
-                    onClick={() => setGalleryIndex(i)}
-                    aria-label={`Show image ${i + 1}`}
-                  >
-                    <img src={src} alt="" loading="lazy" />
-                  </button>
-                ))}
-              </div>
+              {gallery.length > 1 ? (
+                <div className="gallery-thumbs">
+                  {gallery.map((src, i) => (
+                    <button
+                      key={src}
+                      className={`gallery-thumb ${i === galleryIndex ? 'active' : ''}`}
+                      onClick={() => setGalleryIndex(i)}
+                      aria-label={`Show image ${i + 1}`}
+                    >
+                      <img src={src} alt="" loading="lazy" />
+                    </button>
+                  ))}
+                </div>
+              ) : null}
             </div>
           ) : (
             <div className="land-detail-empty">No images uploaded yet.</div>
