@@ -2621,6 +2621,10 @@ button.land-detail-back {
   color: var(--gold);
 }
 
+.listing-bullet-list--spaced {
+  margin-top: 1.25em;
+}
+
 .land-detail-meta {
   display: flex;
   flex-wrap: wrap;

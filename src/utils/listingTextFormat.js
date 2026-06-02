@@ -109,6 +109,14 @@ export function formatLandDetailField(label, value, listing) {
     return formatAsBulletList(splitToBullets(value));
   }
   if (key === 'comments' || key === 'comments / approvals') {
+    const text = String(value).trim();
+    if (/\n\s*\n/.test(text)) {
+      return text
+        .split(/\n\s*\n/)
+        .map((block) => formatAsBulletList(block.trim()))
+        .filter(Boolean)
+        .join('\n\n');
+    }
     return formatAsBulletList(value);
   }
   return formatAsBulletList(value);

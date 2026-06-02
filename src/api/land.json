@@ -368,5 +368,35 @@
       "lng": 73.189,
       "address": "Village Giravale, Panvel - near Today Group, opposite Yogakshema Residency"
     }
+  },
+  {
+    "listingNumber": "Listing #: L/009",
+    "slug": "malad-west-sv-road-commercial-cts-7a",
+    "type": "sale",
+    "category": "commercial",
+    "img": "/listing-photo-placeholder.svg",
+    "loc": "• Near Chincholi Bunder, S.V. Road, Malad West, Mumbai - 400 064\n• CTS No. 7-A",
+    "name": "Commercial land for sale at Malad West - S.V. Road touch",
+    "area": "• Gross Area: 2,311 Sq. Mtr.\n• Road Setback: 488 Sq. Mtr.\n• Net Plot Area: 1,823 Sq. Mtr (Benefit not taken).",
+    "label": "Demand Price",
+    "price": "₹ 65 Cr",
+    "badge": "For Sale",
+    "suitableFor": "Commercial development \n• Hospital project \n• Mega mall \n• Super market \n• Brand hub",
+    "keyPoints": "• Clear & marketable title\n• 200 ft frontage\n• S.V. Road touch property\n• Suitable for Commercial Project",
+    "specialComments": "Planning & Zoning:\n• Ward: P/N\n• No reservation on land\n• No reservation on abutting land\n• No DP road expansion\n• Existing road width: 27.50 mtr\n• Zone: General Industrial (I-2)",
+    "comments": "Zone: 60\nSub-Zone: 60/283\nLand Rate: ₹ 67,640 per sq mtr\nResidential Rate: ₹ 1,30,700 per sq mtr\nOffice Rate: ₹ 2,10,600 per sq mtr\nShop Rate: ₹ 2,96,100 per sq mtr\nIndustrial Rate: ₹ 1,30,700 per sq mtr\n\nCTS No. 7-A\nLand Rate: ₹ 6,284 per sq ft\nResidential Rate: ₹ 12,142 per sq ft\nOffice Rate: ₹ 19,565 per sq ft\nShop Rate: ₹ 27,509 per sq ft\nIndustrial Rate: ₹ 12,142 per sq ft",
+    "snapshot": [
+      "Net plot ~1,823 sq mtr (~19,620 sq ft) on S.V. Road, Malad West - CTS 7-A, General Industrial (I-2), 200 ft frontage.",
+      "Clear title - no land/abutting reservation, no DP road expansion - demand price ₹ 65 Cr."
+    ],
+    "gallery": [],
+    "media": [],
+    "files": [],
+    "googleLocationUrl": "https://maps.app.goo.gl/AvPjrihVkvXQHe58A",
+    "location": {
+      "lat": 19.1842,
+      "lng": 72.8495,
+      "address": "Near Chincholi Bunder, S.V. Road, Malad West, Mumbai - 400064 (CTS No. 7-A)"
+    }
   }
 ]
