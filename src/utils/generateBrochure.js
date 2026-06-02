@@ -818,7 +818,7 @@ export async function generateListingBrochure(data) {
       const required = (needsLabel ? labelBlockHeight : 0) + valueLineHeight;
       if (yCursor - required < minY) {
         await continueOnNewPage();
-        labelDrawn = false;
+        // Same field continues — do not repeat the section heading on page 2+
         linkRect = null;
         continue;
       }
